@@ -12,9 +12,23 @@ namespace HeatControl
 {
     public partial class Form1 : Form
     {
+        private OTGW otgw;
+
         public Form1()
         {
             InitializeComponent();
+
+            this.otgw = new OTGW();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.otgw.Connect("192.168.50.150");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.otgw.Disconnect();
         }
     }
 }
