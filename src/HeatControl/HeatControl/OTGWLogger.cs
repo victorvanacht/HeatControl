@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -12,40 +13,128 @@ namespace HeatControl
 {
     class OTGW
     {
+        public class GatewayConfiguration
+        {
+            public string version;
+            public string build;
+            public string clockSpeed;
+            public string temperaturSensorFunction;
+            public string gpioFunctionsConfiguration;
+            public string gpioFunctionsCurrent;
+            public string ledsFunctionsConfiguration;
+            public string gatewayMode;
+            public string setpointOverride;
+            public string smartPowerModelCurrent;
+            public string causeOfLastReset;
+            public string remehaDetectionStart;
+            public string setbackTemperatureConfiguarion;
+            public string tweaks;
+            public string referenceVoltage;
+            public string hotWater;
+
+        }
+        public GatewayConfiguration gatewayConfiguration;
+
+
+
         private SocketReader socketReader;
-        private Parser parser;
-        private Thread readerThread;
 
-        private volatile bool readerThreadShouldClose;
-        private volatile bool readerThreadHasClosed;
-
+        private Thread socketThread;
+        private volatile bool socketThreadShouldClose;
+        private volatile bool socketThreadHasClosed;
 
 
+
+        private class CommandQueueItem
+        {
+            public string command;
+            public int retryAttempts;
+            public int maxRetryAttempts;
+            public long enqueTick;
+            public long lastTransmitAttemptTick;
+            public long retryDelayTicks;
+
+            public CommandQueueItem(string command) : this(command, 10, 2 * System.TimeSpan.TicksPerSecond) { }
+
+            public CommandQueueItem(string command, int maxRetryAttempts, long retryDelayTicks)
+            {
+                this.command = command;
+                this.retryAttempts = 0;
+                this.maxRetryAttempts = maxRetryAttempts;
+                this.enqueTick = DateTime.Now.Ticks;
+                this.retryDelayTicks = retryDelayTicks;
+            }
+
+        }
+        private ConcurrentQueue<CommandQueueItem> commandQueue;
+
+        public void EnqueueCommand(string command)
+        {
+            CommandQueueItem item = new CommandQueueItem(command);
+            commandQueue.Enqueue(item);
+        }
+        public bool TryDequeueCommand(string command)
+        {
+            if (!commandQueue.IsEmpty)
+            {
+                CommandQueueItem firstItem;
+                if (commandQueue.TryPeek(out firstItem))
+                {
+                    if ((command.Length >= 2) && (firstItem.command.Length >= 2))
+                    {
+                        if (command.Substring(0, 2).ToUpper().Equals(firstItem.command.Substring(0, 2).ToUpper()))
+                        {
+                            return commandQueue.TryDequeue(out firstItem);
+                        }
+                    }
+                }
+            }
+            return false;
+        }
 
         public OTGW()
         {
-           
+            this.gatewayConfiguration = new GatewayConfiguration();
             this.socketReader = new SocketReader();
-            this.parser = new Parser();
         }
 
         public void Connect(string IPAddress)
         {
             socketReader.Connect(IPAddress);
+            this.commandQueue = new ConcurrentQueue<CommandQueueItem>();
 
             if (this.socketReader.IsConnected())
             {
-                this.readerThreadShouldClose = false;
-                this.readerThread = new Thread(ReaderThread);
-                this.readerThread.IsBackground = true;
-                this.readerThread.Start();
+                this.socketThreadShouldClose = false;
+                this.socketThread = new Thread(SocketThread);
+                this.socketThread.IsBackground = true;
+                this.socketThread.Start();
             }
+
+            EnqueueCommand("PR=A");
+            EnqueueCommand("PR=A");
+
+            EnqueueCommand("PR=B");
+            EnqueueCommand("PR=C");
+            EnqueueCommand("PR=D");
+            EnqueueCommand("PR=G");
+            EnqueueCommand("PR=I");
+            EnqueueCommand("PR=L");
+            EnqueueCommand("PR=M");
+            EnqueueCommand("PR=O");
+            EnqueueCommand("PR=P");
+            EnqueueCommand("PR=Q");
+            EnqueueCommand("PR=R");
+            EnqueueCommand("PR=S");
+            EnqueueCommand("PR=T");
+            EnqueueCommand("PR=V");
+            EnqueueCommand("PR=W");
         }
 
         public void Disconnect()
         {
-            this.readerThreadShouldClose = true;
-            while (this.readerThreadHasClosed == false)
+            this.socketThreadShouldClose = true;
+            while (this.socketThreadHasClosed == false)
             {
                 Thread.Sleep(100);
             }
@@ -53,21 +142,208 @@ namespace HeatControl
         }
 
 
-        public void ReaderThread()
+        public void SocketThread()
         {
-            readerThreadHasClosed = false;
-            while (readerThreadShouldClose == false)
+            socketThreadHasClosed = false;
+            while (socketThreadShouldClose == false)
             {
                 string line = socketReader.ReadLine();
                 Console.WriteLine(line);
+                if (line.Length > 0)
+                {
+                    Parse(line);
+                }
+
+                if (!commandQueue.IsEmpty)
+                {
+                    CommandQueueItem firstItem;
+                    if (commandQueue.TryPeek(out firstItem))
+                    {
+                        if ((firstItem.retryAttempts == 0) ||
+                            ((DateTime.Now.Ticks - firstItem.lastTransmitAttemptTick) > firstItem.retryDelayTicks))
+                        {
+                            if (firstItem.retryAttempts < firstItem.maxRetryAttempts)
+                            {
+                                socketReader.WriteLine(firstItem.command);
+                                firstItem.retryAttempts++;
+                                firstItem.lastTransmitAttemptTick = DateTime.Now.Ticks;
+                            }
+                            else
+                            {
+                                /// it failed!!
+                                Console.WriteLine("Command failed!");
+
+                                TryDequeueCommand(firstItem.command);
+                                //throw new Exception("Command failed!");
+                            }
+                        }
+
+                    }
+                }
             }
-            readerThreadHasClosed = true;
+            socketThreadHasClosed = true;
         }
 
-        class Parser
+        public class Message
         {
+            public enum Direction
+            {
+                ThermostatToBoiler,
+                BoilerToThermostat,
+                ThermostatToBoilerModified,
+                BoilerToThermostatModified
+            }
 
+
+            private Direction _direction;
+            public Direction direction
+            {
+                get { return _direction; }
+                set { _direction = value; }
+            }
         }
+
+
+        public Message Parse(string line)
+        {
+            Message message = null;
+
+            char[] lineBytes = line.ToUpper().ToCharArray();
+
+            // Parse errors
+            if (line.Equals("NG")) Console.WriteLine("OTGW reponse 'NG': No Good");
+            else if (line.Equals("SE")) Console.WriteLine("OTGW reponse 'SE': Syntax Error");
+            else if (line.Equals("BV")) Console.WriteLine("OTGW reponse 'BV': Bad Value");
+            else if (line.Equals("OR")) Console.WriteLine("OTGW reponse 'OR': Out of Range");
+            else if (line.Equals("NS")) Console.WriteLine("OTGW reponse 'NS': No Space");
+            else if (line.Equals("NF")) Console.WriteLine("OTGW reponse 'NF': Not Found");
+            else if (line.Equals("OR")) Console.WriteLine("OTGW reponse 'OR': OverRun");
+            else if (line.Length >= 3)
+            {
+                // parse "PR:" request response
+                if (line.Substring(0, 3).Equals("PR:")) {
+                    Console.WriteLine("Response to PR command:" + line);
+                    TryDequeueCommand("PR");
+
+                    switch (lineBytes[4])
+                    {
+                        case 'A':
+                            this.gatewayConfiguration.version = line.Substring(5);
+                            break;
+                        case 'B':
+                            this.gatewayConfiguration.build = line.Substring(5);
+                            break;
+                        case 'C':
+                            this.gatewayConfiguration.clockSpeed = line.Substring(5);
+                            break;
+                        case 'D':
+                            this.gatewayConfiguration.temperaturSensorFunction = (lineBytes[5] == 'O') ? "Outside Temoerature" : "Return water temperature";
+                            break;
+                        case 'G':
+                            this.gatewayConfiguration.gpioFunctionsConfiguration = line.Substring(5);
+                            break;
+                        case 'I':
+                            this.gatewayConfiguration.gpioFunctionsCurrent = line.Substring(5);
+                            break;
+                        case 'L':
+                            this.gatewayConfiguration.ledsFunctionsConfiguration = line.Substring(5);
+                            break;
+                        case 'M':
+                            this.gatewayConfiguration.gatewayMode = (lineBytes[5] == 'G') ? "Gateway" : "Monitor";
+                            break;
+                        case 'O':
+                            this.gatewayConfiguration.setpointOverride = line.Substring(5);
+                            break;
+                        case 'P':
+                            this.gatewayConfiguration.smartPowerModelCurrent = line.Substring(5);
+                            break;
+                        case 'Q':
+                            switch (lineBytes[5])
+                            {
+                                case 'B':
+                                    this.gatewayConfiguration.causeOfLastReset = "Brown out";
+                                    break;
+                                case 'C':
+                                    this.gatewayConfiguration.causeOfLastReset = "By command";
+                                    break;
+                                case 'E':
+                                    this.gatewayConfiguration.causeOfLastReset = "Reset button";
+                                    break;
+                                case 'L':
+                                    this.gatewayConfiguration.causeOfLastReset = "Stuck in loop";
+                                    break;
+                                case 'O':
+                                    this.gatewayConfiguration.causeOfLastReset = "Stack overflow";
+                                    break;
+                                case 'P':
+                                    this.gatewayConfiguration.causeOfLastReset = "Power on";
+                                    break;
+                                case 'S':
+                                    this.gatewayConfiguration.causeOfLastReset = "BREAL on serial interface";
+                                    break;
+                                case 'U':
+                                    this.gatewayConfiguration.causeOfLastReset = "Stack underflow";
+                                    break;
+                                case 'W':
+                                    this.gatewayConfiguration.causeOfLastReset = "Watchdog";
+                                    break;
+                                default:
+                                    this.gatewayConfiguration.causeOfLastReset = "Syntax error";
+                                    break;
+                            }
+                            break;
+                        case 'R':
+                            this.gatewayConfiguration.remehaDetectionStart = line.Substring(5);
+                            break;
+                        case 'S':
+                            this.gatewayConfiguration.setbackTemperatureConfiguarion = line.Substring(5);
+                            break;
+                        case 'T':
+                            this.gatewayConfiguration.tweaks = line.Substring(5);
+                            break;
+                        case 'W':
+                            this.gatewayConfiguration.hotWater = line.Substring(5);
+                            break;
+                        default:
+                            break;
+                    }
+
+                } else if (line.Substring(0, 3).Equals("PS:")) {
+                    Console.WriteLine("Response to PS command:" + line);
+                    TryDequeueCommand("PS");
+                } else 
+  
+
+
+
+                if (line.Length == 9)
+                {
+                    message = new Message();
+                    switch (lineBytes[0])
+                    {
+                        case 'T':
+                            message.direction = Message.Direction.ThermostatToBoiler;
+                            break;
+                        case 'B':
+                            message.direction = Message.Direction.BoilerToThermostat;
+                            break;
+                        case 'R':
+                            message.direction = Message.Direction.ThermostatToBoilerModified;
+                            break;
+                        case 'A':
+                            message.direction = Message.Direction.BoilerToThermostatModified;
+                            break;
+                        default:
+                            Console.WriteLine("Unhandled packet type"); //@@@@ top be fixed
+                            message = null;
+                            break;
+                    }
+                }
+            }
+
+            return message;
+        }
+
 
         class SocketReader
         {
@@ -104,9 +380,6 @@ namespace HeatControl
                 {
                     throw new Exception("Cannot connect to OTGW at " + IPAddress + ":" + port.ToString());
                 }
-
-
-
             }
 
             public void Disconnect()
@@ -138,11 +411,26 @@ namespace HeatControl
                 {
                     line = streamReader.ReadLine();
                 }
-                catch
+                catch (System.IO.IOException e) 
                 {
-                    line = "";
+                    System.Net.Sockets.SocketException innerException = (System.Net.Sockets.SocketException)e.InnerException;
+                    if (innerException.SocketErrorCode == SocketError.TimedOut)
+                    {
+                        line = "";
+                    }
+                    else
+                    {
+                        throw e;
+                    }
                 }
                 return line;
+            }
+
+            public void WriteLine(string line)
+            {
+                streamWriter.WriteLine(line);
+                streamWriter.Flush();
+                Console.WriteLine("----> writing: " + line);
             }
         }
 
