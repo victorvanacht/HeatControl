@@ -111,25 +111,20 @@ namespace HeatControl
                 this.socketThread.Start();
             }
 
-            //Thread.Sleep(1000); 
+            Thread.Sleep(1000);
+
+            // first send three times PS=0 command to make sure that we receive log messages
+            socketReader.WriteLine("PS=0\n\r"); 
+            socketReader.WriteLine("PS=0\n\r");
+            socketReader.WriteLine("PS=0\n\r");
 
 
-            EnqueueCommand("PR=A");
-            EnqueueCommand("PR=B");
-            EnqueueCommand("PR=C");
-            EnqueueCommand("PR=D");
-            EnqueueCommand("PR=G");
-            EnqueueCommand("PR=I");
-            EnqueueCommand("PR=L");
-            EnqueueCommand("PR=M");
-            EnqueueCommand("PR=O");
-            EnqueueCommand("PR=P");
-            EnqueueCommand("PR=Q");
-            EnqueueCommand("PR=R");
-            EnqueueCommand("PR=S");
-            EnqueueCommand("PR=T");
-            EnqueueCommand("PR=V");
-            EnqueueCommand("PR=W");
+            string[] initCommands = {"PR=A", "PR=B", "PR=C", "PR=G", "PR=I", "PR=L", "PR=M", "PR=O", "PR=P", // "PR=D" command does not return a proper response
+                                     "PR=Q", "PR=R", "PR=S", "PR=T", "PR=V", "PR=W" };
+            foreach (string line in initCommands)
+            {
+                EnqueueCommand(line);
+            }
         }
 
         public void Disconnect()
@@ -153,11 +148,10 @@ namespace HeatControl
                 {
                     if (line.Length > 0)
                     {
-                        Console.WriteLine(line);
+                        Console.WriteLine(DateTime.Now.ToString() + " R:" +line);
 
                         Parse(line);
                     }
-                    Console.WriteLine("-------");
 
                     if (!commandQueue.IsEmpty)
                     {
@@ -228,7 +222,6 @@ namespace HeatControl
             {
                 // parse "PR:" request response
                 if (line.Substring(0, 3).Equals("PR:")) {
-                    Console.WriteLine("Response to PR command:" + line);
                     TryDequeueCommand("PR");
 
                     switch (lineBytes[4])
@@ -317,8 +310,7 @@ namespace HeatControl
                             break;
                     }
 
-                } else if (line.Substring(0, 3).Equals("PS:")) {
-                    Console.WriteLine("Response to PS command:" + line);
+                } else if (line.Substring(0, 3).Equals("PS:")) { //@@@@@ this needs to be modified be
                     TryDequeueCommand("PS");
                 } else 
   
@@ -470,6 +462,7 @@ namespace HeatControl
             public void WriteLine(string line)
             {
                 Thread.Sleep(500); // for some reason we need to insert a wait here. Don't know why. But if we don't the OTGW doesnt respond.
+                Console.WriteLine(DateTime.Now.ToString() + " T:" + line);
 
                 byte[] msg = Encoding.ASCII.GetBytes(line+ "\n\r");
                 int byteSent = this.socket.Send(msg);
