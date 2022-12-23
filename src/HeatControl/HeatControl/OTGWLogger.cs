@@ -54,7 +54,7 @@ namespace HeatControl
             public long lastTransmitAttemptTick;
             public long retryDelayTicks;
 
-            public CommandQueueItem(string command) : this(command, 10, 2 * System.TimeSpan.TicksPerSecond) { }
+            public CommandQueueItem(string command) : this(command, 10, 3 * System.TimeSpan.TicksPerSecond) { }
 
             public CommandQueueItem(string command, int maxRetryAttempts, long retryDelayTicks)
             {
@@ -111,9 +111,10 @@ namespace HeatControl
                 this.socketThread.Start();
             }
 
-            EnqueueCommand("PR=A");
-            EnqueueCommand("PR=A");
+            //Thread.Sleep(1000); 
 
+
+            EnqueueCommand("PR=A");
             EnqueueCommand("PR=B");
             EnqueueCommand("PR=C");
             EnqueueCommand("PR=D");
@@ -147,37 +148,42 @@ namespace HeatControl
             socketThreadHasClosed = false;
             while (socketThreadShouldClose == false)
             {
-                string line = socketReader.ReadLine();
-                Console.WriteLine(line);
-                if (line.Length > 0)
+                string[] lines = socketReader.ReadLines();
+                foreach (string line in lines)
                 {
-                    Parse(line);
-                }
-
-                if (!commandQueue.IsEmpty)
-                {
-                    CommandQueueItem firstItem;
-                    if (commandQueue.TryPeek(out firstItem))
+                    if (line.Length > 0)
                     {
-                        if ((firstItem.retryAttempts == 0) ||
-                            ((DateTime.Now.Ticks - firstItem.lastTransmitAttemptTick) > firstItem.retryDelayTicks))
+                        Console.WriteLine(line);
+
+                        Parse(line);
+                    }
+                    Console.WriteLine("-------");
+
+                    if (!commandQueue.IsEmpty)
+                    {
+                        CommandQueueItem firstItem;
+                        if (commandQueue.TryPeek(out firstItem))
                         {
-                            if (firstItem.retryAttempts < firstItem.maxRetryAttempts)
+                            if ((firstItem.retryAttempts == 0) ||
+                                ((DateTime.Now.Ticks - firstItem.lastTransmitAttemptTick) > firstItem.retryDelayTicks))
                             {
-                                socketReader.WriteLine(firstItem.command);
-                                firstItem.retryAttempts++;
-                                firstItem.lastTransmitAttemptTick = DateTime.Now.Ticks;
-                            }
-                            else
-                            {
-                                /// it failed!!
-                                Console.WriteLine("Command failed!");
+                                if (firstItem.retryAttempts < firstItem.maxRetryAttempts)
+                                {
+                                    socketReader.WriteLine(firstItem.command);
+                                    firstItem.retryAttempts++;
+                                    firstItem.lastTransmitAttemptTick = DateTime.Now.Ticks;
+                                }
+                                else
+                                {
+                                    /// it failed!!
+                                    Console.WriteLine("Command failed!");
 
-                                TryDequeueCommand(firstItem.command);
-                                //throw new Exception("Command failed!");
+                                    TryDequeueCommand(firstItem.command);
+                                    //throw new Exception("Command failed!");
+                                }
                             }
+
                         }
-
                     }
                 }
             }
@@ -228,37 +234,37 @@ namespace HeatControl
                     switch (lineBytes[4])
                     {
                         case 'A':
-                            this.gatewayConfiguration.version = line.Substring(5);
+                            this.gatewayConfiguration.version = line.Substring(6);
                             break;
                         case 'B':
-                            this.gatewayConfiguration.build = line.Substring(5);
+                            this.gatewayConfiguration.build = line.Substring(6);
                             break;
                         case 'C':
-                            this.gatewayConfiguration.clockSpeed = line.Substring(5);
+                            this.gatewayConfiguration.clockSpeed = line.Substring(6);
                             break;
                         case 'D':
-                            this.gatewayConfiguration.temperaturSensorFunction = (lineBytes[5] == 'O') ? "Outside Temoerature" : "Return water temperature";
+                            this.gatewayConfiguration.temperaturSensorFunction = (lineBytes[6] == 'O') ? "Outside Temperature" : "Return water temperature";
                             break;
                         case 'G':
-                            this.gatewayConfiguration.gpioFunctionsConfiguration = line.Substring(5);
+                            this.gatewayConfiguration.gpioFunctionsConfiguration = line.Substring(6);
                             break;
                         case 'I':
-                            this.gatewayConfiguration.gpioFunctionsCurrent = line.Substring(5);
+                            this.gatewayConfiguration.gpioFunctionsCurrent = line.Substring(6);
                             break;
                         case 'L':
-                            this.gatewayConfiguration.ledsFunctionsConfiguration = line.Substring(5);
+                            this.gatewayConfiguration.ledsFunctionsConfiguration = line.Substring(6);
                             break;
                         case 'M':
-                            this.gatewayConfiguration.gatewayMode = (lineBytes[5] == 'G') ? "Gateway" : "Monitor";
+                            this.gatewayConfiguration.gatewayMode = (lineBytes[6] == 'G') ? "Gateway" : "Monitor";
                             break;
                         case 'O':
-                            this.gatewayConfiguration.setpointOverride = line.Substring(5);
+                            this.gatewayConfiguration.setpointOverride = line.Substring(6);
                             break;
                         case 'P':
-                            this.gatewayConfiguration.smartPowerModelCurrent = line.Substring(5);
+                            this.gatewayConfiguration.smartPowerModelCurrent = line.Substring(6);
                             break;
                         case 'Q':
-                            switch (lineBytes[5])
+                            switch (lineBytes[6])
                             {
                                 case 'B':
                                     this.gatewayConfiguration.causeOfLastReset = "Brown out";
@@ -293,16 +299,19 @@ namespace HeatControl
                             }
                             break;
                         case 'R':
-                            this.gatewayConfiguration.remehaDetectionStart = line.Substring(5);
+                            this.gatewayConfiguration.remehaDetectionStart = line.Substring(6);
                             break;
                         case 'S':
-                            this.gatewayConfiguration.setbackTemperatureConfiguarion = line.Substring(5);
+                            this.gatewayConfiguration.setbackTemperatureConfiguarion = line.Substring(6);
                             break;
                         case 'T':
-                            this.gatewayConfiguration.tweaks = line.Substring(5);
+                            this.gatewayConfiguration.tweaks = line.Substring(6);
+                            break;
+                        case 'V':
+                            this.gatewayConfiguration.referenceVoltage = line.Substring(6);
                             break;
                         case 'W':
-                            this.gatewayConfiguration.hotWater = line.Substring(5);
+                            this.gatewayConfiguration.hotWater = line.Substring(6);
                             break;
                         default:
                             break;
@@ -347,12 +356,11 @@ namespace HeatControl
 
         class SocketReader
         {
-            private string IPAddress;
             private const int port = 6638;
 
-            private TcpClient tcpClient;
-            private StreamReader streamReader;
-            private StreamWriter streamWriter;
+            private IPAddress ipAddress;
+            private Socket socket;
+
 
             // constructor
             public SocketReader()
@@ -366,71 +374,109 @@ namespace HeatControl
             }
 
 
-            public void Connect(string IPAddress)
+            // hostname can be IP address such as "192.168.50.150" 
+            // or can be host name such as "OTGW_wifi"
+            public void Connect(string hostName)
             {
-                this.IPAddress = IPAddress;
-                try
+                // ### Find the IP address of the host
+
+
+                this.ipAddress = null;
+
+                // Get server related information.
+                IPHostEntry heserver = Dns.GetHostEntry(hostName);
+
+                // Loop on the AddressList
+                foreach (IPAddress curAdd in heserver.AddressList)
                 {
-                    this.tcpClient = new TcpClient(this.IPAddress, port);
-                    this.streamReader = new StreamReader(tcpClient.GetStream(), Encoding.UTF8);
-                    this.streamReader.BaseStream.ReadTimeout = 2000;
-                    this.streamWriter = new StreamWriter(tcpClient.GetStream(), Encoding.UTF8);
+                    if (curAdd.AddressFamily == AddressFamily.InterNetwork) // we only do IPv4. Not IPv6
+                    {
+                        this.ipAddress = curAdd;
+                        Console.WriteLine("IP-Address: " + this.ipAddress.ToString());
+                    }
                 }
-                catch
+
+                if (this.ipAddress == null)
                 {
-                    throw new Exception("Cannot connect to OTGW at " + IPAddress + ":" + port.ToString());
+                    throw new Exception("Hostname or IP-address " + hostName + "not resolvable.");
                 }
+
+
+                this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                this.socket.Connect(new IPAddress[] { this.ipAddress }, port);
+                this.socket.NoDelay = true;
             }
 
             public void Disconnect()
             {
                 try
                 {
-                    if (this.tcpClient != null)
+                    if (this.socket != null)
                     {
-                        this.tcpClient.Close();
+                        this.socket.Close();
                     }
                 }
                 catch
                 {
                 }
-                this.tcpClient = null;
+                this.socket = null;
             }
 
             public bool IsConnected()
             {
-                return this.tcpClient != null;
+                return this.socket != null;
             }
 
-            public string ReadLine()
+            private string readLinesLeftover = "";
+            public string[] ReadLines()
             {
-                string line;
+                string msg;
+                string[] lines= { };
 
-                // try-catch needed to catch timeout
-                try
+                Byte[] bytes = new byte[this.socket.ReceiveBufferSize];
+                int bytesRecv = this.socket.Receive(bytes);
+                if (bytesRecv > 0)
                 {
-                    line = streamReader.ReadLine();
-                }
-                catch (System.IO.IOException e) 
-                {
-                    System.Net.Sockets.SocketException innerException = (System.Net.Sockets.SocketException)e.InnerException;
-                    if (innerException.SocketErrorCode == SocketError.TimedOut)
+                    msg =  readLinesLeftover + Encoding.ASCII.GetString(bytes, 0, bytesRecv);
+
+                    //remove any \r in the string, by splitting and rejoining it [This is the fastest way to do it, according to internet]
+                    string[] temp = msg.Split('\r');
+                    msg = string.Join("", temp);
+
+                    // see if the message ends with CR. If not, chop it andf put the remaining part in leftover.
+                    int lastIndex = msg.LastIndexOf('\n');
+                    if (lastIndex == -1)
                     {
-                        line = "";
+                        readLinesLeftover = msg;
+                        msg = "";
+                    }
+                    else if (lastIndex != msg.Length - 1)
+                    {
+                        readLinesLeftover = msg.Substring(lastIndex + 1);
+                        msg = msg.Substring(0, lastIndex+1);
                     }
                     else
                     {
-                        throw e;
+                        readLinesLeftover = "";
                     }
+
+
+                    // split the message in separate lines by CR
+                    lines = msg.Split('\n');
                 }
-                return line;
+                return lines;
             }
 
             public void WriteLine(string line)
             {
-                streamWriter.WriteLine(line);
-                streamWriter.Flush();
-                Console.WriteLine("----> writing: " + line);
+                Thread.Sleep(500); // for some reason we need to insert a wait here. Don't know why. But if we don't the OTGW doesnt respond.
+
+                byte[] msg = Encoding.ASCII.GetBytes(line+ "\n\r");
+                int byteSent = this.socket.Send(msg);
+                if (byteSent != msg.Length)
+                {
+                    throw new Exception("Message not sent.");
+                }
             }
         }
 
