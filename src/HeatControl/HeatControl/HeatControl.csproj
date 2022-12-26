@@ -52,7 +52,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="OTGWLogger.cs" />
+    <Compile Include="OTGW\CommandQueue.cs" />
+    <Compile Include="OTGW\OTGWLogger.cs" />
+    <Compile Include="OTGW\Parser.cs" />
+    <Compile Include="OTGW\SocketReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
