@@ -4,6 +4,9 @@
 
 OpenThermGateWay. To control the boiler.
 
+#### OpenTherm protocol
+- [Protocol specification](".\Opentherm Protocol v2-2.pdf")
+
 #### Hardware
 
 - Buying OTGW board at
