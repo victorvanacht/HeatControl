@@ -9,36 +9,89 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+
+//youtube.com/watch? v = ESZpBYtQj44
+
 namespace HeatControl
 {
     class OTGW
     {
+        public struct intValueName
+        {
+            public int value;
+            public string name;
+        }
+        public struct boolValueName
+        {
+            public bool value;
+            public string name;
+        }
+        public struct floatValueName
+        {
+            public float value;
+            public string name;
+        }
+        public struct stringValueName
+        {
+            public string value;
+            public string name;
+        }
+
         public class GatewayConfiguration
         {
-            public string version;
-            public string build;
-            public string clockSpeed;
-            public string temperaturSensorFunction;
-            public string gpioFunctionsConfiguration;
-            public string gpioFunctionsCurrent;
-            public string ledsFunctionsConfiguration;
-            public string gatewayMode;
-            public string setpointOverride;
-            public string smartPowerModelCurrent;
-            public string causeOfLastReset;
-            public string remehaDetectionStart;
-            public string setbackTemperatureConfiguarion;
-            public string tweaks;
-            public string referenceVoltage;
-            public string hotWater;
+            public stringValueName version;
+            public stringValueName build;
+            public stringValueName clockSpeed;
+            public stringValueName temperaturSensorFunction;
+            public stringValueName gpioFunctionsConfiguration;
+            public stringValueName gpioState;
+            public stringValueName ledFunctionsConfiguration;
+            public stringValueName gatewayMode;
+            public stringValueName setpointOverride;
+            public stringValueName smartPowerModel;
+            public stringValueName causeOfLastReset;
+            public stringValueName remehaDetectionState;
+            public stringValueName setbackTemperatureConfiguarion;
+            public stringValueName tweaks;
+            public stringValueName referenceVoltage;
+            public stringValueName hotWater;
+
+            public GatewayConfiguration()
+            {
+                this.version.name = "OTGW Version";
+                this.build.name = "OTGW Build";
+                this.clockSpeed.name = "Clock speed";
+                this.temperaturSensorFunction.name = "DS18x20 temperature function";
+                this.gpioFunctionsConfiguration.name = "GPIO function configuation";
+                this.gpioState.name = "GPIO state";
+                this.ledFunctionsConfiguration.name = "LED fucntion configuration";
+                this.gatewayMode.name = "Gateway mode";
+                this.setpointOverride.name = "Setpoint override";
+                this.smartPowerModel.name = "Smart-Power mode";
+                this.causeOfLastReset.name = "Cause of last reset";
+                this.remehaDetectionState.name = "Remeha thermostat detection state";
+                this.setbackTemperatureConfiguarion.name = "Setback temperature configuration";
+                this.tweaks.name = "Tweaks";
+                this.referenceVoltage.name = "Reference voltage";
+                this.hotWater.name = "Domestic hot water";
+
+            }
 
         }
         public GatewayConfiguration gatewayConfiguration;
 
+        public class GatewayStatus
+        {
+            public boolValueName centralHeatingEnable;
 
-
+            public GatewayStatus()
+            {
+                this.centralHeatingEnable.name = "Central heating enable";
+            }
+        }
+        public GatewayStatus gatewayStatus;
+                
         private SocketReader socketReader;
-
         private Thread socketThread;
         private volatile bool socketThreadShouldClose;
         private volatile bool socketThreadHasClosed;
@@ -92,15 +145,102 @@ namespace HeatControl
             return false;
         }
 
+
+
+
+        /*
+            new OTGWMessage("Central heating enable", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 8),
+            new OTGWMessage("Tap water enable", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 9),
+            new OTGWMessage("Cooling enable", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 10),
+            new OTGWMessage("OTC active", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 11),
+            new OTGWMessage("CH2 enable", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 12),
+            new OTGWMessage("Fault indication", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 0),
+            new OTGWMessage("Central heating mode", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 1),
+            new OTGWMessage("Tap water mode", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 2),
+            new OTGWMessage("Flame status", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 3),
+            new OTGWMessage("Cooling status", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 4),
+            new OTGWMessage("CH2 mode", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 5),
+            new OTGWMessage("Diagnostic indication", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 6),
+            new OTGWMessage("Control setpoint", MsgType.WriteData, 1, Direction.ThermostatToBoiler, Handlerf88, 0),
+
+            new OTGWMessage("Control setpoint original", MsgType.WriteData, 1, Direction.ThermostatToBoilerOriginal, Handlerf88, 0),
+
+            new OTGWMessage("Master memberID", MsgType.WriteData, 2, Direction.ThermostatToBoiler, Handleru8L, 0),
+            new OTGWMessage("Tap water present", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 8),
+            new OTGWMessage("Control type", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 9),
+            new OTGWMessage("Cooling config", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 10),
+            new OTGWMessage("Tap water config", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 11),
+            new OTGWMessage("Master low-off&pump control", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 12),
+            new OTGWMessage("CH2 present", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 13),
+            new OTGWMessage("Slave memberID", MsgType.ReadAck,   3, Direction.BoilerToThermostat, Handleru8L, 0),
+            new OTGWMessage("Service request", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 8),
+            new OTGWMessage("Lockout reset", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 9),
+            new OTGWMessage("Low water pressure", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 10),
+            new OTGWMessage("Gas/flame fault", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 11),
+            new OTGWMessage("Air pressure fault", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 12),
+            new OTGWMessage("Water over-temp", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 13),
+            new OTGWMessage("OEM-specific fault code", MsgType.ReadAck,   5, Direction.BoilerToThermostat, Handleru8L, 0),
+            new OTGWMessage("Control setpoint 2", MsgType.WriteData, 8, Direction.ThermostatToBoiler, Handlerf88, 0),
+            new OTGWMessage("Room setpoint", MsgType.WriteData, 16, Direction.ThermostatToBoiler, Handlerf88, 0),
+            new OTGWMessage("Relative modulation level", MsgType.ReadAck,   17, Direction.BoilerToThermostat, Handlerf88, 0),
+            new OTGWMessage("Water pressure CH circuit", MsgType.ReadAck,   18, Direction.BoilerToThermostat, Handlerf88, 0),
+            new OTGWMessage("Water flow rate DHW circuit", MsgType.ReadAck,   19, Direction.BoilerToThermostat, Handlerf88, 0),
+            new OTGWMessage("Time and Day", MsgType.ReadAck,   20, Direction.BoilerToThermostat, Handleru16, 0),
+            new OTGWMessage("Time and Day", MsgType.WriteData, 20, Direction.ThermostatToBoiler, Handleru16, 0),
+            new OTGWMessage("Date", MsgType.ReadAck,   21, Direction.BoilerToThermostat, Handleru16, 0),
+            new OTGWMessage("Date", MsgType.WriteData, 21, Direction.ThermostatToBoiler, Handleru16, 0),
+            new OTGWMessage("Year", MsgType.ReadAck,   22, Direction.BoilerToThermostat, Handleru16, 0),
+            new OTGWMessage("Year", MsgType.WriteData, 22, Direction.ThermostatToBoiler, Handleru16, 0),
+            new OTGWMessage("Room setpoint 2", MsgType.WriteData, 23, Direction.ThermostatToBoiler, Handlerf88, 0),
+            new OTGWMessage("Room temperature", MsgType.WriteData, 24, Direction.ThermostatToBoiler, Handlerf88, 0),
+            new OTGWMessage("Boiler water temperture", MsgType.ReadAck,   25, Direction.BoilerToThermostat, Handlerf88, 0),
+            new OTGWMessage("Tap water temperture", MsgType.ReadAck,   26, Direction.BoilerToThermostat, Handlerf88, 0),
+            new OTGWMessage("Outside temperture", MsgType.ReadAck,   27, Direction.BoilerToThermostat, Handlerf88, 0),
+            new OTGWMessage("Return water temperture", MsgType.ReadAck,   28, Direction.BoilerToThermostat, Handlerf88, 0),
+            new OTGWMessage("Solar storage temperture", MsgType.ReadAck,   29, Direction.BoilerToThermostat, Handlerf88, 0),
+            new OTGWMessage("Solar collector temperture", MsgType.ReadAck,   30, Direction.BoilerToThermostat, Handlers16, 0),
+            new OTGWMessage("Flow temperature CH2", MsgType.ReadAck,   31, Direction.BoilerToThermostat, Handlerf88, 0),
+            new OTGWMessage("Tap water temperature 2", MsgType.ReadAck,   32, Direction.BoilerToThermostat, Handlerf88, 0),
+            new OTGWMessage("Exhaust temperture", MsgType.ReadAck,   33, Direction.BoilerToThermostat, Handlers16, 0),
+            new OTGWMessage("OEM-specifc diagnostic code", MsgType.ReadAck,115, Direction.BoilerToThermostat, Handleru16, 0),
+            new OTGWMessage("Burner starts", MsgType.ReadAck,   116, Direction.BoilerToThermostat, Handleru16, 0),
+            new OTGWMessage("Central heating pump starts", MsgType.ReadAck,   117, Direction.BoilerToThermostat, Handleru16, 0),
+            new OTGWMessage("Tap water valve starts", MsgType.ReadAck,   118, Direction.BoilerToThermostat, Handleru16, 0),
+            new OTGWMessage("Tap water burner starts", MsgType.ReadAck,   119, Direction.BoilerToThermostat, Handleru16, 0),
+            new OTGWMessage("Burner operation hours", MsgType.ReadAck,   120, Direction.BoilerToThermostat, Handleru16, 0),
+            new OTGWMessage("Central heating pump hours", MsgType.ReadAck,   121, Direction.BoilerToThermostat, Handleru16, 0),
+            new OTGWMessage("Tap water valve hours", MsgType.ReadAck,   122, Direction.BoilerToThermostat, Handleru16, 0),
+            new OTGWMessage("Tap water burner hours", MsgType.ReadAck,   123, Direction.BoilerToThermostat, Handleru16, 0),
+            new OTGWMessage("OpenTherm version master", MsgType.ReadAck,   124, Direction.BoilerToThermostat, Handlerf88, 0),
+            new OTGWMessage("OpenTherm version slave", MsgType.ReadAck,   125, Direction.BoilerToThermostat, Handlerf88, 0),
+            new OTGWMessage("Product type master", MsgType.ReadAck,   126, Direction.BoilerToThermostat, Handleru8H, 0),
+            new OTGWMessage("Product version master", MsgType.WriteData,  126, Direction.ThermostatToBoiler, Handleru8L, 0),
+            new OTGWMessage("Product type slave", MsgType.ReadAck,   127, Direction.BoilerToThermostat, Handleru8H, 0),
+            new OTGWMessage("Product version slave", MsgType.ReadAck,   127, Direction.BoilerToThermostat, Handleru8L, 0),
+            */
+
+
+
+
         public OTGW()
         {
             this.gatewayConfiguration = new GatewayConfiguration();
             this.socketReader = new SocketReader();
+
+            this.decodeMessages = new Dictionary<string, ParseDispatch>()
+            {
+                [Message.GenerateKey(0, Message.Direction.ThermostatToBoiler,Message.Type.M2SReadData)] = new ParseDispatch { name = "Central heating enable", parser = new Flags16()},
+                //new OTGWMessage("Central heating enable", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 8),
+
+
+                ["1"] = new ParseDispatch { name = "Control setpoint" },
+                ["2"] = new ParseDispatch { name = "Master memberID"}
+            };
         }
 
-        public void Connect(string IPAddress)
+        public void Connect(string hostName)
         {
-            socketReader.Connect(IPAddress);
+            socketReader.Connect(hostName);
             this.commandQueue = new ConcurrentQueue<CommandQueueItem>();
 
             if (this.socketReader.IsConnected())
@@ -118,7 +258,7 @@ namespace HeatControl
             socketReader.WriteLine("PS=0\n\r");
             socketReader.WriteLine("PS=0\n\r");
 
-
+            // send a list of commands to request configuration parameters
             string[] initCommands = {"PR=A", "PR=B", "PR=C", "PR=G", "PR=I", "PR=L", "PR=M", "PR=O", "PR=P", // "PR=D" command does not return a proper response
                                      "PR=Q", "PR=R", "PR=S", "PR=T", "PR=V", "PR=W" };
             foreach (string line in initCommands)
@@ -149,7 +289,6 @@ namespace HeatControl
                     if (line.Length > 0)
                     {
                         Console.WriteLine(DateTime.Now.ToString() + " R:" +line);
-
                         Parse(line);
                     }
 
@@ -194,14 +333,89 @@ namespace HeatControl
                 BoilerToThermostatModified
             }
 
-
+            public enum Type
+            {
+                M2SReadData=0,
+                M2SWriteData=1,
+                M2SInvalidData=2,
+                S2MReadAck=4,
+                S2MWriteAck=5,
+                S2MInavlidData=6,
+                S2MUnknownData=7
+            }
+            
             private Direction _direction;
             public Direction direction
             {
                 get { return _direction; }
                 set { _direction = value; }
             }
+
+            private Type _type;
+            public Type type
+            {
+                get { return _type; }
+                set { _type = value; }
+            }
+
+            public int dataID;
+            public int dataValue;
+
+            public string GenerateKey()
+            {
+                return GenerateKey(this.dataID, this.direction, this.type);
+            }
+
+            public static string GenerateKey(int dataID, Direction direction, Type type)
+            {
+                return dataID.ToString() + direction.ToString() + type.ToString();
+            }
         }
+
+
+        struct ParseDispatch
+        {
+            public string name;
+            public ParsersBase parser;
+            public ParsersArgumentBase argument;
+        };
+        Dictionary<string, ParseDispatch> decodeMessages;
+
+        abstract private class ParsersBase
+        {
+            abstract public void Parse(Message message, ParsersArgumentBase arguments);
+        }
+
+        abstract private class ParsersArgumentBase
+        {
+        }
+
+
+        private class Flasg16Args : ParsersArgumentBase
+        {
+            int bit;
+            ///how to make a pointer to specific element of an class????
+
+        }
+
+        private class Flags16 : ParsersBase
+        {
+            override public void Parse(Message message, ParsersArgumentBase arguments)
+            {
+                Console.WriteLine("Parse16");
+            }
+        }
+
+        private class Flags8 : ParsersBase
+        {
+            override public void Parse(Message message, ParsersArgumentBase arguments)
+            {
+                Console.WriteLine("Parse8");
+            }
+        }
+
+
+
 
 
         public Message Parse(string line)
@@ -227,84 +441,84 @@ namespace HeatControl
                     switch (lineBytes[4])
                     {
                         case 'A':
-                            this.gatewayConfiguration.version = line.Substring(6);
+                            this.gatewayConfiguration.version.value = line.Substring(6);
                             break;
                         case 'B':
-                            this.gatewayConfiguration.build = line.Substring(6);
+                            this.gatewayConfiguration.build.value = line.Substring(6);
                             break;
                         case 'C':
-                            this.gatewayConfiguration.clockSpeed = line.Substring(6);
+                            this.gatewayConfiguration.clockSpeed.value = line.Substring(6);
                             break;
                         case 'D':
-                            this.gatewayConfiguration.temperaturSensorFunction = (lineBytes[6] == 'O') ? "Outside Temperature" : "Return water temperature";
+                            this.gatewayConfiguration.temperaturSensorFunction.value = (lineBytes[6] == 'O') ? "Outside Temperature" : "Return water temperature";
                             break;
                         case 'G':
-                            this.gatewayConfiguration.gpioFunctionsConfiguration = line.Substring(6);
+                            this.gatewayConfiguration.gpioFunctionsConfiguration.value = line.Substring(6);
                             break;
                         case 'I':
-                            this.gatewayConfiguration.gpioFunctionsCurrent = line.Substring(6);
+                            this.gatewayConfiguration.gpioState.value = line.Substring(6);
                             break;
                         case 'L':
-                            this.gatewayConfiguration.ledsFunctionsConfiguration = line.Substring(6);
+                            this.gatewayConfiguration.ledFunctionsConfiguration.value = line.Substring(6);
                             break;
                         case 'M':
-                            this.gatewayConfiguration.gatewayMode = (lineBytes[6] == 'G') ? "Gateway" : "Monitor";
+                            this.gatewayConfiguration.gatewayMode.value = (lineBytes[6] == 'G') ? "Gateway" : "Monitor";
                             break;
                         case 'O':
-                            this.gatewayConfiguration.setpointOverride = line.Substring(6);
+                            this.gatewayConfiguration.setpointOverride.value = line.Substring(6);
                             break;
                         case 'P':
-                            this.gatewayConfiguration.smartPowerModelCurrent = line.Substring(6);
+                            this.gatewayConfiguration.smartPowerModel.value = line.Substring(6);
                             break;
                         case 'Q':
                             switch (lineBytes[6])
                             {
                                 case 'B':
-                                    this.gatewayConfiguration.causeOfLastReset = "Brown out";
+                                    this.gatewayConfiguration.causeOfLastReset.value = "Brown out";
                                     break;
                                 case 'C':
-                                    this.gatewayConfiguration.causeOfLastReset = "By command";
+                                    this.gatewayConfiguration.causeOfLastReset.value = "By command";
                                     break;
                                 case 'E':
-                                    this.gatewayConfiguration.causeOfLastReset = "Reset button";
+                                    this.gatewayConfiguration.causeOfLastReset.value = "Reset button";
                                     break;
                                 case 'L':
-                                    this.gatewayConfiguration.causeOfLastReset = "Stuck in loop";
+                                    this.gatewayConfiguration.causeOfLastReset.value = "Stuck in loop";
                                     break;
                                 case 'O':
-                                    this.gatewayConfiguration.causeOfLastReset = "Stack overflow";
+                                    this.gatewayConfiguration.causeOfLastReset.value = "Stack overflow";
                                     break;
                                 case 'P':
-                                    this.gatewayConfiguration.causeOfLastReset = "Power on";
+                                    this.gatewayConfiguration.causeOfLastReset.value = "Power on";
                                     break;
                                 case 'S':
-                                    this.gatewayConfiguration.causeOfLastReset = "BREAL on serial interface";
+                                    this.gatewayConfiguration.causeOfLastReset.value = "BREAL on serial interface";
                                     break;
                                 case 'U':
-                                    this.gatewayConfiguration.causeOfLastReset = "Stack underflow";
+                                    this.gatewayConfiguration.causeOfLastReset.value = "Stack underflow";
                                     break;
                                 case 'W':
-                                    this.gatewayConfiguration.causeOfLastReset = "Watchdog";
+                                    this.gatewayConfiguration.causeOfLastReset.value = "Watchdog";
                                     break;
                                 default:
-                                    this.gatewayConfiguration.causeOfLastReset = "Syntax error";
+                                    this.gatewayConfiguration.causeOfLastReset.value = "Syntax error";
                                     break;
                             }
                             break;
                         case 'R':
-                            this.gatewayConfiguration.remehaDetectionStart = line.Substring(6);
+                            this.gatewayConfiguration.remehaDetectionState.value = line.Substring(6);
                             break;
                         case 'S':
-                            this.gatewayConfiguration.setbackTemperatureConfiguarion = line.Substring(6);
+                            this.gatewayConfiguration.setbackTemperatureConfiguarion.value = line.Substring(6);
                             break;
                         case 'T':
-                            this.gatewayConfiguration.tweaks = line.Substring(6);
+                            this.gatewayConfiguration.tweaks.value = line.Substring(6);
                             break;
                         case 'V':
-                            this.gatewayConfiguration.referenceVoltage = line.Substring(6);
+                            this.gatewayConfiguration.referenceVoltage.value = line.Substring(6);
                             break;
                         case 'W':
-                            this.gatewayConfiguration.hotWater = line.Substring(6);
+                            this.gatewayConfiguration.hotWater.value = line.Substring(6);
                             break;
                         default:
                             break;
@@ -314,9 +528,6 @@ namespace HeatControl
                     TryDequeueCommand("PS");
                 } else 
   
-
-
-
                 if (line.Length == 9)
                 {
                     message = new Message();
@@ -338,6 +549,20 @@ namespace HeatControl
                             Console.WriteLine("Unhandled packet type"); //@@@@ top be fixed
                             message = null;
                             break;
+                    }
+                    if (message != null)
+                    {
+                        message.type = (Message.Type)((Convert.ToInt32(line.Substring(1, 2), 16) & 0x70) >> 4);
+                        message.dataID = Convert.ToInt32(line.Substring(3, 2), 16);
+                        message.dataValue = Convert.ToInt32(line.Substring(5, 4), 16);
+
+                        string key = message.GenerateKey();
+                        if (decodeMessages.ContainsKey(key))
+                        {
+                            ParseDispatch value = decodeMessages[key];
+                            value.parser.Parse(message, value.argument);
+
+                        }
                     }
                 }
             }
