@@ -10,8 +10,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 
-//youtube.com/watch? v = ESZpBYtQj44
-
 namespace HeatControl
 {
     class OTGW
@@ -90,62 +88,87 @@ namespace HeatControl
             }
         }
         public GatewayStatus gatewayStatus;
-                
+
         private SocketReader socketReader;
         private Thread socketThread;
         private volatile bool socketThreadShouldClose;
         private volatile bool socketThreadHasClosed;
 
+        private CommandQueue commandQueue;
 
 
-        private class CommandQueueItem
+
+        public class CommandQueue
         {
-            public string command;
-            public int retryAttempts;
-            public int maxRetryAttempts;
-            public long enqueTick;
-            public long lastTransmitAttemptTick;
-            public long retryDelayTicks;
-
-            public CommandQueueItem(string command) : this(command, 10, 3 * System.TimeSpan.TicksPerSecond) { }
-
-            public CommandQueueItem(string command, int maxRetryAttempts, long retryDelayTicks)
+            public class CommandQueueItem
             {
-                this.command = command;
-                this.retryAttempts = 0;
-                this.maxRetryAttempts = maxRetryAttempts;
-                this.enqueTick = DateTime.Now.Ticks;
-                this.retryDelayTicks = retryDelayTicks;
+                public string command;
+                public int retryAttempts;
+                public int maxRetryAttempts;
+                public long enqueTick;
+                public long lastTransmitAttemptTick;
+                public long retryDelayTicks;
+
+                public CommandQueueItem(string command) : this(command, 10, 3 * System.TimeSpan.TicksPerSecond) { }
+
+                public CommandQueueItem(string command, int maxRetryAttempts, long retryDelayTicks)
+                {
+                    this.command = command;
+                    this.retryAttempts = 0;
+                    this.maxRetryAttempts = maxRetryAttempts;
+                    this.enqueTick = DateTime.Now.Ticks;
+                    this.retryDelayTicks = retryDelayTicks;
+                }
+
+            }
+            private ConcurrentQueue<CommandQueueItem> queue;
+
+            public CommandQueue()
+            {
+                this.queue = new ConcurrentQueue<CommandQueueItem>();
             }
 
-        }
-        private ConcurrentQueue<CommandQueueItem> commandQueue;
 
-        public void EnqueueCommand(string command)
-        {
-            CommandQueueItem item = new CommandQueueItem(command);
-            commandQueue.Enqueue(item);
-        }
-        public bool TryDequeueCommand(string command)
-        {
-            if (!commandQueue.IsEmpty)
+            public void EnqueueCommand(string command)
             {
-                CommandQueueItem firstItem;
-                if (commandQueue.TryPeek(out firstItem))
+                CommandQueueItem item = new CommandQueueItem(command);
+                queue.Enqueue(item);
+            }
+
+            public bool TryDequeueCommand(string command)
+            {
+                if (!queue.IsEmpty)
                 {
-                    if ((command.Length >= 2) && (firstItem.command.Length >= 2))
+                    CommandQueueItem firstItem;
+                    if (queue.TryPeek(out firstItem))
                     {
-                        if (command.Substring(0, 2).ToUpper().Equals(firstItem.command.Substring(0, 2).ToUpper()))
+                        if ((command.Length >= 2) && (firstItem.command.Length >= 2))
                         {
-                            return commandQueue.TryDequeue(out firstItem);
+                            if (command.Substring(0, 2).ToUpper().Equals(firstItem.command.Substring(0, 2).ToUpper()))
+                            {
+                                return queue.TryDequeue(out firstItem);
+                            }
                         }
                     }
                 }
+                return false;
             }
-            return false;
+
+            public bool IsEmpty()
+            {
+                return this.queue.IsEmpty;
+            }
+
+            public bool TryDequeue(out CommandQueueItem result)
+            {
+                return this.queue.TryDequeue(out result);
+            }
+
+            public bool TryPeek(out CommandQueueItem result)
+            {
+                return this.queue.TryPeek(out result);
+            }
         }
-
-
 
 
         /*
@@ -220,28 +243,22 @@ namespace HeatControl
             */
 
 
+        private Parser parser;
 
 
         public OTGW()
         {
             this.gatewayConfiguration = new GatewayConfiguration();
             this.socketReader = new SocketReader();
+            this.commandQueue = new CommandQueue();
+            this.parser = new Parser(ref this.gatewayConfiguration, ref this.gatewayStatus, ref this.commandQueue);
+            
 
-            this.decodeMessages = new Dictionary<string, ParseDispatch>()
-            {
-                [Message.GenerateKey(0, Message.Direction.ThermostatToBoiler,Message.Type.M2SReadData)] = new ParseDispatch { name = "Central heating enable", parser = new Flags16()},
-                //new OTGWMessage("Central heating enable", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 8),
-
-
-                ["1"] = new ParseDispatch { name = "Control setpoint" },
-                ["2"] = new ParseDispatch { name = "Master memberID"}
-            };
         }
 
         public void Connect(string hostName)
         {
             socketReader.Connect(hostName);
-            this.commandQueue = new ConcurrentQueue<CommandQueueItem>();
 
             if (this.socketReader.IsConnected())
             {
@@ -263,7 +280,7 @@ namespace HeatControl
                                      "PR=Q", "PR=R", "PR=S", "PR=T", "PR=V", "PR=W" };
             foreach (string line in initCommands)
             {
-                EnqueueCommand(line);
+                commandQueue.EnqueueCommand(line);
             }
         }
 
@@ -289,12 +306,12 @@ namespace HeatControl
                     if (line.Length > 0)
                     {
                         Console.WriteLine(DateTime.Now.ToString() + " R:" +line);
-                        Parse(line);
+                        this.parser.Parse(line);
                     }
 
-                    if (!commandQueue.IsEmpty)
+                    if (!commandQueue.IsEmpty())
                     {
-                        CommandQueueItem firstItem;
+                        CommandQueue.CommandQueueItem firstItem;
                         if (commandQueue.TryPeek(out firstItem))
                         {
                             if ((firstItem.retryAttempts == 0) ||
@@ -311,11 +328,10 @@ namespace HeatControl
                                     /// it failed!!
                                     Console.WriteLine("Command failed!");
 
-                                    TryDequeueCommand(firstItem.command);
+                                    commandQueue.TryDequeueCommand(firstItem.command);
                                     //throw new Exception("Command failed!");
                                 }
                             }
-
                         }
                     }
                 }
@@ -323,253 +339,278 @@ namespace HeatControl
             socketThreadHasClosed = true;
         }
 
-        public class Message
+        private class Parser
         {
-            public enum Direction
+            private GatewayConfiguration gatewayConfiguration;
+            private GatewayStatus gatewayStatus;
+            private CommandQueue commandQueue;
+            private Dictionary<string, ParsersBase> decodeMessages;
+
+            public class Message
             {
-                ThermostatToBoiler,
-                BoilerToThermostat,
-                ThermostatToBoilerModified,
-                BoilerToThermostatModified
-            }
-
-            public enum Type
-            {
-                M2SReadData=0,
-                M2SWriteData=1,
-                M2SInvalidData=2,
-                S2MReadAck=4,
-                S2MWriteAck=5,
-                S2MInavlidData=6,
-                S2MUnknownData=7
-            }
-            
-            private Direction _direction;
-            public Direction direction
-            {
-                get { return _direction; }
-                set { _direction = value; }
-            }
-
-            private Type _type;
-            public Type type
-            {
-                get { return _type; }
-                set { _type = value; }
-            }
-
-            public int dataID;
-            public int dataValue;
-
-            public string GenerateKey()
-            {
-                return GenerateKey(this.dataID, this.direction, this.type);
-            }
-
-            public static string GenerateKey(int dataID, Direction direction, Type type)
-            {
-                return dataID.ToString() + direction.ToString() + type.ToString();
-            }
-        }
-
-
-        struct ParseDispatch
-        {
-            public string name;
-            public ParsersBase parser;
-            public ParsersArgumentBase argument;
-        };
-        Dictionary<string, ParseDispatch> decodeMessages;
-
-        abstract private class ParsersBase
-        {
-            abstract public void Parse(Message message, ParsersArgumentBase arguments);
-        }
-
-        abstract private class ParsersArgumentBase
-        {
-        }
-
-
-        private class Flasg16Args : ParsersArgumentBase
-        {
-            int bit;
-            ///how to make a pointer to specific element of an class????
-
-        }
-
-        private class Flags16 : ParsersBase
-        {
-            override public void Parse(Message message, ParsersArgumentBase arguments)
-            {
-                Console.WriteLine("Parse16");
-            }
-        }
-
-        private class Flags8 : ParsersBase
-        {
-            override public void Parse(Message message, ParsersArgumentBase arguments)
-            {
-                Console.WriteLine("Parse8");
-            }
-        }
-
-
-
-
-
-        public Message Parse(string line)
-        {
-            Message message = null;
-
-            char[] lineBytes = line.ToUpper().ToCharArray();
-
-            // Parse errors
-            if (line.Equals("NG")) Console.WriteLine("OTGW reponse 'NG': No Good");
-            else if (line.Equals("SE")) Console.WriteLine("OTGW reponse 'SE': Syntax Error");
-            else if (line.Equals("BV")) Console.WriteLine("OTGW reponse 'BV': Bad Value");
-            else if (line.Equals("OR")) Console.WriteLine("OTGW reponse 'OR': Out of Range");
-            else if (line.Equals("NS")) Console.WriteLine("OTGW reponse 'NS': No Space");
-            else if (line.Equals("NF")) Console.WriteLine("OTGW reponse 'NF': Not Found");
-            else if (line.Equals("OR")) Console.WriteLine("OTGW reponse 'OR': OverRun");
-            else if (line.Length >= 3)
-            {
-                // parse "PR:" request response
-                if (line.Substring(0, 3).Equals("PR:")) {
-                    TryDequeueCommand("PR");
-
-                    switch (lineBytes[4])
-                    {
-                        case 'A':
-                            this.gatewayConfiguration.version.value = line.Substring(6);
-                            break;
-                        case 'B':
-                            this.gatewayConfiguration.build.value = line.Substring(6);
-                            break;
-                        case 'C':
-                            this.gatewayConfiguration.clockSpeed.value = line.Substring(6);
-                            break;
-                        case 'D':
-                            this.gatewayConfiguration.temperaturSensorFunction.value = (lineBytes[6] == 'O') ? "Outside Temperature" : "Return water temperature";
-                            break;
-                        case 'G':
-                            this.gatewayConfiguration.gpioFunctionsConfiguration.value = line.Substring(6);
-                            break;
-                        case 'I':
-                            this.gatewayConfiguration.gpioState.value = line.Substring(6);
-                            break;
-                        case 'L':
-                            this.gatewayConfiguration.ledFunctionsConfiguration.value = line.Substring(6);
-                            break;
-                        case 'M':
-                            this.gatewayConfiguration.gatewayMode.value = (lineBytes[6] == 'G') ? "Gateway" : "Monitor";
-                            break;
-                        case 'O':
-                            this.gatewayConfiguration.setpointOverride.value = line.Substring(6);
-                            break;
-                        case 'P':
-                            this.gatewayConfiguration.smartPowerModel.value = line.Substring(6);
-                            break;
-                        case 'Q':
-                            switch (lineBytes[6])
-                            {
-                                case 'B':
-                                    this.gatewayConfiguration.causeOfLastReset.value = "Brown out";
-                                    break;
-                                case 'C':
-                                    this.gatewayConfiguration.causeOfLastReset.value = "By command";
-                                    break;
-                                case 'E':
-                                    this.gatewayConfiguration.causeOfLastReset.value = "Reset button";
-                                    break;
-                                case 'L':
-                                    this.gatewayConfiguration.causeOfLastReset.value = "Stuck in loop";
-                                    break;
-                                case 'O':
-                                    this.gatewayConfiguration.causeOfLastReset.value = "Stack overflow";
-                                    break;
-                                case 'P':
-                                    this.gatewayConfiguration.causeOfLastReset.value = "Power on";
-                                    break;
-                                case 'S':
-                                    this.gatewayConfiguration.causeOfLastReset.value = "BREAL on serial interface";
-                                    break;
-                                case 'U':
-                                    this.gatewayConfiguration.causeOfLastReset.value = "Stack underflow";
-                                    break;
-                                case 'W':
-                                    this.gatewayConfiguration.causeOfLastReset.value = "Watchdog";
-                                    break;
-                                default:
-                                    this.gatewayConfiguration.causeOfLastReset.value = "Syntax error";
-                                    break;
-                            }
-                            break;
-                        case 'R':
-                            this.gatewayConfiguration.remehaDetectionState.value = line.Substring(6);
-                            break;
-                        case 'S':
-                            this.gatewayConfiguration.setbackTemperatureConfiguarion.value = line.Substring(6);
-                            break;
-                        case 'T':
-                            this.gatewayConfiguration.tweaks.value = line.Substring(6);
-                            break;
-                        case 'V':
-                            this.gatewayConfiguration.referenceVoltage.value = line.Substring(6);
-                            break;
-                        case 'W':
-                            this.gatewayConfiguration.hotWater.value = line.Substring(6);
-                            break;
-                        default:
-                            break;
-                    }
-
-                } else if (line.Substring(0, 3).Equals("PS:")) { //@@@@@ this needs to be modified be
-                    TryDequeueCommand("PS");
-                } else 
-  
-                if (line.Length == 9)
+                public enum Direction
                 {
-                    message = new Message();
-                    switch (lineBytes[0])
-                    {
-                        case 'T':
-                            message.direction = Message.Direction.ThermostatToBoiler;
-                            break;
-                        case 'B':
-                            message.direction = Message.Direction.BoilerToThermostat;
-                            break;
-                        case 'R':
-                            message.direction = Message.Direction.ThermostatToBoilerModified;
-                            break;
-                        case 'A':
-                            message.direction = Message.Direction.BoilerToThermostatModified;
-                            break;
-                        default:
-                            Console.WriteLine("Unhandled packet type"); //@@@@ top be fixed
-                            message = null;
-                            break;
-                    }
-                    if (message != null)
-                    {
-                        message.type = (Message.Type)((Convert.ToInt32(line.Substring(1, 2), 16) & 0x70) >> 4);
-                        message.dataID = Convert.ToInt32(line.Substring(3, 2), 16);
-                        message.dataValue = Convert.ToInt32(line.Substring(5, 4), 16);
+                    ThermostatToBoiler,
+                    BoilerToThermostat,
+                    ThermostatToBoilerModified,
+                    BoilerToThermostatModified
+                }
 
-                        string key = message.GenerateKey();
-                        if (decodeMessages.ContainsKey(key))
-                        {
-                            ParseDispatch value = decodeMessages[key];
-                            value.parser.Parse(message, value.argument);
+                public enum Type
+                {
+                    M2SReadData = 0,
+                    M2SWriteData = 1,
+                    M2SInvalidData = 2,
+                    S2MReadAck = 4,
+                    S2MWriteAck = 5,
+                    S2MInavlidData = 6,
+                    S2MUnknownData = 7
+                }
 
-                        }
-                    }
+                private Direction _direction;
+                public Direction direction
+                {
+                    get { return _direction; }
+                    set { _direction = value; }
+                }
+
+                private Type _type;
+                public Type type
+                {
+                    get { return _type; }
+                    set { _type = value; }
+                }
+
+                public int dataID;
+                public int dataValue;
+
+                public string GenerateKey()
+                {
+                    return GenerateKey(this.dataID, this.direction, this.type);
+                }
+
+                public static string GenerateKey(int dataID, Direction direction, Type type)
+                {
+                    return dataID.ToString() + direction.ToString() + type.ToString();
                 }
             }
 
-            return message;
-        }
+            public Parser(ref GatewayConfiguration configuration, ref GatewayStatus status, ref CommandQueue commandQueue)
+            {
+                this.gatewayConfiguration = configuration;
+                this.gatewayStatus = status;
+                this.commandQueue = commandQueue;
 
+                /*
+                this.decodeMessages = new Dictionary<string, ParsersBase>()
+                [Message.GenerateKey(0, Message.Direction.ThermostatToBoiler, Message.Type.M2SReadData)] = new ParseDispatch { name = "Central heating enable", parser = new Flags16()},
+                //new OTGWMessage("Central heating enable", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 8),
+
+
+                ["1"] = new ParseDispatch { name = "Control setpoint" },
+                ["2"] = new ParseDispatch { name = "Master memberID"}
+
+            };
+
+*/
+            }
+
+
+
+            abstract private class ParsersBase
+            {
+                abstract public void Parse(Message message);
+            }
+
+            private class Flags16 : ParsersBase
+            {
+                public Flags16()
+                {
+                    Console.WriteLine("This is the contructor of Flasg16");
+                }
+
+                override public void Parse(Message message)
+                {
+                    Console.WriteLine("Parse16");
+                }
+            }
+
+            private class Flags8 : ParsersBase
+            {
+                public Flags8()
+                {
+                    Console.WriteLine("This is the contructor of Flasg8");
+                }
+
+
+                override public void Parse(Message message)
+                {
+                    Console.WriteLine("Parse8");
+                }
+            }
+
+
+
+
+
+            public Message Parse(string line)
+            {
+                Message message = null;
+
+                char[] lineBytes = line.ToUpper().ToCharArray();
+
+                // Parse errors
+                if (line.Equals("NG")) Console.WriteLine("OTGW reponse 'NG': No Good");
+                else if (line.Equals("SE")) Console.WriteLine("OTGW reponse 'SE': Syntax Error");
+                else if (line.Equals("BV")) Console.WriteLine("OTGW reponse 'BV': Bad Value");
+                else if (line.Equals("OR")) Console.WriteLine("OTGW reponse 'OR': Out of Range");
+                else if (line.Equals("NS")) Console.WriteLine("OTGW reponse 'NS': No Space");
+                else if (line.Equals("NF")) Console.WriteLine("OTGW reponse 'NF': Not Found");
+                else if (line.Equals("OR")) Console.WriteLine("OTGW reponse 'OR': OverRun");
+                else if (line.Length >= 3)
+                {
+                    // parse "PR:" request response
+                    if (line.Substring(0, 3).Equals("PR:"))
+                    {
+                        commandQueue.TryDequeueCommand("PR");
+
+                        switch (lineBytes[4])
+                        {
+                            case 'A':
+                                this.gatewayConfiguration.version.value = line.Substring(6);
+                                break;
+                            case 'B':
+                                this.gatewayConfiguration.build.value = line.Substring(6);
+                                break;
+                            case 'C':
+                                this.gatewayConfiguration.clockSpeed.value = line.Substring(6);
+                                break;
+                            case 'D':
+                                this.gatewayConfiguration.temperaturSensorFunction.value = (lineBytes[6] == 'O') ? "Outside Temperature" : "Return water temperature";
+                                break;
+                            case 'G':
+                                this.gatewayConfiguration.gpioFunctionsConfiguration.value = line.Substring(6);
+                                break;
+                            case 'I':
+                                this.gatewayConfiguration.gpioState.value = line.Substring(6);
+                                break;
+                            case 'L':
+                                this.gatewayConfiguration.ledFunctionsConfiguration.value = line.Substring(6);
+                                break;
+                            case 'M':
+                                this.gatewayConfiguration.gatewayMode.value = (lineBytes[6] == 'G') ? "Gateway" : "Monitor";
+                                break;
+                            case 'O':
+                                this.gatewayConfiguration.setpointOverride.value = line.Substring(6);
+                                break;
+                            case 'P':
+                                this.gatewayConfiguration.smartPowerModel.value = line.Substring(6);
+                                break;
+                            case 'Q':
+                                switch (lineBytes[6])
+                                {
+                                    case 'B':
+                                        this.gatewayConfiguration.causeOfLastReset.value = "Brown out";
+                                        break;
+                                    case 'C':
+                                        this.gatewayConfiguration.causeOfLastReset.value = "By command";
+                                        break;
+                                    case 'E':
+                                        this.gatewayConfiguration.causeOfLastReset.value = "Reset button";
+                                        break;
+                                    case 'L':
+                                        this.gatewayConfiguration.causeOfLastReset.value = "Stuck in loop";
+                                        break;
+                                    case 'O':
+                                        this.gatewayConfiguration.causeOfLastReset.value = "Stack overflow";
+                                        break;
+                                    case 'P':
+                                        this.gatewayConfiguration.causeOfLastReset.value = "Power on";
+                                        break;
+                                    case 'S':
+                                        this.gatewayConfiguration.causeOfLastReset.value = "BREAL on serial interface";
+                                        break;
+                                    case 'U':
+                                        this.gatewayConfiguration.causeOfLastReset.value = "Stack underflow";
+                                        break;
+                                    case 'W':
+                                        this.gatewayConfiguration.causeOfLastReset.value = "Watchdog";
+                                        break;
+                                    default:
+                                        this.gatewayConfiguration.causeOfLastReset.value = "Syntax error";
+                                        break;
+                                }
+                                break;
+                            case 'R':
+                                this.gatewayConfiguration.remehaDetectionState.value = line.Substring(6);
+                                break;
+                            case 'S':
+                                this.gatewayConfiguration.setbackTemperatureConfiguarion.value = line.Substring(6);
+                                break;
+                            case 'T':
+                                this.gatewayConfiguration.tweaks.value = line.Substring(6);
+                                break;
+                            case 'V':
+                                this.gatewayConfiguration.referenceVoltage.value = line.Substring(6);
+                                break;
+                            case 'W':
+                                this.gatewayConfiguration.hotWater.value = line.Substring(6);
+                                break;
+                            default:
+                                break;
+                        }
+
+                    }
+                    else if (line.Substring(0, 3).Equals("PS:"))
+                    { //@@@@@ this needs to be modified be
+                        commandQueue.TryDequeueCommand("PS");
+                    }
+                    else
+
+                  if (line.Length == 9)
+                    {
+                        message = new Message();
+                        switch (lineBytes[0])
+                        {
+                            case 'T':
+                                message.direction = Message.Direction.ThermostatToBoiler;
+                                break;
+                            case 'B':
+                                message.direction = Message.Direction.BoilerToThermostat;
+                                break;
+                            case 'R':
+                                message.direction = Message.Direction.ThermostatToBoilerModified;
+                                break;
+                            case 'A':
+                                message.direction = Message.Direction.BoilerToThermostatModified;
+                                break;
+                            default:
+                                Console.WriteLine("Unhandled packet type"); //@@@@ top be fixed
+                                message = null;
+                                break;
+                        }
+                        if (message != null)
+                        {
+                            message.type = (Message.Type)((Convert.ToInt32(line.Substring(1, 2), 16) & 0x70) >> 4);
+                            message.dataID = Convert.ToInt32(line.Substring(3, 2), 16);
+                            message.dataValue = Convert.ToInt32(line.Substring(5, 4), 16);
+
+                            string key = message.GenerateKey();
+                            /*
+                            if (decodeMessages.ContainsKey(key))
+                            {
+                                ParsersBase handler = decodeMessages[key];
+                                handler.Parse(message);
+
+                            }
+                            */
+                        }
+                    }
+                }
+
+                return message;
+            }
+        }
 
         class SocketReader
         {
