@@ -77,14 +77,36 @@ namespace HeatControl
 
         }
         public GatewayConfiguration gatewayConfiguration;
-
+        
         public class GatewayStatus
         {
             public boolValueName centralHeatingEnable;
+            public boolValueName tapWaterEnable;
+            public boolValueName coolingEnable;
+            public boolValueName OTCActive;
+            public boolValueName CH2Enable;
+            public boolValueName faultIndication;
+            public boolValueName centralHeatingMode;
+            public boolValueName tapWaterMode;
+            public boolValueName flameStatus;
+            public boolValueName coolingStatus;
+            public boolValueName CH2Mode;
+            public boolValueName diagnosticIndication;
 
             public GatewayStatus()
             {
                 this.centralHeatingEnable.name = "Central heating enable";
+                this.tapWaterEnable.name = "Tap water enable";
+                this.coolingEnable.name = "Cooling enable";
+                this.OTCActive.name = "OTC active";
+                this.CH2Enable.name = "CH2 enable";
+                this.faultIndication.name = "Fault indication";
+                this.centralHeatingMode.name = "Central heating mode";
+                this.tapWaterMode.name = "Tap water mode";
+                this.flameStatus.name = "Flame status";
+                this.coolingStatus.name = "Cooling status";
+                this.CH2Mode.name = "CH2 mode";
+                this.diagnosticIndication.name = "Diagnostic indication";
             }
         }
         public GatewayStatus gatewayStatus;
@@ -98,84 +120,12 @@ namespace HeatControl
         private Parser parser;
 
 
-
-
-        /*
-            new OTGWMessage("Central heating enable", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 8),
-            new OTGWMessage("Tap water enable", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 9),
-            new OTGWMessage("Cooling enable", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 10),
-            new OTGWMessage("OTC active", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 11),
-            new OTGWMessage("CH2 enable", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 12),
-            new OTGWMessage("Fault indication", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 0),
-            new OTGWMessage("Central heating mode", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 1),
-            new OTGWMessage("Tap water mode", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 2),
-            new OTGWMessage("Flame status", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 3),
-            new OTGWMessage("Cooling status", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 4),
-            new OTGWMessage("CH2 mode", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 5),
-            new OTGWMessage("Diagnostic indication", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 6),
-            new OTGWMessage("Control setpoint", MsgType.WriteData, 1, Direction.ThermostatToBoiler, Handlerf88, 0),
-
-            new OTGWMessage("Control setpoint original", MsgType.WriteData, 1, Direction.ThermostatToBoilerOriginal, Handlerf88, 0),
-
-            new OTGWMessage("Master memberID", MsgType.WriteData, 2, Direction.ThermostatToBoiler, Handleru8L, 0),
-            new OTGWMessage("Tap water present", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 8),
-            new OTGWMessage("Control type", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 9),
-            new OTGWMessage("Cooling config", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 10),
-            new OTGWMessage("Tap water config", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 11),
-            new OTGWMessage("Master low-off&pump control", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 12),
-            new OTGWMessage("CH2 present", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 13),
-            new OTGWMessage("Slave memberID", MsgType.ReadAck,   3, Direction.BoilerToThermostat, Handleru8L, 0),
-            new OTGWMessage("Service request", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 8),
-            new OTGWMessage("Lockout reset", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 9),
-            new OTGWMessage("Low water pressure", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 10),
-            new OTGWMessage("Gas/flame fault", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 11),
-            new OTGWMessage("Air pressure fault", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 12),
-            new OTGWMessage("Water over-temp", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 13),
-            new OTGWMessage("OEM-specific fault code", MsgType.ReadAck,   5, Direction.BoilerToThermostat, Handleru8L, 0),
-            new OTGWMessage("Control setpoint 2", MsgType.WriteData, 8, Direction.ThermostatToBoiler, Handlerf88, 0),
-            new OTGWMessage("Room setpoint", MsgType.WriteData, 16, Direction.ThermostatToBoiler, Handlerf88, 0),
-            new OTGWMessage("Relative modulation level", MsgType.ReadAck,   17, Direction.BoilerToThermostat, Handlerf88, 0),
-            new OTGWMessage("Water pressure CH circuit", MsgType.ReadAck,   18, Direction.BoilerToThermostat, Handlerf88, 0),
-            new OTGWMessage("Water flow rate DHW circuit", MsgType.ReadAck,   19, Direction.BoilerToThermostat, Handlerf88, 0),
-            new OTGWMessage("Time and Day", MsgType.ReadAck,   20, Direction.BoilerToThermostat, Handleru16, 0),
-            new OTGWMessage("Time and Day", MsgType.WriteData, 20, Direction.ThermostatToBoiler, Handleru16, 0),
-            new OTGWMessage("Date", MsgType.ReadAck,   21, Direction.BoilerToThermostat, Handleru16, 0),
-            new OTGWMessage("Date", MsgType.WriteData, 21, Direction.ThermostatToBoiler, Handleru16, 0),
-            new OTGWMessage("Year", MsgType.ReadAck,   22, Direction.BoilerToThermostat, Handleru16, 0),
-            new OTGWMessage("Year", MsgType.WriteData, 22, Direction.ThermostatToBoiler, Handleru16, 0),
-            new OTGWMessage("Room setpoint 2", MsgType.WriteData, 23, Direction.ThermostatToBoiler, Handlerf88, 0),
-            new OTGWMessage("Room temperature", MsgType.WriteData, 24, Direction.ThermostatToBoiler, Handlerf88, 0),
-            new OTGWMessage("Boiler water temperture", MsgType.ReadAck,   25, Direction.BoilerToThermostat, Handlerf88, 0),
-            new OTGWMessage("Tap water temperture", MsgType.ReadAck,   26, Direction.BoilerToThermostat, Handlerf88, 0),
-            new OTGWMessage("Outside temperture", MsgType.ReadAck,   27, Direction.BoilerToThermostat, Handlerf88, 0),
-            new OTGWMessage("Return water temperture", MsgType.ReadAck,   28, Direction.BoilerToThermostat, Handlerf88, 0),
-            new OTGWMessage("Solar storage temperture", MsgType.ReadAck,   29, Direction.BoilerToThermostat, Handlerf88, 0),
-            new OTGWMessage("Solar collector temperture", MsgType.ReadAck,   30, Direction.BoilerToThermostat, Handlers16, 0),
-            new OTGWMessage("Flow temperature CH2", MsgType.ReadAck,   31, Direction.BoilerToThermostat, Handlerf88, 0),
-            new OTGWMessage("Tap water temperature 2", MsgType.ReadAck,   32, Direction.BoilerToThermostat, Handlerf88, 0),
-            new OTGWMessage("Exhaust temperture", MsgType.ReadAck,   33, Direction.BoilerToThermostat, Handlers16, 0),
-            new OTGWMessage("OEM-specifc diagnostic code", MsgType.ReadAck,115, Direction.BoilerToThermostat, Handleru16, 0),
-            new OTGWMessage("Burner starts", MsgType.ReadAck,   116, Direction.BoilerToThermostat, Handleru16, 0),
-            new OTGWMessage("Central heating pump starts", MsgType.ReadAck,   117, Direction.BoilerToThermostat, Handleru16, 0),
-            new OTGWMessage("Tap water valve starts", MsgType.ReadAck,   118, Direction.BoilerToThermostat, Handleru16, 0),
-            new OTGWMessage("Tap water burner starts", MsgType.ReadAck,   119, Direction.BoilerToThermostat, Handleru16, 0),
-            new OTGWMessage("Burner operation hours", MsgType.ReadAck,   120, Direction.BoilerToThermostat, Handleru16, 0),
-            new OTGWMessage("Central heating pump hours", MsgType.ReadAck,   121, Direction.BoilerToThermostat, Handleru16, 0),
-            new OTGWMessage("Tap water valve hours", MsgType.ReadAck,   122, Direction.BoilerToThermostat, Handleru16, 0),
-            new OTGWMessage("Tap water burner hours", MsgType.ReadAck,   123, Direction.BoilerToThermostat, Handleru16, 0),
-            new OTGWMessage("OpenTherm version master", MsgType.ReadAck,   124, Direction.BoilerToThermostat, Handlerf88, 0),
-            new OTGWMessage("OpenTherm version slave", MsgType.ReadAck,   125, Direction.BoilerToThermostat, Handlerf88, 0),
-            new OTGWMessage("Product type master", MsgType.ReadAck,   126, Direction.BoilerToThermostat, Handleru8H, 0),
-            new OTGWMessage("Product version master", MsgType.WriteData,  126, Direction.ThermostatToBoiler, Handleru8L, 0),
-            new OTGWMessage("Product type slave", MsgType.ReadAck,   127, Direction.BoilerToThermostat, Handleru8H, 0),
-            new OTGWMessage("Product version slave", MsgType.ReadAck,   127, Direction.BoilerToThermostat, Handleru8L, 0),
-            */
-
-            
+  
 
         public OTGW()
         {
             this.gatewayConfiguration = new GatewayConfiguration();
+            this.gatewayStatus = new GatewayStatus();
             this.socketReader = new SocketReader();
             this.commandQueue = new CommandQueue();
             this.parser = new Parser(ref this.gatewayConfiguration, ref this.gatewayStatus, ref this.commandQueue);
