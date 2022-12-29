@@ -14,64 +14,92 @@ namespace HeatControl
 {
     partial class OTGW
     {
-        public struct intValueName
+        public class IntValueName
         {
             public int value;
             public string name;
+
+            public IntValueName(string name)
+            {
+                this.value = -1; // uninitialzed indicator
+                this.name = name;
+            }
         }
-        public struct boolValueName
+        public class BoolValueName
         {
             public bool value;
             public string name;
+
+            public BoolValueName(string name)
+            {
+                this.value = false; // uninitialzed indicator????
+                this.name = name;
+            }
+
+
         }
-        public struct floatValueName
+        public class FloatValueName
         {
             public float value;
             public string name;
+
+            public FloatValueName(string name)
+            {
+                this.value = -1; // uninitialzed indicator
+                this.name = name;
+            }
+
         }
-        public struct stringValueName
+        public class StringValueName
         {
             public string value;
             public string name;
+
+            public StringValueName(string name)
+            {
+                this.value = ""; // uninitialzed indicator
+                this.name = name;
+            }
+
         }
 
         public class GatewayConfiguration
         {
-            public stringValueName version;
-            public stringValueName build;
-            public stringValueName clockSpeed;
-            public stringValueName temperaturSensorFunction;
-            public stringValueName gpioFunctionsConfiguration;
-            public stringValueName gpioState;
-            public stringValueName ledFunctionsConfiguration;
-            public stringValueName gatewayMode;
-            public stringValueName setpointOverride;
-            public stringValueName smartPowerModel;
-            public stringValueName causeOfLastReset;
-            public stringValueName remehaDetectionState;
-            public stringValueName setbackTemperatureConfiguarion;
-            public stringValueName tweaks;
-            public stringValueName referenceVoltage;
-            public stringValueName hotWater;
+            public StringValueName version;
+            public StringValueName build;
+            public StringValueName clockSpeed;
+            public StringValueName temperaturSensorFunction;
+            public StringValueName gpioFunctionsConfiguration;
+            public StringValueName gpioState;
+            public StringValueName ledFunctionsConfiguration;
+            public StringValueName gatewayMode;
+            public StringValueName setpointOverride;
+            public StringValueName smartPowerModel;
+            public StringValueName causeOfLastReset;
+            public StringValueName remehaDetectionState;
+            public StringValueName setbackTemperatureConfiguarion;
+            public StringValueName tweaks;
+            public StringValueName referenceVoltage;
+            public StringValueName hotWater;
 
             public GatewayConfiguration()
             {
-                this.version.name = "OTGW Version";
-                this.build.name = "OTGW Build";
-                this.clockSpeed.name = "Clock speed";
-                this.temperaturSensorFunction.name = "DS18x20 temperature function";
-                this.gpioFunctionsConfiguration.name = "GPIO function configuation";
-                this.gpioState.name = "GPIO state";
-                this.ledFunctionsConfiguration.name = "LED fucntion configuration";
-                this.gatewayMode.name = "Gateway mode";
-                this.setpointOverride.name = "Setpoint override";
-                this.smartPowerModel.name = "Smart-Power mode";
-                this.causeOfLastReset.name = "Cause of last reset";
-                this.remehaDetectionState.name = "Remeha thermostat detection state";
-                this.setbackTemperatureConfiguarion.name = "Setback temperature configuration";
-                this.tweaks.name = "Tweaks";
-                this.referenceVoltage.name = "Reference voltage";
-                this.hotWater.name = "Domestic hot water";
+                this.version = new StringValueName("OTGW Version");
+                this.build = new StringValueName("OTGW Build");
+                this.clockSpeed = new StringValueName("Clock speed");
+                this.temperaturSensorFunction = new StringValueName("DS18x20 temperature function");
+                this.gpioFunctionsConfiguration = new StringValueName("GPIO function configuation");
+                this.gpioState = new StringValueName("GPIO state");
+                this.ledFunctionsConfiguration = new StringValueName("LED fucntion configuration");
+                this.gatewayMode = new StringValueName("Gateway mode");
+                this.setpointOverride = new StringValueName("Setpoint override");
+                this.smartPowerModel = new StringValueName("Smart-Power mode");
+                this.causeOfLastReset = new StringValueName("Cause of last reset");
+                this.remehaDetectionState = new StringValueName("Remeha thermostat detection state");
+                this.setbackTemperatureConfiguarion = new StringValueName("Setback temperature configuration");
+                this.tweaks = new StringValueName("Tweaks");
+                this.referenceVoltage = new StringValueName("Reference voltage");
+                this.hotWater = new StringValueName("Domestic hot water");
 
             }
 
@@ -80,33 +108,33 @@ namespace HeatControl
         
         public class GatewayStatus
         {
-            public boolValueName centralHeatingEnable;
-            public boolValueName tapWaterEnable;
-            public boolValueName coolingEnable;
-            public boolValueName OTCActive;
-            public boolValueName CH2Enable;
-            public boolValueName faultIndication;
-            public boolValueName centralHeatingMode;
-            public boolValueName tapWaterMode;
-            public boolValueName flameStatus;
-            public boolValueName coolingStatus;
-            public boolValueName CH2Mode;
-            public boolValueName diagnosticIndication;
+            public BoolValueName centralHeatingEnable;
+            public BoolValueName tapWaterEnable;
+            public BoolValueName coolingEnable;
+            public BoolValueName OTCActive;
+            public BoolValueName CH2Enable;
+            public BoolValueName faultIndication;
+            public BoolValueName centralHeatingMode;
+            public BoolValueName tapWaterMode;
+            public BoolValueName flameStatus;
+            public BoolValueName coolingStatus;
+            public BoolValueName CH2Mode;
+            public BoolValueName diagnosticIndication;
 
             public GatewayStatus()
             {
-                this.centralHeatingEnable.name = "Central heating enable";
-                this.tapWaterEnable.name = "Tap water enable";
-                this.coolingEnable.name = "Cooling enable";
-                this.OTCActive.name = "OTC active";
-                this.CH2Enable.name = "CH2 enable";
-                this.faultIndication.name = "Fault indication";
-                this.centralHeatingMode.name = "Central heating mode";
-                this.tapWaterMode.name = "Tap water mode";
-                this.flameStatus.name = "Flame status";
-                this.coolingStatus.name = "Cooling status";
-                this.CH2Mode.name = "CH2 mode";
-                this.diagnosticIndication.name = "Diagnostic indication";
+                this.centralHeatingEnable= new BoolValueName("Central heating enable");
+                this.tapWaterEnable = new BoolValueName("Tap water enable");
+                this.coolingEnable = new BoolValueName("Cooling enable");
+                this.OTCActive = new BoolValueName("OTC active");
+                this.CH2Enable = new BoolValueName("CH2 enable");
+                this.faultIndication = new BoolValueName("Fault indication");
+                this.centralHeatingMode = new BoolValueName("Central heating mode");
+                this.tapWaterMode = new BoolValueName("Tap water mode");
+                this.flameStatus = new BoolValueName("Flame status");
+                this.coolingStatus = new BoolValueName("Cooling status");
+                this.CH2Mode = new BoolValueName("CH2 mode");
+                this.diagnosticIndication = new BoolValueName("Diagnostic indication");
             }
         }
         public GatewayStatus gatewayStatus;

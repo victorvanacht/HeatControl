@@ -69,52 +69,30 @@ namespace HeatControl
                 this.gatewayConfiguration = configuration;
                 this.gatewayStatus = status;
                 this.commandQueue = commandQueue;
-
-                /*
-                Flags16Element e1 = new Flags16Element { bit = 8, value = gatewayStatus.centralHeatingEnable };
-                Flags16Element e2 = new Flags16Element { bit = 9, value = gatewayStatus.tapWaterEnable };
-                List<Flags16Element> le = new List<Flags16Element>() { e1, e2 };
-                Flags16 f = new Flags16(le);
-                */
-
-                /*
-                List<Flags16Element> le = new List<Flags16Element>() {
-                    new Flags16Element { bit = 8, value = gatewayStatus.centralHeatingEnable },
-                    new Flags16Element { bit = 9, value = gatewayStatus.tapWaterEnable }
-                    };
-                Flags16 f = new Flags16(le);
-                */
-
-                Flags16 f = new Flags16(
-                    new List<Flags16Element>() {
-                        new Flags16Element { bit = 8, value = gatewayStatus.centralHeatingEnable },
-                        new Flags16Element { bit = 9, value = gatewayStatus.tapWaterEnable }
-                        }
-                    );
                 
                 this.decodeMessages = new Dictionary<string, ParsersBase>
                 {
                     [Message.GenerateKey(0, Message.Direction.ThermostatToBoiler, Message.Type.M2SReadData)] = 
                         new Flags16(
                             new List<Flags16Element>() {
-                                new Flags16Element { bit = 8, value = gatewayStatus.centralHeatingEnable },
-                                new Flags16Element { bit = 9, value = gatewayStatus.tapWaterEnable },
-                                new Flags16Element { bit = 10, value = gatewayStatus.coolingEnable },
-                                new Flags16Element { bit = 11, value = gatewayStatus.OTCActive },
-                                new Flags16Element { bit = 12, value = gatewayStatus.CH2Enable }
+                                new Flags16Element(8, ref gatewayStatus.centralHeatingEnable),
+                                new Flags16Element(9, ref gatewayStatus.tapWaterEnable),
+                                new Flags16Element(10, ref gatewayStatus.coolingEnable),
+                                new Flags16Element(11, ref gatewayStatus.OTCActive),
+                                new Flags16Element(12, ref gatewayStatus.CH2Enable)
 
                             }
                         ),
                     [Message.GenerateKey(0, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] =
                         new Flags16(
                             new List<Flags16Element>() {
-                                new Flags16Element { bit = 0, value = gatewayStatus.faultIndication },
-                                new Flags16Element { bit = 1, value = gatewayStatus.centralHeatingMode },
-                                new Flags16Element { bit = 2, value = gatewayStatus.tapWaterMode },
-                                new Flags16Element { bit = 3, value = gatewayStatus.flameStatus },
-                                new Flags16Element { bit = 4, value = gatewayStatus.coolingStatus },
-                                new Flags16Element { bit = 5, value = gatewayStatus.CH2Mode },
-                                new Flags16Element { bit = 6, value = gatewayStatus.diagnosticIndication },
+                                new Flags16Element(0, ref gatewayStatus.faultIndication),
+                                new Flags16Element(1, ref gatewayStatus.centralHeatingMode),
+                                new Flags16Element(2, ref gatewayStatus.tapWaterMode),
+                                new Flags16Element(3, ref gatewayStatus.flameStatus),
+                                new Flags16Element(4, ref gatewayStatus.coolingStatus),
+                                new Flags16Element(5, ref gatewayStatus.CH2Mode),
+                                new Flags16Element(6, ref gatewayStatus.diagnosticIndication),
                             }
                         ),
                 };
@@ -192,17 +170,24 @@ namespace HeatControl
                 new OTGWMessage("Product version slave", MsgType.ReadAck,   127, Direction.BoilerToThermostat, Handleru8L, 0),
                 */
 
-
-
-
-
             abstract private class ParsersBase
             {
                 abstract public void Parse(Message message);
             }
 
 
-            struct Flags16Element {public int bit; public boolValueName value;}
+            class Flags16Element
+            {
+                public int bit;
+                public BoolValueName value;
+
+                public Flags16Element(int bit, ref BoolValueName value)
+                {
+                    this.bit = bit;
+                    this.value = value;
+                }
+
+            }
             private class Flags16 : ParsersBase
             {
                 private List<Flags16Element> arg;
@@ -216,8 +201,7 @@ namespace HeatControl
                     foreach (Flags16Element item in this.arg)
                     {
                         Flags16Element i = item;
-                        //i.value.value = Convert.ToBoolean(((message.dataValue) >> (item.bit)) & 1);
-                        i.value.value = true;
+                        i.value.value = Convert.ToBoolean(((message.dataValue) >> (item.bit)) & 1);
                     }
                 }
             }
@@ -226,7 +210,7 @@ namespace HeatControl
             {
                 public Flags8()
                 {
-                    Console.WriteLine("This is the contructor of Flasg8");
+                    Console.WriteLine("This is the contructor of Flags8");
                 }
 
 
@@ -235,9 +219,6 @@ namespace HeatControl
                     Console.WriteLine("Parse8");
                 }
             }
-
-
-
 
 
             public Message Parse(string line)
@@ -349,7 +330,7 @@ namespace HeatControl
 
                     }
                     else if (line.Substring(0, 3).Equals("PS:"))
-                    { //@@@@@ this needs to be modified be
+                    { //@@@@@ this needs to be modified
                         commandQueue.TryDequeueCommand("PS");
                     }
                     else
