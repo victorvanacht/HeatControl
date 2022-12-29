@@ -121,6 +121,24 @@ namespace HeatControl
             public BoolValueName CH2Mode;
             public BoolValueName diagnosticIndication;
 
+            public FloatValueName controlSetPoint;
+            public FloatValueName controlSetPointModified;
+            public IntValueName masterMemberID;
+
+            public BoolValueName tapWaterPresent;
+            public BoolValueName controlType;
+            public BoolValueName coolingConfiguration;
+            public BoolValueName tapWaterConfiguration;
+            public BoolValueName masterLowOffPumpControl;
+            public BoolValueName CH2Present;
+
+            public BoolValueName serviceRequest;
+            public BoolValueName lockoutReset;
+            public BoolValueName lowWaterPressure;
+            public BoolValueName gasFlamFault;
+            public BoolValueName airPressureFault;
+            public BoolValueName waterOverTemp;
+
             public GatewayStatus()
             {
                 this.centralHeatingEnable= new BoolValueName("Central heating enable");
@@ -135,6 +153,24 @@ namespace HeatControl
                 this.coolingStatus = new BoolValueName("Cooling status");
                 this.CH2Mode = new BoolValueName("CH2 mode");
                 this.diagnosticIndication = new BoolValueName("Diagnostic indication");
+
+                this.controlSetPoint = new FloatValueName("Control setpoint");
+                this.controlSetPointModified = new FloatValueName("Control setpoint modified");
+                this.masterMemberID = new IntValueName("Master member ID");
+
+                this.tapWaterPresent = new BoolValueName("Tap water present");
+                this.controlType = new BoolValueName("Control type");
+                this.coolingConfiguration = new BoolValueName("Cooling configuration");
+                this.tapWaterConfiguration = new BoolValueName("Tap water configuration");
+                this.masterLowOffPumpControl = new BoolValueName("Master low-off & Pump control");
+                this.CH2Present = new BoolValueName("CH2 present");
+                this.serviceRequest = new BoolValueName("Service request");
+                this.lockoutReset = new BoolValueName("Lock out reset");
+                this.lowWaterPressure = new BoolValueName("Low water pressure");
+                this.gasFlamFault = new BoolValueName("Gas/ Flame fault");
+                this.airPressureFault = new BoolValueName("Air pressure fault");
+                this.waterOverTemp = new BoolValueName("Water overtempearatur");
+
             }
         }
         public GatewayStatus gatewayStatus;

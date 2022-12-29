@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace HeatControl
 {
@@ -92,7 +93,40 @@ namespace HeatControl
                                 new Flags16Element(3, ref gatewayStatus.flameStatus),
                                 new Flags16Element(4, ref gatewayStatus.coolingStatus),
                                 new Flags16Element(5, ref gatewayStatus.CH2Mode),
-                                new Flags16Element(6, ref gatewayStatus.diagnosticIndication),
+                                new Flags16Element(6, ref gatewayStatus.diagnosticIndication)
+                            }
+                        ),
+                    [Message.GenerateKey(1, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] =
+                        new Float88(ref gatewayStatus.controlSetPoint),
+                    [Message.GenerateKey(1, Message.Direction.ThermostatToBoilerModified, Message.Type.M2SWriteData)] =
+                        new Float88(ref gatewayStatus.controlSetPointModified),
+                    [Message.GenerateKey(2, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] =
+                        new U88HL(
+                            new List<IntValueName>() {
+                                gatewayStatus.masterMemberID,
+                                null,
+                            }
+                        ),
+                    [Message.GenerateKey(3, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] =
+                        new Flags16(
+                            new List<Flags16Element>() {
+                                new Flags16Element(8, ref gatewayStatus.tapWaterPresent),
+                                new Flags16Element(9, ref gatewayStatus.controlType),
+                                new Flags16Element(10, ref gatewayStatus.coolingConfiguration),
+                                new Flags16Element(11, ref gatewayStatus.tapWaterConfiguration),
+                                new Flags16Element(12, ref gatewayStatus.masterLowOffPumpControl),
+                                new Flags16Element(13, ref gatewayStatus.CH2Present)
+                            }
+                        ),
+                    [Message.GenerateKey(5, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] =
+                        new Flags16(
+                            new List<Flags16Element>() {
+                                new Flags16Element(8, ref gatewayStatus.serviceRequest),
+                                new Flags16Element(9, ref gatewayStatus.lockoutReset),
+                                new Flags16Element(10, ref gatewayStatus.lowWaterPressure),
+                                new Flags16Element(11, ref gatewayStatus.gasFlamFault),
+                                new Flags16Element(12, ref gatewayStatus.airPressureFault),
+                                new Flags16Element(13, ref gatewayStatus.waterOverTemp)
                             }
                         ),
                 };
@@ -112,24 +146,25 @@ namespace HeatControl
                     new OTGWMessage("Cooling status", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 4),
                     new OTGWMessage("CH2 mode", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 5),
                     new OTGWMessage("Diagnostic indication", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 6),
+                    new OTGWMessage("Control setpoint", MsgType.WriteData, 1, Direction.ThermostatToBoiler, Handlerf88, 0),
+                    new OTGWMessage("Control setpoint original", MsgType.WriteData, 1, Direction.ThermostatToBoilerOriginal, Handlerf88, 0),
+                    new OTGWMessage("Master memberID", MsgType.WriteData, 2, Direction.ThermostatToBoiler, Handleru8L, 0),
+                    new OTGWMessage("Tap water present", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 8),
+                    new OTGWMessage("Control type", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 9),
+                    new OTGWMessage("Cooling config", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 10),
+                    new OTGWMessage("Tap water config", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 11),
+                    new OTGWMessage("Master low-off&pump control", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 12),
+                    new OTGWMessage("CH2 present", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 13),
 
-
-                new OTGWMessage("Control setpoint", MsgType.WriteData, 1, Direction.ThermostatToBoiler, Handlerf88, 0),
-                new OTGWMessage("Control setpoint original", MsgType.WriteData, 1, Direction.ThermostatToBoilerOriginal, Handlerf88, 0),
-                new OTGWMessage("Master memberID", MsgType.WriteData, 2, Direction.ThermostatToBoiler, Handleru8L, 0),
-                new OTGWMessage("Tap water present", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 8),
-                new OTGWMessage("Control type", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 9),
-                new OTGWMessage("Cooling config", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 10),
-                new OTGWMessage("Tap water config", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 11),
-                new OTGWMessage("Master low-off&pump control", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 12),
-                new OTGWMessage("CH2 present", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 13),
                 new OTGWMessage("Slave memberID", MsgType.ReadAck,   3, Direction.BoilerToThermostat, Handleru8L, 0),
-                new OTGWMessage("Service request", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 8),
-                new OTGWMessage("Lockout reset", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 9),
-                new OTGWMessage("Low water pressure", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 10),
-                new OTGWMessage("Gas/flame fault", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 11),
-                new OTGWMessage("Air pressure fault", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 12),
-                new OTGWMessage("Water over-temp", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 13),
+
+                    new OTGWMessage("Service request", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 8),
+                    new OTGWMessage("Lockout reset", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 9),
+                    new OTGWMessage("Low water pressure", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 10),
+                    new OTGWMessage("Gas/flame fault", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 11),
+                    new OTGWMessage("Air pressure fault", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 12),
+                    new OTGWMessage("Water over-temp", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 13),
+
                 new OTGWMessage("OEM-specific fault code", MsgType.ReadAck,   5, Direction.BoilerToThermostat, Handleru8L, 0),
                 new OTGWMessage("Control setpoint 2", MsgType.WriteData, 8, Direction.ThermostatToBoiler, Handlerf88, 0),
                 new OTGWMessage("Room setpoint", MsgType.WriteData, 16, Direction.ThermostatToBoiler, Handlerf88, 0),
@@ -206,19 +241,48 @@ namespace HeatControl
                 }
             }
 
-            private class Flags8 : ParsersBase
+            private class Float88 : ParsersBase
             {
-                public Flags8()
-                {
-                    Console.WriteLine("This is the contructor of Flags8");
-                }
+                private FloatValueName arg;
 
+                public Float88(ref FloatValueName arg)
+                {
+                    this.arg = arg;
+                }
 
                 override public void Parse(Message message)
                 {
-                    Console.WriteLine("Parse8");
+                    arg.value = ((float)(message.dataValue)) / 256;
                 }
             }
+
+
+            private class U88HL : ParsersBase
+            {
+                private List<IntValueName> arg;
+
+                // element 0 of list is LOW 8 bits
+                // element 1 of list is HIGH 8 bits
+                // if element not used, it can be null
+                public U88HL(List<IntValueName> arg)
+                {
+                    Debug.Assert(arg.Count == 2);
+                    this.arg = arg;
+                }
+
+                override public void Parse(Message message)
+                {
+                    if (arg[0] != null)
+                    {
+                        arg[0].value = message.dataValue & 0xff;
+                    }
+                    if (arg[1] != null)
+                    {
+                        arg[1].value = (message.dataValue >> 8) & 0xff;
+                    }
+                }
+            }
+
 
 
             public Message Parse(string line)
