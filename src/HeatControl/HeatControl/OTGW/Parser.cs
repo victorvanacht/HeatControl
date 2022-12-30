@@ -111,6 +111,48 @@ namespace HeatControl
                         new Flags16(13, ref gatewayStatus.waterOverTemp)},
                     [Message.GenerateKey(8, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
                         new Float88(ref gatewayStatus.controlSetPoint2)},
+                    [Message.GenerateKey(16, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.roomSetPoint)},
+                    [Message.GenerateKey(17, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.relativeModulationLevel)},
+                    [Message.GenerateKey(18, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.waterPressureCHCircuit)},
+                    [Message.GenerateKey(19, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.waterFlowRateTap)},
+                    [Message.GenerateKey(20, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
+                        new Uint16(ref gatewayStatus.timeAndDay)},
+                    [Message.GenerateKey(20, Message.Direction.BoilerToThermostat, Message.Type.S2MWriteAck)] = new List<ParsersBase>() {
+                        new Uint16(ref gatewayStatus.timeAndDay)},
+                    [Message.GenerateKey(21, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
+                        new Uint16(ref gatewayStatus.date)},
+                    [Message.GenerateKey(21, Message.Direction.BoilerToThermostat, Message.Type.S2MWriteAck)] = new List<ParsersBase>() {
+                        new Uint16(ref gatewayStatus.date)},
+                    [Message.GenerateKey(22, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
+                        new Uint16(ref gatewayStatus.year)},
+                    [Message.GenerateKey(22, Message.Direction.BoilerToThermostat, Message.Type.S2MWriteAck)] = new List<ParsersBase>() {
+                        new Uint16(ref gatewayStatus.year)},
+                    [Message.GenerateKey(23, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.roomSetpoint2)},
+                    [Message.GenerateKey(24, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.roomTemperature)},
+                    [Message.GenerateKey(25, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.boilerWaterTemperature)},
+                    [Message.GenerateKey(26, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.tapWaterTemperature)},
+                    [Message.GenerateKey(27, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.outsideTemperature)},
+                    [Message.GenerateKey(28, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.returnWaterTemperature)},
+                    [Message.GenerateKey(29, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.solarStorageTemperature)},
+                    [Message.GenerateKey(30, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Sint16(ref gatewayStatus.solarCollectorTemperature)},
+                    [Message.GenerateKey(31, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.flowTemperatureCH2)},
+                    [Message.GenerateKey(32, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.tapWaterTemperature2)},
+                    [Message.GenerateKey(33, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Sint16(ref gatewayStatus.exhaustTemperature)},
                     [Message.GenerateKey(115, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
                         new Uint16(ref gatewayStatus.OEMDiagnosticCode)},
                     [Message.GenerateKey(116, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
@@ -129,7 +171,16 @@ namespace HeatControl
                         new Uint16(ref gatewayStatus.tapWaterValveHours)},
                     [Message.GenerateKey(123, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
                         new Uint16(ref gatewayStatus.tapWaterBurnerHours)},
-
+                    [Message.GenerateKey(124, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.openthermVersionMaster)},
+                    [Message.GenerateKey(125, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.openthermVersionSlave)},
+                    [Message.GenerateKey(126, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
+                        new Uint8(0, ref gatewayStatus.productVersionMaster),
+                        new Uint8(8, ref gatewayStatus.productTypeMaster)},
+                    [Message.GenerateKey(127, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Uint8(0, ref gatewayStatus.productVersionSlave),
+                        new Uint8(8, ref gatewayStatus.productTypeSlave)},
                 };
             }
 
@@ -165,16 +216,17 @@ namespace HeatControl
                     new OTGWMessage("Water over-temp", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 13),
                     new OTGWMessage("OEM-specific fault code", MsgType.ReadAck,   5, Direction.BoilerToThermostat, Handleru8L, 0),
                     new OTGWMessage("Control setpoint 2", MsgType.WriteData, 8, Direction.ThermostatToBoiler, Handlerf88, 0),
-                new OTGWMessage("Room setpoint", MsgType.WriteData, 16, Direction.ThermostatToBoiler, Handlerf88, 0),
-                new OTGWMessage("Relative modulation level", MsgType.ReadAck,   17, Direction.BoilerToThermostat, Handlerf88, 0),
-                new OTGWMessage("Water pressure CH circuit", MsgType.ReadAck,   18, Direction.BoilerToThermostat, Handlerf88, 0),
-                new OTGWMessage("Water flow rate DHW circuit", MsgType.ReadAck,   19, Direction.BoilerToThermostat, Handlerf88, 0),
-                new OTGWMessage("Time and Day", MsgType.ReadAck,   20, Direction.BoilerToThermostat, Handleru16, 0),
-                new OTGWMessage("Time and Day", MsgType.WriteData, 20, Direction.ThermostatToBoiler, Handleru16, 0),
-                new OTGWMessage("Date", MsgType.ReadAck,   21, Direction.BoilerToThermostat, Handleru16, 0),
-                new OTGWMessage("Date", MsgType.WriteData, 21, Direction.ThermostatToBoiler, Handleru16, 0),
-                new OTGWMessage("Year", MsgType.ReadAck,   22, Direction.BoilerToThermostat, Handleru16, 0),
-                new OTGWMessage("Year", MsgType.WriteData, 22, Direction.ThermostatToBoiler, Handleru16, 0),
+
+                    new OTGWMessage("Room setpoint", MsgType.WriteData, 16, Direction.ThermostatToBoiler, Handlerf88, 0),
+                    new OTGWMessage("Relative modulation level", MsgType.ReadAck,   17, Direction.BoilerToThermostat, Handlerf88, 0),
+                    new OTGWMessage("Water pressure CH circuit", MsgType.ReadAck,   18, Direction.BoilerToThermostat, Handlerf88, 0),
+                    new OTGWMessage("Water flow rate DHW circuit", MsgType.ReadAck,   19, Direction.BoilerToThermostat, Handlerf88, 0),
+                    new OTGWMessage("Time and Day", MsgType.ReadAck,   20, Direction.BoilerToThermostat, Handleru16, 0),
+                    new OTGWMessage("Time and Day", MsgType.WriteData, 20, Direction.ThermostatToBoiler, Handleru16, 0),
+                    new OTGWMessage("Date", MsgType.ReadAck,   21, Direction.BoilerToThermostat, Handleru16, 0),
+                    new OTGWMessage("Date", MsgType.WriteData, 21, Direction.ThermostatToBoiler, Handleru16, 0),
+                    new OTGWMessage("Year", MsgType.ReadAck,   22, Direction.BoilerToThermostat, Handleru16, 0),
+                    new OTGWMessage("Year", MsgType.WriteData, 22, Direction.ThermostatToBoiler, Handleru16, 0),
                 new OTGWMessage("Room setpoint 2", MsgType.WriteData, 23, Direction.ThermostatToBoiler, Handlerf88, 0),
                 new OTGWMessage("Room temperature", MsgType.WriteData, 24, Direction.ThermostatToBoiler, Handlerf88, 0),
                 new OTGWMessage("Boiler water temperture", MsgType.ReadAck,   25, Direction.BoilerToThermostat, Handlerf88, 0),
@@ -196,13 +248,12 @@ namespace HeatControl
                     new OTGWMessage("Central heating pump hours", MsgType.ReadAck,   121, Direction.BoilerToThermostat, Handleru16, 0),
                     new OTGWMessage("Tap water valve hours", MsgType.ReadAck,   122, Direction.BoilerToThermostat, Handleru16, 0),
                     new OTGWMessage("Tap water burner hours", MsgType.ReadAck,   123, Direction.BoilerToThermostat, Handleru16, 0),
-
-                new OTGWMessage("OpenTherm version master", MsgType.ReadAck,   124, Direction.BoilerToThermostat, Handlerf88, 0),
-                new OTGWMessage("OpenTherm version slave", MsgType.ReadAck,   125, Direction.BoilerToThermostat, Handlerf88, 0),
-                new OTGWMessage("Product type master", MsgType.ReadAck,   126, Direction.BoilerToThermostat, Handleru8H, 0),
-                new OTGWMessage("Product version master", MsgType.WriteData,  126, Direction.ThermostatToBoiler, Handleru8L, 0),
-                new OTGWMessage("Product type slave", MsgType.ReadAck,   127, Direction.BoilerToThermostat, Handleru8H, 0),
-                new OTGWMessage("Product version slave", MsgType.ReadAck,   127, Direction.BoilerToThermostat, Handleru8L, 0),
+                    new OTGWMessage("OpenTherm version master", MsgType.ReadAck,   124, Direction.BoilerToThermostat, Handlerf88, 0),
+                    new OTGWMessage("OpenTherm version slave", MsgType.ReadAck,   125, Direction.BoilerToThermostat, Handlerf88, 0),
+                    new OTGWMessage("Product type master", MsgType.ReadAck,   126, Direction.BoilerToThermostat, Handleru8H, 0),
+                    new OTGWMessage("Product version master", MsgType.WriteData,  126, Direction.ThermostatToBoiler, Handleru8L, 0),
+                    new OTGWMessage("Product type slave", MsgType.ReadAck,   127, Direction.BoilerToThermostat, Handleru8H, 0),
+                    new OTGWMessage("Product version slave", MsgType.ReadAck,   127, Direction.BoilerToThermostat, Handleru8L, 0),
                 */
 
             abstract private class ParsersBase
@@ -277,6 +328,22 @@ namespace HeatControl
                 }
             }
 
+            private class Sint16 : ParsersBase
+            {
+                private int bit;
+                private IntValueName value;
+
+                public Sint16(ref IntValueName value)
+                {
+                    this.value = value;
+                }
+
+                override public void Parse(Message message)
+                {
+                    value.value = message.dataValue;
+                    if (value.value > 32767) value.value -= 65536;
+                }
+            }
 
 
             public Message Parse(string line)

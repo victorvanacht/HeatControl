@@ -150,6 +150,17 @@ namespace HeatControl
             public IntValueName timeAndDay;
             public IntValueName date;
             public IntValueName year;
+            public FloatValueName roomSetpoint2;
+            public FloatValueName roomTemperature;
+            public FloatValueName boilerWaterTemperature;
+            public FloatValueName tapWaterTemperature;
+            public FloatValueName outsideTemperature;
+            public FloatValueName returnWaterTemperature;
+            public FloatValueName solarStorageTemperature;
+            public IntValueName solarCollectorTemperature;
+            public FloatValueName flowTemperatureCH2;
+            public FloatValueName tapWaterTemperature2;
+            public IntValueName exhaustTemperature;
             
             public IntValueName OEMDiagnosticCode;
             public IntValueName burnerStarts;
@@ -211,6 +222,18 @@ namespace HeatControl
                 this.timeAndDay = new IntValueName("Time abd day of week");
                 this.date = new IntValueName("Date");
                 this.year = new IntValueName("Year");
+
+                this.roomSetpoint2 = new FloatValueName("Room setpoint 2");
+                this.roomTemperature = new FloatValueName("Room temperature");
+                this.boilerWaterTemperature = new FloatValueName("Boiler water temperature");
+                this.tapWaterTemperature = new FloatValueName("Tap water temperature");
+                this.outsideTemperature = new FloatValueName("Outside temperature");
+                this.returnWaterTemperature = new FloatValueName("Return water temperature");
+                this.solarStorageTemperature = new FloatValueName("Solar storage temperature");
+                this.solarCollectorTemperature = new IntValueName("Solar collector temperature");
+                this.flowTemperatureCH2 = new FloatValueName("Flow temperature CH2");
+                this.tapWaterTemperature2 = new FloatValueName("Tap water temperature 2");
+                this.exhaustTemperature = new IntValueName("Exhaust temperature");
 
                 this.OEMDiagnosticCode = new IntValueName("OEM Diagnostic code");
 
