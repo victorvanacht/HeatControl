@@ -53,7 +53,6 @@ namespace HeatControl
 
                 public int dataID;
                 public int dataValue;
-
                 public string line;
 
                 public Message(string line)
@@ -206,7 +205,9 @@ namespace HeatControl
                     ["PR: G"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.gpioFunctionsConfiguration) },
                     ["PR: I"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.gpioState) },
                     ["PR: L"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.ledFunctionsConfiguration) },
-                    ["PR: M"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.gatewayMode) },
+                    ["PR: M"] = new List<ParsersBase>() { new StringReplaceParser(6, 1, ref this.gatewayConfiguration.gatewayMode, new Dictionary<string,string> {
+                        ["G"] = "Gateway",
+                        ["M"] = "Monitor" }) },
                     ["PR: O"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.setpointOverride) },
                     ["PR: P"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.smartPowerModel) },
                     ["PR: Q"] = new List<ParsersBase>() { new StringReplaceParser(6, 1, ref this.gatewayConfiguration.causeOfLastReset, new Dictionary<string,string> {
@@ -373,8 +374,6 @@ namespace HeatControl
             }
 
 
-
-
         public Message Parse(string line)
             {
                 Message message = null;
@@ -440,7 +439,6 @@ namespace HeatControl
                         }
                     }
                 }
-
                 return message;
             }
         }
