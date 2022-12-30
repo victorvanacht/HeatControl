@@ -54,6 +54,13 @@ namespace HeatControl
                 public int dataID;
                 public int dataValue;
 
+                public string line;
+
+                public Message(string line)
+                {
+                    this.line = line;
+                }
+
                 public string GenerateKey()
                 {
                     return GenerateKey(this.dataID, this.direction, this.type);
@@ -74,187 +81,151 @@ namespace HeatControl
                 this.decodeMessages = new Dictionary<string, List<ParsersBase>>
                 {
                     [Message.GenerateKey(0, Message.Direction.ThermostatToBoiler, Message.Type.M2SReadData)] = new List<ParsersBase>() {
-                        new Flags16(8, ref gatewayStatus.centralHeatingEnable),
-                        new Flags16(9, ref gatewayStatus.tapWaterEnable),
-                        new Flags16(10, ref gatewayStatus.coolingEnable),
-                        new Flags16(11, ref gatewayStatus.OTCActive),
-                        new Flags16(12, ref gatewayStatus.CH2Enable)},
+                        new Flags16Parser(8, ref gatewayStatus.centralHeatingEnable),
+                        new Flags16Parser(9, ref gatewayStatus.tapWaterEnable),
+                        new Flags16Parser(10, ref gatewayStatus.coolingEnable),
+                        new Flags16Parser(11, ref gatewayStatus.OTCActive),
+                        new Flags16Parser(12, ref gatewayStatus.CH2Enable)},
                     [Message.GenerateKey(0, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() { 
-                        new Flags16(0, ref gatewayStatus.faultIndication),
-                        new Flags16(1, ref gatewayStatus.centralHeatingMode),
-                        new Flags16(2, ref gatewayStatus.tapWaterMode),
-                        new Flags16(3, ref gatewayStatus.flameStatus),
-                        new Flags16(4, ref gatewayStatus.coolingStatus),
-                        new Flags16(5, ref gatewayStatus.CH2Mode),
-                        new Flags16(6, ref gatewayStatus.diagnosticIndication)},
+                        new Flags16Parser(0, ref gatewayStatus.faultIndication),
+                        new Flags16Parser(1, ref gatewayStatus.centralHeatingMode),
+                        new Flags16Parser(2, ref gatewayStatus.tapWaterMode),
+                        new Flags16Parser(3, ref gatewayStatus.flameStatus),
+                        new Flags16Parser(4, ref gatewayStatus.coolingStatus),
+                        new Flags16Parser(5, ref gatewayStatus.CH2Mode),
+                        new Flags16Parser(6, ref gatewayStatus.diagnosticIndication)},
                     [Message.GenerateKey(1, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.controlSetPoint)},
+                        new Float88Parser(ref gatewayStatus.controlSetPoint)},
                     [Message.GenerateKey(1, Message.Direction.ThermostatToBoilerModified, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.controlSetPointModified)},
+                        new Float88Parser(ref gatewayStatus.controlSetPointModified)},
                     [Message.GenerateKey(2, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
-                        new Uint8(8, ref gatewayStatus.masterMemberID)},
+                        new Uint8Parser(8, ref gatewayStatus.masterMemberID)},
                     [Message.GenerateKey(3, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Uint8(0, ref gatewayStatus.slaveMemberID),
-                        new Flags16(8, ref gatewayStatus.tapWaterPresent),
-                        new Flags16(9, ref gatewayStatus.controlType),
-                        new Flags16(10, ref gatewayStatus.coolingConfiguration),
-                        new Flags16(11, ref gatewayStatus.tapWaterConfiguration),
-                        new Flags16(12, ref gatewayStatus.masterLowOffPumpControl),
-                        new Flags16(13, ref gatewayStatus.CH2Present)},
+                        new Uint8Parser(0, ref gatewayStatus.slaveMemberID),
+                        new Flags16Parser(8, ref gatewayStatus.tapWaterPresent),
+                        new Flags16Parser(9, ref gatewayStatus.controlType),
+                        new Flags16Parser(10, ref gatewayStatus.coolingConfiguration),
+                        new Flags16Parser(11, ref gatewayStatus.tapWaterConfiguration),
+                        new Flags16Parser(12, ref gatewayStatus.masterLowOffPumpControl),
+                        new Flags16Parser(13, ref gatewayStatus.CH2Present)},
                     [Message.GenerateKey(5, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Uint8(0, ref gatewayStatus.OEMFaultCode),
-                        new Flags16(8, ref gatewayStatus.serviceRequest),
-                        new Flags16(9, ref gatewayStatus.lockoutReset),
-                        new Flags16(10, ref gatewayStatus.lowWaterPressure),
-                        new Flags16(11, ref gatewayStatus.gasFlamFault),
-                        new Flags16(12, ref gatewayStatus.airPressureFault),
-                        new Flags16(13, ref gatewayStatus.waterOverTemp)},
+                        new Uint8Parser(0, ref gatewayStatus.OEMFaultCode),
+                        new Flags16Parser(8, ref gatewayStatus.serviceRequest),
+                        new Flags16Parser(9, ref gatewayStatus.lockoutReset),
+                        new Flags16Parser(10, ref gatewayStatus.lowWaterPressure),
+                        new Flags16Parser(11, ref gatewayStatus.gasFlamFault),
+                        new Flags16Parser(12, ref gatewayStatus.airPressureFault),
+                        new Flags16Parser(13, ref gatewayStatus.waterOverTemp)},
                     [Message.GenerateKey(8, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.controlSetPoint2)},
+                        new Float88Parser(ref gatewayStatus.controlSetPoint2)},
                     [Message.GenerateKey(16, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.roomSetPoint)},
+                        new Float88Parser(ref gatewayStatus.roomSetPoint)},
                     [Message.GenerateKey(17, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.relativeModulationLevel)},
+                        new Float88Parser(ref gatewayStatus.relativeModulationLevel)},
                     [Message.GenerateKey(18, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.waterPressureCHCircuit)},
+                        new Float88Parser(ref gatewayStatus.waterPressureCHCircuit)},
                     [Message.GenerateKey(19, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.waterFlowRateTap)},
+                        new Float88Parser(ref gatewayStatus.waterFlowRateTap)},
                     [Message.GenerateKey(20, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
-                        new Uint16(ref gatewayStatus.timeAndDay)},
+                        new Uint16Parser(ref gatewayStatus.timeAndDay)},
                     [Message.GenerateKey(20, Message.Direction.BoilerToThermostat, Message.Type.S2MWriteAck)] = new List<ParsersBase>() {
-                        new Uint16(ref gatewayStatus.timeAndDay)},
+                        new Uint16Parser(ref gatewayStatus.timeAndDay)},
                     [Message.GenerateKey(21, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
-                        new Uint16(ref gatewayStatus.date)},
+                        new Uint16Parser(ref gatewayStatus.date)},
                     [Message.GenerateKey(21, Message.Direction.BoilerToThermostat, Message.Type.S2MWriteAck)] = new List<ParsersBase>() {
-                        new Uint16(ref gatewayStatus.date)},
+                        new Uint16Parser(ref gatewayStatus.date)},
                     [Message.GenerateKey(22, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
-                        new Uint16(ref gatewayStatus.year)},
+                        new Uint16Parser(ref gatewayStatus.year)},
                     [Message.GenerateKey(22, Message.Direction.BoilerToThermostat, Message.Type.S2MWriteAck)] = new List<ParsersBase>() {
-                        new Uint16(ref gatewayStatus.year)},
+                        new Uint16Parser(ref gatewayStatus.year)},
                     [Message.GenerateKey(23, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.roomSetpoint2)},
+                        new Float88Parser(ref gatewayStatus.roomSetpoint2)},
                     [Message.GenerateKey(24, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.roomTemperature)},
+                        new Float88Parser(ref gatewayStatus.roomTemperature)},
                     [Message.GenerateKey(25, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.boilerWaterTemperature)},
+                        new Float88Parser(ref gatewayStatus.boilerWaterTemperature)},
                     [Message.GenerateKey(26, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.tapWaterTemperature)},
+                        new Float88Parser(ref gatewayStatus.tapWaterTemperature)},
                     [Message.GenerateKey(27, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.outsideTemperature)},
+                        new Float88Parser(ref gatewayStatus.outsideTemperature)},
                     [Message.GenerateKey(28, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.returnWaterTemperature)},
+                        new Float88Parser(ref gatewayStatus.returnWaterTemperature)},
                     [Message.GenerateKey(29, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.solarStorageTemperature)},
+                        new Float88Parser(ref gatewayStatus.solarStorageTemperature)},
                     [Message.GenerateKey(30, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Sint16(ref gatewayStatus.solarCollectorTemperature)},
+                        new Sint16Parser(ref gatewayStatus.solarCollectorTemperature)},
                     [Message.GenerateKey(31, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.flowTemperatureCH2)},
+                        new Float88Parser(ref gatewayStatus.flowTemperatureCH2)},
                     [Message.GenerateKey(32, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.tapWaterTemperature2)},
+                        new Float88Parser(ref gatewayStatus.tapWaterTemperature2)},
                     [Message.GenerateKey(33, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Sint16(ref gatewayStatus.exhaustTemperature)},
+                        new Sint16Parser(ref gatewayStatus.exhaustTemperature)},
                     [Message.GenerateKey(115, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Uint16(ref gatewayStatus.OEMDiagnosticCode)},
+                        new Uint16Parser(ref gatewayStatus.OEMDiagnosticCode)},
                     [Message.GenerateKey(116, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Uint16(ref gatewayStatus.burnerStarts)},
+                        new Uint16Parser(ref gatewayStatus.burnerStarts)},
                     [Message.GenerateKey(117, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Uint16(ref gatewayStatus.pumpStarts)},
+                        new Uint16Parser(ref gatewayStatus.pumpStarts)},
                     [Message.GenerateKey(118, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Uint16(ref gatewayStatus.tapWaterValveStarts)},
+                        new Uint16Parser(ref gatewayStatus.tapWaterValveStarts)},
                     [Message.GenerateKey(119, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Uint16(ref gatewayStatus.tapWaterBurnerStarts)},
+                        new Uint16Parser(ref gatewayStatus.tapWaterBurnerStarts)},
                     [Message.GenerateKey(120, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Uint16(ref gatewayStatus.burnerOperatingHours)},
+                        new Uint16Parser(ref gatewayStatus.burnerOperatingHours)},
                     [Message.GenerateKey(121, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Uint16(ref gatewayStatus.pumpOperatingHours)},
+                        new Uint16Parser(ref gatewayStatus.pumpOperatingHours)},
                     [Message.GenerateKey(122, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Uint16(ref gatewayStatus.tapWaterValveHours)},
+                        new Uint16Parser(ref gatewayStatus.tapWaterValveHours)},
                     [Message.GenerateKey(123, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Uint16(ref gatewayStatus.tapWaterBurnerHours)},
+                        new Uint16Parser(ref gatewayStatus.tapWaterBurnerHours)},
                     [Message.GenerateKey(124, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.openthermVersionMaster)},
+                        new Float88Parser(ref gatewayStatus.openthermVersionMaster)},
                     [Message.GenerateKey(125, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Float88(ref gatewayStatus.openthermVersionSlave)},
+                        new Float88Parser(ref gatewayStatus.openthermVersionSlave)},
                     [Message.GenerateKey(126, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
-                        new Uint8(0, ref gatewayStatus.productVersionMaster),
-                        new Uint8(8, ref gatewayStatus.productTypeMaster)},
+                        new Uint8Parser(0, ref gatewayStatus.productVersionMaster),
+                        new Uint8Parser(8, ref gatewayStatus.productTypeMaster)},
                     [Message.GenerateKey(127, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
-                        new Uint8(0, ref gatewayStatus.productVersionSlave),
-                        new Uint8(8, ref gatewayStatus.productTypeSlave)},
+                        new Uint8Parser(0, ref gatewayStatus.productVersionSlave),
+                        new Uint8Parser(8, ref gatewayStatus.productTypeSlave)},
+
+                    ["NG"] = new List<ParsersBase>() { new ErrorParser("No Good") },
+                    ["SE"] = new List<ParsersBase>() { new ErrorParser("Syntax error") },
+                    ["BV"] = new List<ParsersBase>() { new ErrorParser("Bad value") },
+                    ["OR"] = new List<ParsersBase>() { new ErrorParser("Out of range") },
+                    ["NS"] = new List<ParsersBase>() { new ErrorParser("No space") },
+                    ["NF"] = new List<ParsersBase>() { new ErrorParser("Not found") },
+                    ["OR"] = new List<ParsersBase>() { new ErrorParser("Overrun") },
+
+                    ["PR: A"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.version) },
+                    ["PR: B"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.build) },
+                    ["PR: C"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.clockSpeed) },
+                    ["PR: D"] = new List<ParsersBase>() { new StringReplaceParser(6, 1, ref this.gatewayConfiguration.temperaturSensorFunction, new Dictionary<string,string> {
+                        ["O"] = "Outside temperature",
+                        ["R"] = "Return water temperature" }) },                        
+                    ["PR: G"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.gpioFunctionsConfiguration) },
+                    ["PR: I"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.gpioState) },
+                    ["PR: L"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.ledFunctionsConfiguration) },
+                    ["PR: M"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.gatewayMode) },
+                    ["PR: O"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.setpointOverride) },
+                    ["PR: P"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.smartPowerModel) },
+                    ["PR: Q"] = new List<ParsersBase>() { new StringReplaceParser(6, 1, ref this.gatewayConfiguration.causeOfLastReset, new Dictionary<string,string> {
+                        ["B"] = "Brown out",
+                        ["C"] = "By Command",
+                        ["E"] = "Reset button",
+                        ["L"] = "Stuck in loop",
+                        ["O"] = "Stack overflow",
+                        ["P"] = "Power on",
+                        ["S"] = "BREAK on serial interface",
+                        ["U"] = "Stack undeflow",
+                        ["W"] = "Watchdog" }) },
+                    ["PR: R"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.remehaDetectionState) },
+                    ["PR: S"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.setbackTemperatureConfiguarion) },
+                    ["PR: T"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.tweaks) },
+                    ["PR: V"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.referenceVoltage) },
+                    ["PR: W"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.hotWater) },
                 };
             }
-
-
-            /*
-                    new OTGWMessage("Central heating enable", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 8),
-                    new OTGWMessage("Tap water enable", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 9),
-                    new OTGWMessage("Cooling enable", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 10),
-                    new OTGWMessage("OTC active", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 11),
-                    new OTGWMessage("CH2 enable", MsgType.ReadData, 0, Direction.ThermostatToBoiler, HandlerFlag16, 12),
-                    new OTGWMessage("Fault indication", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 0),
-                    new OTGWMessage("Central heating mode", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 1),
-                    new OTGWMessage("Tap water mode", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 2),
-                    new OTGWMessage("Flame status", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 3),
-                    new OTGWMessage("Cooling status", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 4),
-                    new OTGWMessage("CH2 mode", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 5),
-                    new OTGWMessage("Diagnostic indication", MsgType.ReadAck,  0, Direction.BoilerToThermostat, HandlerFlag16, 6),
-                    new OTGWMessage("Control setpoint", MsgType.WriteData, 1, Direction.ThermostatToBoiler, Handlerf88, 0),
-                    new OTGWMessage("Control setpoint original", MsgType.WriteData, 1, Direction.ThermostatToBoilerOriginal, Handlerf88, 0),
-                    new OTGWMessage("Master memberID", MsgType.WriteData, 2, Direction.ThermostatToBoiler, Handleru8L, 0),
-                    new OTGWMessage("Tap water present", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 8),
-                    new OTGWMessage("Control type", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 9),
-                    new OTGWMessage("Cooling config", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 10),
-                    new OTGWMessage("Tap water config", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 11),
-                    new OTGWMessage("Master low-off&pump control", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 12),
-                    new OTGWMessage("CH2 present", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 13),
-                    new OTGWMessage("Slave memberID", MsgType.ReadAck,   3, Direction.BoilerToThermostat, Handleru8L, 0),
-                    new OTGWMessage("Service request", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 8),
-                    new OTGWMessage("Lockout reset", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 9),
-                    new OTGWMessage("Low water pressure", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 10),
-                    new OTGWMessage("Gas/flame fault", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 11),
-                    new OTGWMessage("Air pressure fault", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 12),
-                    new OTGWMessage("Water over-temp", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 13),
-                    new OTGWMessage("OEM-specific fault code", MsgType.ReadAck,   5, Direction.BoilerToThermostat, Handleru8L, 0),
-                    new OTGWMessage("Control setpoint 2", MsgType.WriteData, 8, Direction.ThermostatToBoiler, Handlerf88, 0),
-
-                    new OTGWMessage("Room setpoint", MsgType.WriteData, 16, Direction.ThermostatToBoiler, Handlerf88, 0),
-                    new OTGWMessage("Relative modulation level", MsgType.ReadAck,   17, Direction.BoilerToThermostat, Handlerf88, 0),
-                    new OTGWMessage("Water pressure CH circuit", MsgType.ReadAck,   18, Direction.BoilerToThermostat, Handlerf88, 0),
-                    new OTGWMessage("Water flow rate DHW circuit", MsgType.ReadAck,   19, Direction.BoilerToThermostat, Handlerf88, 0),
-                    new OTGWMessage("Time and Day", MsgType.ReadAck,   20, Direction.BoilerToThermostat, Handleru16, 0),
-                    new OTGWMessage("Time and Day", MsgType.WriteData, 20, Direction.ThermostatToBoiler, Handleru16, 0),
-                    new OTGWMessage("Date", MsgType.ReadAck,   21, Direction.BoilerToThermostat, Handleru16, 0),
-                    new OTGWMessage("Date", MsgType.WriteData, 21, Direction.ThermostatToBoiler, Handleru16, 0),
-                    new OTGWMessage("Year", MsgType.ReadAck,   22, Direction.BoilerToThermostat, Handleru16, 0),
-                    new OTGWMessage("Year", MsgType.WriteData, 22, Direction.ThermostatToBoiler, Handleru16, 0),
-                new OTGWMessage("Room setpoint 2", MsgType.WriteData, 23, Direction.ThermostatToBoiler, Handlerf88, 0),
-                new OTGWMessage("Room temperature", MsgType.WriteData, 24, Direction.ThermostatToBoiler, Handlerf88, 0),
-                new OTGWMessage("Boiler water temperture", MsgType.ReadAck,   25, Direction.BoilerToThermostat, Handlerf88, 0),
-                new OTGWMessage("Tap water temperture", MsgType.ReadAck,   26, Direction.BoilerToThermostat, Handlerf88, 0),
-                new OTGWMessage("Outside temperture", MsgType.ReadAck,   27, Direction.BoilerToThermostat, Handlerf88, 0),
-                new OTGWMessage("Return water temperture", MsgType.ReadAck,   28, Direction.BoilerToThermostat, Handlerf88, 0),
-                new OTGWMessage("Solar storage temperture", MsgType.ReadAck,   29, Direction.BoilerToThermostat, Handlerf88, 0),
-                new OTGWMessage("Solar collector temperture", MsgType.ReadAck,   30, Direction.BoilerToThermostat, Handlers16, 0),
-                new OTGWMessage("Flow temperature CH2", MsgType.ReadAck,   31, Direction.BoilerToThermostat, Handlerf88, 0),
-                new OTGWMessage("Tap water temperature 2", MsgType.ReadAck,   32, Direction.BoilerToThermostat, Handlerf88, 0),
-                new OTGWMessage("Exhaust temperture", MsgType.ReadAck,   33, Direction.BoilerToThermostat, Handlers16, 0),
-                
-                    new OTGWMessage("OEM-specifc diagnostic code", MsgType.ReadAck,115, Direction.BoilerToThermostat, Handleru16, 0),
-                    new OTGWMessage("Burner starts", MsgType.ReadAck,   116, Direction.BoilerToThermostat, Handleru16, 0),
-                    new OTGWMessage("Central heating pump starts", MsgType.ReadAck,   117, Direction.BoilerToThermostat, Handleru16, 0),
-                    new OTGWMessage("Tap water valve starts", MsgType.ReadAck,   118, Direction.BoilerToThermostat, Handleru16, 0),
-                    new OTGWMessage("Tap water burner starts", MsgType.ReadAck,   119, Direction.BoilerToThermostat, Handleru16, 0),
-                    new OTGWMessage("Burner operation hours", MsgType.ReadAck,   120, Direction.BoilerToThermostat, Handleru16, 0),
-                    new OTGWMessage("Central heating pump hours", MsgType.ReadAck,   121, Direction.BoilerToThermostat, Handleru16, 0),
-                    new OTGWMessage("Tap water valve hours", MsgType.ReadAck,   122, Direction.BoilerToThermostat, Handleru16, 0),
-                    new OTGWMessage("Tap water burner hours", MsgType.ReadAck,   123, Direction.BoilerToThermostat, Handleru16, 0),
-                    new OTGWMessage("OpenTherm version master", MsgType.ReadAck,   124, Direction.BoilerToThermostat, Handlerf88, 0),
-                    new OTGWMessage("OpenTherm version slave", MsgType.ReadAck,   125, Direction.BoilerToThermostat, Handlerf88, 0),
-                    new OTGWMessage("Product type master", MsgType.ReadAck,   126, Direction.BoilerToThermostat, Handleru8H, 0),
-                    new OTGWMessage("Product version master", MsgType.WriteData,  126, Direction.ThermostatToBoiler, Handleru8L, 0),
-                    new OTGWMessage("Product type slave", MsgType.ReadAck,   127, Direction.BoilerToThermostat, Handleru8H, 0),
-                    new OTGWMessage("Product version slave", MsgType.ReadAck,   127, Direction.BoilerToThermostat, Handleru8L, 0),
-                */
 
             abstract private class ParsersBase
             {
@@ -262,12 +233,12 @@ namespace HeatControl
             }
 
 
-            private class Flags16 : ParsersBase
+            private class Flags16Parser : ParsersBase
             {
                 private int bit;
                 private BoolValueName value;
 
-                public Flags16(int bit, ref BoolValueName value)
+                public Flags16Parser(int bit, ref BoolValueName value)
                 {
                     this.bit = bit;
                     this.value = value;
@@ -279,11 +250,11 @@ namespace HeatControl
                 }
             }
 
-            private class Float88 : ParsersBase
+            private class Float88Parser : ParsersBase
             {
                 private FloatValueName arg;
 
-                public Float88(ref FloatValueName arg)
+                public Float88Parser(ref FloatValueName arg)
                 {
                     this.arg = arg;
                 }
@@ -295,12 +266,12 @@ namespace HeatControl
             }
 
 
-            private class Uint8 : ParsersBase
+            private class Uint8Parser : ParsersBase
             {
                 private int bit;
                 private IntValueName value;
 
-                public Uint8(int bit, ref IntValueName value)
+                public Uint8Parser(int bit, ref IntValueName value)
                 {
                     this.bit = bit;
                     this.value = value;
@@ -312,12 +283,12 @@ namespace HeatControl
                 }
             }
 
-            private class Uint16 : ParsersBase
+            private class Uint16Parser : ParsersBase
             {
                 private int bit;
                 private IntValueName value;
 
-                public Uint16(ref IntValueName value)
+                public Uint16Parser(ref IntValueName value)
                 {
                     this.value = value;
                 }
@@ -328,12 +299,11 @@ namespace HeatControl
                 }
             }
 
-            private class Sint16 : ParsersBase
+            private class Sint16Parser : ParsersBase
             {
-                private int bit;
                 private IntValueName value;
 
-                public Sint16(ref IntValueName value)
+                public Sint16Parser(ref IntValueName value)
                 {
                     this.value = value;
                 }
@@ -345,124 +315,94 @@ namespace HeatControl
                 }
             }
 
+            private class StringParser : ParsersBase
+            {
+                private int firstChar;
+                private StringValueName value;
 
-            public Message Parse(string line)
+                public StringParser(int firstChar, ref StringValueName value)
+                {
+                    this.firstChar = firstChar;
+                    this.value = value;
+                }
+
+                override public void Parse(Message message)
+                {
+                    value.value = message.line.Substring(firstChar);
+                }
+            }
+
+            private class StringReplaceParser : ParsersBase
+            {
+                private int firstChar;
+                private int stringLength;
+                private StringValueName value;
+                private Dictionary<string, string> replaceStrings;
+
+                public StringReplaceParser(int firstChar, int stringLength, ref StringValueName value, Dictionary<string, string> replaceStrings)
+                {
+                    this.firstChar = firstChar;
+                    this.stringLength = stringLength;
+                    this.value = value;
+                    this.replaceStrings = replaceStrings;
+                }
+
+                override public void Parse(Message message)
+                {
+                    string key = message.line.Substring(this.firstChar, this.stringLength);
+                    if (this.replaceStrings.ContainsKey(key)) {
+                        value.value = this.replaceStrings[key];
+                    }
+                }
+            }
+
+
+            private class ErrorParser : ParsersBase
+            {
+                private string errorMessage;
+
+                public ErrorParser(string errorMessage)
+                {
+                    this.errorMessage = errorMessage;
+                }
+
+                override public void Parse(Message message)
+                {
+                    Console.WriteLine("Error: " + errorMessage);
+                }
+            }
+
+
+
+
+        public Message Parse(string line)
             {
                 Message message = null;
 
                 char[] lineBytes = line.ToUpper().ToCharArray();
 
-                // Parse errors
-                if (line.Equals("NG")) Console.WriteLine("OTGW reponse 'NG': No Good");
-                else if (line.Equals("SE")) Console.WriteLine("OTGW reponse 'SE': Syntax Error");
-                else if (line.Equals("BV")) Console.WriteLine("OTGW reponse 'BV': Bad Value");
-                else if (line.Equals("OR")) Console.WriteLine("OTGW reponse 'OR': Out of Range");
-                else if (line.Equals("NS")) Console.WriteLine("OTGW reponse 'NS': No Space");
-                else if (line.Equals("NF")) Console.WriteLine("OTGW reponse 'NF': Not Found");
-                else if (line.Equals("OR")) Console.WriteLine("OTGW reponse 'OR': OverRun");
-                else if (line.Length >= 3)
+                // parse error messages
+                if (line.Length == 2)
+                {
+                    if (decodeMessages.ContainsKey(line))
+                    {
+                        decodeMessages[line][0].Parse(message);
+                    }
+                }
+                else if (line.Length >= 5)
                 {
                     // parse "PR:" request response
-                    if (line.Substring(0, 3).Equals("PR:"))
+                    string res = line.Substring(0, 5);
+
+                    if (decodeMessages.ContainsKey(res))
                     {
-                        commandQueue.TryDequeueCommand("PR");
-
-                        switch (lineBytes[4])
-                        {
-                            case 'A':
-                                this.gatewayConfiguration.version.value = line.Substring(6);
-                                break;
-                            case 'B':
-                                this.gatewayConfiguration.build.value = line.Substring(6);
-                                break;
-                            case 'C':
-                                this.gatewayConfiguration.clockSpeed.value = line.Substring(6);
-                                break;
-                            case 'D':
-                                this.gatewayConfiguration.temperaturSensorFunction.value = (lineBytes[6] == 'O') ? "Outside Temperature" : "Return water temperature";
-                                break;
-                            case 'G':
-                                this.gatewayConfiguration.gpioFunctionsConfiguration.value = line.Substring(6);
-                                break;
-                            case 'I':
-                                this.gatewayConfiguration.gpioState.value = line.Substring(6);
-                                break;
-                            case 'L':
-                                this.gatewayConfiguration.ledFunctionsConfiguration.value = line.Substring(6);
-                                break;
-                            case 'M':
-                                this.gatewayConfiguration.gatewayMode.value = (lineBytes[6] == 'G') ? "Gateway" : "Monitor";
-                                break;
-                            case 'O':
-                                this.gatewayConfiguration.setpointOverride.value = line.Substring(6);
-                                break;
-                            case 'P':
-                                this.gatewayConfiguration.smartPowerModel.value = line.Substring(6);
-                                break;
-                            case 'Q':
-                                switch (lineBytes[6])
-                                {
-                                    case 'B':
-                                        this.gatewayConfiguration.causeOfLastReset.value = "Brown out";
-                                        break;
-                                    case 'C':
-                                        this.gatewayConfiguration.causeOfLastReset.value = "By command";
-                                        break;
-                                    case 'E':
-                                        this.gatewayConfiguration.causeOfLastReset.value = "Reset button";
-                                        break;
-                                    case 'L':
-                                        this.gatewayConfiguration.causeOfLastReset.value = "Stuck in loop";
-                                        break;
-                                    case 'O':
-                                        this.gatewayConfiguration.causeOfLastReset.value = "Stack overflow";
-                                        break;
-                                    case 'P':
-                                        this.gatewayConfiguration.causeOfLastReset.value = "Power on";
-                                        break;
-                                    case 'S':
-                                        this.gatewayConfiguration.causeOfLastReset.value = "BREAL on serial interface";
-                                        break;
-                                    case 'U':
-                                        this.gatewayConfiguration.causeOfLastReset.value = "Stack underflow";
-                                        break;
-                                    case 'W':
-                                        this.gatewayConfiguration.causeOfLastReset.value = "Watchdog";
-                                        break;
-                                    default:
-                                        this.gatewayConfiguration.causeOfLastReset.value = "Syntax error";
-                                        break;
-                                }
-                                break;
-                            case 'R':
-                                this.gatewayConfiguration.remehaDetectionState.value = line.Substring(6);
-                                break;
-                            case 'S':
-                                this.gatewayConfiguration.setbackTemperatureConfiguarion.value = line.Substring(6);
-                                break;
-                            case 'T':
-                                this.gatewayConfiguration.tweaks.value = line.Substring(6);
-                                break;
-                            case 'V':
-                                this.gatewayConfiguration.referenceVoltage.value = line.Substring(6);
-                                break;
-                            case 'W':
-                                this.gatewayConfiguration.hotWater.value = line.Substring(6);
-                                break;
-                            default:
-                                break;
-                        }
-
+                        commandQueue.TryDequeueCommand(res.Substring(0,2));
+                        decodeMessages[res][0].Parse(new Message(line));
                     }
-                    else if (line.Substring(0, 3).Equals("PS:"))
-                    { //@@@@@ this needs to be modified
-                        commandQueue.TryDequeueCommand("PS");
-                    }
-                    else
 
-                  if (line.Length == 9)
+                    else if (line.Length == 9)
                     {
-                        message = new Message();
+                        message = new Message(line);
                         switch (lineBytes[0])
                         {
                             case 'T':
@@ -491,7 +431,8 @@ namespace HeatControl
                             string key = message.GenerateKey();
                             if (decodeMessages.ContainsKey(key))
                             {
-                                foreach (ParsersBase handler in decodeMessages[key]) {
+                                foreach (ParsersBase handler in decodeMessages[key])
+                                {
                                     handler.Parse(message);
                                 }
 
@@ -505,5 +446,6 @@ namespace HeatControl
         }
     }
 }
+
 
 
