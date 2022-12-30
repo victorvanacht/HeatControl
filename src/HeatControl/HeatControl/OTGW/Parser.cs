@@ -14,7 +14,7 @@ namespace HeatControl
             private GatewayConfiguration gatewayConfiguration;
             private GatewayStatus gatewayStatus;
             private CommandQueue commandQueue;
-            private Dictionary<string, ParsersBase> decodeMessages;
+            private Dictionary<string, List<ParsersBase>> decodeMessages;
 
             public class Message
             {
@@ -71,64 +71,42 @@ namespace HeatControl
                 this.gatewayStatus = status;
                 this.commandQueue = commandQueue;
                 
-                this.decodeMessages = new Dictionary<string, ParsersBase>
+                this.decodeMessages = new Dictionary<string, List<ParsersBase>>
                 {
-                    [Message.GenerateKey(0, Message.Direction.ThermostatToBoiler, Message.Type.M2SReadData)] = 
-                        new Flags16(
-                            new List<Flags16Element>() {
-                                new Flags16Element(8, ref gatewayStatus.centralHeatingEnable),
-                                new Flags16Element(9, ref gatewayStatus.tapWaterEnable),
-                                new Flags16Element(10, ref gatewayStatus.coolingEnable),
-                                new Flags16Element(11, ref gatewayStatus.OTCActive),
-                                new Flags16Element(12, ref gatewayStatus.CH2Enable)
-
-                            }
-                        ),
-                    [Message.GenerateKey(0, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] =
-                        new Flags16(
-                            new List<Flags16Element>() {
-                                new Flags16Element(0, ref gatewayStatus.faultIndication),
-                                new Flags16Element(1, ref gatewayStatus.centralHeatingMode),
-                                new Flags16Element(2, ref gatewayStatus.tapWaterMode),
-                                new Flags16Element(3, ref gatewayStatus.flameStatus),
-                                new Flags16Element(4, ref gatewayStatus.coolingStatus),
-                                new Flags16Element(5, ref gatewayStatus.CH2Mode),
-                                new Flags16Element(6, ref gatewayStatus.diagnosticIndication)
-                            }
-                        ),
-                    [Message.GenerateKey(1, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] =
-                        new Float88(ref gatewayStatus.controlSetPoint),
-                    [Message.GenerateKey(1, Message.Direction.ThermostatToBoilerModified, Message.Type.M2SWriteData)] =
-                        new Float88(ref gatewayStatus.controlSetPointModified),
-                    [Message.GenerateKey(2, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] =
-                        new U88HL(
-                            new List<IntValueName>() {
-                                gatewayStatus.masterMemberID,
-                                null,
-                            }
-                        ),
-                    [Message.GenerateKey(3, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] =
-                        new Flags16(
-                            new List<Flags16Element>() {
-                                new Flags16Element(8, ref gatewayStatus.tapWaterPresent),
-                                new Flags16Element(9, ref gatewayStatus.controlType),
-                                new Flags16Element(10, ref gatewayStatus.coolingConfiguration),
-                                new Flags16Element(11, ref gatewayStatus.tapWaterConfiguration),
-                                new Flags16Element(12, ref gatewayStatus.masterLowOffPumpControl),
-                                new Flags16Element(13, ref gatewayStatus.CH2Present)
-                            }
-                        ),
-                    [Message.GenerateKey(5, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] =
-                        new Flags16(
-                            new List<Flags16Element>() {
-                                new Flags16Element(8, ref gatewayStatus.serviceRequest),
-                                new Flags16Element(9, ref gatewayStatus.lockoutReset),
-                                new Flags16Element(10, ref gatewayStatus.lowWaterPressure),
-                                new Flags16Element(11, ref gatewayStatus.gasFlamFault),
-                                new Flags16Element(12, ref gatewayStatus.airPressureFault),
-                                new Flags16Element(13, ref gatewayStatus.waterOverTemp)
-                            }
-                        ),
+                    [Message.GenerateKey(0, Message.Direction.ThermostatToBoiler, Message.Type.M2SReadData)] = new List<ParsersBase>() {
+                        new Flags16(8, ref gatewayStatus.centralHeatingEnable),
+                        new Flags16(9, ref gatewayStatus.tapWaterEnable),
+                        new Flags16(10, ref gatewayStatus.coolingEnable),
+                        new Flags16(11, ref gatewayStatus.OTCActive),
+                        new Flags16(12, ref gatewayStatus.CH2Enable)},
+                    [Message.GenerateKey(0, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() { 
+                        new Flags16(0, ref gatewayStatus.faultIndication),
+                        new Flags16(1, ref gatewayStatus.centralHeatingMode),
+                        new Flags16(2, ref gatewayStatus.tapWaterMode),
+                        new Flags16(3, ref gatewayStatus.flameStatus),
+                        new Flags16(4, ref gatewayStatus.coolingStatus),
+                        new Flags16(5, ref gatewayStatus.CH2Mode),
+                        new Flags16(6, ref gatewayStatus.diagnosticIndication)},
+                    [Message.GenerateKey(1, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.controlSetPoint)},
+                    [Message.GenerateKey(1, Message.Direction.ThermostatToBoilerModified, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.controlSetPointModified)},
+                    [Message.GenerateKey(2, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
+                        new U8(0, ref gatewayStatus.masterMemberID)},
+                    [Message.GenerateKey(3, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Flags16(8, ref gatewayStatus.tapWaterPresent),
+                        new Flags16(9, ref gatewayStatus.controlType),
+                        new Flags16(10, ref gatewayStatus.coolingConfiguration),
+                        new Flags16(11, ref gatewayStatus.tapWaterConfiguration),
+                        new Flags16(12, ref gatewayStatus.masterLowOffPumpControl),
+                        new Flags16(13, ref gatewayStatus.CH2Present) },
+                    [Message.GenerateKey(5, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Flags16(8, ref gatewayStatus.serviceRequest),
+                        new Flags16(9, ref gatewayStatus.lockoutReset),
+                        new Flags16(10, ref gatewayStatus.lowWaterPressure),
+                        new Flags16(11, ref gatewayStatus.gasFlamFault),
+                        new Flags16(12, ref gatewayStatus.airPressureFault),
+                        new Flags16(13, ref gatewayStatus.waterOverTemp)},
                 };
             }
 
@@ -211,33 +189,20 @@ namespace HeatControl
             }
 
 
-            class Flags16Element
+            private class Flags16 : ParsersBase
             {
-                public int bit;
-                public BoolValueName value;
+                private int bit;
+                private BoolValueName value;
 
-                public Flags16Element(int bit, ref BoolValueName value)
+                public Flags16(int bit, ref BoolValueName value)
                 {
                     this.bit = bit;
                     this.value = value;
                 }
 
-            }
-            private class Flags16 : ParsersBase
-            {
-                private List<Flags16Element> arg;
-                public Flags16(List<Flags16Element> arg)
-                {
-                    this.arg = arg;
-                }
-
                 override public void Parse(Message message)
                 {
-                    foreach (Flags16Element item in this.arg)
-                    {
-                        Flags16Element i = item;
-                        i.value.value = Convert.ToBoolean(((message.dataValue) >> (item.bit)) & 1);
-                    }
+                    value.value = Convert.ToBoolean(((message.dataValue) >> (this.bit)) & 1);
                 }
             }
 
@@ -257,29 +222,20 @@ namespace HeatControl
             }
 
 
-            private class U88HL : ParsersBase
+            private class U8 : ParsersBase
             {
-                private List<IntValueName> arg;
+                private int bit;
+                private IntValueName value;
 
-                // element 0 of list is LOW 8 bits
-                // element 1 of list is HIGH 8 bits
-                // if element not used, it can be null
-                public U88HL(List<IntValueName> arg)
+                public U8(int bit, ref IntValueName value)
                 {
-                    Debug.Assert(arg.Count == 2);
-                    this.arg = arg;
+                    this.bit = bit;
+                    this.value = value;
                 }
 
                 override public void Parse(Message message)
                 {
-                    if (arg[0] != null)
-                    {
-                        arg[0].value = message.dataValue & 0xff;
-                    }
-                    if (arg[1] != null)
-                    {
-                        arg[1].value = (message.dataValue >> 8) & 0xff;
-                    }
+                    value.value = (message.dataValue>> bit) & 0xff;
                 }
             }
 
@@ -430,8 +386,9 @@ namespace HeatControl
                             string key = message.GenerateKey();
                             if (decodeMessages.ContainsKey(key))
                             {
-                                ParsersBase handler = decodeMessages[key];
-                                handler.Parse(message);
+                                foreach (ParsersBase handler in decodeMessages[key]) {
+                                    handler.Parse(message);
+                                }
 
                             }
                         }
