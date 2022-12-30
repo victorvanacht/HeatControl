@@ -142,6 +142,15 @@ namespace HeatControl
             public IntValueName OEMFaultCode;
 
             public FloatValueName controlSetPoint2;
+            public FloatValueName roomSetPoint;
+            public FloatValueName relativeModulationLevel;
+            public FloatValueName waterPressureCHCircuit;
+            public FloatValueName waterFlowRateTap;
+
+            public IntValueName timeAndDay;
+            public IntValueName date;
+            public IntValueName year;
+            
             public IntValueName OEMDiagnosticCode;
             public IntValueName burnerStarts;
             public IntValueName pumpStarts;
@@ -151,6 +160,14 @@ namespace HeatControl
             public IntValueName pumpOperatingHours;
             public IntValueName tapWaterValveHours;
             public IntValueName tapWaterBurnerHours;
+
+            public FloatValueName openthermVersionMaster;
+            public FloatValueName openthermVersionSlave;
+            public IntValueName productTypeMaster;
+            public IntValueName productVersionMaster;
+            public IntValueName productTypeSlave;
+            public IntValueName productVersionSlave;
+
 
             public GatewayStatus()
             {
@@ -187,6 +204,14 @@ namespace HeatControl
                 this.OEMFaultCode = new IntValueName("OEM specific fault code");
 
                 this.controlSetPoint2 = new FloatValueName("Control setpoint 2");
+                this.roomSetPoint = new FloatValueName("Room setpoint");
+                this.relativeModulationLevel = new FloatValueName("Relative modulation level");
+                this.waterPressureCHCircuit = new FloatValueName("Water pressure central heating system");
+                this.waterFlowRateTap = new FloatValueName("Water flow rate tap water");
+                this.timeAndDay = new IntValueName("Time abd day of week");
+                this.date = new IntValueName("Date");
+                this.year = new IntValueName("Year");
+
                 this.OEMDiagnosticCode = new IntValueName("OEM Diagnostic code");
 
                 this.burnerStarts = new IntValueName("Burner starts");
@@ -197,11 +222,12 @@ namespace HeatControl
                 this.pumpOperatingHours = new IntValueName("Pump operating hours");
                 this.tapWaterValveHours = new IntValueName("Tap water valve operating hours");
                 this.tapWaterBurnerHours = new IntValueName("Tap water burber operating hours");
-
-                
-
-
-
+                this.openthermVersionMaster = new FloatValueName("OpenTherm version master");
+                this.openthermVersionSlave = new FloatValueName("OpenTherm version slave");
+                this.productTypeMaster = new IntValueName("Product type master");
+                this.productVersionMaster = new IntValueName("Product version master");
+                this.productTypeSlave = new IntValueName("Product type slave");
+                this.productVersionSlave = new IntValueName("Product version slave");
             }
         }
         public GatewayStatus gatewayStatus;
@@ -575,3 +601,5 @@ namespace HeatControl
         */
     }
 }
+
+
