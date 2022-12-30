@@ -92,21 +92,44 @@ namespace HeatControl
                     [Message.GenerateKey(1, Message.Direction.ThermostatToBoilerModified, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
                         new Float88(ref gatewayStatus.controlSetPointModified)},
                     [Message.GenerateKey(2, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
-                        new U8(0, ref gatewayStatus.masterMemberID)},
+                        new Uint8(8, ref gatewayStatus.masterMemberID)},
                     [Message.GenerateKey(3, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Uint8(0, ref gatewayStatus.slaveMemberID),
                         new Flags16(8, ref gatewayStatus.tapWaterPresent),
                         new Flags16(9, ref gatewayStatus.controlType),
                         new Flags16(10, ref gatewayStatus.coolingConfiguration),
                         new Flags16(11, ref gatewayStatus.tapWaterConfiguration),
                         new Flags16(12, ref gatewayStatus.masterLowOffPumpControl),
-                        new Flags16(13, ref gatewayStatus.CH2Present) },
+                        new Flags16(13, ref gatewayStatus.CH2Present)},
                     [Message.GenerateKey(5, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Uint8(0, ref gatewayStatus.OEMFaultCode),
                         new Flags16(8, ref gatewayStatus.serviceRequest),
                         new Flags16(9, ref gatewayStatus.lockoutReset),
                         new Flags16(10, ref gatewayStatus.lowWaterPressure),
                         new Flags16(11, ref gatewayStatus.gasFlamFault),
                         new Flags16(12, ref gatewayStatus.airPressureFault),
                         new Flags16(13, ref gatewayStatus.waterOverTemp)},
+                    [Message.GenerateKey(8, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
+                        new Float88(ref gatewayStatus.controlSetPoint2)},
+                    [Message.GenerateKey(115, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Uint16(ref gatewayStatus.OEMDiagnosticCode)},
+                    [Message.GenerateKey(116, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Uint16(ref gatewayStatus.burnerStarts)},
+                    [Message.GenerateKey(117, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Uint16(ref gatewayStatus.pumpStarts)},
+                    [Message.GenerateKey(118, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Uint16(ref gatewayStatus.tapWaterValveStarts)},
+                    [Message.GenerateKey(119, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Uint16(ref gatewayStatus.tapWaterBurnerStarts)},
+                    [Message.GenerateKey(120, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Uint16(ref gatewayStatus.burnerOperatingHours)},
+                    [Message.GenerateKey(121, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Uint16(ref gatewayStatus.pumpOperatingHours)},
+                    [Message.GenerateKey(122, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Uint16(ref gatewayStatus.tapWaterValveHours)},
+                    [Message.GenerateKey(123, Message.Direction.BoilerToThermostat, Message.Type.S2MReadAck)] = new List<ParsersBase>() {
+                        new Uint16(ref gatewayStatus.tapWaterBurnerHours)},
+
                 };
             }
 
@@ -133,18 +156,15 @@ namespace HeatControl
                     new OTGWMessage("Tap water config", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 11),
                     new OTGWMessage("Master low-off&pump control", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 12),
                     new OTGWMessage("CH2 present", MsgType.ReadAck,   3, Direction.BoilerToThermostat, HandlerFlag16, 13),
-
-                new OTGWMessage("Slave memberID", MsgType.ReadAck,   3, Direction.BoilerToThermostat, Handleru8L, 0),
-
+                    new OTGWMessage("Slave memberID", MsgType.ReadAck,   3, Direction.BoilerToThermostat, Handleru8L, 0),
                     new OTGWMessage("Service request", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 8),
                     new OTGWMessage("Lockout reset", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 9),
                     new OTGWMessage("Low water pressure", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 10),
                     new OTGWMessage("Gas/flame fault", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 11),
                     new OTGWMessage("Air pressure fault", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 12),
                     new OTGWMessage("Water over-temp", MsgType.ReadAck,   5, Direction.BoilerToThermostat, HandlerFlag16, 13),
-
-                new OTGWMessage("OEM-specific fault code", MsgType.ReadAck,   5, Direction.BoilerToThermostat, Handleru8L, 0),
-                new OTGWMessage("Control setpoint 2", MsgType.WriteData, 8, Direction.ThermostatToBoiler, Handlerf88, 0),
+                    new OTGWMessage("OEM-specific fault code", MsgType.ReadAck,   5, Direction.BoilerToThermostat, Handleru8L, 0),
+                    new OTGWMessage("Control setpoint 2", MsgType.WriteData, 8, Direction.ThermostatToBoiler, Handlerf88, 0),
                 new OTGWMessage("Room setpoint", MsgType.WriteData, 16, Direction.ThermostatToBoiler, Handlerf88, 0),
                 new OTGWMessage("Relative modulation level", MsgType.ReadAck,   17, Direction.BoilerToThermostat, Handlerf88, 0),
                 new OTGWMessage("Water pressure CH circuit", MsgType.ReadAck,   18, Direction.BoilerToThermostat, Handlerf88, 0),
@@ -166,15 +186,17 @@ namespace HeatControl
                 new OTGWMessage("Flow temperature CH2", MsgType.ReadAck,   31, Direction.BoilerToThermostat, Handlerf88, 0),
                 new OTGWMessage("Tap water temperature 2", MsgType.ReadAck,   32, Direction.BoilerToThermostat, Handlerf88, 0),
                 new OTGWMessage("Exhaust temperture", MsgType.ReadAck,   33, Direction.BoilerToThermostat, Handlers16, 0),
-                new OTGWMessage("OEM-specifc diagnostic code", MsgType.ReadAck,115, Direction.BoilerToThermostat, Handleru16, 0),
-                new OTGWMessage("Burner starts", MsgType.ReadAck,   116, Direction.BoilerToThermostat, Handleru16, 0),
-                new OTGWMessage("Central heating pump starts", MsgType.ReadAck,   117, Direction.BoilerToThermostat, Handleru16, 0),
-                new OTGWMessage("Tap water valve starts", MsgType.ReadAck,   118, Direction.BoilerToThermostat, Handleru16, 0),
-                new OTGWMessage("Tap water burner starts", MsgType.ReadAck,   119, Direction.BoilerToThermostat, Handleru16, 0),
-                new OTGWMessage("Burner operation hours", MsgType.ReadAck,   120, Direction.BoilerToThermostat, Handleru16, 0),
-                new OTGWMessage("Central heating pump hours", MsgType.ReadAck,   121, Direction.BoilerToThermostat, Handleru16, 0),
-                new OTGWMessage("Tap water valve hours", MsgType.ReadAck,   122, Direction.BoilerToThermostat, Handleru16, 0),
-                new OTGWMessage("Tap water burner hours", MsgType.ReadAck,   123, Direction.BoilerToThermostat, Handleru16, 0),
+                
+                    new OTGWMessage("OEM-specifc diagnostic code", MsgType.ReadAck,115, Direction.BoilerToThermostat, Handleru16, 0),
+                    new OTGWMessage("Burner starts", MsgType.ReadAck,   116, Direction.BoilerToThermostat, Handleru16, 0),
+                    new OTGWMessage("Central heating pump starts", MsgType.ReadAck,   117, Direction.BoilerToThermostat, Handleru16, 0),
+                    new OTGWMessage("Tap water valve starts", MsgType.ReadAck,   118, Direction.BoilerToThermostat, Handleru16, 0),
+                    new OTGWMessage("Tap water burner starts", MsgType.ReadAck,   119, Direction.BoilerToThermostat, Handleru16, 0),
+                    new OTGWMessage("Burner operation hours", MsgType.ReadAck,   120, Direction.BoilerToThermostat, Handleru16, 0),
+                    new OTGWMessage("Central heating pump hours", MsgType.ReadAck,   121, Direction.BoilerToThermostat, Handleru16, 0),
+                    new OTGWMessage("Tap water valve hours", MsgType.ReadAck,   122, Direction.BoilerToThermostat, Handleru16, 0),
+                    new OTGWMessage("Tap water burner hours", MsgType.ReadAck,   123, Direction.BoilerToThermostat, Handleru16, 0),
+
                 new OTGWMessage("OpenTherm version master", MsgType.ReadAck,   124, Direction.BoilerToThermostat, Handlerf88, 0),
                 new OTGWMessage("OpenTherm version slave", MsgType.ReadAck,   125, Direction.BoilerToThermostat, Handlerf88, 0),
                 new OTGWMessage("Product type master", MsgType.ReadAck,   126, Direction.BoilerToThermostat, Handleru8H, 0),
@@ -222,12 +244,12 @@ namespace HeatControl
             }
 
 
-            private class U8 : ParsersBase
+            private class Uint8 : ParsersBase
             {
                 private int bit;
                 private IntValueName value;
 
-                public U8(int bit, ref IntValueName value)
+                public Uint8(int bit, ref IntValueName value)
                 {
                     this.bit = bit;
                     this.value = value;
@@ -236,6 +258,22 @@ namespace HeatControl
                 override public void Parse(Message message)
                 {
                     value.value = (message.dataValue>> bit) & 0xff;
+                }
+            }
+
+            private class Uint16 : ParsersBase
+            {
+                private int bit;
+                private IntValueName value;
+
+                public Uint16(ref IntValueName value)
+                {
+                    this.value = value;
+                }
+
+                override public void Parse(Message message)
+                {
+                    value.value = message.dataValue;
                 }
             }
 

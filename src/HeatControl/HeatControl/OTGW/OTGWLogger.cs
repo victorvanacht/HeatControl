@@ -124,6 +124,7 @@ namespace HeatControl
             public FloatValueName controlSetPoint;
             public FloatValueName controlSetPointModified;
             public IntValueName masterMemberID;
+            public IntValueName slaveMemberID;
 
             public BoolValueName tapWaterPresent;
             public BoolValueName controlType;
@@ -138,6 +139,18 @@ namespace HeatControl
             public BoolValueName gasFlamFault;
             public BoolValueName airPressureFault;
             public BoolValueName waterOverTemp;
+            public IntValueName OEMFaultCode;
+
+            public FloatValueName controlSetPoint2;
+            public IntValueName OEMDiagnosticCode;
+            public IntValueName burnerStarts;
+            public IntValueName pumpStarts;
+            public IntValueName tapWaterValveStarts;
+            public IntValueName tapWaterBurnerStarts;
+            public IntValueName burnerOperatingHours;
+            public IntValueName pumpOperatingHours;
+            public IntValueName tapWaterValveHours;
+            public IntValueName tapWaterBurnerHours;
 
             public GatewayStatus()
             {
@@ -157,6 +170,7 @@ namespace HeatControl
                 this.controlSetPoint = new FloatValueName("Control setpoint");
                 this.controlSetPointModified = new FloatValueName("Control setpoint modified");
                 this.masterMemberID = new IntValueName("Master member ID");
+                this.slaveMemberID = new IntValueName("Slave member ID");
 
                 this.tapWaterPresent = new BoolValueName("Tap water present");
                 this.controlType = new BoolValueName("Control type");
@@ -170,6 +184,23 @@ namespace HeatControl
                 this.gasFlamFault = new BoolValueName("Gas/ Flame fault");
                 this.airPressureFault = new BoolValueName("Air pressure fault");
                 this.waterOverTemp = new BoolValueName("Water overtempearatur");
+                this.OEMFaultCode = new IntValueName("OEM specific fault code");
+
+                this.controlSetPoint2 = new FloatValueName("Control setpoint 2");
+                this.OEMDiagnosticCode = new IntValueName("OEM Diagnostic code");
+
+                this.burnerStarts = new IntValueName("Burner starts");
+                this.pumpStarts = new IntValueName("Pump starts");
+                this.tapWaterValveStarts = new IntValueName("Tap water valve starts");
+                this.tapWaterBurnerStarts = new IntValueName("Tap water burner starts");
+                this.burnerOperatingHours = new IntValueName("Burner operating hours");
+                this.pumpOperatingHours = new IntValueName("Pump operating hours");
+                this.tapWaterValveHours = new IntValueName("Tap water valve operating hours");
+                this.tapWaterBurnerHours = new IntValueName("Tap water burber operating hours");
+
+                
+
+
 
             }
         }
