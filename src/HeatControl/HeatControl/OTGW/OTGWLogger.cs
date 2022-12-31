@@ -270,9 +270,32 @@ namespace HeatControl
         {
             this.gatewayConfiguration = new GatewayConfiguration();
             this.gatewayStatus = new GatewayStatus();
-            this.socketReader = new SocketReader();
+            this.socketReader = new SocketReader(this);
             this.commandQueue = new CommandQueue();
             this.parser = new Parser(ref this.gatewayConfiguration, ref this.gatewayStatus, ref this.commandQueue);
+            this.logHandlers = new List<LogHandler>();
+        }
+
+        public delegate void LogHandler(string text);
+        private List<LogHandler> logHandlers;
+
+        private void Log(string text)
+        {
+            Console.WriteLine(text);
+            foreach (LogHandler logHandler in logHandlers)
+            {
+                logHandler(text);
+            }
+
+        }
+        public void AddLogger(LogHandler handler)
+        {
+            this.logHandlers.Add(handler);
+        }
+
+        public void RemoveLogger(LogHandler handler)
+        {
+            this.logHandlers.Remove(handler);
         }
 
         public void Connect(string hostName)
@@ -324,7 +347,7 @@ namespace HeatControl
                 {
                     if (line.Length > 0)
                     {
-                        Console.WriteLine(DateTime.Now.ToString() + " R:" +line);
+                        Log(DateTime.Now.ToString() + " R:" +line);
                         this.parser.Parse(line);
                     }
 

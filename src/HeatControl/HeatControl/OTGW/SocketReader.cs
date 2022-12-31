@@ -18,11 +18,13 @@ namespace HeatControl
 
             private IPAddress ipAddress;
             private Socket socket;
+            private OTGW otgw;
 
 
             // constructor
-            public SocketReader()
+            public SocketReader(OTGW otgw)
             {
+                this.otgw = otgw;
             }
 
             // destructor
@@ -50,7 +52,7 @@ namespace HeatControl
                     if (curAdd.AddressFamily == AddressFamily.InterNetwork) // we only do IPv4. Not IPv6
                     {
                         this.ipAddress = curAdd;
-                        Console.WriteLine("IP-Address: " + this.ipAddress.ToString());
+                        otgw.Log("IP-Address: " + this.ipAddress.ToString());
                     }
                 }
 
@@ -128,7 +130,7 @@ namespace HeatControl
             public void WriteLine(string line)
             {
                 Thread.Sleep(500); // for some reason we need to insert a wait here. Don't know why. But if we don't the OTGW doesnt respond.
-                Console.WriteLine(DateTime.Now.ToString() + " T:" + line);
+                otgw.Log(DateTime.Now.ToString() + " T:" + line);
 
                 byte[] msg = Encoding.ASCII.GetBytes(line + "\n\r");
                 int byteSent = this.socket.Send(msg);
