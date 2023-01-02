@@ -31,15 +31,20 @@
             this.OTGWButtonConnect = new System.Windows.Forms.Button();
             this.OTGWButtonDisconnect = new System.Windows.Forms.Button();
             this.OTGWGroupbox = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.OTGWTabcontrol = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.OTGWTextBoxRoomTemp = new System.Windows.Forms.TextBox();
+            this.OTGWLabelRoomTemp = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.OTGWTextboxHostname = new System.Windows.Forms.TextBox();
+            this.OTGWListboxLog = new System.Windows.Forms.ListBox();
             this.OTGWLabelHostname = new System.Windows.Forms.Label();
-            this.OTGWTextboxLog = new System.Windows.Forms.TextBox();
+            this.OTGWTextboxHostname = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.OTGWLabelBoilerTemp = new System.Windows.Forms.Label();
+            this.OTGWTextBoxBoilerTemp = new System.Windows.Forms.TextBox();
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,21 +52,21 @@
             // 
             this.OTGWButtonConnect.Location = new System.Drawing.Point(19, 64);
             this.OTGWButtonConnect.Name = "OTGWButtonConnect";
-            this.OTGWButtonConnect.Size = new System.Drawing.Size(140, 34);
+            this.OTGWButtonConnect.Size = new System.Drawing.Size(191, 34);
             this.OTGWButtonConnect.TabIndex = 0;
             this.OTGWButtonConnect.Text = "Connect";
             this.OTGWButtonConnect.UseVisualStyleBackColor = true;
-            this.OTGWButtonConnect.Click += new System.EventHandler(this.button1_Click);
+            this.OTGWButtonConnect.Click += new System.EventHandler(this.OTGWButtonConnect_Click);
             // 
             // OTGWButtonDisconnect
             // 
-            this.OTGWButtonDisconnect.Location = new System.Drawing.Point(177, 64);
+            this.OTGWButtonDisconnect.Location = new System.Drawing.Point(216, 64);
             this.OTGWButtonDisconnect.Name = "OTGWButtonDisconnect";
-            this.OTGWButtonDisconnect.Size = new System.Drawing.Size(140, 31);
+            this.OTGWButtonDisconnect.Size = new System.Drawing.Size(191, 34);
             this.OTGWButtonDisconnect.TabIndex = 1;
             this.OTGWButtonDisconnect.Text = "Disconnect";
             this.OTGWButtonDisconnect.UseVisualStyleBackColor = true;
-            this.OTGWButtonDisconnect.Click += new System.EventHandler(this.button2_Click);
+            this.OTGWButtonDisconnect.Click += new System.EventHandler(this.OTGWButtonDisconnect_Click);
             // 
             // OTGWGroupbox
             // 
@@ -73,15 +78,6 @@
             this.OTGWGroupbox.TabStop = false;
             this.OTGWGroupbox.Text = "OpenTherm Gateway (OTGW)";
             this.OTGWGroupbox.Enter += new System.EventHandler(this.groupBox1_Enter);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Location = new System.Drawing.Point(15, 23);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(457, 505);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "EQ-3 Max!";
             // 
             // OTGWTabcontrol
             // 
@@ -95,6 +91,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.OTGWTextBoxBoilerTemp);
+            this.tabPage1.Controls.Add(this.OTGWLabelBoilerTemp);
+            this.tabPage1.Controls.Add(this.OTGWTextBoxRoomTemp);
+            this.tabPage1.Controls.Add(this.OTGWLabelRoomTemp);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -103,9 +103,28 @@
             this.tabPage1.Text = "Status Overview";
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
+            // OTGWTextBoxRoomTemp
+            // 
+            this.OTGWTextBoxRoomTemp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.OTGWTextBoxRoomTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OTGWTextBoxRoomTemp.Location = new System.Drawing.Point(173, 32);
+            this.OTGWTextBoxRoomTemp.Name = "OTGWTextBoxRoomTemp";
+            this.OTGWTextBoxRoomTemp.Size = new System.Drawing.Size(100, 26);
+            this.OTGWTextBoxRoomTemp.TabIndex = 1;
+            // 
+            // OTGWLabelRoomTemp
+            // 
+            this.OTGWLabelRoomTemp.AutoSize = true;
+            this.OTGWLabelRoomTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OTGWLabelRoomTemp.Location = new System.Drawing.Point(6, 34);
+            this.OTGWLabelRoomTemp.Name = "OTGWLabelRoomTemp";
+            this.OTGWLabelRoomTemp.Size = new System.Drawing.Size(143, 20);
+            this.OTGWLabelRoomTemp.TabIndex = 0;
+            this.OTGWLabelRoomTemp.Text = "Room temperature";
+            // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.OTGWTextboxLog);
+            this.tabPage2.Controls.Add(this.OTGWListboxLog);
             this.tabPage2.Controls.Add(this.OTGWLabelHostname);
             this.tabPage2.Controls.Add(this.OTGWTextboxHostname);
             this.tabPage2.Controls.Add(this.OTGWButtonConnect);
@@ -117,12 +136,13 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Connection";
             // 
-            // OTGWTextboxHostname
+            // OTGWListboxLog
             // 
-            this.OTGWTextboxHostname.Location = new System.Drawing.Point(147, 23);
-            this.OTGWTextboxHostname.Name = "OTGWTextboxHostname";
-            this.OTGWTextboxHostname.Size = new System.Drawing.Size(170, 20);
-            this.OTGWTextboxHostname.TabIndex = 2;
+            this.OTGWListboxLog.FormattingEnabled = true;
+            this.OTGWListboxLog.Location = new System.Drawing.Point(19, 116);
+            this.OTGWListboxLog.Name = "OTGWListboxLog";
+            this.OTGWListboxLog.Size = new System.Drawing.Size(388, 238);
+            this.OTGWListboxLog.TabIndex = 5;
             // 
             // OTGWLabelHostname
             // 
@@ -133,15 +153,40 @@
             this.OTGWLabelHostname.TabIndex = 3;
             this.OTGWLabelHostname.Text = "Hostname/ IP-address";
             // 
-            // OTGWTextboxLog
+            // OTGWTextboxHostname
             // 
-            this.OTGWTextboxLog.Location = new System.Drawing.Point(19, 136);
-            this.OTGWTextboxLog.Multiline = true;
-            this.OTGWTextboxLog.Name = "OTGWTextboxLog";
-            this.OTGWTextboxLog.ReadOnly = true;
-            this.OTGWTextboxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.OTGWTextboxLog.Size = new System.Drawing.Size(298, 231);
-            this.OTGWTextboxLog.TabIndex = 4;
+            this.OTGWTextboxHostname.Location = new System.Drawing.Point(147, 23);
+            this.OTGWTextboxHostname.Name = "OTGWTextboxHostname";
+            this.OTGWTextboxHostname.Size = new System.Drawing.Size(260, 20);
+            this.OTGWTextboxHostname.TabIndex = 2;
+            this.OTGWTextboxHostname.Text = "OTGW_wifi";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Location = new System.Drawing.Point(15, 23);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(457, 505);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "EQ-3 Max!";
+            // 
+            // OTGWLabelBoilerTemp
+            // 
+            this.OTGWLabelBoilerTemp.AutoSize = true;
+            this.OTGWLabelBoilerTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OTGWLabelBoilerTemp.Location = new System.Drawing.Point(9, 73);
+            this.OTGWLabelBoilerTemp.Name = "OTGWLabelBoilerTemp";
+            this.OTGWLabelBoilerTemp.Size = new System.Drawing.Size(140, 20);
+            this.OTGWLabelBoilerTemp.TabIndex = 2;
+            this.OTGWLabelBoilerTemp.Text = "Boiler temperature";
+            // 
+            // OTGWTextBoxBoilerTemp
+            // 
+            this.OTGWTextBoxBoilerTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OTGWTextBoxBoilerTemp.Location = new System.Drawing.Point(173, 70);
+            this.OTGWTextBoxBoilerTemp.Name = "OTGWTextBoxBoilerTemp";
+            this.OTGWTextBoxBoilerTemp.Size = new System.Drawing.Size(100, 26);
+            this.OTGWTextBoxBoilerTemp.TabIndex = 3;
             // 
             // Form1
             // 
@@ -154,6 +199,8 @@
             this.Text = "HeatControl";
             this.OTGWGroupbox.ResumeLayout(false);
             this.OTGWTabcontrol.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
@@ -171,7 +218,11 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label OTGWLabelHostname;
         private System.Windows.Forms.TextBox OTGWTextboxHostname;
-        private System.Windows.Forms.TextBox OTGWTextboxLog;
+        private System.Windows.Forms.ListBox OTGWListboxLog;
+        private System.Windows.Forms.TextBox OTGWTextBoxRoomTemp;
+        private System.Windows.Forms.Label OTGWLabelRoomTemp;
+        private System.Windows.Forms.TextBox OTGWTextBoxBoilerTemp;
+        private System.Windows.Forms.Label OTGWLabelBoilerTemp;
     }
 }
 

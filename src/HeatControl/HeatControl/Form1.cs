@@ -19,15 +19,19 @@ namespace HeatControl
             InitializeComponent();
 
             this.otgw = new OTGW();
-            otgw.AddLogger(OTGWLogger);
+            this.otgw.AddLogger(OTGWLogger);
+            this.otgw.gatewayStatus.roomTemperature.AddListener(OTGWListenerRoomTemperature);
+            this.otgw.gatewayStatus.boilerWaterTemperature.AddListener(OTGWListenerBoilerWaterTemperature);
+
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void OTGWButtonConnect_Click(object sender, EventArgs e)
         {
-            this.otgw.Connect("192.168.50.150");
+            this.otgw.Connect(this.OTGWTextboxHostname.Text);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void OTGWButtonDisconnect_Click(object sender, EventArgs e)
         {
             this.otgw.Disconnect();
         }
@@ -44,16 +48,44 @@ namespace HeatControl
 
         private void OTGWLogger(string text)
         {
-            string line = text + "\n\r\n\r";
-
-            if (this.OTGWTextboxLog.InvokeRequired)
+            if (this.OTGWListboxLog.InvokeRequired)
             {
-                this.OTGWTextboxLog.Invoke((Action)delegate { this.OTGWTextboxLog.Text += line; });
+                this.OTGWListboxLog.Invoke((Action)delegate { OTGWLogger(text); });
             }
             else
             {
-                this.OTGWTextboxLog.Text += line;
+                this.OTGWListboxLog.Items.Add(text);
+                if (this.OTGWListboxLog.Items.Count > 100) OTGWListboxLog.Items.RemoveAt(0);
             }
         }
+
+
+        private void OTGWListenerRoomTemperature(float value)
+        {
+            if (this.OTGWTextBoxRoomTemp.InvokeRequired)
+            {
+                this.OTGWTextBoxRoomTemp.Invoke((Action)delegate { OTGWListenerRoomTemperature(value); });
+            }
+            else
+            {
+                this.OTGWTextBoxRoomTemp.Text = value.ToString();
+            }
+        }
+
+
+        private void OTGWListenerBoilerWaterTemperature(float value)
+        {
+            if (this.OTGWTextBoxBoilerTemp.InvokeRequired)
+            {
+                this.OTGWTextBoxBoilerTemp.Invoke((Action)delegate { OTGWListenerBoilerWaterTemperature(value); });
+            }
+            else
+            {
+                this.OTGWTextBoxBoilerTemp.Text = value.ToString();
+            }
+        }
+
+
+
     }
 }

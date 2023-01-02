@@ -14,51 +14,81 @@ namespace HeatControl
 {
     partial class OTGW
     {
-        public class IntValueName
+        public class VarValueName<T>
         {
-            public int value;
             public string name;
+            private T _value;
+            public delegate void Listener(T value);
+            private List<Listener> listeners;
 
-            public IntValueName(string name)
+            public T value
             {
-                this.value = -1; // uninitialzed indicator
+                get
+                {
+                    return _value;
+                }
+                set
+                {
+                    _value = value;
+
+                    foreach (Listener listener in listeners)
+                    {
+                        listener(_value);
+                    }
+
+
+                }
+            }
+
+            public VarValueName(string name)
+            {
                 this.name = name;
+                this.listeners = new List<Listener>();
+            }
+
+            public void AddListener(Listener listener)
+            {
+                this.listeners.Add(listener);
+            }
+
+            public void RemoveListener(Listener listener)
+            {
+                this.listeners.Remove(listener);
             }
         }
-        public class BoolValueName
-        {
-            public bool value;
-            public string name;
 
-            public BoolValueName(string name)
+
+
+        public class IntValueName : VarValueName<int>
+        {
+            public IntValueName(string name) : base(name)
+            {
+                this.value = -1; // uninitialzed indicator
+            }
+        }
+
+        public class BoolValueName : VarValueName<bool>
+        {
+            public BoolValueName(string name) : base(name)
             {
                 this.value = false; // uninitialzed indicator????
-                this.name = name;
             }
 
 
         }
-        public class FloatValueName
+        public class FloatValueName : VarValueName<float>
         {
-            public float value;
-            public string name;
-
-            public FloatValueName(string name)
+            public FloatValueName(string name) : base(name)
             {
                 this.value = -1; // uninitialzed indicator
-                this.name = name;
             }
 
         }
-        public class StringValueName
+        public class StringValueName : VarValueName<string>
         {
-            public string value;
-            public string name;
-
-            public StringValueName(string name)
+            public StringValueName(string name) : base(name)
             {
                 this.value = ""; // uninitialzed indicator
-                this.name = name;
             }
 
         }
