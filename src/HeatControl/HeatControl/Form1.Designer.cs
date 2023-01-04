@@ -33,7 +33,6 @@
             this.OTGWGroupbox = new System.Windows.Forms.GroupBox();
             this.OTGWTabcontrol = new System.Windows.Forms.TabControl();
             this.OTGWTabStatus = new System.Windows.Forms.TabPage();
-            this.OTGWLabelDiagTimeAndDay = new System.Windows.Forms.Label();
             this.OTGWTextBoxOutsideTemperature = new System.Windows.Forms.TextBox();
             this.OTGWLabelOutsideTemperature = new System.Windows.Forms.Label();
             this.OTGWTextBoxReturnTemperature = new System.Windows.Forms.TextBox();
@@ -71,8 +70,37 @@
             this.OTGWLabelHostname = new System.Windows.Forms.Label();
             this.OTGWTextboxHostname = new System.Windows.Forms.TextBox();
             this.OTGWTabBoilerDiagnostics = new System.Windows.Forms.TabPage();
+            this.OTGWTextBoxDiagTapWaterBurnerHours = new System.Windows.Forms.TextBox();
+            this.OTGWLabelDiagTapBurnerHours = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagTapWaterValveHours = new System.Windows.Forms.TextBox();
+            this.OTGWLabelDiagTapWaterValveHours = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagPumpHours = new System.Windows.Forms.TextBox();
+            this.OTGWLabelDiagPumpHours = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagBurnerHours = new System.Windows.Forms.TextBox();
+            this.OTGWLabelDiagBurnerHours = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagTapWaterBurnerStarts = new System.Windows.Forms.TextBox();
+            this.OTGWLabelDiagTapWaterBurnerStarts = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagTapWaterValveStarts = new System.Windows.Forms.TextBox();
+            this.OTGWLabelDiagTapWaterValveStarts = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagPumpStarts = new System.Windows.Forms.TextBox();
+            this.OTGWLabelDiagPumpStarts = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagBurnerStarts = new System.Windows.Forms.TextBox();
+            this.OTGWLabelDiagBurnerStarts = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagExhaustTemperature = new System.Windows.Forms.TextBox();
+            this.OTGWLabelDiagExhaustTemperature = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagTapWater2Temperature = new System.Windows.Forms.TextBox();
+            this.OTGWLabelDiagTapWater2Temperature = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagFlowTemperatureCH2 = new System.Windows.Forms.TextBox();
+            this.OTGWLabelDiagFlowTemperatureCH2 = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagSolarCollectorTemperature = new System.Windows.Forms.TextBox();
+            this.OTGWLabelDiagSolarCollectorTemperature = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagSolarStorageTemperature = new System.Windows.Forms.TextBox();
+            this.OTGWLabelDiagSolarStorageTemperature = new System.Windows.Forms.Label();
+            this.OTGWLabelDiagYear = new System.Windows.Forms.Label();
+            this.OTGWLabelDiagTimeAndDay = new System.Windows.Forms.Label();
             this.OTGWTextBoxDiagOEMDiagnosticCode = new System.Windows.Forms.TextBox();
             this.OTGWLabelDiagOEMDiagnosticCode = new System.Windows.Forms.Label();
+            this.OTGWLabelDiagDate = new System.Windows.Forms.Label();
             this.OTGWTextBoxDiagOEMFaultCode = new System.Windows.Forms.TextBox();
             this.OTGWLabelDiagOEMFaultCode = new System.Windows.Forms.Label();
             this.OTGWTextBoxDiagWaterOvertemp = new System.Windows.Forms.TextBox();
@@ -114,6 +142,17 @@
             this.OTGWTextBoxDiagCentralHeatingEnabled = new System.Windows.Forms.TextBox();
             this.OTGWLabelDiagCentralHeatingEnabled = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.OTGWLabelProductVersionSlave = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagProductVersionMaster = new System.Windows.Forms.TextBox();
+            this.OTGWLabelDiagProductVersionMaster = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagProductTypeSlave = new System.Windows.Forms.TextBox();
+            this.OTGWLabelProductTypeSlave = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagProductTypeMaster = new System.Windows.Forms.TextBox();
+            this.OTGWLabelDiagProductTypeMaster = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagOpenThermVersionSlave = new System.Windows.Forms.TextBox();
+            this.OTGWLabelDiagOpenThermVersionSlave = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagOpenThermVersionMaster = new System.Windows.Forms.TextBox();
+            this.OTGWLabelDiagOpenThermVersionMaster = new System.Windows.Forms.Label();
             this.OTGWTextBoxDiagHotWater = new System.Windows.Forms.TextBox();
             this.OTGWLabelDiagHotWater = new System.Windows.Forms.Label();
             this.OTGWLabelDiagReferenceVoltage = new System.Windows.Forms.Label();
@@ -147,8 +186,7 @@
             this.OTGWTextBoxDiagVersion = new System.Windows.Forms.TextBox();
             this.OTGWLabelDiagVersion = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.OTGWLabelDiagDate = new System.Windows.Forms.Label();
-            this.OTGWLabelDiagYear = new System.Windows.Forms.Label();
+            this.OTGWTextBoxDiagProductVersionSlave = new System.Windows.Forms.TextBox();
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.OTGWTabStatus.SuspendLayout();
@@ -201,12 +239,9 @@
             // 
             // OTGWTabStatus
             // 
-            this.OTGWTabStatus.Controls.Add(this.OTGWLabelDiagYear);
             this.OTGWTabStatus.Controls.Add(this.OTGWTextBoxOutsideTemperature);
             this.OTGWTabStatus.Controls.Add(this.OTGWLabelOutsideTemperature);
-            this.OTGWTabStatus.Controls.Add(this.OTGWLabelDiagDate);
             this.OTGWTabStatus.Controls.Add(this.OTGWTextBoxReturnTemperature);
-            this.OTGWTabStatus.Controls.Add(this.OTGWLabelDiagTimeAndDay);
             this.OTGWTabStatus.Controls.Add(this.OTGWLabelReturnTemperature);
             this.OTGWTabStatus.Controls.Add(this.OTGWTextBoxTapWaterTemperature);
             this.OTGWTabStatus.Controls.Add(this.OTGWLabelTapWaterTemperature);
@@ -242,15 +277,6 @@
             this.OTGWTabStatus.Size = new System.Drawing.Size(624, 373);
             this.OTGWTabStatus.TabIndex = 0;
             this.OTGWTabStatus.Text = "Status Overview";
-            // 
-            // OTGWLabelDiagTimeAndDay
-            // 
-            this.OTGWLabelDiagTimeAndDay.AutoSize = true;
-            this.OTGWLabelDiagTimeAndDay.Location = new System.Drawing.Point(8, 278);
-            this.OTGWLabelDiagTimeAndDay.Name = "OTGWLabelDiagTimeAndDay";
-            this.OTGWLabelDiagTimeAndDay.Size = new System.Drawing.Size(30, 13);
-            this.OTGWLabelDiagTimeAndDay.TabIndex = 32;
-            this.OTGWLabelDiagTimeAndDay.Text = "Time";
             // 
             // OTGWTextBoxOutsideTemperature
             // 
@@ -558,8 +584,37 @@
             // OTGWTabBoilerDiagnostics
             // 
             this.OTGWTabBoilerDiagnostics.BackColor = System.Drawing.SystemColors.Control;
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWTextBoxDiagTapWaterBurnerHours);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagTapBurnerHours);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWTextBoxDiagTapWaterValveHours);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagTapWaterValveHours);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWTextBoxDiagPumpHours);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagPumpHours);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWTextBoxDiagBurnerHours);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagBurnerHours);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWTextBoxDiagTapWaterBurnerStarts);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagTapWaterBurnerStarts);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWTextBoxDiagTapWaterValveStarts);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagTapWaterValveStarts);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWTextBoxDiagPumpStarts);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagPumpStarts);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWTextBoxDiagBurnerStarts);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagBurnerStarts);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWTextBoxDiagExhaustTemperature);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagExhaustTemperature);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWTextBoxDiagTapWater2Temperature);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagTapWater2Temperature);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWTextBoxDiagFlowTemperatureCH2);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagFlowTemperatureCH2);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWTextBoxDiagSolarCollectorTemperature);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagSolarCollectorTemperature);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWTextBoxDiagSolarStorageTemperature);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagSolarStorageTemperature);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagYear);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagTimeAndDay);
             this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWTextBoxDiagOEMDiagnosticCode);
             this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagOEMDiagnosticCode);
+            this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagDate);
             this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWTextBoxDiagOEMFaultCode);
             this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWLabelDiagOEMFaultCode);
             this.OTGWTabBoilerDiagnostics.Controls.Add(this.OTGWTextBoxDiagWaterOvertemp);
@@ -607,6 +662,232 @@
             this.OTGWTabBoilerDiagnostics.TabIndex = 2;
             this.OTGWTabBoilerDiagnostics.Text = "Boiler diagnostics";
             // 
+            // OTGWTextBoxDiagTapWaterBurnerHours
+            // 
+            this.OTGWTextBoxDiagTapWaterBurnerHours.Location = new System.Drawing.Point(526, 317);
+            this.OTGWTextBoxDiagTapWaterBurnerHours.Name = "OTGWTextBoxDiagTapWaterBurnerHours";
+            this.OTGWTextBoxDiagTapWaterBurnerHours.Size = new System.Drawing.Size(54, 20);
+            this.OTGWTextBoxDiagTapWaterBurnerHours.TabIndex = 66;
+            // 
+            // OTGWLabelDiagTapBurnerHours
+            // 
+            this.OTGWLabelDiagTapBurnerHours.AutoSize = true;
+            this.OTGWLabelDiagTapBurnerHours.Location = new System.Drawing.Point(417, 320);
+            this.OTGWLabelDiagTapBurnerHours.Name = "OTGWLabelDiagTapBurnerHours";
+            this.OTGWLabelDiagTapBurnerHours.Size = new System.Drawing.Size(88, 13);
+            this.OTGWLabelDiagTapBurnerHours.TabIndex = 65;
+            this.OTGWLabelDiagTapBurnerHours.Text = "Tap burner hours";
+            // 
+            // OTGWTextBoxDiagTapWaterValveHours
+            // 
+            this.OTGWTextBoxDiagTapWaterValveHours.Location = new System.Drawing.Point(526, 291);
+            this.OTGWTextBoxDiagTapWaterValveHours.Name = "OTGWTextBoxDiagTapWaterValveHours";
+            this.OTGWTextBoxDiagTapWaterValveHours.Size = new System.Drawing.Size(54, 20);
+            this.OTGWTextBoxDiagTapWaterValveHours.TabIndex = 64;
+            // 
+            // OTGWLabelDiagTapWaterValveHours
+            // 
+            this.OTGWLabelDiagTapWaterValveHours.AutoSize = true;
+            this.OTGWLabelDiagTapWaterValveHours.Location = new System.Drawing.Point(417, 294);
+            this.OTGWLabelDiagTapWaterValveHours.Name = "OTGWLabelDiagTapWaterValveHours";
+            this.OTGWLabelDiagTapWaterValveHours.Size = new System.Drawing.Size(84, 13);
+            this.OTGWLabelDiagTapWaterValveHours.TabIndex = 63;
+            this.OTGWLabelDiagTapWaterValveHours.Text = "Tap valve hours";
+            // 
+            // OTGWTextBoxDiagPumpHours
+            // 
+            this.OTGWTextBoxDiagPumpHours.Location = new System.Drawing.Point(526, 265);
+            this.OTGWTextBoxDiagPumpHours.Name = "OTGWTextBoxDiagPumpHours";
+            this.OTGWTextBoxDiagPumpHours.Size = new System.Drawing.Size(54, 20);
+            this.OTGWTextBoxDiagPumpHours.TabIndex = 62;
+            // 
+            // OTGWLabelDiagPumpHours
+            // 
+            this.OTGWLabelDiagPumpHours.AutoSize = true;
+            this.OTGWLabelDiagPumpHours.Location = new System.Drawing.Point(417, 268);
+            this.OTGWLabelDiagPumpHours.Name = "OTGWLabelDiagPumpHours";
+            this.OTGWLabelDiagPumpHours.Size = new System.Drawing.Size(63, 13);
+            this.OTGWLabelDiagPumpHours.TabIndex = 61;
+            this.OTGWLabelDiagPumpHours.Text = "Pump hours";
+            // 
+            // OTGWTextBoxDiagBurnerHours
+            // 
+            this.OTGWTextBoxDiagBurnerHours.Location = new System.Drawing.Point(526, 239);
+            this.OTGWTextBoxDiagBurnerHours.Name = "OTGWTextBoxDiagBurnerHours";
+            this.OTGWTextBoxDiagBurnerHours.Size = new System.Drawing.Size(54, 20);
+            this.OTGWTextBoxDiagBurnerHours.TabIndex = 60;
+            // 
+            // OTGWLabelDiagBurnerHours
+            // 
+            this.OTGWLabelDiagBurnerHours.AutoSize = true;
+            this.OTGWLabelDiagBurnerHours.Location = new System.Drawing.Point(417, 242);
+            this.OTGWLabelDiagBurnerHours.Name = "OTGWLabelDiagBurnerHours";
+            this.OTGWLabelDiagBurnerHours.Size = new System.Drawing.Size(67, 13);
+            this.OTGWLabelDiagBurnerHours.TabIndex = 59;
+            this.OTGWLabelDiagBurnerHours.Text = "Burner hours";
+            // 
+            // OTGWTextBoxDiagTapWaterBurnerStarts
+            // 
+            this.OTGWTextBoxDiagTapWaterBurnerStarts.Location = new System.Drawing.Point(329, 317);
+            this.OTGWTextBoxDiagTapWaterBurnerStarts.Name = "OTGWTextBoxDiagTapWaterBurnerStarts";
+            this.OTGWTextBoxDiagTapWaterBurnerStarts.Size = new System.Drawing.Size(54, 20);
+            this.OTGWTextBoxDiagTapWaterBurnerStarts.TabIndex = 58;
+            // 
+            // OTGWLabelDiagTapWaterBurnerStarts
+            // 
+            this.OTGWLabelDiagTapWaterBurnerStarts.AutoSize = true;
+            this.OTGWLabelDiagTapWaterBurnerStarts.Location = new System.Drawing.Point(222, 320);
+            this.OTGWLabelDiagTapWaterBurnerStarts.Name = "OTGWLabelDiagTapWaterBurnerStarts";
+            this.OTGWLabelDiagTapWaterBurnerStarts.Size = new System.Drawing.Size(87, 13);
+            this.OTGWLabelDiagTapWaterBurnerStarts.TabIndex = 57;
+            this.OTGWLabelDiagTapWaterBurnerStarts.Text = "Tap burner starts";
+            // 
+            // OTGWTextBoxDiagTapWaterValveStarts
+            // 
+            this.OTGWTextBoxDiagTapWaterValveStarts.Location = new System.Drawing.Point(329, 291);
+            this.OTGWTextBoxDiagTapWaterValveStarts.Name = "OTGWTextBoxDiagTapWaterValveStarts";
+            this.OTGWTextBoxDiagTapWaterValveStarts.Size = new System.Drawing.Size(54, 20);
+            this.OTGWTextBoxDiagTapWaterValveStarts.TabIndex = 56;
+            // 
+            // OTGWLabelDiagTapWaterValveStarts
+            // 
+            this.OTGWLabelDiagTapWaterValveStarts.AutoSize = true;
+            this.OTGWLabelDiagTapWaterValveStarts.Location = new System.Drawing.Point(222, 294);
+            this.OTGWLabelDiagTapWaterValveStarts.Name = "OTGWLabelDiagTapWaterValveStarts";
+            this.OTGWLabelDiagTapWaterValveStarts.Size = new System.Drawing.Size(83, 13);
+            this.OTGWLabelDiagTapWaterValveStarts.TabIndex = 55;
+            this.OTGWLabelDiagTapWaterValveStarts.Text = "Tap valve starts";
+            // 
+            // OTGWTextBoxDiagPumpStarts
+            // 
+            this.OTGWTextBoxDiagPumpStarts.Location = new System.Drawing.Point(329, 265);
+            this.OTGWTextBoxDiagPumpStarts.Name = "OTGWTextBoxDiagPumpStarts";
+            this.OTGWTextBoxDiagPumpStarts.Size = new System.Drawing.Size(54, 20);
+            this.OTGWTextBoxDiagPumpStarts.TabIndex = 54;
+            // 
+            // OTGWLabelDiagPumpStarts
+            // 
+            this.OTGWLabelDiagPumpStarts.AutoSize = true;
+            this.OTGWLabelDiagPumpStarts.Location = new System.Drawing.Point(222, 268);
+            this.OTGWLabelDiagPumpStarts.Name = "OTGWLabelDiagPumpStarts";
+            this.OTGWLabelDiagPumpStarts.Size = new System.Drawing.Size(62, 13);
+            this.OTGWLabelDiagPumpStarts.TabIndex = 53;
+            this.OTGWLabelDiagPumpStarts.Text = "Pump starts";
+            // 
+            // OTGWTextBoxDiagBurnerStarts
+            // 
+            this.OTGWTextBoxDiagBurnerStarts.Location = new System.Drawing.Point(329, 239);
+            this.OTGWTextBoxDiagBurnerStarts.Name = "OTGWTextBoxDiagBurnerStarts";
+            this.OTGWTextBoxDiagBurnerStarts.Size = new System.Drawing.Size(54, 20);
+            this.OTGWTextBoxDiagBurnerStarts.TabIndex = 52;
+            // 
+            // OTGWLabelDiagBurnerStarts
+            // 
+            this.OTGWLabelDiagBurnerStarts.AutoSize = true;
+            this.OTGWLabelDiagBurnerStarts.Location = new System.Drawing.Point(222, 242);
+            this.OTGWLabelDiagBurnerStarts.Name = "OTGWLabelDiagBurnerStarts";
+            this.OTGWLabelDiagBurnerStarts.Size = new System.Drawing.Size(66, 13);
+            this.OTGWLabelDiagBurnerStarts.TabIndex = 51;
+            this.OTGWLabelDiagBurnerStarts.Text = "Burner starts";
+            // 
+            // OTGWTextBoxDiagExhaustTemperature
+            // 
+            this.OTGWTextBoxDiagExhaustTemperature.Location = new System.Drawing.Point(135, 343);
+            this.OTGWTextBoxDiagExhaustTemperature.Name = "OTGWTextBoxDiagExhaustTemperature";
+            this.OTGWTextBoxDiagExhaustTemperature.Size = new System.Drawing.Size(54, 20);
+            this.OTGWTextBoxDiagExhaustTemperature.TabIndex = 50;
+            // 
+            // OTGWLabelDiagExhaustTemperature
+            // 
+            this.OTGWLabelDiagExhaustTemperature.AutoSize = true;
+            this.OTGWLabelDiagExhaustTemperature.Location = new System.Drawing.Point(12, 346);
+            this.OTGWLabelDiagExhaustTemperature.Name = "OTGWLabelDiagExhaustTemperature";
+            this.OTGWLabelDiagExhaustTemperature.Size = new System.Drawing.Size(104, 13);
+            this.OTGWLabelDiagExhaustTemperature.TabIndex = 49;
+            this.OTGWLabelDiagExhaustTemperature.Text = "Exhaust temperature";
+            // 
+            // OTGWTextBoxDiagTapWater2Temperature
+            // 
+            this.OTGWTextBoxDiagTapWater2Temperature.Location = new System.Drawing.Point(135, 317);
+            this.OTGWTextBoxDiagTapWater2Temperature.Name = "OTGWTextBoxDiagTapWater2Temperature";
+            this.OTGWTextBoxDiagTapWater2Temperature.Size = new System.Drawing.Size(54, 20);
+            this.OTGWTextBoxDiagTapWater2Temperature.TabIndex = 48;
+            // 
+            // OTGWLabelDiagTapWater2Temperature
+            // 
+            this.OTGWLabelDiagTapWater2Temperature.AutoSize = true;
+            this.OTGWLabelDiagTapWater2Temperature.Location = new System.Drawing.Point(12, 320);
+            this.OTGWLabelDiagTapWater2Temperature.Name = "OTGWLabelDiagTapWater2Temperature";
+            this.OTGWLabelDiagTapWater2Temperature.Size = new System.Drawing.Size(90, 13);
+            this.OTGWLabelDiagTapWater2Temperature.TabIndex = 47;
+            this.OTGWLabelDiagTapWater2Temperature.Text = "Tap water 2 temp";
+            // 
+            // OTGWTextBoxDiagFlowTemperatureCH2
+            // 
+            this.OTGWTextBoxDiagFlowTemperatureCH2.Location = new System.Drawing.Point(135, 291);
+            this.OTGWTextBoxDiagFlowTemperatureCH2.Name = "OTGWTextBoxDiagFlowTemperatureCH2";
+            this.OTGWTextBoxDiagFlowTemperatureCH2.Size = new System.Drawing.Size(54, 20);
+            this.OTGWTextBoxDiagFlowTemperatureCH2.TabIndex = 46;
+            // 
+            // OTGWLabelDiagFlowTemperatureCH2
+            // 
+            this.OTGWLabelDiagFlowTemperatureCH2.AutoSize = true;
+            this.OTGWLabelDiagFlowTemperatureCH2.Location = new System.Drawing.Point(12, 294);
+            this.OTGWLabelDiagFlowTemperatureCH2.Name = "OTGWLabelDiagFlowTemperatureCH2";
+            this.OTGWLabelDiagFlowTemperatureCH2.Size = new System.Drawing.Size(121, 13);
+            this.OTGWLabelDiagFlowTemperatureCH2.TabIndex = 45;
+            this.OTGWLabelDiagFlowTemperatureCH2.Text = "Centr.Heat. 2 Flow temp";
+            // 
+            // OTGWTextBoxDiagSolarCollectorTemperature
+            // 
+            this.OTGWTextBoxDiagSolarCollectorTemperature.Location = new System.Drawing.Point(135, 265);
+            this.OTGWTextBoxDiagSolarCollectorTemperature.Name = "OTGWTextBoxDiagSolarCollectorTemperature";
+            this.OTGWTextBoxDiagSolarCollectorTemperature.Size = new System.Drawing.Size(54, 20);
+            this.OTGWTextBoxDiagSolarCollectorTemperature.TabIndex = 44;
+            // 
+            // OTGWLabelDiagSolarCollectorTemperature
+            // 
+            this.OTGWLabelDiagSolarCollectorTemperature.AutoSize = true;
+            this.OTGWLabelDiagSolarCollectorTemperature.Location = new System.Drawing.Point(12, 268);
+            this.OTGWLabelDiagSolarCollectorTemperature.Name = "OTGWLabelDiagSolarCollectorTemperature";
+            this.OTGWLabelDiagSolarCollectorTemperature.Size = new System.Drawing.Size(100, 13);
+            this.OTGWLabelDiagSolarCollectorTemperature.TabIndex = 43;
+            this.OTGWLabelDiagSolarCollectorTemperature.Text = "Solar collector temp";
+            // 
+            // OTGWTextBoxDiagSolarStorageTemperature
+            // 
+            this.OTGWTextBoxDiagSolarStorageTemperature.Location = new System.Drawing.Point(135, 239);
+            this.OTGWTextBoxDiagSolarStorageTemperature.Name = "OTGWTextBoxDiagSolarStorageTemperature";
+            this.OTGWTextBoxDiagSolarStorageTemperature.Size = new System.Drawing.Size(54, 20);
+            this.OTGWTextBoxDiagSolarStorageTemperature.TabIndex = 42;
+            // 
+            // OTGWLabelDiagSolarStorageTemperature
+            // 
+            this.OTGWLabelDiagSolarStorageTemperature.AutoSize = true;
+            this.OTGWLabelDiagSolarStorageTemperature.Location = new System.Drawing.Point(12, 242);
+            this.OTGWLabelDiagSolarStorageTemperature.Name = "OTGWLabelDiagSolarStorageTemperature";
+            this.OTGWLabelDiagSolarStorageTemperature.Size = new System.Drawing.Size(95, 13);
+            this.OTGWLabelDiagSolarStorageTemperature.TabIndex = 35;
+            this.OTGWLabelDiagSolarStorageTemperature.Text = "Solar storage temp";
+            // 
+            // OTGWLabelDiagYear
+            // 
+            this.OTGWLabelDiagYear.AutoSize = true;
+            this.OTGWLabelDiagYear.Location = new System.Drawing.Point(589, 357);
+            this.OTGWLabelDiagYear.Name = "OTGWLabelDiagYear";
+            this.OTGWLabelDiagYear.Size = new System.Drawing.Size(29, 13);
+            this.OTGWLabelDiagYear.TabIndex = 34;
+            this.OTGWLabelDiagYear.Text = "Year";
+            // 
+            // OTGWLabelDiagTimeAndDay
+            // 
+            this.OTGWLabelDiagTimeAndDay.AutoSize = true;
+            this.OTGWLabelDiagTimeAndDay.Location = new System.Drawing.Point(404, 357);
+            this.OTGWLabelDiagTimeAndDay.Name = "OTGWLabelDiagTimeAndDay";
+            this.OTGWLabelDiagTimeAndDay.Size = new System.Drawing.Size(30, 13);
+            this.OTGWLabelDiagTimeAndDay.TabIndex = 32;
+            this.OTGWLabelDiagTimeAndDay.Text = "Time";
+            // 
             // OTGWTextBoxDiagOEMDiagnosticCode
             // 
             this.OTGWTextBoxDiagOEMDiagnosticCode.Location = new System.Drawing.Point(564, 191);
@@ -622,6 +903,15 @@
             this.OTGWLabelDiagOEMDiagnosticCode.Size = new System.Drawing.Size(86, 13);
             this.OTGWLabelDiagOEMDiagnosticCode.TabIndex = 40;
             this.OTGWLabelDiagOEMDiagnosticCode.Text = "OEM Diag. code";
+            // 
+            // OTGWLabelDiagDate
+            // 
+            this.OTGWLabelDiagDate.AutoSize = true;
+            this.OTGWLabelDiagDate.Location = new System.Drawing.Point(517, 357);
+            this.OTGWLabelDiagDate.Name = "OTGWLabelDiagDate";
+            this.OTGWLabelDiagDate.Size = new System.Drawing.Size(30, 13);
+            this.OTGWLabelDiagDate.TabIndex = 33;
+            this.OTGWLabelDiagDate.Text = "Date";
             // 
             // OTGWTextBoxDiagOEMFaultCode
             // 
@@ -833,7 +1123,7 @@
             // 
             // OTGWTextBoxDiagSlaveMemberID
             // 
-            this.OTGWTextBoxDiagSlaveMemberID.Location = new System.Drawing.Point(171, 258);
+            this.OTGWTextBoxDiagSlaveMemberID.Location = new System.Drawing.Point(369, 191);
             this.OTGWTextBoxDiagSlaveMemberID.Name = "OTGWTextBoxDiagSlaveMemberID";
             this.OTGWTextBoxDiagSlaveMemberID.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagSlaveMemberID.TabIndex = 13;
@@ -841,7 +1131,7 @@
             // OTGWLabelDiagSlaveMemberID
             // 
             this.OTGWLabelDiagSlaveMemberID.AutoSize = true;
-            this.OTGWLabelDiagSlaveMemberID.Location = new System.Drawing.Point(48, 258);
+            this.OTGWLabelDiagSlaveMemberID.Location = new System.Drawing.Point(222, 194);
             this.OTGWLabelDiagSlaveMemberID.Name = "OTGWLabelDiagSlaveMemberID";
             this.OTGWLabelDiagSlaveMemberID.Size = new System.Drawing.Size(88, 13);
             this.OTGWLabelDiagSlaveMemberID.TabIndex = 12;
@@ -849,7 +1139,7 @@
             // 
             // OTGWTextBoxDiagMasterMemberID
             // 
-            this.OTGWTextBoxDiagMasterMemberID.Location = new System.Drawing.Point(171, 229);
+            this.OTGWTextBoxDiagMasterMemberID.Location = new System.Drawing.Point(135, 191);
             this.OTGWTextBoxDiagMasterMemberID.Name = "OTGWTextBoxDiagMasterMemberID";
             this.OTGWTextBoxDiagMasterMemberID.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagMasterMemberID.TabIndex = 11;
@@ -857,7 +1147,7 @@
             // OTGWLabelDiagMasterMemberID
             // 
             this.OTGWLabelDiagMasterMemberID.AutoSize = true;
-            this.OTGWLabelDiagMasterMemberID.Location = new System.Drawing.Point(48, 232);
+            this.OTGWLabelDiagMasterMemberID.Location = new System.Drawing.Point(12, 194);
             this.OTGWLabelDiagMasterMemberID.Name = "OTGWLabelDiagMasterMemberID";
             this.OTGWLabelDiagMasterMemberID.Size = new System.Drawing.Size(93, 13);
             this.OTGWLabelDiagMasterMemberID.TabIndex = 10;
@@ -946,6 +1236,18 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagProductVersionSlave);
+            this.tabPage1.Controls.Add(this.OTGWLabelProductVersionSlave);
+            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagProductVersionMaster);
+            this.tabPage1.Controls.Add(this.OTGWLabelDiagProductVersionMaster);
+            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagProductTypeSlave);
+            this.tabPage1.Controls.Add(this.OTGWLabelProductTypeSlave);
+            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagProductTypeMaster);
+            this.tabPage1.Controls.Add(this.OTGWLabelDiagProductTypeMaster);
+            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagOpenThermVersionSlave);
+            this.tabPage1.Controls.Add(this.OTGWLabelDiagOpenThermVersionSlave);
+            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagOpenThermVersionMaster);
+            this.tabPage1.Controls.Add(this.OTGWLabelDiagOpenThermVersionMaster);
             this.tabPage1.Controls.Add(this.OTGWTextBoxDiagHotWater);
             this.tabPage1.Controls.Add(this.OTGWLabelDiagHotWater);
             this.tabPage1.Controls.Add(this.OTGWLabelDiagReferenceVoltage);
@@ -985,9 +1287,98 @@
             this.tabPage1.TabIndex = 3;
             this.tabPage1.Text = "OTGW Diagnostics";
             // 
+            // OTGWLabelProductVersionSlave
+            // 
+            this.OTGWLabelProductVersionSlave.AutoSize = true;
+            this.OTGWLabelProductVersionSlave.Location = new System.Drawing.Point(430, 326);
+            this.OTGWLabelProductVersionSlave.Name = "OTGWLabelProductVersionSlave";
+            this.OTGWLabelProductVersionSlave.Size = new System.Drawing.Size(109, 13);
+            this.OTGWLabelProductVersionSlave.TabIndex = 42;
+            this.OTGWLabelProductVersionSlave.Text = "Product version slave";
+            // 
+            // OTGWTextBoxDiagProductVersionMaster
+            // 
+            this.OTGWTextBoxDiagProductVersionMaster.Location = new System.Drawing.Point(563, 297);
+            this.OTGWTextBoxDiagProductVersionMaster.Name = "OTGWTextBoxDiagProductVersionMaster";
+            this.OTGWTextBoxDiagProductVersionMaster.Size = new System.Drawing.Size(55, 20);
+            this.OTGWTextBoxDiagProductVersionMaster.TabIndex = 41;
+            // 
+            // OTGWLabelDiagProductVersionMaster
+            // 
+            this.OTGWLabelDiagProductVersionMaster.AutoSize = true;
+            this.OTGWLabelDiagProductVersionMaster.Location = new System.Drawing.Point(430, 300);
+            this.OTGWLabelDiagProductVersionMaster.Name = "OTGWLabelDiagProductVersionMaster";
+            this.OTGWLabelDiagProductVersionMaster.Size = new System.Drawing.Size(116, 13);
+            this.OTGWLabelDiagProductVersionMaster.TabIndex = 40;
+            this.OTGWLabelDiagProductVersionMaster.Text = "Product version Master";
+            // 
+            // OTGWTextBoxDiagProductTypeSlave
+            // 
+            this.OTGWTextBoxDiagProductTypeSlave.Location = new System.Drawing.Point(352, 323);
+            this.OTGWTextBoxDiagProductTypeSlave.Name = "OTGWTextBoxDiagProductTypeSlave";
+            this.OTGWTextBoxDiagProductTypeSlave.Size = new System.Drawing.Size(56, 20);
+            this.OTGWTextBoxDiagProductTypeSlave.TabIndex = 39;
+            // 
+            // OTGWLabelProductTypeSlave
+            // 
+            this.OTGWLabelProductTypeSlave.AutoSize = true;
+            this.OTGWLabelProductTypeSlave.Location = new System.Drawing.Point(239, 326);
+            this.OTGWLabelProductTypeSlave.Name = "OTGWLabelProductTypeSlave";
+            this.OTGWLabelProductTypeSlave.Size = new System.Drawing.Size(95, 13);
+            this.OTGWLabelProductTypeSlave.TabIndex = 38;
+            this.OTGWLabelProductTypeSlave.Text = "Product type slave";
+            // 
+            // OTGWTextBoxDiagProductTypeMaster
+            // 
+            this.OTGWTextBoxDiagProductTypeMaster.Location = new System.Drawing.Point(352, 297);
+            this.OTGWTextBoxDiagProductTypeMaster.Name = "OTGWTextBoxDiagProductTypeMaster";
+            this.OTGWTextBoxDiagProductTypeMaster.Size = new System.Drawing.Size(55, 20);
+            this.OTGWTextBoxDiagProductTypeMaster.TabIndex = 37;
+            // 
+            // OTGWLabelDiagProductTypeMaster
+            // 
+            this.OTGWLabelDiagProductTypeMaster.AutoSize = true;
+            this.OTGWLabelDiagProductTypeMaster.Location = new System.Drawing.Point(239, 300);
+            this.OTGWLabelDiagProductTypeMaster.Name = "OTGWLabelDiagProductTypeMaster";
+            this.OTGWLabelDiagProductTypeMaster.Size = new System.Drawing.Size(101, 13);
+            this.OTGWLabelDiagProductTypeMaster.TabIndex = 36;
+            this.OTGWLabelDiagProductTypeMaster.Text = "Product type master";
+            // 
+            // OTGWTextBoxDiagOpenThermVersionSlave
+            // 
+            this.OTGWTextBoxDiagOpenThermVersionSlave.Location = new System.Drawing.Point(159, 323);
+            this.OTGWTextBoxDiagOpenThermVersionSlave.Name = "OTGWTextBoxDiagOpenThermVersionSlave";
+            this.OTGWTextBoxDiagOpenThermVersionSlave.Size = new System.Drawing.Size(55, 20);
+            this.OTGWTextBoxDiagOpenThermVersionSlave.TabIndex = 35;
+            // 
+            // OTGWLabelDiagOpenThermVersionSlave
+            // 
+            this.OTGWLabelDiagOpenThermVersionSlave.AutoSize = true;
+            this.OTGWLabelDiagOpenThermVersionSlave.Location = new System.Drawing.Point(7, 326);
+            this.OTGWLabelDiagOpenThermVersionSlave.Name = "OTGWLabelDiagOpenThermVersionSlave";
+            this.OTGWLabelDiagOpenThermVersionSlave.Size = new System.Drawing.Size(128, 13);
+            this.OTGWLabelDiagOpenThermVersionSlave.TabIndex = 34;
+            this.OTGWLabelDiagOpenThermVersionSlave.Text = "OpenTherm version slave";
+            // 
+            // OTGWTextBoxDiagOpenThermVersionMaster
+            // 
+            this.OTGWTextBoxDiagOpenThermVersionMaster.Location = new System.Drawing.Point(159, 297);
+            this.OTGWTextBoxDiagOpenThermVersionMaster.Name = "OTGWTextBoxDiagOpenThermVersionMaster";
+            this.OTGWTextBoxDiagOpenThermVersionMaster.Size = new System.Drawing.Size(55, 20);
+            this.OTGWTextBoxDiagOpenThermVersionMaster.TabIndex = 33;
+            // 
+            // OTGWLabelDiagOpenThermVersionMaster
+            // 
+            this.OTGWLabelDiagOpenThermVersionMaster.AutoSize = true;
+            this.OTGWLabelDiagOpenThermVersionMaster.Location = new System.Drawing.Point(6, 300);
+            this.OTGWLabelDiagOpenThermVersionMaster.Name = "OTGWLabelDiagOpenThermVersionMaster";
+            this.OTGWLabelDiagOpenThermVersionMaster.Size = new System.Drawing.Size(134, 13);
+            this.OTGWLabelDiagOpenThermVersionMaster.TabIndex = 32;
+            this.OTGWLabelDiagOpenThermVersionMaster.Text = "OpenTherm version master";
+            // 
             // OTGWTextBoxDiagHotWater
             // 
-            this.OTGWTextBoxDiagHotWater.Location = new System.Drawing.Point(504, 232);
+            this.OTGWTextBoxDiagHotWater.Location = new System.Drawing.Point(536, 235);
             this.OTGWTextBoxDiagHotWater.Name = "OTGWTextBoxDiagHotWater";
             this.OTGWTextBoxDiagHotWater.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagHotWater.TabIndex = 31;
@@ -995,7 +1386,7 @@
             // OTGWLabelDiagHotWater
             // 
             this.OTGWLabelDiagHotWater.AutoSize = true;
-            this.OTGWLabelDiagHotWater.Location = new System.Drawing.Point(352, 235);
+            this.OTGWLabelDiagHotWater.Location = new System.Drawing.Point(384, 235);
             this.OTGWLabelDiagHotWater.Name = "OTGWLabelDiagHotWater";
             this.OTGWLabelDiagHotWater.Size = new System.Drawing.Size(53, 13);
             this.OTGWLabelDiagHotWater.TabIndex = 30;
@@ -1020,7 +1411,7 @@
             // OTGWLabelDiagTweaks
             // 
             this.OTGWLabelDiagTweaks.AutoSize = true;
-            this.OTGWLabelDiagTweaks.Location = new System.Drawing.Point(352, 209);
+            this.OTGWLabelDiagTweaks.Location = new System.Drawing.Point(384, 209);
             this.OTGWLabelDiagTweaks.Name = "OTGWLabelDiagTweaks";
             this.OTGWLabelDiagTweaks.Size = new System.Drawing.Size(45, 13);
             this.OTGWLabelDiagTweaks.TabIndex = 27;
@@ -1028,14 +1419,14 @@
             // 
             // OTGWTextBoxDiagTweaks
             // 
-            this.OTGWTextBoxDiagTweaks.Location = new System.Drawing.Point(504, 206);
+            this.OTGWTextBoxDiagTweaks.Location = new System.Drawing.Point(536, 206);
             this.OTGWTextBoxDiagTweaks.Name = "OTGWTextBoxDiagTweaks";
             this.OTGWTextBoxDiagTweaks.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagTweaks.TabIndex = 26;
             // 
             // OTGWTextBoxDiagSetbackTemperature
             // 
-            this.OTGWTextBoxDiagSetbackTemperature.Location = new System.Drawing.Point(504, 180);
+            this.OTGWTextBoxDiagSetbackTemperature.Location = new System.Drawing.Point(536, 180);
             this.OTGWTextBoxDiagSetbackTemperature.Name = "OTGWTextBoxDiagSetbackTemperature";
             this.OTGWTextBoxDiagSetbackTemperature.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagSetbackTemperature.TabIndex = 25;
@@ -1043,7 +1434,7 @@
             // OTGWLabelDiagSetbackTemperature
             // 
             this.OTGWLabelDiagSetbackTemperature.AutoSize = true;
-            this.OTGWLabelDiagSetbackTemperature.Location = new System.Drawing.Point(352, 183);
+            this.OTGWLabelDiagSetbackTemperature.Location = new System.Drawing.Point(384, 183);
             this.OTGWLabelDiagSetbackTemperature.Name = "OTGWLabelDiagSetbackTemperature";
             this.OTGWLabelDiagSetbackTemperature.Size = new System.Drawing.Size(106, 13);
             this.OTGWLabelDiagSetbackTemperature.TabIndex = 24;
@@ -1051,7 +1442,7 @@
             // 
             // OTGWTextBoxDiagRemehaDetectionState
             // 
-            this.OTGWTextBoxDiagRemehaDetectionState.Location = new System.Drawing.Point(504, 154);
+            this.OTGWTextBoxDiagRemehaDetectionState.Location = new System.Drawing.Point(536, 154);
             this.OTGWTextBoxDiagRemehaDetectionState.Name = "OTGWTextBoxDiagRemehaDetectionState";
             this.OTGWTextBoxDiagRemehaDetectionState.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagRemehaDetectionState.TabIndex = 23;
@@ -1059,7 +1450,7 @@
             // OTGWLabelDiagRemehaDetectionState
             // 
             this.OTGWLabelDiagRemehaDetectionState.AutoSize = true;
-            this.OTGWLabelDiagRemehaDetectionState.Location = new System.Drawing.Point(352, 157);
+            this.OTGWLabelDiagRemehaDetectionState.Location = new System.Drawing.Point(384, 157);
             this.OTGWLabelDiagRemehaDetectionState.Name = "OTGWLabelDiagRemehaDetectionState";
             this.OTGWLabelDiagRemehaDetectionState.Size = new System.Drawing.Size(120, 13);
             this.OTGWLabelDiagRemehaDetectionState.TabIndex = 22;
@@ -1083,7 +1474,7 @@
             // 
             // OTGWTextBoxDiagSmartPowerMode
             // 
-            this.OTGWTextBoxDiagSmartPowerMode.Location = new System.Drawing.Point(504, 128);
+            this.OTGWTextBoxDiagSmartPowerMode.Location = new System.Drawing.Point(536, 128);
             this.OTGWTextBoxDiagSmartPowerMode.Name = "OTGWTextBoxDiagSmartPowerMode";
             this.OTGWTextBoxDiagSmartPowerMode.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagSmartPowerMode.TabIndex = 19;
@@ -1091,7 +1482,7 @@
             // OTGWLabelDiagSmartPowerMode
             // 
             this.OTGWLabelDiagSmartPowerMode.AutoSize = true;
-            this.OTGWLabelDiagSmartPowerMode.Location = new System.Drawing.Point(351, 131);
+            this.OTGWLabelDiagSmartPowerMode.Location = new System.Drawing.Point(383, 131);
             this.OTGWLabelDiagSmartPowerMode.Name = "OTGWLabelDiagSmartPowerMode";
             this.OTGWLabelDiagSmartPowerMode.Size = new System.Drawing.Size(95, 13);
             this.OTGWLabelDiagSmartPowerMode.TabIndex = 18;
@@ -1099,7 +1490,7 @@
             // 
             // OTGWTextBoxDiagSetpointOverride
             // 
-            this.OTGWTextBoxDiagSetpointOverride.Location = new System.Drawing.Point(504, 102);
+            this.OTGWTextBoxDiagSetpointOverride.Location = new System.Drawing.Point(536, 102);
             this.OTGWTextBoxDiagSetpointOverride.Name = "OTGWTextBoxDiagSetpointOverride";
             this.OTGWTextBoxDiagSetpointOverride.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagSetpointOverride.TabIndex = 17;
@@ -1107,7 +1498,7 @@
             // OTGWLabelDiagSetpointOverride
             // 
             this.OTGWLabelDiagSetpointOverride.AutoSize = true;
-            this.OTGWLabelDiagSetpointOverride.Location = new System.Drawing.Point(351, 105);
+            this.OTGWLabelDiagSetpointOverride.Location = new System.Drawing.Point(383, 105);
             this.OTGWLabelDiagSetpointOverride.Name = "OTGWLabelDiagSetpointOverride";
             this.OTGWLabelDiagSetpointOverride.Size = new System.Drawing.Size(87, 13);
             this.OTGWLabelDiagSetpointOverride.TabIndex = 16;
@@ -1115,7 +1506,7 @@
             // 
             // OTGWTextBoxDiagGatewayMode
             // 
-            this.OTGWTextBoxDiagGatewayMode.Location = new System.Drawing.Point(504, 76);
+            this.OTGWTextBoxDiagGatewayMode.Location = new System.Drawing.Point(536, 76);
             this.OTGWTextBoxDiagGatewayMode.Name = "OTGWTextBoxDiagGatewayMode";
             this.OTGWTextBoxDiagGatewayMode.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagGatewayMode.TabIndex = 15;
@@ -1123,7 +1514,7 @@
             // OTGWLabelDiagGatewayMode
             // 
             this.OTGWLabelDiagGatewayMode.AutoSize = true;
-            this.OTGWLabelDiagGatewayMode.Location = new System.Drawing.Point(352, 79);
+            this.OTGWLabelDiagGatewayMode.Location = new System.Drawing.Point(384, 79);
             this.OTGWLabelDiagGatewayMode.Name = "OTGWLabelDiagGatewayMode";
             this.OTGWLabelDiagGatewayMode.Size = new System.Drawing.Size(78, 13);
             this.OTGWLabelDiagGatewayMode.TabIndex = 14;
@@ -1213,7 +1604,7 @@
             // 
             this.OTGWTextBoxDiagBuild.Location = new System.Drawing.Point(159, 50);
             this.OTGWTextBoxDiagBuild.Name = "OTGWTextBoxDiagBuild";
-            this.OTGWTextBoxDiagBuild.Size = new System.Drawing.Size(427, 20);
+            this.OTGWTextBoxDiagBuild.Size = new System.Drawing.Size(459, 20);
             this.OTGWTextBoxDiagBuild.TabIndex = 3;
             // 
             // OTGWLabelDiagBuild
@@ -1229,7 +1620,7 @@
             // 
             this.OTGWTextBoxDiagVersion.Location = new System.Drawing.Point(159, 24);
             this.OTGWTextBoxDiagVersion.Name = "OTGWTextBoxDiagVersion";
-            this.OTGWTextBoxDiagVersion.Size = new System.Drawing.Size(427, 20);
+            this.OTGWTextBoxDiagVersion.Size = new System.Drawing.Size(459, 20);
             this.OTGWTextBoxDiagVersion.TabIndex = 1;
             // 
             // OTGWLabelDiagVersion
@@ -1250,23 +1641,12 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "EQ-3 Max!";
             // 
-            // OTGWLabelDiagDate
+            // OTGWTextBoxDiagProductVersionSlave
             // 
-            this.OTGWLabelDiagDate.AutoSize = true;
-            this.OTGWLabelDiagDate.Location = new System.Drawing.Point(85, 278);
-            this.OTGWLabelDiagDate.Name = "OTGWLabelDiagDate";
-            this.OTGWLabelDiagDate.Size = new System.Drawing.Size(30, 13);
-            this.OTGWLabelDiagDate.TabIndex = 33;
-            this.OTGWLabelDiagDate.Text = "Date";
-            // 
-            // OTGWLabelDiagYear
-            // 
-            this.OTGWLabelDiagYear.AutoSize = true;
-            this.OTGWLabelDiagYear.Location = new System.Drawing.Point(155, 278);
-            this.OTGWLabelDiagYear.Name = "OTGWLabelDiagYear";
-            this.OTGWLabelDiagYear.Size = new System.Drawing.Size(29, 13);
-            this.OTGWLabelDiagYear.TabIndex = 34;
-            this.OTGWLabelDiagYear.Text = "Year";
+            this.OTGWTextBoxDiagProductVersionSlave.Location = new System.Drawing.Point(563, 323);
+            this.OTGWTextBoxDiagProductVersionSlave.Name = "OTGWTextBoxDiagProductVersionSlave";
+            this.OTGWTextBoxDiagProductVersionSlave.Size = new System.Drawing.Size(55, 20);
+            this.OTGWTextBoxDiagProductVersionSlave.TabIndex = 43;
             // 
             // Form1
             // 
@@ -1414,6 +1794,44 @@
         private System.Windows.Forms.Label OTGWLabelDiagTimeAndDay;
         private System.Windows.Forms.Label OTGWLabelDiagYear;
         private System.Windows.Forms.Label OTGWLabelDiagDate;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagSolarStorageTemperature;
+        private System.Windows.Forms.Label OTGWLabelDiagSolarStorageTemperature;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagSolarCollectorTemperature;
+        private System.Windows.Forms.Label OTGWLabelDiagSolarCollectorTemperature;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagFlowTemperatureCH2;
+        private System.Windows.Forms.Label OTGWLabelDiagFlowTemperatureCH2;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagExhaustTemperature;
+        private System.Windows.Forms.Label OTGWLabelDiagExhaustTemperature;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagTapWater2Temperature;
+        private System.Windows.Forms.Label OTGWLabelDiagTapWater2Temperature;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagBurnerStarts;
+        private System.Windows.Forms.Label OTGWLabelDiagBurnerStarts;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagPumpStarts;
+        private System.Windows.Forms.Label OTGWLabelDiagPumpStarts;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagTapWaterValveStarts;
+        private System.Windows.Forms.Label OTGWLabelDiagTapWaterValveStarts;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagTapWaterBurnerStarts;
+        private System.Windows.Forms.Label OTGWLabelDiagTapWaterBurnerStarts;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagBurnerHours;
+        private System.Windows.Forms.Label OTGWLabelDiagBurnerHours;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagPumpHours;
+        private System.Windows.Forms.Label OTGWLabelDiagPumpHours;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagTapWaterValveHours;
+        private System.Windows.Forms.Label OTGWLabelDiagTapWaterValveHours;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagTapWaterBurnerHours;
+        private System.Windows.Forms.Label OTGWLabelDiagTapBurnerHours;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagOpenThermVersionMaster;
+        private System.Windows.Forms.Label OTGWLabelDiagOpenThermVersionMaster;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagOpenThermVersionSlave;
+        private System.Windows.Forms.Label OTGWLabelDiagOpenThermVersionSlave;
+        private System.Windows.Forms.Label OTGWLabelProductVersionSlave;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagProductVersionMaster;
+        private System.Windows.Forms.Label OTGWLabelDiagProductVersionMaster;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagProductTypeSlave;
+        private System.Windows.Forms.Label OTGWLabelProductTypeSlave;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagProductTypeMaster;
+        private System.Windows.Forms.Label OTGWLabelDiagProductTypeMaster;
+        private System.Windows.Forms.TextBox OTGWTextBoxDiagProductVersionSlave;
     }
 }
 

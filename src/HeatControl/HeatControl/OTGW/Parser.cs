@@ -208,8 +208,13 @@ namespace HeatControl
                     ["PR: M"] = new List<ParsersBase>() { new StringReplaceParser(6, 1, ref this.gatewayConfiguration.gatewayMode, new Dictionary<string,string> {
                         ["G"] = "Gateway",
                         ["M"] = "Monitor" }) },
-                    ["PR: O"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.setpointOverride) },
-                    ["PR: P"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.smartPowerModel) },
+                    ["PR: O"] = new List<ParsersBase>() { new StringReplaceParser(6, 1, ref this.gatewayConfiguration.setpointOverride, new Dictionary<string,string> {
+                        ["N"] = "No",
+                        ["Y"] = "Yes" }) },
+                    ["PR: P"] = new List<ParsersBase>() { new StringReplaceParser(6, 1, ref this.gatewayConfiguration.smartPowerModel, new Dictionary<string,string> {
+                        ["L"] = "Low",
+                        ["M"] = "Medium",
+                        ["H"] = "High" }) },
                     ["PR: Q"] = new List<ParsersBase>() { new StringReplaceParser(6, 1, ref this.gatewayConfiguration.causeOfLastReset, new Dictionary<string,string> {
                         ["B"] = "Brown out",
                         ["C"] = "By Command",
@@ -220,7 +225,10 @@ namespace HeatControl
                         ["S"] = "BREAK on serial interface",
                         ["U"] = "Stack undeflow",
                         ["W"] = "Watchdog" }) },
-                    ["PR: R"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.remehaDetectionState) },
+                    ["PR: R"] = new List<ParsersBase>() { new StringReplaceParser(6, 1, ref this.gatewayConfiguration.remehaDetectionState, new Dictionary<string,string> {
+                        ["C"] = "Remeha Celcia 20",
+                        ["I"] = "Remeha iSense",
+                        ["S"] = "Standard"}) },
                     ["PR: S"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.setbackTemperatureConfiguarion) },
                     ["PR: T"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.tweaks) },
                     ["PR: V"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.referenceVoltage) },

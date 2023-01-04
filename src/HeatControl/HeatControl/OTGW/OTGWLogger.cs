@@ -274,6 +274,7 @@ namespace HeatControl
                 this.pumpOperatingHours = new IntValueName("Pump operating hours");
                 this.tapWaterValveHours = new IntValueName("Tap water valve operating hours");
                 this.tapWaterBurnerHours = new IntValueName("Tap water burber operating hours");
+
                 this.openthermVersionMaster = new FloatValueName("OpenTherm version master");
                 this.openthermVersionSlave = new FloatValueName("OpenTherm version slave");
                 this.productTypeMaster = new IntValueName("Product type master");
