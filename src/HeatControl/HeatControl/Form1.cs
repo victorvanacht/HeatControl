@@ -24,8 +24,23 @@ namespace HeatControl
 
             this.listeners = new List<ListernerBase>()
             {
+                new OTGWListener<string>(this.OTGWLabelVersion, this.otgw.gatewayConfiguration.version),
+                new OTGWListener<string>(this.OTGWLabelBuild, this.otgw.gatewayConfiguration.build),
                 new OTGWListener<float>(this.OTGWTextBoxRoomTemp, this.otgw.gatewayStatus.roomTemperature),
                 new OTGWListener<float>(this.OTGWTextBoxBoilerTemp, this.otgw.gatewayStatus.boilerWaterTemperature),
+                new OTGWListener<bool>(this.OTGWTextBoxFlameStatus, this.otgw.gatewayStatus.flameStatus),
+                new OTGWListener<bool>(this.OTGWTextBoxCentralHeatingMode, this.otgw.gatewayStatus.centralHeatingMode),
+                new OTGWListener<bool>(this.OTGWTextBoxTapWaterMode, this.otgw.gatewayStatus.tapWaterMode),
+                new OTGWListener<bool>(this.OTGWTextBoxFaultIndication, this.otgw.gatewayStatus.faultIndication),
+                new OTGWListener<float>(this.OTGWTextBoxControlSetpoint, this.otgw.gatewayStatus.controlSetPoint),
+                new OTGWListener<float>(this.OTGWTextBoxControlSetpointModified, this.otgw.gatewayStatus.controlSetPointModified),
+                new OTGWListener<float>(this.OTGWTextBoxRoomSetpoint, this.otgw.gatewayStatus.roomSetPoint),
+                new OTGWListener<float>(this.OTGWTextBoxWaterPressure, this.otgw.gatewayStatus.waterPressureCHCircuit),
+                new OTGWListener<float>(this.OTGWTextBoxTapWaterFlow, this.otgw.gatewayStatus.waterFlowRateTap),
+                new OTGWListener<float>(this.OTGWTextBoxTapWaterTemperature, this.otgw.gatewayStatus.tapWaterTemperature),
+                new OTGWListener<float>(this.OTGWTextBoxReturnTemperature, this.otgw.gatewayStatus.returnWaterTemperature),
+                new OTGWListener<float>(this.OTGWTextBoxOutsideTemperature, this.otgw.gatewayStatus.outsideTemperature),
+
             };
 
         }
@@ -91,6 +106,7 @@ namespace HeatControl
                 }
             }
         }
+
     }
 }
 
