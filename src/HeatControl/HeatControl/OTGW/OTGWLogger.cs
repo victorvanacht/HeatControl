@@ -164,9 +164,9 @@ namespace HeatControl
             public BoolValueName serviceRequest;
             public BoolValueName lockoutReset;
             public BoolValueName lowWaterPressure;
-            public BoolValueName gasFlamFault;
+            public BoolValueName gasFlameFault;
             public BoolValueName airPressureFault;
-            public BoolValueName waterOverTemp;
+            public BoolValueName waterOvertemp;
             public IntValueName OEMFaultCode;
 
             public FloatValueName controlSetPoint2;
@@ -234,12 +234,13 @@ namespace HeatControl
                 this.tapWaterConfiguration = new BoolValueName("Tap water configuration");
                 this.masterLowOffPumpControl = new BoolValueName("Master low-off & Pump control");
                 this.CH2Present = new BoolValueName("CH2 present");
+
                 this.serviceRequest = new BoolValueName("Service request");
                 this.lockoutReset = new BoolValueName("Lock out reset");
                 this.lowWaterPressure = new BoolValueName("Low water pressure");
-                this.gasFlamFault = new BoolValueName("Gas/ Flame fault");
+                this.gasFlameFault = new BoolValueName("Gas/ Flame fault");
                 this.airPressureFault = new BoolValueName("Air pressure fault");
-                this.waterOverTemp = new BoolValueName("Water overtempearatur");
+                this.waterOvertemp = new BoolValueName("Water overtempearatur");
                 this.OEMFaultCode = new IntValueName("OEM specific fault code");
 
                 this.controlSetPoint2 = new FloatValueName("Control setpoint 2");

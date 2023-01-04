@@ -112,9 +112,9 @@ namespace HeatControl
                         new Flags16Parser(8, ref gatewayStatus.serviceRequest),
                         new Flags16Parser(9, ref gatewayStatus.lockoutReset),
                         new Flags16Parser(10, ref gatewayStatus.lowWaterPressure),
-                        new Flags16Parser(11, ref gatewayStatus.gasFlamFault),
+                        new Flags16Parser(11, ref gatewayStatus.gasFlameFault),
                         new Flags16Parser(12, ref gatewayStatus.airPressureFault),
-                        new Flags16Parser(13, ref gatewayStatus.waterOverTemp)},
+                        new Flags16Parser(13, ref gatewayStatus.waterOvertemp)},
                     [Message.GenerateKey(8, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
                         new Float88Parser(ref gatewayStatus.controlSetPoint2)},
                     [Message.GenerateKey(16, Message.Direction.ThermostatToBoiler, Message.Type.M2SWriteData)] = new List<ParsersBase>() {
