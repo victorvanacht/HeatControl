@@ -41,6 +41,24 @@ namespace HeatControl
                 new OTGWListener<float>(this.OTGWTextBoxReturnTemperature, this.otgw.gatewayStatus.returnWaterTemperature),
                 new OTGWListener<float>(this.OTGWTextBoxOutsideTemperature, this.otgw.gatewayStatus.outsideTemperature),
 
+
+                new OTGWListener<string>(this.OTGWTextBoxDiagVersion, this.otgw.gatewayConfiguration.version),
+                new OTGWListener<string>(this.OTGWTextBoxDiagBuild, this.otgw.gatewayConfiguration.build),
+                new OTGWListener<string>(this.OTGWTextBoxDiagClockSpeed, this.otgw.gatewayConfiguration.clockSpeed),
+                new OTGWListener<string>(this.OTGWTextBoxDiagTemperatureSensorFunction, this.otgw.gatewayConfiguration.temperaturSensorFunction),
+                new OTGWListener<string>(this.OTGWTextBoxDiagGPIOFunctions, this.otgw.gatewayConfiguration.gpioFunctionsConfiguration),
+                new OTGWListener<string>(this.OTGWTextBoxDiagGPIOState, this.otgw.gatewayConfiguration.gpioState),
+                new OTGWListener<string>(this.OTGWTextBoxDiagLedFunctions, this.otgw.gatewayConfiguration.ledFunctionsConfiguration),
+                new OTGWListener<string>(this.OTGWTextBoxDiagGatewayMode, this.otgw.gatewayConfiguration.gatewayMode),
+                new OTGWListener<string>(this.OTGWTextBoxDiagSetpointOverride, this.otgw.gatewayConfiguration.setpointOverride),
+                new OTGWListener<string>(this.OTGWTextBoxDiagSmartPowerMode, this.otgw.gatewayConfiguration.smartPowerModel),
+                new OTGWListener<string>(this.OTGWTextBoxDiagCauseOfLastReset, this.otgw.gatewayConfiguration.causeOfLastReset),
+                new OTGWListener<string>(this.OTGWTextBoxDiagRemehaDetectionState, this.otgw.gatewayConfiguration.remehaDetectionState),
+                new OTGWListener<string>(this.OTGWTextBoxDiagSetbackTemperature, this.otgw.gatewayConfiguration.setbackTemperatureConfiguarion),
+                new OTGWListener<string>(this.OTGWTextBoxDiagTweaks, this.otgw.gatewayConfiguration.tweaks),
+                new OTGWListener<string>(this.OTGWTextBoxDiagReferenceVoltage, this.otgw.gatewayConfiguration.referenceVoltage),
+                new OTGWListener<string>(this.OTGWTextBoxDiagHotWater, this.otgw.gatewayConfiguration.hotWater),
+
             };
 
         }
@@ -106,7 +124,6 @@ namespace HeatControl
                 }
             }
         }
-
     }
 }
 

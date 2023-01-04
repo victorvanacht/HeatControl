@@ -118,7 +118,7 @@ namespace HeatControl
                 this.temperaturSensorFunction = new StringValueName("DS18x20 temperature function");
                 this.gpioFunctionsConfiguration = new StringValueName("GPIO function configuation");
                 this.gpioState = new StringValueName("GPIO state");
-                this.ledFunctionsConfiguration = new StringValueName("LED fucntion configuration");
+                this.ledFunctionsConfiguration = new StringValueName("LED function configuration");
                 this.gatewayMode = new StringValueName("Gateway mode");
                 this.setpointOverride = new StringValueName("Setpoint override");
                 this.smartPowerModel = new StringValueName("Smart-Power mode");
