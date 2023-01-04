@@ -35,12 +35,10 @@ namespace HeatControl
                     {
                         listener(_value);
                     }
-
-
                 }
             }
 
-            public VarValueName(string name)
+            protected VarValueName(string name)
             {
                 this.name = name;
                 this.listeners = new List<Listener>();

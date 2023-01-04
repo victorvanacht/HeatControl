@@ -33,6 +33,8 @@
             this.OTGWGroupbox = new System.Windows.Forms.GroupBox();
             this.OTGWTabcontrol = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.OTGWTextBoxBoilerTemp = new System.Windows.Forms.TextBox();
+            this.OTGWLabelBoilerTemp = new System.Windows.Forms.Label();
             this.OTGWTextBoxRoomTemp = new System.Windows.Forms.TextBox();
             this.OTGWLabelRoomTemp = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -40,8 +42,6 @@
             this.OTGWLabelHostname = new System.Windows.Forms.Label();
             this.OTGWTextboxHostname = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.OTGWLabelBoilerTemp = new System.Windows.Forms.Label();
-            this.OTGWTextBoxBoilerTemp = new System.Windows.Forms.TextBox();
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -77,7 +77,6 @@
             this.OTGWGroupbox.TabIndex = 2;
             this.OTGWGroupbox.TabStop = false;
             this.OTGWGroupbox.Text = "OpenTherm Gateway (OTGW)";
-            this.OTGWGroupbox.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // OTGWTabcontrol
             // 
@@ -101,7 +100,24 @@
             this.tabPage1.Size = new System.Drawing.Size(687, 373);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Status Overview";
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // OTGWTextBoxBoilerTemp
+            // 
+            this.OTGWTextBoxBoilerTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OTGWTextBoxBoilerTemp.Location = new System.Drawing.Point(173, 70);
+            this.OTGWTextBoxBoilerTemp.Name = "OTGWTextBoxBoilerTemp";
+            this.OTGWTextBoxBoilerTemp.Size = new System.Drawing.Size(100, 26);
+            this.OTGWTextBoxBoilerTemp.TabIndex = 3;
+            // 
+            // OTGWLabelBoilerTemp
+            // 
+            this.OTGWLabelBoilerTemp.AutoSize = true;
+            this.OTGWLabelBoilerTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OTGWLabelBoilerTemp.Location = new System.Drawing.Point(9, 73);
+            this.OTGWLabelBoilerTemp.Name = "OTGWLabelBoilerTemp";
+            this.OTGWLabelBoilerTemp.Size = new System.Drawing.Size(140, 20);
+            this.OTGWLabelBoilerTemp.TabIndex = 2;
+            this.OTGWLabelBoilerTemp.Text = "Boiler temperature";
             // 
             // OTGWTextBoxRoomTemp
             // 
@@ -169,24 +185,6 @@
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "EQ-3 Max!";
-            // 
-            // OTGWLabelBoilerTemp
-            // 
-            this.OTGWLabelBoilerTemp.AutoSize = true;
-            this.OTGWLabelBoilerTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OTGWLabelBoilerTemp.Location = new System.Drawing.Point(9, 73);
-            this.OTGWLabelBoilerTemp.Name = "OTGWLabelBoilerTemp";
-            this.OTGWLabelBoilerTemp.Size = new System.Drawing.Size(140, 20);
-            this.OTGWLabelBoilerTemp.TabIndex = 2;
-            this.OTGWLabelBoilerTemp.Text = "Boiler temperature";
-            // 
-            // OTGWTextBoxBoilerTemp
-            // 
-            this.OTGWTextBoxBoilerTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OTGWTextBoxBoilerTemp.Location = new System.Drawing.Point(173, 70);
-            this.OTGWTextBoxBoilerTemp.Name = "OTGWTextBoxBoilerTemp";
-            this.OTGWTextBoxBoilerTemp.Size = new System.Drawing.Size(100, 26);
-            this.OTGWTextBoxBoilerTemp.TabIndex = 3;
             // 
             // Form1
             // 

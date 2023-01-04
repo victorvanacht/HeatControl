@@ -14,15 +14,19 @@ namespace HeatControl
     {
         private OTGW otgw;
 
+
         public Form1()
         {
             InitializeComponent();
 
             this.otgw = new OTGW();
             this.otgw.AddLogger(OTGWLogger);
-            this.otgw.gatewayStatus.roomTemperature.AddListener(OTGWListenerRoomTemperature);
-            this.otgw.gatewayStatus.boilerWaterTemperature.AddListener(OTGWListenerBoilerWaterTemperature);
 
+            this.listeners = new List<ListernerBase>()
+            {
+                new OTGWListener<float>(this.OTGWTextBoxRoomTemp, this.otgw.gatewayStatus.roomTemperature),
+                new OTGWListener<float>(this.OTGWTextBoxBoilerTemp, this.otgw.gatewayStatus.boilerWaterTemperature),
+            };
 
         }
 
@@ -36,16 +40,6 @@ namespace HeatControl
             this.otgw.Disconnect();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void OTGWLogger(string text)
         {
             if (this.OTGWListboxLog.InvokeRequired)
@@ -55,37 +49,49 @@ namespace HeatControl
             else
             {
                 this.OTGWListboxLog.Items.Add(text);
-                if (this.OTGWListboxLog.Items.Count > 100) OTGWListboxLog.Items.RemoveAt(0);
+                if (this.OTGWListboxLog.Items.Count > 100)
+                {
+                    OTGWListboxLog.Items.RemoveAt(0);
+                }
+                this.OTGWListboxLog.SelectedIndex = this.OTGWListboxLog.Items.Count-1;
             }
         }
 
 
-        private void OTGWListenerRoomTemperature(float value)
+        private delegate void Listener(object value);
+        private List<ListernerBase> listeners;
+
+
+        private class ListernerBase
         {
-            if (this.OTGWTextBoxRoomTemp.InvokeRequired)
+            public Control control;
+
+            public ListernerBase(Control control)
             {
-                this.OTGWTextBoxRoomTemp.Invoke((Action)delegate { OTGWListenerRoomTemperature(value); });
-            }
-            else
-            {
-                this.OTGWTextBoxRoomTemp.Text = value.ToString();
+                this.control = control;
             }
         }
 
-
-        private void OTGWListenerBoilerWaterTemperature(float value)
+        private class OTGWListener<T> : ListernerBase
         {
-            if (this.OTGWTextBoxBoilerTemp.InvokeRequired)
+            public OTGWListener(Control control, OTGW.VarValueName<T> property) : base(control)
             {
-                this.OTGWTextBoxBoilerTemp.Invoke((Action)delegate { OTGWListenerBoilerWaterTemperature(value); });
+                property.AddListener(this.Listener);
             }
-            else
+
+            public void Listener(T value)
             {
-                this.OTGWTextBoxBoilerTemp.Text = value.ToString();
+                if (this.control.InvokeRequired)
+                {
+                    this.control.Invoke((Action)delegate { this.Listener(value); });
+                }
+                else
+                {
+                    this.control.Text = value.ToString();
+                }
             }
         }
-
-
-
     }
 }
+
+

@@ -262,7 +262,7 @@ namespace HeatControl
 
                 override public void Parse(Message message)
                 {
-                    arg.value = ((float)(message.dataValue)) / 256;
+                    arg.value = (float)Math.Round(((float)(message.dataValue)) / 256, 1);
                 }
             }
 
@@ -286,7 +286,6 @@ namespace HeatControl
 
             private class Uint16Parser : ParsersBase
             {
-                private int bit;
                 private IntValueName value;
 
                 public Uint16Parser(ref IntValueName value)
