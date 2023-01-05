@@ -142,6 +142,7 @@
             this.OTGWTextBoxDiagCentralHeatingEnabled = new System.Windows.Forms.TextBox();
             this.OTGWLabelDiagCentralHeatingEnabled = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.OTGWTextBoxDiagProductVersionSlave = new System.Windows.Forms.TextBox();
             this.OTGWLabelProductVersionSlave = new System.Windows.Forms.Label();
             this.OTGWTextBoxDiagProductVersionMaster = new System.Windows.Forms.TextBox();
             this.OTGWLabelDiagProductVersionMaster = new System.Windows.Forms.Label();
@@ -186,7 +187,8 @@
             this.OTGWTextBoxDiagVersion = new System.Windows.Forms.TextBox();
             this.OTGWLabelDiagVersion = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.OTGWTextBoxDiagProductVersionSlave = new System.Windows.Forms.TextBox();
+            this.OTGWFormsPlotFloats = new ScottPlot.FormsPlot();
+            this.OTHWFormsPlotBools = new ScottPlot.FormsPlot();
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.OTGWTabStatus.SuspendLayout();
@@ -220,7 +222,7 @@
             this.OTGWGroupbox.Controls.Add(this.OTGWTabcontrol);
             this.OTGWGroupbox.Location = new System.Drawing.Point(478, 23);
             this.OTGWGroupbox.Name = "OTGWGroupbox";
-            this.OTGWGroupbox.Size = new System.Drawing.Size(670, 507);
+            this.OTGWGroupbox.Size = new System.Drawing.Size(670, 555);
             this.OTGWGroupbox.TabIndex = 2;
             this.OTGWGroupbox.TabStop = false;
             this.OTGWGroupbox.Text = "OpenTherm Gateway (OTGW)";
@@ -231,14 +233,16 @@
             this.OTGWTabcontrol.Controls.Add(this.OTGWTabConnection);
             this.OTGWTabcontrol.Controls.Add(this.OTGWTabBoilerDiagnostics);
             this.OTGWTabcontrol.Controls.Add(this.tabPage1);
-            this.OTGWTabcontrol.Location = new System.Drawing.Point(6, 108);
+            this.OTGWTabcontrol.Location = new System.Drawing.Point(6, 19);
             this.OTGWTabcontrol.Name = "OTGWTabcontrol";
             this.OTGWTabcontrol.SelectedIndex = 0;
-            this.OTGWTabcontrol.Size = new System.Drawing.Size(632, 399);
+            this.OTGWTabcontrol.Size = new System.Drawing.Size(632, 530);
             this.OTGWTabcontrol.TabIndex = 2;
             // 
             // OTGWTabStatus
             // 
+            this.OTGWTabStatus.Controls.Add(this.OTHWFormsPlotBools);
+            this.OTGWTabStatus.Controls.Add(this.OTGWFormsPlotFloats);
             this.OTGWTabStatus.Controls.Add(this.OTGWTextBoxOutsideTemperature);
             this.OTGWTabStatus.Controls.Add(this.OTGWLabelOutsideTemperature);
             this.OTGWTabStatus.Controls.Add(this.OTGWTextBoxReturnTemperature);
@@ -274,7 +278,7 @@
             this.OTGWTabStatus.Location = new System.Drawing.Point(4, 22);
             this.OTGWTabStatus.Name = "OTGWTabStatus";
             this.OTGWTabStatus.Padding = new System.Windows.Forms.Padding(3);
-            this.OTGWTabStatus.Size = new System.Drawing.Size(624, 373);
+            this.OTGWTabStatus.Size = new System.Drawing.Size(624, 504);
             this.OTGWTabStatus.TabIndex = 0;
             this.OTGWTabStatus.Text = "Status Overview";
             // 
@@ -552,7 +556,7 @@
             this.OTGWTabConnection.Location = new System.Drawing.Point(4, 22);
             this.OTGWTabConnection.Name = "OTGWTabConnection";
             this.OTGWTabConnection.Padding = new System.Windows.Forms.Padding(3);
-            this.OTGWTabConnection.Size = new System.Drawing.Size(624, 373);
+            this.OTGWTabConnection.Size = new System.Drawing.Size(624, 504);
             this.OTGWTabConnection.TabIndex = 1;
             this.OTGWTabConnection.Text = "Connection";
             // 
@@ -658,7 +662,7 @@
             this.OTGWTabBoilerDiagnostics.Location = new System.Drawing.Point(4, 22);
             this.OTGWTabBoilerDiagnostics.Name = "OTGWTabBoilerDiagnostics";
             this.OTGWTabBoilerDiagnostics.Padding = new System.Windows.Forms.Padding(3);
-            this.OTGWTabBoilerDiagnostics.Size = new System.Drawing.Size(624, 373);
+            this.OTGWTabBoilerDiagnostics.Size = new System.Drawing.Size(624, 504);
             this.OTGWTabBoilerDiagnostics.TabIndex = 2;
             this.OTGWTabBoilerDiagnostics.Text = "Boiler diagnostics";
             // 
@@ -1283,9 +1287,16 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(624, 373);
+            this.tabPage1.Size = new System.Drawing.Size(624, 504);
             this.tabPage1.TabIndex = 3;
             this.tabPage1.Text = "OTGW Diagnostics";
+            // 
+            // OTGWTextBoxDiagProductVersionSlave
+            // 
+            this.OTGWTextBoxDiagProductVersionSlave.Location = new System.Drawing.Point(563, 323);
+            this.OTGWTextBoxDiagProductVersionSlave.Name = "OTGWTextBoxDiagProductVersionSlave";
+            this.OTGWTextBoxDiagProductVersionSlave.Size = new System.Drawing.Size(55, 20);
+            this.OTGWTextBoxDiagProductVersionSlave.TabIndex = 43;
             // 
             // OTGWLabelProductVersionSlave
             // 
@@ -1641,18 +1652,25 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "EQ-3 Max!";
             // 
-            // OTGWTextBoxDiagProductVersionSlave
+            // OTGWFormsPlotFloats
             // 
-            this.OTGWTextBoxDiagProductVersionSlave.Location = new System.Drawing.Point(563, 323);
-            this.OTGWTextBoxDiagProductVersionSlave.Name = "OTGWTextBoxDiagProductVersionSlave";
-            this.OTGWTextBoxDiagProductVersionSlave.Size = new System.Drawing.Size(55, 20);
-            this.OTGWTextBoxDiagProductVersionSlave.TabIndex = 43;
+            this.OTGWFormsPlotFloats.Location = new System.Drawing.Point(0, 186);
+            this.OTGWFormsPlotFloats.Name = "OTGWFormsPlotFloats";
+            this.OTGWFormsPlotFloats.Size = new System.Drawing.Size(624, 225);
+            this.OTGWFormsPlotFloats.TabIndex = 32;
+            // 
+            // OTHWFormsPlotBools
+            // 
+            this.OTHWFormsPlotBools.Location = new System.Drawing.Point(0, 370);
+            this.OTHWFormsPlotBools.Name = "OTHWFormsPlotBools";
+            this.OTHWFormsPlotBools.Size = new System.Drawing.Size(624, 134);
+            this.OTHWFormsPlotBools.TabIndex = 33;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 549);
+            this.ClientSize = new System.Drawing.Size(1184, 590);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.OTGWGroupbox);
             this.Name = "Form1";
@@ -1832,6 +1850,8 @@
         private System.Windows.Forms.TextBox OTGWTextBoxDiagProductTypeMaster;
         private System.Windows.Forms.Label OTGWLabelDiagProductTypeMaster;
         private System.Windows.Forms.TextBox OTGWTextBoxDiagProductVersionSlave;
+        private ScottPlot.FormsPlot OTGWFormsPlotFloats;
+        private ScottPlot.FormsPlot OTHWFormsPlotBools;
     }
 }
 

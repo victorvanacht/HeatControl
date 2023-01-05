@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ScottPlot;
 
 namespace HeatControl
 {
@@ -105,8 +106,19 @@ namespace HeatControl
                 new ListenerGeneral<int>(this.OTGWTextBoxDiagProductTypeSlave, this.otgw.gatewayStatus.productTypeSlave),
                 new ListenerGeneral<int>(this.OTGWTextBoxDiagProductVersionMaster, this.otgw.gatewayStatus.productVersionMaster),
                 new ListenerGeneral<int>(this.OTGWTextBoxDiagProductVersionSlave, this.otgw.gatewayStatus.productVersionSlave),
+          };
 
-            };
+            /*
+
+            double[] dataX = new double[] { 1, 2, 3, 4, 5 };
+            double[] dataY = new double[] { 1, 4, 9, 16, 25 };
+            ScottPlot.FormsPlot formsPlot1 = new FormsPlot();
+
+
+//            formsPlot1.Plot.AddScatter(dataX, dataY);
+            formsPlot1.Refresh();
+            */
+
 
         }
 
