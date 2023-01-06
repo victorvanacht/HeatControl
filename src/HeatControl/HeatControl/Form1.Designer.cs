@@ -33,7 +33,6 @@
             this.OTGWGroupbox = new System.Windows.Forms.GroupBox();
             this.OTGWTabcontrol = new System.Windows.Forms.TabControl();
             this.OTGWTabStatus = new System.Windows.Forms.TabPage();
-            this.OTHWFormsPlotBools = new ScottPlot.FormsPlot();
             this.OTGWFormsPlotFloats = new ScottPlot.FormsPlot();
             this.OTGWTextBoxOutsideTemperature = new System.Windows.Forms.TextBox();
             this.OTGWLabelOutsideTemperature = new System.Windows.Forms.Label();
@@ -241,7 +240,6 @@
             // 
             // OTGWTabStatus
             // 
-            this.OTGWTabStatus.Controls.Add(this.OTHWFormsPlotBools);
             this.OTGWTabStatus.Controls.Add(this.OTGWFormsPlotFloats);
             this.OTGWTabStatus.Controls.Add(this.OTGWTextBoxOutsideTemperature);
             this.OTGWTabStatus.Controls.Add(this.OTGWLabelOutsideTemperature);
@@ -282,18 +280,12 @@
             this.OTGWTabStatus.TabIndex = 0;
             this.OTGWTabStatus.Text = "Status Overview";
             // 
-            // OTHWFormsPlotBools
-            // 
-            this.OTHWFormsPlotBools.Location = new System.Drawing.Point(6, 417);
-            this.OTHWFormsPlotBools.Name = "OTHWFormsPlotBools";
-            this.OTHWFormsPlotBools.Size = new System.Drawing.Size(624, 134);
-            this.OTHWFormsPlotBools.TabIndex = 33;
-            // 
             // OTGWFormsPlotFloats
             // 
             this.OTGWFormsPlotFloats.Location = new System.Drawing.Point(0, 186);
+            this.OTGWFormsPlotFloats.Margin = new System.Windows.Forms.Padding(0);
             this.OTGWFormsPlotFloats.Name = "OTGWFormsPlotFloats";
-            this.OTGWFormsPlotFloats.Size = new System.Drawing.Size(624, 225);
+            this.OTGWFormsPlotFloats.Size = new System.Drawing.Size(624, 322);
             this.OTGWFormsPlotFloats.TabIndex = 32;
             // 
             // OTGWTextBoxOutsideTemperature
@@ -1851,7 +1843,6 @@
         private System.Windows.Forms.Label OTGWLabelDiagProductTypeMaster;
         private System.Windows.Forms.TextBox OTGWTextBoxDiagProductVersionSlave;
         private ScottPlot.FormsPlot OTGWFormsPlotFloats;
-        private ScottPlot.FormsPlot OTHWFormsPlotBools;
     }
 }
 

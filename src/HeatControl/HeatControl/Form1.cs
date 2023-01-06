@@ -110,14 +110,36 @@ namespace HeatControl
                 new ListenerGeneral<int>(this.OTGWTextBoxDiagProductVersionSlave, this.otgw.gatewayStatus.productVersionSlave),
             };
 
-            for (int i=0; i<plotXaxis.Length; i++)
+            for (int i=0; i<plotXaxisData.Length; i++)
             {
-                plotXaxis[i] = (DateTime.Now + TimeSpan.FromSeconds(OTGW.statusReportInterval * i)).ToOADate();
+                plotXaxisData[i] = (DateTime.Now + TimeSpan.FromSeconds(OTGW.statusReportInterval * i)).ToOADate();
             }
             this.OTGWFormsPlotFloats.Plot.SetAxisLimits(yMin: 0, yMax: 100);
-            this.OTGWFormsPlotFloats.Plot.SetAxisLimits(xMin: plotXaxis[0], xMax: plotXaxis[plotXaxis.Length-1]);
+            this.OTGWFormsPlotFloats.Plot.SetAxisLimits(xMin: plotXaxisData[0], xMax: plotXaxisData[plotXaxisData.Length-1]);
+            this.OTGWFormsPlotFloats.Plot.Legend();
 
-            var signalPlot = this.OTGWFormsPlotFloats.Plot.AddScatterLines(plotXaxis, temp);
+            this.plot1 = this.OTGWFormsPlotFloats.Plot.AddSignalXY(plotXaxisData, plotBoilerTemperatureData, label: "BoilerTemp");
+            this.plot1.MarkerSize = 0;
+
+            this.plot2 = this.OTGWFormsPlotFloats.Plot.AddSignalXY(plotXaxisData, plotFlameStatusData, label: "Burner");
+            this.plot2.FillAboveAndBelow(Color.Aqua, Color.Azure);
+            this.plot2.BaselineY = 20;
+            this.plot2.OffsetY = 22;
+            this.plot2.MarkerSize = 0;
+
+            this.plot3 = this.OTGWFormsPlotFloats.Plot.AddSignalXY(plotXaxisData, plotTapWaterModeData, label: "TapWater");
+            this.plot3.FillAboveAndBelow(Color.Aqua, Color.Azure);
+            this.plot3.BaselineY = 40;
+            this.plot3.OffsetY = 42;
+            this.plot3.MarkerSize = 0;
+
+            this.plot4 = this.OTGWFormsPlotFloats.Plot.AddSignalXY(plotXaxisData, plotCentralHeatingModeData, label: "Heating");
+            this.plot4.FillAboveAndBelow(Color.Aqua, Color.Azure);
+            this.plot4.BaselineY = 60;
+            this.plot4.OffsetY = 62;
+            this.plot4.MarkerSize = 0;
+
+
             this.OTGWFormsPlotFloats.Plot.XAxis.DateTimeFormat(true);
             this.OTGWFormsPlotFloats.Refresh();
 
@@ -232,31 +254,58 @@ namespace HeatControl
             }
         }
 
-        private const int plotXLen = 10000;
-        private double[] plotXaxis = new double[plotXLen];
-        private double[] temp = new double[plotXLen];
+
+
+
+        private const int plotXDataLen = 100;
+        private double[] plotXaxisData = new double[plotXDataLen];
+        private double[] plotBoilerTemperatureData = new double[plotXDataLen];
+        
+        private double[] plotCentralHeatingModeData = new double[plotXDataLen];
+        private double[] plotTapWaterModeData = new double[plotXDataLen];
+        private double[] plotFlameStatusData = new double[plotXDataLen];
         private int plotXCount = 0;
+
+        ScottPlot.Plottable.SignalPlotXY plot1;
+        ScottPlot.Plottable.SignalPlotXY plot2;
+        ScottPlot.Plottable.SignalPlotXY plot3;
+        ScottPlot.Plottable.SignalPlotXY plot4;
+
 
 
         private void OTGWPlotter(OTGW.StatusReport status)
         {
-            plotXaxis[plotXCount] = status.dateTime.ToOADate();
-            temp[plotXCount] = status.boilerWaterTemperature.value;
+            plotXaxisData[plotXCount] = status.dateTime.ToOADate();
+            plotBoilerTemperatureData[plotXCount] = status.boilerWaterTemperature.value;
+            plotFlameStatusData[plotXCount] = Convert.ToDouble(status.flameStatus.value) * 10;
+            plotCentralHeatingModeData[plotXCount] = Convert.ToDouble(status.centralHeatingMode.value) * 10;
+            plotTapWaterModeData[plotXCount] = Convert.ToDouble(status.tapWaterMode.value) * 10;
+
             plotXCount++;
 
 
 
-            if (plotXCount == plotXLen)
+            if (plotXCount == plotXDataLen)
             {
-                int skip = plotXLen / 10;
-                Array.Copy(plotXaxis, skip, plotXaxis, 0, plotXLen - skip);
-                Array.Copy(temp, skip, temp, 0, plotXLen - skip);
+                int skip = plotXDataLen / 10;
+                Array.Copy(plotXaxisData, skip, plotXaxisData, 0, plotXDataLen - skip);
+                Array.Copy(plotBoilerTemperatureData, skip, plotBoilerTemperatureData, 0, plotXDataLen - skip);
+                Array.Copy(plotFlameStatusData, skip, plotFlameStatusData, 0, plotXDataLen - skip);
+                Array.Copy(plotCentralHeatingModeData, skip, plotCentralHeatingModeData, 0, plotXDataLen - skip);
+                Array.Copy(plotTapWaterModeData, skip, plotTapWaterModeData, 0, plotXDataLen - skip);
 
                 plotXCount -= skip;
-                this.OTGWFormsPlotFloats.Plot.SetAxisLimits(xMin: plotXaxis[0], xMax: plotXaxis[plotXaxis.Length - 1]);
+                this.OTGWFormsPlotFloats.Plot.SetAxisLimits(xMin: plotXaxisData[0], xMax: plotXaxisData[plotXaxisData.Length - 1]);
             }
+            this.plot1.MaxRenderIndex = plotXCount - 1;
+            this.plot2.MaxRenderIndex = plotXCount - 1;
+            this.plot3.MaxRenderIndex = plotXCount - 1;
+            this.plot4.MaxRenderIndex = plotXCount - 1;
+
+
 
             this.OTGWFormsPlotFloats.Invoke((Action)delegate { this.OTGWFormsPlotFloats.Refresh(); });
         }
     }
 }
+
