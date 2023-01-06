@@ -285,16 +285,45 @@ namespace HeatControl
         }
         public GatewayStatus gatewayStatus;
 
-        private SocketReader socketReader;
-        private Thread socketThread;
-        private volatile bool socketThreadShouldClose;
-        private volatile bool socketThreadHasClosed;
+        public class StatusReport
+        {
+            public DateTime dateTime;
+            public BoolValueName centralHeatingMode;
+            public BoolValueName tapWaterMode;
+            public BoolValueName flameStatus;
+
+            public FloatValueName controlSetPoint;
+            public FloatValueName controlSetPointModified;
+            public FloatValueName relativeModulationLevel;
+            public FloatValueName roomSetPoint;
+            public FloatValueName boilerWaterTemperature;
+            public FloatValueName tapWaterTemperature;
+            public FloatValueName outsideTemperature;
+            public FloatValueName returnWaterTemperature;
+
+            public StatusReport(GatewayStatus status)
+            {
+                this.dateTime = DateTime.Now;
+
+                this.centralHeatingMode = status.centralHeatingMode;
+                this.tapWaterMode = status.tapWaterMode;
+                this.flameStatus = status.flameStatus;
+
+                this.controlSetPoint = status.controlSetPoint;
+                this.controlSetPointModified = status.controlSetPointModified;
+                this.relativeModulationLevel = status.relativeModulationLevel;
+                this.roomSetPoint = status.roomSetPoint;
+                this.boilerWaterTemperature = status.boilerWaterTemperature;
+                this.tapWaterMode = status.tapWaterMode;
+                this.outsideTemperature = status.outsideTemperature;
+                this.returnWaterTemperature = status.returnWaterTemperature;
+            }
+        }
+
 
         private CommandQueue commandQueue;
         private Parser parser;
 
-
-  
 
         public OTGW()
         {
@@ -304,11 +333,11 @@ namespace HeatControl
             this.commandQueue = new CommandQueue();
             this.parser = new Parser(ref this.gatewayConfiguration, ref this.gatewayStatus, ref this.commandQueue);
             this.logHandlers = new List<LogHandler>();
+            this.statusReportHandlers = new List<StatusReportHandler>();
         }
 
         public delegate void LogHandler(string text);
         private List<LogHandler> logHandlers;
-
         private void Log(string text)
         {
             Console.WriteLine(text);
@@ -327,6 +356,22 @@ namespace HeatControl
         {
             this.logHandlers.Remove(handler);
         }
+
+
+        public delegate void StatusReportHandler(StatusReport status);
+        private List<StatusReportHandler> statusReportHandlers;
+
+
+        public void AddStatusReporter(StatusReportHandler handler)
+        {
+            this.statusReportHandlers.Add(handler);
+        }
+
+        public void RemoveStatusReporter(StatusReportHandler handler)
+        {
+            this.statusReportHandlers.Remove(handler);
+        }
+
 
         public void Connect(string hostName)
         {
@@ -366,9 +411,14 @@ namespace HeatControl
             socketReader.Disconnect();
         }
 
-
-        public void SocketThread()
+        private SocketReader socketReader;
+        private Thread socketThread;
+        private volatile bool socketThreadShouldClose;
+        private volatile bool socketThreadHasClosed;
+        private void SocketThread()
         {
+            long lastStatusReportTick = 0;
+
             socketThreadHasClosed = false;
             while (socketThreadShouldClose == false)
             {
@@ -405,6 +455,17 @@ namespace HeatControl
                                 }
                             }
                         }
+                    }
+                }
+
+                if ((DateTime.Now.Ticks - lastStatusReportTick) > (10 * System.TimeSpan.TicksPerSecond))
+                {
+                    lastStatusReportTick = DateTime.Now.Ticks;
+
+                    StatusReport statusReport = new StatusReport(this.gatewayStatus);
+                    foreach (StatusReportHandler statusReportHandler in statusReportHandlers)
+                    {
+                        statusReportHandler(statusReport);
                     }
                 }
             }

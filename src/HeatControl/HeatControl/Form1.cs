@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ScottPlot;
+using ScottPlot.Plottable;
 
 namespace HeatControl
 {
@@ -22,6 +23,7 @@ namespace HeatControl
 
             this.otgw = new OTGW();
             this.otgw.AddLogger(OTGWLogger);
+            this.otgw.AddStatusReporter(OTGWPlotter);
 
             this.listeners = new List<ListernerBase>()
             {
@@ -106,18 +108,12 @@ namespace HeatControl
                 new ListenerGeneral<int>(this.OTGWTextBoxDiagProductTypeSlave, this.otgw.gatewayStatus.productTypeSlave),
                 new ListenerGeneral<int>(this.OTGWTextBoxDiagProductVersionMaster, this.otgw.gatewayStatus.productVersionMaster),
                 new ListenerGeneral<int>(this.OTGWTextBoxDiagProductVersionSlave, this.otgw.gatewayStatus.productVersionSlave),
-          };
+            };
 
-            /*
+            this.OTGWFormsPlotFloats.Plot.AddSignal(temp);
+            this.OTGWFormsPlotFloats.Plot.AxisAutoX(margin: 0);
+            this.OTGWFormsPlotFloats.Plot.AxisAutoY(margin: 0);
 
-            double[] dataX = new double[] { 1, 2, 3, 4, 5 };
-            double[] dataY = new double[] { 1, 4, 9, 16, 25 };
-            ScottPlot.FormsPlot formsPlot1 = new FormsPlot();
-
-
-//            formsPlot1.Plot.AddScatter(dataX, dataY);
-            formsPlot1.Refresh();
-            */
 
 
         }
@@ -226,6 +222,39 @@ namespace HeatControl
                     this.control.Text = this.months[value >> 8] + " " + (value & 0xFF).ToString();
                 }
             }
+        }
+
+        private const int plotXLen = 20;
+        private double[] plotXaxis = new double[plotXLen];
+        private double[] temp = new double[plotXLen];
+        private int plotXCount = 0;
+
+
+        private void OTGWPlotter(OTGW.StatusReport status)
+        {
+            plotXaxis[plotXCount] = status.dateTime.ToOADate();
+            temp[plotXCount] = status.boilerWaterTemperature.value;
+            plotXCount++;
+
+
+
+            if (plotXCount == plotXLen)
+            {
+                int skip = plotXLen / 10;
+
+                plotXCount = plotXCount - skip;
+
+                // here we should use Array.Copy
+
+                for (int i = 0; i < plotXLen - skip; i++)
+                {
+                    plotXaxis[i] = plotXaxis[i + skip];
+                    temp[i] = temp[i + skip];
+                }
+                plotXCount -= skip;
+            }
+
+            this.OTGWFormsPlotFloats.Invoke((Action)delegate { this.OTGWFormsPlotFloats.Refresh(); });
         }
     }
 }
