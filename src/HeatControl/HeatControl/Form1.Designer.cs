@@ -33,6 +33,8 @@
             this.OTGWGroupbox = new System.Windows.Forms.GroupBox();
             this.OTGWTabcontrol = new System.Windows.Forms.TabControl();
             this.OTGWTabStatus = new System.Windows.Forms.TabPage();
+            this.OTHWFormsPlotBools = new ScottPlot.FormsPlot();
+            this.OTGWFormsPlotFloats = new ScottPlot.FormsPlot();
             this.OTGWTextBoxOutsideTemperature = new System.Windows.Forms.TextBox();
             this.OTGWLabelOutsideTemperature = new System.Windows.Forms.Label();
             this.OTGWTextBoxReturnTemperature = new System.Windows.Forms.TextBox();
@@ -187,8 +189,6 @@
             this.OTGWTextBoxDiagVersion = new System.Windows.Forms.TextBox();
             this.OTGWLabelDiagVersion = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.OTGWFormsPlotFloats = new ScottPlot.FormsPlot();
-            this.OTHWFormsPlotBools = new ScottPlot.FormsPlot();
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.OTGWTabStatus.SuspendLayout();
@@ -281,6 +281,20 @@
             this.OTGWTabStatus.Size = new System.Drawing.Size(624, 504);
             this.OTGWTabStatus.TabIndex = 0;
             this.OTGWTabStatus.Text = "Status Overview";
+            // 
+            // OTHWFormsPlotBools
+            // 
+            this.OTHWFormsPlotBools.Location = new System.Drawing.Point(6, 417);
+            this.OTHWFormsPlotBools.Name = "OTHWFormsPlotBools";
+            this.OTHWFormsPlotBools.Size = new System.Drawing.Size(624, 134);
+            this.OTHWFormsPlotBools.TabIndex = 33;
+            // 
+            // OTGWFormsPlotFloats
+            // 
+            this.OTGWFormsPlotFloats.Location = new System.Drawing.Point(0, 186);
+            this.OTGWFormsPlotFloats.Name = "OTGWFormsPlotFloats";
+            this.OTGWFormsPlotFloats.Size = new System.Drawing.Size(624, 225);
+            this.OTGWFormsPlotFloats.TabIndex = 32;
             // 
             // OTGWTextBoxOutsideTemperature
             // 
@@ -1651,20 +1665,6 @@
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "EQ-3 Max!";
-            // 
-            // OTGWFormsPlotFloats
-            // 
-            this.OTGWFormsPlotFloats.Location = new System.Drawing.Point(0, 186);
-            this.OTGWFormsPlotFloats.Name = "OTGWFormsPlotFloats";
-            this.OTGWFormsPlotFloats.Size = new System.Drawing.Size(624, 225);
-            this.OTGWFormsPlotFloats.TabIndex = 32;
-            // 
-            // OTHWFormsPlotBools
-            // 
-            this.OTHWFormsPlotBools.Location = new System.Drawing.Point(0, 370);
-            this.OTHWFormsPlotBools.Name = "OTHWFormsPlotBools";
-            this.OTHWFormsPlotBools.Size = new System.Drawing.Size(624, 134);
-            this.OTHWFormsPlotBools.TabIndex = 33;
             // 
             // Form1
             // 

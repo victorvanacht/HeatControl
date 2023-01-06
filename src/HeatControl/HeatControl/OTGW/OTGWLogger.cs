@@ -358,6 +358,7 @@ namespace HeatControl
         }
 
 
+        public const int statusReportInterval = 10;
         public delegate void StatusReportHandler(StatusReport status);
         private List<StatusReportHandler> statusReportHandlers;
 
@@ -458,7 +459,7 @@ namespace HeatControl
                     }
                 }
 
-                if ((DateTime.Now.Ticks - lastStatusReportTick) > (10 * System.TimeSpan.TicksPerSecond))
+                if ((DateTime.Now.Ticks - lastStatusReportTick) > (statusReportInterval * System.TimeSpan.TicksPerSecond))
                 {
                     lastStatusReportTick = DateTime.Now.Ticks;
 

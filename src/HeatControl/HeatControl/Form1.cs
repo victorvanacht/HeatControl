@@ -110,9 +110,17 @@ namespace HeatControl
                 new ListenerGeneral<int>(this.OTGWTextBoxDiagProductVersionSlave, this.otgw.gatewayStatus.productVersionSlave),
             };
 
-            this.OTGWFormsPlotFloats.Plot.AddSignal(temp);
-            this.OTGWFormsPlotFloats.Plot.AxisAutoX(margin: 0);
-            this.OTGWFormsPlotFloats.Plot.AxisAutoY(margin: 0);
+            for (int i=0; i<plotXaxis.Length; i++)
+            {
+                plotXaxis[i] = (DateTime.Now + TimeSpan.FromSeconds(OTGW.statusReportInterval * i)).ToOADate();
+            }
+            this.OTGWFormsPlotFloats.Plot.SetAxisLimits(yMin: 0, yMax: 100);
+            this.OTGWFormsPlotFloats.Plot.SetAxisLimits(xMin: plotXaxis[0], xMax: plotXaxis[plotXaxis.Length-1]);
+
+            var signalPlot = this.OTGWFormsPlotFloats.Plot.AddScatterLines(plotXaxis, temp);
+            this.OTGWFormsPlotFloats.Plot.XAxis.DateTimeFormat(true);
+            this.OTGWFormsPlotFloats.Refresh();
+
 
 
 
@@ -224,7 +232,7 @@ namespace HeatControl
             }
         }
 
-        private const int plotXLen = 20;
+        private const int plotXLen = 10000;
         private double[] plotXaxis = new double[plotXLen];
         private double[] temp = new double[plotXLen];
         private int plotXCount = 0;
@@ -241,17 +249,11 @@ namespace HeatControl
             if (plotXCount == plotXLen)
             {
                 int skip = plotXLen / 10;
+                Array.Copy(plotXaxis, skip, plotXaxis, 0, plotXLen - skip);
+                Array.Copy(temp, skip, temp, 0, plotXLen - skip);
 
-                plotXCount = plotXCount - skip;
-
-                // here we should use Array.Copy
-
-                for (int i = 0; i < plotXLen - skip; i++)
-                {
-                    plotXaxis[i] = plotXaxis[i + skip];
-                    temp[i] = temp[i + skip];
-                }
                 plotXCount -= skip;
+                this.OTGWFormsPlotFloats.Plot.SetAxisLimits(xMin: plotXaxis[0], xMax: plotXaxis[plotXaxis.Length - 1]);
             }
 
             this.OTGWFormsPlotFloats.Invoke((Action)delegate { this.OTGWFormsPlotFloats.Refresh(); });
