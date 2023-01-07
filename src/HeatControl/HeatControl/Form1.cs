@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ScottPlot;
 using ScottPlot.Plottable;
+using System.Diagnostics;
 
 namespace HeatControl
 {
     public partial class Form1 : Form
     {
         private OTGW otgw;
-
 
         public Form1()
         {
@@ -110,42 +110,18 @@ namespace HeatControl
                 new ListenerGeneral<int>(this.OTGWTextBoxDiagProductVersionSlave, this.otgw.gatewayStatus.productVersionSlave),
             };
 
-            for (int i=0; i<plotXaxisData.Length; i++)
+            this.lines = new Dictionary<string, Line>()
             {
-                plotXaxisData[i] = (DateTime.Now + TimeSpan.FromSeconds(OTGW.statusReportInterval * i)).ToOADate();
-            }
+                ["BoilerTemp"] = new Line(this.OTGWFormsPlotFloats, "BoilerTemp", Color.Blue),
+                ["Burner"] = new Line(this.OTGWFormsPlotFloats, "Burner", 10, Color.OrangeRed, Color.Yellow),
+                ["TapWater"] = new Line(this.OTGWFormsPlotFloats, "TapWater", 40, Color.DarkGreen, Color.LightGreen),
+                ["Heating"] = new Line(this.OTGWFormsPlotFloats, "Heating", 70, Color.DarkMagenta, Color.LightPink),
+            };
+
             this.OTGWFormsPlotFloats.Plot.SetAxisLimits(yMin: 0, yMax: 100);
-            this.OTGWFormsPlotFloats.Plot.SetAxisLimits(xMin: plotXaxisData[0], xMax: plotXaxisData[plotXaxisData.Length-1]);
-            this.OTGWFormsPlotFloats.Plot.Legend();
-
-            this.plot1 = this.OTGWFormsPlotFloats.Plot.AddSignalXY(plotXaxisData, plotBoilerTemperatureData, label: "BoilerTemp");
-            this.plot1.MarkerSize = 0;
-
-            this.plot2 = this.OTGWFormsPlotFloats.Plot.AddSignalXY(plotXaxisData, plotFlameStatusData, label: "Burner");
-            this.plot2.FillAboveAndBelow(Color.Aqua, Color.Azure);
-            this.plot2.BaselineY = 20;
-            this.plot2.OffsetY = 22;
-            this.plot2.MarkerSize = 0;
-
-            this.plot3 = this.OTGWFormsPlotFloats.Plot.AddSignalXY(plotXaxisData, plotTapWaterModeData, label: "TapWater");
-            this.plot3.FillAboveAndBelow(Color.Aqua, Color.Azure);
-            this.plot3.BaselineY = 40;
-            this.plot3.OffsetY = 42;
-            this.plot3.MarkerSize = 0;
-
-            this.plot4 = this.OTGWFormsPlotFloats.Plot.AddSignalXY(plotXaxisData, plotCentralHeatingModeData, label: "Heating");
-            this.plot4.FillAboveAndBelow(Color.Aqua, Color.Azure);
-            this.plot4.BaselineY = 60;
-            this.plot4.OffsetY = 62;
-            this.plot4.MarkerSize = 0;
-
-
             this.OTGWFormsPlotFloats.Plot.XAxis.DateTimeFormat(true);
+            this.OTGWFormsPlotFloats.Plot.Legend();
             this.OTGWFormsPlotFloats.Refresh();
-
-
-
-
         }
 
         private void OTGWButtonConnect_Click(object sender, EventArgs e)
@@ -255,54 +231,92 @@ namespace HeatControl
         }
 
 
+        private Dictionary<string,Line> lines;
+        private class Line
+        {
+            private FormsPlot plot;
+            private bool isBool;
+            private double[] xData;
+            private double[] yData;
+            private string name;
+            private Color color;
+            private Color fillColor;
+            private double gain;
+            private double offset;
 
+            ScottPlot.Plottable.SignalPlotXY line;
 
-        private const int plotXDataLen = 100;
-        private double[] plotXaxisData = new double[plotXDataLen];
-        private double[] plotBoilerTemperatureData = new double[plotXDataLen];
-        
-        private double[] plotCentralHeatingModeData = new double[plotXDataLen];
-        private double[] plotTapWaterModeData = new double[plotXDataLen];
-        private double[] plotFlameStatusData = new double[plotXDataLen];
-        private int plotXCount = 0;
+            private int xCount;
+            private const int xSize = 20;
 
-        ScottPlot.Plottable.SignalPlotXY plot1;
-        ScottPlot.Plottable.SignalPlotXY plot2;
-        ScottPlot.Plottable.SignalPlotXY plot3;
-        ScottPlot.Plottable.SignalPlotXY plot4;
+            // Main constructor for all lines
+            private Line(FormsPlot plot, bool isBool, string name, double gain, double offset, Color color, Color fillColor)
+            {
+                this.plot = plot;
+                this.name = name;
+                this.gain = gain;
+                this.offset = offset;
+                this.color = color;
+                this.fillColor = fillColor;
+                this.isBool = isBool;
 
+                this.xCount = 0;
+                this.xData = new double[xSize];
+                this.yData = new double[xSize];
+
+                this.line = this.plot.Plot.AddSignalXY(this.xData, this.yData, label: name);
+                if (this.isBool) this.line.FillAboveAndBelow(fillColor, fillColor);
+                this.line.BaselineY = offset;
+                this.line.OffsetY = offset + 2;
+                this.line.MarkerSize = 0;
+                this.line.Color = this.color;
+
+                this.FillXAxisNow();
+            }
+
+            //Constructor for float-data lines
+            public Line(FormsPlot plot, string name, Color color) : this(plot, false, name, 1, 0, color, color) { }
+
+            //Constructor for bool-data lines
+            public Line(FormsPlot plot, string name, double offset, Color color, Color fillColor) : this(plot, true, name, 10, offset, color, fillColor) { }
+
+            public void FillXAxisNow()
+            {
+                for (int i = 0; i < xSize; i++)
+                {
+                    xData[i] = (DateTime.Now + TimeSpan.FromSeconds(OTGW.statusReportInterval * i)).ToOADate();
+                }
+                this.plot.Plot.SetAxisLimits(xMin: xData[0], xMax: xData[xSize - 1]);
+                this.line.MaxRenderIndex = 0;
+            }
+
+            public void AddPoint(double xValue, double yValue)
+            {
+                xData[xCount] = xValue;
+                yData[xCount] = yValue * this.gain;
+                xCount++;
+
+                if (xCount == xSize)
+                {
+                    int skip = xSize / 10;
+                    Array.Copy(xData, skip, xData, 0, xSize - skip);
+                    Array.Copy(yData, skip, yData, 0, xSize - skip);
+                    xCount -= skip;
+                    this.plot.Plot.SetAxisLimits(xMin: xData[0], xMax: xData[xSize - 1]);
+                }
+                this.line.MaxRenderIndex = xCount - 1;
+            }
+        }
 
 
         private void OTGWPlotter(OTGW.StatusReport status)
         {
-            plotXaxisData[plotXCount] = status.dateTime.ToOADate();
-            plotBoilerTemperatureData[plotXCount] = status.boilerWaterTemperature.value;
-            plotFlameStatusData[plotXCount] = Convert.ToDouble(status.flameStatus.value) * 10;
-            plotCentralHeatingModeData[plotXCount] = Convert.ToDouble(status.centralHeatingMode.value) * 10;
-            plotTapWaterModeData[plotXCount] = Convert.ToDouble(status.tapWaterMode.value) * 10;
+            double dateTime = status.dateTime.ToOADate();
 
-            plotXCount++;
-
-
-
-            if (plotXCount == plotXDataLen)
-            {
-                int skip = plotXDataLen / 10;
-                Array.Copy(plotXaxisData, skip, plotXaxisData, 0, plotXDataLen - skip);
-                Array.Copy(plotBoilerTemperatureData, skip, plotBoilerTemperatureData, 0, plotXDataLen - skip);
-                Array.Copy(plotFlameStatusData, skip, plotFlameStatusData, 0, plotXDataLen - skip);
-                Array.Copy(plotCentralHeatingModeData, skip, plotCentralHeatingModeData, 0, plotXDataLen - skip);
-                Array.Copy(plotTapWaterModeData, skip, plotTapWaterModeData, 0, plotXDataLen - skip);
-
-                plotXCount -= skip;
-                this.OTGWFormsPlotFloats.Plot.SetAxisLimits(xMin: plotXaxisData[0], xMax: plotXaxisData[plotXaxisData.Length - 1]);
-            }
-            this.plot1.MaxRenderIndex = plotXCount - 1;
-            this.plot2.MaxRenderIndex = plotXCount - 1;
-            this.plot3.MaxRenderIndex = plotXCount - 1;
-            this.plot4.MaxRenderIndex = plotXCount - 1;
-
-
+            lines["BoilerTemp"].AddPoint(dateTime, status.boilerWaterTemperature.value);
+            lines["Burner"].AddPoint(dateTime, Convert.ToDouble(status.flameStatus.value));
+            lines["TapWater"].AddPoint(dateTime, Convert.ToDouble(status.tapWaterMode.value));
+            lines["Heating"].AddPoint(dateTime, Convert.ToDouble(status.centralHeatingMode.value));
 
             this.OTGWFormsPlotFloats.Invoke((Action)delegate { this.OTGWFormsPlotFloats.Refresh(); });
         }
