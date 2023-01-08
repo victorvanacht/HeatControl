@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using ScottPlot;
 using ScottPlot.Plottable;
 using System.Diagnostics;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace HeatControl
 {
@@ -113,20 +115,37 @@ namespace HeatControl
             this.lines = new Dictionary<string, Line>()
             {
                 ["BoilerTemp"] = new Line(this.OTGWFormsPlotFloats, "BoilerTemp", Color.Blue),
+                ["RoomSetpoint"] = new Line(this.OTGWFormsPlotFloats, "RoomSetpoint", Color.Gray),
+                ["Setpoint"] = new Line(this.OTGWFormsPlotFloats, "Setpoint", Color.LightBlue),
+                ["SetpointMod"] = new Line(this.OTGWFormsPlotFloats, "SetpointMod", Color.AliceBlue),
+                ["Modulation"] = new Line(this.OTGWFormsPlotFloats, "Modulation", Color.Pink),
+                ["OutsideTemp"] = new Line(this.OTGWFormsPlotFloats, "OutsideTemp", Color.DeepPink),
+                ["ReturnTemp"] = new Line(this.OTGWFormsPlotFloats, "ReturnTemp", Color.DarkRed),
                 ["Burner"] = new Line(this.OTGWFormsPlotFloats, "Burner", 10, Color.OrangeRed, Color.Yellow),
                 ["TapWater"] = new Line(this.OTGWFormsPlotFloats, "TapWater", 40, Color.DarkGreen, Color.LightGreen),
                 ["Heating"] = new Line(this.OTGWFormsPlotFloats, "Heating", 70, Color.DarkMagenta, Color.LightPink),
             };
 
             this.OTGWFormsPlotFloats.Plot.SetAxisLimits(yMin: 0, yMax: 100);
+            this.OTGWFormsPlotFloats.Configuration.LockVerticalAxis = true;
+            this.OTGWFormsPlotFloats.Configuration.DoubleClickBenchmark = false;
             this.OTGWFormsPlotFloats.Plot.XAxis.DateTimeFormat(true);
-            this.OTGWFormsPlotFloats.Plot.Legend();
+            this.legend = this.OTGWFormsPlotFloats.Plot.Legend();
+            this.legend.Orientation = ScottPlot.Orientation.Vertical;
+            this.legend.Location = ScottPlot.Alignment.UpperLeft;
+            this.legend.FontSize = 9;
             this.OTGWFormsPlotFloats.Refresh();
         }
 
         private void OTGWButtonConnect_Click(object sender, EventArgs e)
         {
             this.otgw.Connect(this.OTGWTextboxHostname.Text);
+
+            // Reset the x-axis of the plot to now.
+            foreach (KeyValuePair<string, Line> entry in lines)
+            {
+                entry.Value.FillXAxisNow();
+            }
         }
 
         private void OTGWButtonDisconnect_Click(object sender, EventArgs e)
@@ -232,6 +251,7 @@ namespace HeatControl
 
 
         private Dictionary<string,Line> lines;
+        private ScottPlot.Renderable.Legend legend;
         private class Line
         {
             private FormsPlot plot;
@@ -246,8 +266,10 @@ namespace HeatControl
 
             ScottPlot.Plottable.SignalPlotXY line;
 
-            private int xCount;
-            private const int xSize = 20;
+            private int xCount; // number of valid elements in the data array
+            private int xLim;   // maximum of elements that should be in the plot (auto-zooming when data arrays are not filled yet)
+            private const int xSize = 10000; // maximum size of data arrays
+            
 
             // Main constructor for all lines
             private Line(FormsPlot plot, bool isBool, string name, double gain, double offset, Color color, Color fillColor)
@@ -286,34 +308,61 @@ namespace HeatControl
                 {
                     xData[i] = (DateTime.Now + TimeSpan.FromSeconds(OTGW.statusReportInterval * i)).ToOADate();
                 }
-                this.plot.Plot.SetAxisLimits(xMin: xData[0], xMax: xData[xSize - 1]);
                 this.line.MaxRenderIndex = 0;
+                this.xLim = 10;
+                this.xCount = 0;
+                this.plot.Plot.SetAxisLimits(xMin: xData[0], xMax: xData[xLim - 1]);
+
             }
 
             public void AddPoint(double xValue, double yValue)
             {
-                xData[xCount] = xValue;
-                yData[xCount] = yValue * this.gain;
-                xCount++;
-
-                if (xCount == xSize)
+                if (yValue != -1)
                 {
-                    int skip = xSize / 10;
-                    Array.Copy(xData, skip, xData, 0, xSize - skip);
-                    Array.Copy(yData, skip, yData, 0, xSize - skip);
-                    xCount -= skip;
-                    this.plot.Plot.SetAxisLimits(xMin: xData[0], xMax: xData[xSize - 1]);
+                    xData[xCount] = xValue;
+                    yData[xCount] = yValue * this.gain;
+                    xCount++;
+
+                    if (xCount>xLim)
+                    {
+                        xLim *= 3;
+                        if (xLim>xSize)
+                        {
+                            xLim = xSize;
+                        }
+                        this.plot.Plot.SetAxisLimits(xMin: xData[0], xMax: xData[xLim-1]);
+                    }
+
+                    if (xCount == xSize)
+                    {
+                        int skip = xSize / 10;
+                        Array.Copy(xData, skip, xData, 0, xSize - skip);
+                        Array.Copy(yData, skip, yData, 0, xSize - skip);
+                        xCount -= skip;
+
+                        DateTime xValueDateTime = DateTime.FromOADate(xValue);
+                        // extend x-axis
+                        for (int i = 1; i < skip; i++)
+                        {
+                            xData[xSize-skip+i] = (xValueDateTime + TimeSpan.FromSeconds(OTGW.statusReportInterval * i)).ToOADate();
+                        }
+                        this.plot.Plot.SetAxisLimits(xMin: xData[0], xMax: xData[xSize - 1]);
+                    }
+                    this.line.MaxRenderIndex = xCount - 1;
                 }
-                this.line.MaxRenderIndex = xCount - 1;
             }
         }
-
-
         private void OTGWPlotter(OTGW.StatusReport status)
         {
             double dateTime = status.dateTime.ToOADate();
 
             lines["BoilerTemp"].AddPoint(dateTime, status.boilerWaterTemperature.value);
+            lines["RoomSetpoint"].AddPoint(dateTime, status.roomSetPoint.value);
+            lines["Setpoint"].AddPoint(dateTime, status.controlSetPoint.value);
+            lines["SetpointMod"].AddPoint(dateTime, status.controlSetPointModified.value);
+            lines["Modulation"].AddPoint(dateTime, status.relativeModulationLevel.value);
+            lines["OutsideTemp"].AddPoint(dateTime, status.outsideTemperature.value);
+            lines["ReturnTemp"].AddPoint(dateTime, status.returnWaterTemperature.value);
             lines["Burner"].AddPoint(dateTime, Convert.ToDouble(status.flameStatus.value));
             lines["TapWater"].AddPoint(dateTime, Convert.ToDouble(status.tapWaterMode.value));
             lines["Heating"].AddPoint(dateTime, Convert.ToDouble(status.centralHeatingMode.value));
@@ -322,4 +371,5 @@ namespace HeatControl
         }
     }
 }
+
 

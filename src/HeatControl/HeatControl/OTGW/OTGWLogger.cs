@@ -358,7 +358,7 @@ namespace HeatControl
         }
 
 
-        public const int statusReportInterval = 10;
+        public const int statusReportInterval = 1;
         public delegate void StatusReportHandler(StatusReport status);
         private List<StatusReportHandler> statusReportHandlers;
 
