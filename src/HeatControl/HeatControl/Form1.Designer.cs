@@ -193,6 +193,7 @@
             this.OTGWTextBoxDiagVersion = new System.Windows.Forms.TextBox();
             this.OTGWLabelDiagVersion = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.OTGWCheckBoxEnableLoggingToFile = new System.Windows.Forms.CheckBox();
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.OTGWTabStatus.SuspendLayout();
@@ -560,6 +561,7 @@
             // 
             // OTGWTabConnection
             // 
+            this.OTGWTabConnection.Controls.Add(this.OTGWCheckBoxEnableLoggingToFile);
             this.OTGWTabConnection.Controls.Add(this.OTGWCheckBoxAppend);
             this.OTGWTabConnection.Controls.Add(this.OTGWLabelAppend);
             this.OTGWTabConnection.Controls.Add(this.label1);
@@ -1713,6 +1715,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "EQ-3 Max!";
             // 
+            // OTGWCheckBoxEnableLoggingToFile
+            // 
+            this.OTGWCheckBoxEnableLoggingToFile.AutoSize = true;
+            this.OTGWCheckBoxEnableLoggingToFile.Location = new System.Drawing.Point(19, 387);
+            this.OTGWCheckBoxEnableLoggingToFile.Name = "OTGWCheckBoxEnableLoggingToFile";
+            this.OTGWCheckBoxEnableLoggingToFile.Size = new System.Drawing.Size(124, 17);
+            this.OTGWCheckBoxEnableLoggingToFile.TabIndex = 11;
+            this.OTGWCheckBoxEnableLoggingToFile.Text = "Enable logging to file";
+            this.OTGWCheckBoxEnableLoggingToFile.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1903,6 +1915,7 @@
         private System.Windows.Forms.Label OTGWLabelLogfileName;
         private System.Windows.Forms.CheckBox OTGWCheckBoxAppend;
         private System.Windows.Forms.Label OTGWLabelAppend;
+        private System.Windows.Forms.CheckBox OTGWCheckBoxEnableLoggingToFile;
     }
 }
 

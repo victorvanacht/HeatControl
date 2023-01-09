@@ -305,9 +305,9 @@ namespace HeatControl
             {
                 this.dateTime = DateTime.Now;
 
+                this.flameStatus = status.flameStatus;
                 this.centralHeatingMode = status.centralHeatingMode;
                 this.tapWaterMode = status.tapWaterMode;
-                this.flameStatus = status.flameStatus;
 
                 this.controlSetPoint = status.controlSetPoint;
                 this.controlSetPointModified = status.controlSetPointModified;
@@ -317,6 +317,42 @@ namespace HeatControl
                 this.tapWaterTemperature = status.tapWaterTemperature;
                 this.outsideTemperature = status.outsideTemperature;
                 this.returnWaterTemperature = status.returnWaterTemperature;
+            }
+
+            public static string heading
+            {
+                get
+                {
+                    GatewayStatus dummyStatus = new GatewayStatus();
+                    return "Date Time; " +
+                        dummyStatus.flameStatus.name + "; " +
+                        dummyStatus.centralHeatingMode.name + "; " +
+                        dummyStatus.tapWaterMode.name + "; " +
+                        dummyStatus.controlSetPoint.name + "; " +
+                        dummyStatus.controlSetPointModified.name + "; " +
+                        dummyStatus.relativeModulationLevel.name + "; " +
+                        dummyStatus.roomSetPoint.name + "; " +
+                        dummyStatus.boilerWaterTemperature.name + "; " +
+                        dummyStatus.tapWaterTemperature.name + "; " +
+                        dummyStatus.outsideTemperature.name + "; " +
+                        dummyStatus.returnWaterTemperature.name;
+                }
+            }
+
+            override public string ToString()
+            {
+                return this.dateTime.ToString() + "; " +
+                    this.flameStatus.value.ToString() + "; " +
+                    this.centralHeatingMode.value.ToString() + "; " +
+                    this.tapWaterMode.value.ToString() + "; " +
+                    this.controlSetPoint.value.ToString() + "; " +
+                    this.controlSetPointModified.value.ToString() + "; " +
+                    this.relativeModulationLevel.value.ToString() + "; " +
+                    this.roomSetPoint.value.ToString() + "; " +
+                    this.boilerWaterTemperature.value.ToString() + "; " +
+                    this.tapWaterTemperature.value.ToString(    ) + "; " +
+                    this.outsideTemperature.value.ToString() + "; " +
+                    this.returnWaterTemperature.value.ToString();
             }
         }
 
@@ -339,7 +375,6 @@ namespace HeatControl
             this.stateMachine = new Thread(StateMachine);
             this.stateMachine.IsBackground = true;
             this.stateMachine.Start();
-
         }
 
         public delegate void LogHandler(string text);

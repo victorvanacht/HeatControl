@@ -12,6 +12,7 @@ using ScottPlot.Plottable;
 using System.Diagnostics;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
+using System.IO;
 
 namespace HeatControl
 {
@@ -24,8 +25,6 @@ namespace HeatControl
             InitializeComponent();
 
             this.otgw = new OTGW();
-            this.otgw.AddLogger(OTGWLogger);
-            this.otgw.AddStatusReporter(OTGWPlotter);
 
             this.listeners = new List<ListernerBase>()
             {
@@ -139,6 +138,8 @@ namespace HeatControl
 
         }
 
+        private FileStream logFileStream;
+
         private void OTGWButtonConnect_Click(object sender, EventArgs e)
         {
             if (otgw.stateRequest == OTGW.StateRequest.Disconnected)
@@ -147,6 +148,7 @@ namespace HeatControl
                 this.OTGWButtonDisconnect.Enabled = true;
                 this.OTGWTextBoxLogfileName.Enabled = false;
                 this.OTGWCheckBoxAppend.Enabled = false;
+                this.OTGWCheckBoxEnableLoggingToFile.Enabled = false;
 
                 this.otgw.hostName = this.OTGWTextboxHostname.Text;
 
@@ -155,6 +157,23 @@ namespace HeatControl
                 {
                     entry.Value.FillXAxisNow();
                 }
+
+                // open log file, if needed
+                if (this.OTGWCheckBoxEnableLoggingToFile.Checked)
+                {
+                    FileMode mode = (this.OTGWCheckBoxAppend.Checked) ? FileMode.Append : FileMode.Create;
+                    logFileStream = File.Open(this.OTGWTextBoxLogfileName.Text, mode);
+
+                    if (mode==FileMode.Create)
+                    {
+                        Byte[] heading = new UTF8Encoding().GetBytes(OTGW.StatusReport.heading + "\n");
+                        logFileStream.Write(heading, 0, heading.Length);
+                    }
+                    this.otgw.AddStatusReporter(OTGWLogToFile);
+                }
+
+                this.otgw.AddLogger(OTGWLogger);
+                this.otgw.AddStatusReporter(OTGWPlotter);
 
                 this.otgw.stateRequest = OTGW.StateRequest.Connect;
             }
@@ -165,12 +184,24 @@ namespace HeatControl
             if (otgw.stateRequest == OTGW.StateRequest.Running)
             {
 
-                this.otgw.stateRequest = OTGW.StateRequest.Disconnect; ;
+                this.otgw.stateRequest = OTGW.StateRequest.Disconnect;
+
+
+                this.otgw.RemoveLogger(OTGWLogger);
+                this.otgw.RemoveStatusReporter(OTGWPlotter);
+
+                // close the log file
+                if (this.OTGWCheckBoxEnableLoggingToFile.Checked)
+                {
+                    this.otgw.AddStatusReporter(OTGWLogToFile);
+                    logFileStream.Close();
+                }
 
                 this.OTGWButtonConnect.Enabled = true;
                 this.OTGWButtonDisconnect.Enabled = false;
                 this.OTGWTextBoxLogfileName.Enabled = true;
                 this.OTGWCheckBoxAppend.Enabled = true;
+                this.OTGWCheckBoxEnableLoggingToFile.Enabled = true;
             }
 
         }
@@ -388,6 +419,13 @@ namespace HeatControl
 
             this.OTGWFormsPlotFloats.Invoke((Action)delegate { this.OTGWFormsPlotFloats.Refresh(); });
         }
+
+        private void OTGWLogToFile(OTGW.StatusReport status)
+        {
+            Byte[] line = new UTF8Encoding().GetBytes(status.ToString() + "\n");
+            logFileStream.Write(line, 0, line.Length);
+        }
+
     }
 }
 
