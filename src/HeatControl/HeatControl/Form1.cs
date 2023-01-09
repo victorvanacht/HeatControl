@@ -19,6 +19,7 @@ namespace HeatControl
     public partial class Form1 : Form
     {
         private OTGW otgw;
+        private FileStream logFileStream;
 
         public Form1()
         {
@@ -138,7 +139,11 @@ namespace HeatControl
 
         }
 
-        private FileStream logFileStream;
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            OTGWButtonDisconnect_Click(sender, e);
+        }
+
 
         private void OTGWButtonConnect_Click(object sender, EventArgs e)
         {
@@ -205,6 +210,7 @@ namespace HeatControl
             }
 
         }
+
 
         private void OTGWLogger(string text)
         {

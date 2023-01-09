@@ -1734,6 +1734,7 @@
             this.Controls.Add(this.OTGWGroupbox);
             this.Name = "Form1";
             this.Text = "HeatControl";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.OTGWGroupbox.ResumeLayout(false);
             this.OTGWTabcontrol.ResumeLayout(false);
             this.OTGWTabStatus.ResumeLayout(false);
