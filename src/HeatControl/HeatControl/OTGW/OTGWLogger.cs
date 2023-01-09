@@ -8,7 +8,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System.Net.Http.Headers;
 
 namespace HeatControl
 {
@@ -314,7 +314,7 @@ namespace HeatControl
                 this.relativeModulationLevel = status.relativeModulationLevel;
                 this.roomSetPoint = status.roomSetPoint;
                 this.boilerWaterTemperature = status.boilerWaterTemperature;
-                this.tapWaterMode = status.tapWaterMode;
+                this.tapWaterTemperature = status.tapWaterTemperature;
                 this.outsideTemperature = status.outsideTemperature;
                 this.returnWaterTemperature = status.returnWaterTemperature;
             }
@@ -334,6 +334,12 @@ namespace HeatControl
             this.parser = new Parser(ref this.gatewayConfiguration, ref this.gatewayStatus, ref this.commandQueue);
             this.logHandlers = new List<LogHandler>();
             this.statusReportHandlers = new List<StatusReportHandler>();
+
+            this.stateMachineShouldClose = false;
+            this.stateMachine = new Thread(StateMachine);
+            this.stateMachine.IsBackground = true;
+            this.stateMachine.Start();
+
         }
 
         public delegate void LogHandler(string text);
@@ -374,9 +380,50 @@ namespace HeatControl
         }
 
 
-        public void Connect(string hostName)
+        public enum StateRequest
         {
-            socketReader.Connect(hostName);
+            Disconnected = 0,
+            Connect = 1,
+            Running = 2,
+            Disconnect = 3,
+        };
+
+        private Thread stateMachine;
+        private volatile bool stateMachineShouldClose;
+        private volatile bool stateMachineHasClosed;
+        public volatile StateRequest stateRequest;
+
+        private void StateMachine()
+        {
+            stateMachineHasClosed = false;
+            stateRequest = StateRequest.Disconnected;
+            while (this.stateMachineShouldClose == false)
+            {
+                switch (stateRequest)
+                {
+                    case StateRequest.Disconnected: 
+                        break;
+                    case StateRequest.Connect:
+                        Connect();
+                        stateRequest = StateRequest.Running;
+                        break;
+                    case StateRequest.Running:
+                        break;
+                    case StateRequest.Disconnect:
+                        Disconnect();
+                        stateRequest = StateRequest.Disconnected;
+                        break;
+                }
+                Thread.Sleep(100); // we could make this event driven somehow....
+            }
+            stateMachineHasClosed = true;
+        }
+
+        public string hostName;
+
+        public void Connect()
+        {
+            socketReader.Connect(this.hostName);
 
             if (this.socketReader.IsConnected())
             {
@@ -385,8 +432,6 @@ namespace HeatControl
                 this.socketThread.IsBackground = true;
                 this.socketThread.Start();
             }
-
-            Thread.Sleep(1000);
 
             // first send three times PS=0 command to make sure that we receive log messages
             socketReader.WriteLine("PS=0\n\r"); 
@@ -405,10 +450,7 @@ namespace HeatControl
         public void Disconnect()
         {
             this.socketThreadShouldClose = true;
-            while (this.socketThreadHasClosed == false)
-            {
-                Thread.Sleep(100);
-            }
+            this.socketThread.Join();
             socketReader.Disconnect();
         }
 

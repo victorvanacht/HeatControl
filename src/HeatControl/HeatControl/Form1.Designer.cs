@@ -67,6 +67,11 @@
             this.OTGWTextBoxRoomTemp = new System.Windows.Forms.TextBox();
             this.OTGWLabelRoomTemp = new System.Windows.Forms.Label();
             this.OTGWTabConnection = new System.Windows.Forms.TabPage();
+            this.OTGWCheckBoxAppend = new System.Windows.Forms.CheckBox();
+            this.OTGWLabelAppend = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.OTGWTextBoxLogfileName = new System.Windows.Forms.TextBox();
+            this.OTGWLabelLogfileName = new System.Windows.Forms.Label();
             this.OTGWListboxLog = new System.Windows.Forms.ListBox();
             this.OTGWLabelHostname = new System.Windows.Forms.Label();
             this.OTGWTextboxHostname = new System.Windows.Forms.TextBox();
@@ -208,6 +213,7 @@
             // 
             // OTGWButtonDisconnect
             // 
+            this.OTGWButtonDisconnect.Enabled = false;
             this.OTGWButtonDisconnect.Location = new System.Drawing.Point(216, 64);
             this.OTGWButtonDisconnect.Name = "OTGWButtonDisconnect";
             this.OTGWButtonDisconnect.Size = new System.Drawing.Size(191, 34);
@@ -554,6 +560,11 @@
             // 
             // OTGWTabConnection
             // 
+            this.OTGWTabConnection.Controls.Add(this.OTGWCheckBoxAppend);
+            this.OTGWTabConnection.Controls.Add(this.OTGWLabelAppend);
+            this.OTGWTabConnection.Controls.Add(this.label1);
+            this.OTGWTabConnection.Controls.Add(this.OTGWTextBoxLogfileName);
+            this.OTGWTabConnection.Controls.Add(this.OTGWLabelLogfileName);
             this.OTGWTabConnection.Controls.Add(this.OTGWListboxLog);
             this.OTGWTabConnection.Controls.Add(this.OTGWLabelHostname);
             this.OTGWTabConnection.Controls.Add(this.OTGWTextboxHostname);
@@ -565,6 +576,50 @@
             this.OTGWTabConnection.Size = new System.Drawing.Size(624, 504);
             this.OTGWTabConnection.TabIndex = 1;
             this.OTGWTabConnection.Text = "Connection";
+            // 
+            // OTGWCheckBoxAppend
+            // 
+            this.OTGWCheckBoxAppend.AutoSize = true;
+            this.OTGWCheckBoxAppend.Location = new System.Drawing.Point(392, 406);
+            this.OTGWCheckBoxAppend.Name = "OTGWCheckBoxAppend";
+            this.OTGWCheckBoxAppend.Size = new System.Drawing.Size(15, 14);
+            this.OTGWCheckBoxAppend.TabIndex = 10;
+            this.OTGWCheckBoxAppend.UseVisualStyleBackColor = true;
+            // 
+            // OTGWLabelAppend
+            // 
+            this.OTGWLabelAppend.AutoSize = true;
+            this.OTGWLabelAppend.Location = new System.Drawing.Point(342, 407);
+            this.OTGWLabelAppend.Name = "OTGWLabelAppend";
+            this.OTGWLabelAppend.Size = new System.Drawing.Size(44, 13);
+            this.OTGWLabelAppend.TabIndex = 9;
+            this.OTGWLabelAppend.Text = "Append";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "label1";
+            // 
+            // OTGWTextBoxLogfileName
+            // 
+            this.OTGWTextBoxLogfileName.Location = new System.Drawing.Point(107, 404);
+            this.OTGWTextBoxLogfileName.Name = "OTGWTextBoxLogfileName";
+            this.OTGWTextBoxLogfileName.Size = new System.Drawing.Size(221, 20);
+            this.OTGWTextBoxLogfileName.TabIndex = 7;
+            this.OTGWTextBoxLogfileName.Text = "E:\\HeatControlLog.txt";
+            // 
+            // OTGWLabelLogfileName
+            // 
+            this.OTGWLabelLogfileName.AutoSize = true;
+            this.OTGWLabelLogfileName.Location = new System.Drawing.Point(16, 407);
+            this.OTGWLabelLogfileName.Name = "OTGWLabelLogfileName";
+            this.OTGWLabelLogfileName.Size = new System.Drawing.Size(67, 13);
+            this.OTGWLabelLogfileName.TabIndex = 6;
+            this.OTGWLabelLogfileName.Text = "Log filename";
             // 
             // OTGWListboxLog
             // 
@@ -1843,6 +1898,11 @@
         private System.Windows.Forms.Label OTGWLabelDiagProductTypeMaster;
         private System.Windows.Forms.TextBox OTGWTextBoxDiagProductVersionSlave;
         private ScottPlot.FormsPlot OTGWFormsPlotFloats;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox OTGWTextBoxLogfileName;
+        private System.Windows.Forms.Label OTGWLabelLogfileName;
+        private System.Windows.Forms.CheckBox OTGWCheckBoxAppend;
+        private System.Windows.Forms.Label OTGWLabelAppend;
     }
 }
 

@@ -135,22 +135,44 @@ namespace HeatControl
             this.legend.Location = ScottPlot.Alignment.UpperLeft;
             this.legend.FontSize = 9;
             this.OTGWFormsPlotFloats.Refresh();
+
+
         }
 
         private void OTGWButtonConnect_Click(object sender, EventArgs e)
         {
-            this.otgw.Connect(this.OTGWTextboxHostname.Text);
-
-            // Reset the x-axis of the plot to now.
-            foreach (KeyValuePair<string, Line> entry in lines)
+            if (otgw.stateRequest == OTGW.StateRequest.Disconnected)
             {
-                entry.Value.FillXAxisNow();
+                this.OTGWButtonConnect.Enabled = false;
+                this.OTGWButtonDisconnect.Enabled = true;
+                this.OTGWTextBoxLogfileName.Enabled = false;
+                this.OTGWCheckBoxAppend.Enabled = false;
+
+                this.otgw.hostName = this.OTGWTextboxHostname.Text;
+
+                // Reset the x-axis of the plot to now.
+                foreach (KeyValuePair<string, Line> entry in lines)
+                {
+                    entry.Value.FillXAxisNow();
+                }
+
+                this.otgw.stateRequest = OTGW.StateRequest.Connect;
             }
         }
 
         private void OTGWButtonDisconnect_Click(object sender, EventArgs e)
         {
-            this.otgw.Disconnect();
+            if (otgw.stateRequest == OTGW.StateRequest.Running)
+            {
+
+                this.otgw.stateRequest = OTGW.StateRequest.Disconnect; ;
+
+                this.OTGWButtonConnect.Enabled = true;
+                this.OTGWButtonDisconnect.Enabled = false;
+                this.OTGWTextBoxLogfileName.Enabled = true;
+                this.OTGWCheckBoxAppend.Enabled = true;
+            }
+
         }
 
         private void OTGWLogger(string text)
@@ -265,11 +287,9 @@ namespace HeatControl
             private double offset;
 
             ScottPlot.Plottable.SignalPlotXY line;
-
             private int xCount; // number of valid elements in the data array
             private int xLim;   // maximum of elements that should be in the plot (auto-zooming when data arrays are not filled yet)
             private const int xSize = 10000; // maximum size of data arrays
-            
 
             // Main constructor for all lines
             private Line(FormsPlot plot, bool isBool, string name, double gain, double offset, Color color, Color fillColor)
@@ -312,7 +332,6 @@ namespace HeatControl
                 this.xLim = 10;
                 this.xCount = 0;
                 this.plot.Plot.SetAxisLimits(xMin: xData[0], xMax: xData[xLim - 1]);
-
             }
 
             public void AddPoint(double xValue, double yValue)
