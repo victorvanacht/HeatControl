@@ -27,7 +27,9 @@ OpenThermGateWay. To control the boiler.
 
 ## EQ-3 MaxCube
 
-To be filled...
+#### Protocol
+- [Max-cube Protocol](https://github.com/Bouni/max-cube-protocol)
+
 
 
 
