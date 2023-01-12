@@ -67,6 +67,7 @@
             this.OTGWTextBoxRoomTemp = new System.Windows.Forms.TextBox();
             this.OTGWLabelRoomTemp = new System.Windows.Forms.Label();
             this.OTGWTabConnection = new System.Windows.Forms.TabPage();
+            this.OTGWCheckBoxEnableLoggingToFile = new System.Windows.Forms.CheckBox();
             this.OTGWCheckBoxAppend = new System.Windows.Forms.CheckBox();
             this.OTGWLabelAppend = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -193,13 +194,18 @@
             this.OTGWTextBoxDiagVersion = new System.Windows.Forms.TextBox();
             this.OTGWLabelDiagVersion = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.OTGWCheckBoxEnableLoggingToFile = new System.Windows.Forms.CheckBox();
+            this.MaxTextBoxHostname = new System.Windows.Forms.TextBox();
+            this.MaxLabelHostName = new System.Windows.Forms.Label();
+            this.MaxButtonDisconnect = new System.Windows.Forms.Button();
+            this.MaxButtonConnect = new System.Windows.Forms.Button();
+            this.MAXListboxLog = new System.Windows.Forms.ListBox();
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.OTGWTabStatus.SuspendLayout();
             this.OTGWTabConnection.SuspendLayout();
             this.OTGWTabBoilerDiagnostics.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // OTGWButtonConnect
@@ -578,6 +584,16 @@
             this.OTGWTabConnection.Size = new System.Drawing.Size(624, 504);
             this.OTGWTabConnection.TabIndex = 1;
             this.OTGWTabConnection.Text = "Connection";
+            // 
+            // OTGWCheckBoxEnableLoggingToFile
+            // 
+            this.OTGWCheckBoxEnableLoggingToFile.AutoSize = true;
+            this.OTGWCheckBoxEnableLoggingToFile.Location = new System.Drawing.Point(19, 387);
+            this.OTGWCheckBoxEnableLoggingToFile.Name = "OTGWCheckBoxEnableLoggingToFile";
+            this.OTGWCheckBoxEnableLoggingToFile.Size = new System.Drawing.Size(124, 17);
+            this.OTGWCheckBoxEnableLoggingToFile.TabIndex = 11;
+            this.OTGWCheckBoxEnableLoggingToFile.Text = "Enable logging to file";
+            this.OTGWCheckBoxEnableLoggingToFile.UseVisualStyleBackColor = true;
             // 
             // OTGWCheckBoxAppend
             // 
@@ -1708,6 +1724,11 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.MAXListboxLog);
+            this.groupBox2.Controls.Add(this.MaxTextBoxHostname);
+            this.groupBox2.Controls.Add(this.MaxLabelHostName);
+            this.groupBox2.Controls.Add(this.MaxButtonDisconnect);
+            this.groupBox2.Controls.Add(this.MaxButtonConnect);
             this.groupBox2.Location = new System.Drawing.Point(15, 23);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(457, 505);
@@ -1715,15 +1736,49 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "EQ-3 Max!";
             // 
-            // OTGWCheckBoxEnableLoggingToFile
+            // MaxTextBoxHostname
             // 
-            this.OTGWCheckBoxEnableLoggingToFile.AutoSize = true;
-            this.OTGWCheckBoxEnableLoggingToFile.Location = new System.Drawing.Point(19, 387);
-            this.OTGWCheckBoxEnableLoggingToFile.Name = "OTGWCheckBoxEnableLoggingToFile";
-            this.OTGWCheckBoxEnableLoggingToFile.Size = new System.Drawing.Size(124, 17);
-            this.OTGWCheckBoxEnableLoggingToFile.TabIndex = 11;
-            this.OTGWCheckBoxEnableLoggingToFile.Text = "Enable logging to file";
-            this.OTGWCheckBoxEnableLoggingToFile.UseVisualStyleBackColor = true;
+            this.MaxTextBoxHostname.Location = new System.Drawing.Point(173, 64);
+            this.MaxTextBoxHostname.Name = "MaxTextBoxHostname";
+            this.MaxTextBoxHostname.Size = new System.Drawing.Size(268, 20);
+            this.MaxTextBoxHostname.TabIndex = 3;
+            // 
+            // MaxLabelHostName
+            // 
+            this.MaxLabelHostName.AutoSize = true;
+            this.MaxLabelHostName.Location = new System.Drawing.Point(20, 67);
+            this.MaxLabelHostName.Name = "MaxLabelHostName";
+            this.MaxLabelHostName.Size = new System.Drawing.Size(113, 13);
+            this.MaxLabelHostName.TabIndex = 2;
+            this.MaxLabelHostName.Text = "Hostname/ IP-address";
+            // 
+            // MaxButtonDisconnect
+            // 
+            this.MaxButtonDisconnect.Location = new System.Drawing.Point(250, 107);
+            this.MaxButtonDisconnect.Name = "MaxButtonDisconnect";
+            this.MaxButtonDisconnect.Size = new System.Drawing.Size(191, 31);
+            this.MaxButtonDisconnect.TabIndex = 1;
+            this.MaxButtonDisconnect.Text = "Disconnect";
+            this.MaxButtonDisconnect.UseVisualStyleBackColor = true;
+            this.MaxButtonDisconnect.Click += new System.EventHandler(this.MaxButtonDisconnect_Click);
+            // 
+            // MaxButtonConnect
+            // 
+            this.MaxButtonConnect.Location = new System.Drawing.Point(23, 104);
+            this.MaxButtonConnect.Name = "MaxButtonConnect";
+            this.MaxButtonConnect.Size = new System.Drawing.Size(191, 34);
+            this.MaxButtonConnect.TabIndex = 0;
+            this.MaxButtonConnect.Text = "Connect";
+            this.MaxButtonConnect.UseVisualStyleBackColor = true;
+            this.MaxButtonConnect.Click += new System.EventHandler(this.MAXButtonConnect_Click);
+            // 
+            // MAXListboxLog
+            // 
+            this.MAXListboxLog.FormattingEnabled = true;
+            this.MAXListboxLog.Location = new System.Drawing.Point(23, 157);
+            this.MAXListboxLog.Name = "MAXListboxLog";
+            this.MAXListboxLog.Size = new System.Drawing.Size(418, 238);
+            this.MAXListboxLog.TabIndex = 4;
             // 
             // Form1
             // 
@@ -1745,6 +1800,8 @@
             this.OTGWTabBoilerDiagnostics.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1917,6 +1974,11 @@
         private System.Windows.Forms.CheckBox OTGWCheckBoxAppend;
         private System.Windows.Forms.Label OTGWLabelAppend;
         private System.Windows.Forms.CheckBox OTGWCheckBoxEnableLoggingToFile;
+        private System.Windows.Forms.Button MaxButtonConnect;
+        private System.Windows.Forms.Label MaxLabelHostName;
+        private System.Windows.Forms.Button MaxButtonDisconnect;
+        private System.Windows.Forms.TextBox MaxTextBoxHostname;
+        private System.Windows.Forms.ListBox MAXListboxLog;
     }
 }
 
