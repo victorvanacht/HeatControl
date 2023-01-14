@@ -19,7 +19,7 @@ namespace HeatControl
     public partial class Form1 : Form
     {
         private OTGW otgw;
-        private MaxCube maxCube;
+        private MaxCubeLogger maxCube;
         private FileStream logFileStream;
 
         public Form1()
@@ -27,7 +27,7 @@ namespace HeatControl
             InitializeComponent();
 
             this.otgw = new OTGW();
-            this.maxCube = new MaxCube();
+            this.maxCube = new MaxCubeLogger();
 
             this.listeners = new List<ListernerBase>()
             {
@@ -436,7 +436,7 @@ namespace HeatControl
 
         private void MAXButtonConnect_Click(object sender, EventArgs e)
         {
-            this.maxCube.hostname = this.MaxTextBoxHostname.Text;
+            this.maxCube.hostName = this.MaxTextBoxHostname.Text;
             this.maxCube.AddLogger(MAXLogger);
 
             this.maxCube.Connect();

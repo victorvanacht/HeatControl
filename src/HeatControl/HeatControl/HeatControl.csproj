@@ -89,7 +89,9 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="MaxCube\MaxCube.cs" />
     <Compile Include="MaxCube\MaxCubeLogger.cs" />
+    <Compile Include="MaxCube\Parser.cs" />
     <Compile Include="MaxCube\SocketReader.cs" />
     <Compile Include="OTGW\CommandQueue.cs" />
     <Compile Include="OTGW\OTGWLogger.cs" />

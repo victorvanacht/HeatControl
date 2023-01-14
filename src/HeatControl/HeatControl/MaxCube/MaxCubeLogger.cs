@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,38 +10,18 @@ using static HeatControl.OTGW;
 
 namespace HeatControl
 {
-    partial class MaxCube
+    partial class MaxCubeLogger
     {
-        private SocketReader socketReader;
-
-        public MaxCube()
+        public MaxCubeLogger()
         {
-            this.cubes = new List<Cube>();
+            this.maxCubes = new List<MaxCube>();
             this.logHandlers = new List<LogHandler>();
-            this.socketReader = new SocketReader(this);
 
         }
 
-        public string hostname;
+        public string hostName;
 
-
-        public class Cube
-        {
-            public string iPAddress;
-            public string name;
-            public string serial;
-            public int RFAddress;
-
-            public Cube(string iPAddress, string name, string serial, int RFAddress)
-            {
-                this.iPAddress = iPAddress;
-                this.name = name;
-                this.serial= serial;
-                this.RFAddress = RFAddress;
-            }
-        }
-
-        List<Cube> cubes;
+        List<MaxCube> maxCubes;
 
 
         public delegate void LogHandler(string text);
@@ -65,7 +47,43 @@ namespace HeatControl
 
         public void Connect()
         {
-            this.socketReader.Connect(this.hostname);
+            if ((this.hostName == null) || (this.hostName.Equals("")))
+            {
+                // hostname is empty string, let's find the IP-adress(es) automagically
+                this.findCubeIPAddress();
+            }
+            else
+            {
+                // Get server related information.
+                IPHostEntry heserver = Dns.GetHostEntry(hostName);
+
+                // Loop on the AddressList
+                foreach (IPAddress curAdd in heserver.AddressList)
+                {
+                    if (curAdd.AddressFamily == AddressFamily.InterNetwork) // we only do IPv4. Not IPv6
+                    {
+                        this.maxCubes.Add(new MaxCube(this, curAdd, hostName, "", -1, ""));
+                        this.Log("IP-Address: " + curAdd.ToString());
+                        break;
+                    }
+                }
+
+                if (this.maxCubes.Count == 0)
+                {
+                    throw new Exception("Hostname or IP-address " + hostName + "not resolvable.");
+                }
+            }
+
+            // open connection to all cubes
+            foreach (MaxCube cube in this.maxCubes)
+            {
+                cube.Connect();
+            }
+
+
+
+
+
             /*
             socketReader.Connect(this.hostName);
 
@@ -159,5 +177,95 @@ namespace HeatControl
             socketThreadHasClosed = true;
             */
         }
+
+        private static string GetLocalIPAddress()
+        {
+            string localIP;
+            using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0))
+            {
+                socket.Connect("8.8.8.8", 65530);
+                IPEndPoint endPoint = socket.LocalEndPoint as IPEndPoint;
+                localIP = endPoint.Address.ToString();
+            }
+
+            return localIP;
+        }
+
+        private void findCubeIPAddress()
+        {
+            const int port = 23272;
+
+            string localIP = GetLocalIPAddress();
+            string broadcastIP = localIP.Substring(0, IndexOfNthSB(localIP, '.', 0, 3) + 1) + "255";
+
+            UdpClient udpClient = new UdpClient() { EnableBroadcast = true };
+            udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, port));
+            IPEndPoint from = new IPEndPoint(0, 0);
+
+            byte[] identifyData = { 0x65, 0x51, 0x33, 0x4d, 0x61, 0x78, 0x2a, 0x00, 0x2a, 0x2a, 0x2a, 0x2a, 0x2a, 0x2a, 0x2a, 0x2a, 0x2a, 0x2a, 0x49 };
+            udpClient.Send(identifyData, identifyData.Length, broadcastIP, port);
+
+            byte[] receiveBuffer;
+
+            do
+            {
+                receiveBuffer = UdpClientReadTimeOut(udpClient, ref from, 2);
+                if (receiveBuffer.Length == 26)
+                {
+                    string t = System.Text.Encoding.UTF8.GetString(receiveBuffer);
+                    IPAddress ip = from.Address;
+                    string name = t.Substring(0, 8);
+                    string serial = t.Substring(8, 10);
+                    int RFaddress = (receiveBuffer[21] << 16) + (receiveBuffer[22] << 8) + receiveBuffer[23];
+                    string version = t[24].ToString() + "." + (t[25] >>4).ToString() + "." + (t[25]&0x0f).ToString();
+
+                    if (!serial.Equals("**********"))
+                    {
+                        this.Log("Found MaxCube @ " + ip.ToString());
+                        this.maxCubes.Add(new MaxCube(this, ip, name, serial, RFaddress, version));
+                    }
+                }
+            }
+            while (receiveBuffer.Length != 0);
+
+            udpClient.Close();
+            return;
+        }
+
+        private static int IndexOfNthSB(string input, char value, int startIndex, int nth)
+        {
+            if (nth < 1)
+                throw new NotSupportedException("Param 'nth' must be greater than 0!");
+            var nResult = 0;
+            for (int i = startIndex; i < input.Length; i++)
+            {
+                if (input[i] == value)
+                    nResult++;
+                if (nResult == nth)
+                    return i;
+            }
+            return -1;
+        }
+
+        private static byte[] UdpClientReadTimeOut(UdpClient udpClient, ref IPEndPoint from, int timeOut)
+        {
+            byte[] recvBuffer = { };
+            int counter = timeOut * 10;
+            while ((udpClient.Available == 0) && (counter > 0))
+            {
+                System.Threading.Thread.Sleep(100);
+                counter--;
+            }
+            if (udpClient.Available != 0)
+            {
+                recvBuffer = udpClient.Receive(ref from);
+            }
+            return recvBuffer;
+        }
+
+
+
+
+        
     }
 }

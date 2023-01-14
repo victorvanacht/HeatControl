@@ -1742,6 +1742,7 @@
             this.MaxTextBoxHostname.Name = "MaxTextBoxHostname";
             this.MaxTextBoxHostname.Size = new System.Drawing.Size(268, 20);
             this.MaxTextBoxHostname.TabIndex = 3;
+            this.MaxTextBoxHostname.Text = "KEQ0567251";
             // 
             // MaxLabelHostName
             // 
