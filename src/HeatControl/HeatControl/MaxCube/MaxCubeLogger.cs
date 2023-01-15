@@ -216,7 +216,7 @@ namespace HeatControl
                     IPAddress ip = from.Address;
                     string name = t.Substring(0, 8);
                     string serial = t.Substring(8, 10);
-                    int RFaddress = (receiveBuffer[21] << 16) + (receiveBuffer[22] << 8) + receiveBuffer[23];
+                    int RFaddress = MaxCube.GetRfAddress(receiveBuffer,21);
                     string version = t[24].ToString() + "." + (t[25] >>4).ToString() + "." + (t[25]&0x0f).ToString();
 
                     if (!serial.Equals("**********"))
