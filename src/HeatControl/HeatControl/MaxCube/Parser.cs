@@ -166,11 +166,11 @@ namespace HeatControl
                     {
                         string[] element = message.Split(',');
 
-                        maxCube.serial = element[0];
-                        maxCube.RFAddress = int.Parse(element[1], System.Globalization.NumberStyles.HexNumber);
-                        maxCube.version = element[2].Substring(0, 2) + "." + element[2].Substring(2, 1) + "." + element[2].Substring(3, 1);
-                        maxCube.dutyCycle = int.Parse(element[5], System.Globalization.NumberStyles.HexNumber);
-                        maxCube.freeMemorySlots = int.Parse(element[6], System.Globalization.NumberStyles.HexNumber);
+                        maxCube.deviceMaxCube.serialNumber = element[0];
+                        maxCube.deviceMaxCube.rfAddress = int.Parse(element[1], System.Globalization.NumberStyles.HexNumber);
+                        maxCube.deviceMaxCube.version = element[2].Substring(0, 2) + "." + element[2].Substring(2, 1) + "." + element[2].Substring(3, 1);
+                        maxCube.deviceMaxCube.dutyCycle = int.Parse(element[5], System.Globalization.NumberStyles.HexNumber);
+                        maxCube.deviceMaxCube.freeMemorySlots = int.Parse(element[6], System.Globalization.NumberStyles.HexNumber);
 
                         string year = (2000 + int.Parse(element[7].Substring(0, 2), System.Globalization.NumberStyles.HexNumber)).ToString();
                         string month = int.Parse(element[7].Substring(2, 2), System.Globalization.NumberStyles.HexNumber).ToString();
@@ -178,7 +178,9 @@ namespace HeatControl
                         string hour = int.Parse(element[8].Substring(0, 2), System.Globalization.NumberStyles.HexNumber).ToString();
                         string minute = int.Parse(element[8].Substring(2, 2), System.Globalization.NumberStyles.HexNumber).ToString();
                         string dateTime = year + "-" + month + "-" + day + " " + hour + ":" + minute;
-                        maxCube.dateTime = DateTime.Parse(dateTime);
+                        maxCube.deviceMaxCube.dateTime = DateTime.Parse(dateTime);
+
+                        maxCube.deviceLookup.Add(maxCube.deviceMaxCube.rfAddress, maxCube.deviceMaxCube);
                     }
                 }
 

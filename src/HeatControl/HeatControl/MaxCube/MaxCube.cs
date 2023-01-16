@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static HeatControl.MaxCubeLogger;
 using static HeatControl.OTGW;
 
 namespace HeatControl
@@ -173,15 +174,27 @@ namespace HeatControl
                 }
             }
 
+            public class DeviceMaxCube : DeviceBase
+            {
+                public string version;
+                public int dutyCycle;
+                public int freeMemorySlots;
+                public DateTime dateTime;
+
+                public DeviceMaxCube(string name, string serialNumber, int rfAddress, Room room) :
+                    base(DeviceType.EcoSwitch, name, serialNumber, rfAddress, room)
+                {
+                }
+            }
+
+
+
 
             public IPAddress iPAddress;
-            public string name;
-            public string serial;
-            public int RFAddress;
-            public string version;
-            public int dutyCycle;
-            public int freeMemorySlots;
-            public DateTime dateTime;
+            public DeviceMaxCube deviceMaxCube;
+            //public string name;
+            //public string serial;
+            //public int RFAddress;
 
             public Dictionary<int, Room> rooms;
             public Dictionary<int, DeviceBase> deviceLookup;
@@ -192,18 +205,20 @@ namespace HeatControl
 
             public MaxCube(MaxCubeLogger maxCubeLogger, IPAddress iPAddress, string name, string serial, int RFAddress, string version)
             {
+                this.deviceLookup = new Dictionary<int, DeviceBase>();
+                this.rooms = new Dictionary<int, Room>();
+                this.rooms.Add(0, new Room("House", 0, 0));
+
+                this.deviceMaxCube = new DeviceMaxCube(name, serial, RFAddress, this.rooms[0]);
+                //this.deviceLookup.Add(RFAddress, this.deviceMaxCube); because we dont know the RFaddress at this point in time, we delay this operation, and do it in the implementation of the "H" parser, where we have all information that we need.
+
                 this.maxCubeLogger = maxCubeLogger;
                 this.iPAddress = iPAddress;
-                this.name = name;
-                this.serial = serial;
-                this.RFAddress = RFAddress;
-                this.version = version;
+                this.deviceMaxCube .version = version;
 
                 this.socketReader = new SocketReader(maxCubeLogger, this);
                 this.parser= new Parser(this);
-                this.rooms= new Dictionary<int, Room>();
-                this.rooms.Add(0, new Room("House", 0, 0));
-                this.deviceLookup = new Dictionary<int, DeviceBase>();
+                
             }
 
             public void Connect()
