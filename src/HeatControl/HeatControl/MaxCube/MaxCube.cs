@@ -18,6 +18,7 @@ namespace HeatControl
         {
             public enum DeviceType
             {
+                Cube = 0,                
                 HeatingThermostat = 1,
                 HeatingThermostatTODO = 2,
                 WallThermostat = 3,
@@ -100,6 +101,9 @@ namespace HeatControl
                 public float ecoTemperature;
                 public float maxSetpointTemperature;
                 public float minSetpointTemperature;
+                public float configuredTemperature;
+                public float actualTemperature;
+
                 public List<List<ProgramEntry>> program;
 
                 public DeviceWallThermostat(string name, string serialNumber, int rfAddress, Room room) : 
@@ -136,6 +140,8 @@ namespace HeatControl
                 public int decalcificationHours;
                 public float maxValveSettingPercent;
                 public float valveOffsetPercent;
+                public int valvePosition;
+                public float configuredTemperature;
                 public List<List<ProgramEntry>> program;
 
                 public DeviceHeatingThermostat(string name, string serialNumber, int rfAddress, Room room) :
@@ -180,9 +186,14 @@ namespace HeatControl
                 public int dutyCycle;
                 public int freeMemorySlots;
                 public DateTime dateTime;
+                public bool portalEnabled;
+                public string portalURL;
+                public int pushButtonUpConfig;
+                public int pushButtonDownConfig;
+
 
                 public DeviceMaxCube(string name, string serialNumber, int rfAddress, Room room) :
-                    base(DeviceType.EcoSwitch, name, serialNumber, rfAddress, room)
+                    base(DeviceType.Cube, name, serialNumber, rfAddress, room)
                 {
                 }
             }

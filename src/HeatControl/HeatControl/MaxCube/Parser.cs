@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing.Text;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -67,17 +68,23 @@ namespace HeatControl
                         {
                             DeviceBase device = maxCube.deviceLookup[rfAddress];
                             
-
                             switch (device.type)
                             {
+                                case DeviceType.Cube:
+                                    if (!this.AssertDevice(device, data, false)) // do not check roomID.
+                                    {
+                                        throw new Exception("Internal data error");
+                                    }
+                                    this.ParseCube((DeviceMaxCube)device, data);
+                                    break;
                                 case DeviceType.HeatingThermostat:
+                                case DeviceType.HeatingThermostatTODO: // do we need to fix this??
                                     if (!this.AssertDevice(device, data))
                                     {
                                         throw new Exception("Internal data error");
                                     }
                                     this.ParseHeatingThermostat((DeviceHeatingThermostat)device, data);
                                     break;
-
                                 case DeviceType.WallThermostat:
                                     if (!this.AssertDevice(device, data))
                                     {
@@ -85,23 +92,41 @@ namespace HeatControl
                                     }
                                     this.ParseWallThermostat((DeviceWallThermostat)device, data);
                                     break;
+                                case DeviceType.EcoSwitch:
+                                    // no information available on how to parse this message.
+                                    break;
+                                default:
+                                    throw new Exception("not implemented");
 
                             }
                         }
                         else
                         {
-                            throw new Exception("rAddress not found");
+                            throw new Exception("rfAddress not found");
                         }
                     }
 
                     private bool AssertDevice(DeviceBase device, byte[] data)
                     {
+                        return AssertDevice(device, data, true);
+                    }
+
+                    private bool AssertDevice(DeviceBase device, byte[] data, bool checkRoomID)
+                    {
                         bool r = true;
                         if (MaxCube.GetRfAddress(data,1) != device.rfAddress) { r = false; }
                         if ((DeviceType)data[4] != device.type) { r = false; }
-                        if (data[5] != device.room.roomID) { r = false; }
+                        if (checkRoomID && (data[5] != device.room.roomID)) { r = false; }
                         if (!Encoding.UTF8.GetString(data, 8, 10).Equals(device.serialNumber)) { r = false; }
                         return r;
+                    }
+
+                    private void ParseCube(DeviceMaxCube device, byte[] data)
+                    {
+                        device.portalEnabled = (data[0x12] != 0);
+                        device.pushButtonUpConfig = data[0x1e];
+                        device.pushButtonDownConfig = data[0x3f];
+                        device.portalURL = Encoding.UTF8.GetString(data, 0x55, 127);
                     }
 
                     private void ParseWallThermostat(DeviceWallThermostat device, byte[] data)
@@ -191,15 +216,16 @@ namespace HeatControl
                         byte[] data = System.Convert.FromBase64String(message);
                         int index = 0;
 
-                        while ((index < (data.Length-3)) && (data[index] != 0xce) && (data[index=1] != 0x00))
+                        while ((index < (data.Length-3)) && (data[index] != 0xce) && (data[index+1] != 0x00))
                         {
+                            int indexStartOfMessage = index; // store this value for later
                             int messageLength = data[index++];
                             int rfAddress = MaxCube.GetRfAddress(data, index);
                             index += 4; // 3 for rfAddress and 1 for unknown
                             int flags = (data[index]<<8) + data[index+1];
                             index += 2;
                             int valvePosition=-1;
-                            float temperature=-1;
+                            float configuredTemperature=-1;
                             int storeForLater=-1;
                             int dateUntil=-1;
                             int timeUntil=-1;
@@ -207,7 +233,7 @@ namespace HeatControl
                             if (messageLength > 6)
                             {
                                 valvePosition = data[index++];
-                                temperature = ((float)(data[index] & 0x7f))/2;
+                                configuredTemperature = ((float)(data[index] & 0x7f))/2;
                                 storeForLater = (data[index++]&0x80) <<1;
                                 dateUntil = (data[index] << 8) + data[index + 1];
                                 index += 2;
@@ -219,80 +245,38 @@ namespace HeatControl
                             }
 
 
-
                             if (maxCube.deviceLookup.ContainsKey(rfAddress))
                             {
                                 DeviceBase device = maxCube.deviceLookup[rfAddress];
 
-
                                 switch (device.type)
                                 {
-                                    /*
+                                    case DeviceType.Cube:
+                                        throw new Exception("to do");
+                                        break;
                                     case DeviceType.HeatingThermostat:
-                                        if (!this.AssertDevice(device, data))
-                                        {
-                                            throw new Exception("Internal data error");
-                                        }
-                                        this.ParseHeatingThermostat((DeviceHeatingThermostat)device, data);
+                                    case DeviceType.HeatingThermostatTODO: // do we need to fix this??
+                                        DeviceHeatingThermostat heatingThermostat = (DeviceHeatingThermostat) device;
+                                        heatingThermostat.valvePosition = valvePosition;
+                                        heatingThermostat.configuredTemperature= configuredTemperature;
                                         break;
-
                                     case DeviceType.WallThermostat:
-                                        if (!this.AssertDevice(device, data))
-                                        {
-                                            throw new Exception("Internal data error");
-                                        }
-                                        this.ParseWallThermostat((DeviceWallThermostat)device, data);
+                                        DeviceWallThermostat wallThermostat = (DeviceWallThermostat)device;
+                                        wallThermostat.configuredTemperature = configuredTemperature;
+                                        wallThermostat.actualTemperature = actualTemperature;
                                         break;
-                                    */
+                                    case DeviceType.EcoSwitch:
+                                        // TODO: throw new Exception("to do");
+                                        break;
+                                    default:
+                                        throw new Exception("not implemented");
                                 }
                             }
-
-
-
-
+                            else
+                            {
+                                throw new Exception("rfAddress not found");
+                            }
                         }
-
-
-
-                        /*
-                        string[] element = message.Split(',');
-                        int messageIndex = int.Parse(element[0], System.Globalization.NumberStyles.HexNumber);
-                        int messageCount = int.Parse(element[1], System.Globalization.NumberStyles.HexNumber);
-                        byte[] data = System.Convert.FromBase64String(element[2]);
-
-                        int index = 2;
-                        int roomCount = data[index++];
-                        for (int i = 0; i < roomCount; i++)
-                        {
-                            int roomID = data[index++];
-                            int nameLenght = data[index++];
-                            string name = Encoding.UTF8.GetString(data, index, nameLenght);
-                            index += nameLenght;
-                            int rfAddress = MaxCube.GetRfAddress(data, index);
-                            index += 3;
-
-                            maxCube.rooms.Add(roomID, new Room(name, rfAddress, roomID));
-                        }
-
-                        int deviceCount = data[index++];
-                        for (int i = 0; i < deviceCount; i++)
-                        {
-                            DeviceType deviceType = (DeviceType)data[index++];
-                            int rfAddress = MaxCube.GetRfAddress(data, index);
-                            index += 3;
-                            string serialNumber = Encoding.UTF8.GetString(data, index, 10);
-                            index += 10;
-                            int nameLenght = data[index++];
-                            string name = Encoding.UTF8.GetString(data, index, nameLenght);
-                            index += nameLenght;
-                            int roomID = data[index++];
-
-                            DeviceBase device = DeviceBase.CreateFromTypeID(deviceType, name, serialNumber, rfAddress, maxCube.rooms[roomID]);
-
-                            maxCube.rooms[roomID].devices.Add(device);
-                            if (!maxCube.deviceLookup.ContainsKey(rfAddress)) maxCube.deviceLookup.Add(rfAddress, device);
-                        }
-                        */
                     }
                 }
 
@@ -339,7 +323,6 @@ namespace HeatControl
                         }
                     }
                 }
-
             }
         }
     }
