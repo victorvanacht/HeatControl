@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.OTGWButtonConnect = new System.Windows.Forms.Button();
             this.OTGWButtonDisconnect = new System.Windows.Forms.Button();
             this.OTGWGroupbox = new System.Windows.Forms.GroupBox();
@@ -70,7 +71,6 @@
             this.OTGWCheckBoxEnableLoggingToFile = new System.Windows.Forms.CheckBox();
             this.OTGWCheckBoxAppend = new System.Windows.Forms.CheckBox();
             this.OTGWLabelAppend = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.OTGWTextBoxLogfileName = new System.Windows.Forms.TextBox();
             this.OTGWLabelLogfileName = new System.Windows.Forms.Label();
             this.OTGWListboxLog = new System.Windows.Forms.ListBox();
@@ -148,7 +148,7 @@
             this.OTGWLabelDiagTapWaterEnabled = new System.Windows.Forms.Label();
             this.OTGWTextBoxDiagCentralHeatingEnabled = new System.Windows.Forms.TextBox();
             this.OTGWLabelDiagCentralHeatingEnabled = new System.Windows.Forms.Label();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.OTGWTabOTGWDiagnostics = new System.Windows.Forms.TabPage();
             this.OTGWTextBoxDiagProductVersionSlave = new System.Windows.Forms.TextBox();
             this.OTGWLabelProductVersionSlave = new System.Windows.Forms.Label();
             this.OTGWTextBoxDiagProductVersionMaster = new System.Windows.Forms.TextBox();
@@ -194,18 +194,32 @@
             this.OTGWTextBoxDiagVersion = new System.Windows.Forms.TextBox();
             this.OTGWLabelDiagVersion = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.MaxTextBoxHostname = new System.Windows.Forms.TextBox();
+            this.MaxTabControl = new System.Windows.Forms.TabControl();
+            this.MaxTabPageStatusOverview = new System.Windows.Forms.TabPage();
+            this.MaxTabConnection = new System.Windows.Forms.TabPage();
             this.MaxLabelHostName = new System.Windows.Forms.Label();
+            this.MAXListboxLog = new System.Windows.Forms.ListBox();
+            this.MaxTextBoxHostname = new System.Windows.Forms.TextBox();
             this.MaxButtonDisconnect = new System.Windows.Forms.Button();
             this.MaxButtonConnect = new System.Windows.Forms.Button();
-            this.MAXListboxLog = new System.Windows.Forms.ListBox();
+            this.MaxTabRooms = new System.Windows.Forms.TabPage();
+            this.MaxListBoxRoomsDevice = new System.Windows.Forms.ListBox();
+            this.MaxLabelRoomsDevice = new System.Windows.Forms.Label();
+            this.MaxListBoxRoomsRooms = new System.Windows.Forms.ListBox();
+            this.MaxListBoxRoomsMaxCube = new System.Windows.Forms.ListBox();
+            this.MaxLabelRoomsRoom = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsMaxCube = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.OTGWTabStatus.SuspendLayout();
             this.OTGWTabConnection.SuspendLayout();
             this.OTGWTabBoilerDiagnostics.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.OTGWTabOTGWDiagnostics.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.MaxTabControl.SuspendLayout();
+            this.MaxTabConnection.SuspendLayout();
+            this.MaxTabRooms.SuspendLayout();
             this.SuspendLayout();
             // 
             // OTGWButtonConnect
@@ -244,7 +258,7 @@
             this.OTGWTabcontrol.Controls.Add(this.OTGWTabStatus);
             this.OTGWTabcontrol.Controls.Add(this.OTGWTabConnection);
             this.OTGWTabcontrol.Controls.Add(this.OTGWTabBoilerDiagnostics);
-            this.OTGWTabcontrol.Controls.Add(this.tabPage1);
+            this.OTGWTabcontrol.Controls.Add(this.OTGWTabOTGWDiagnostics);
             this.OTGWTabcontrol.Location = new System.Drawing.Point(6, 19);
             this.OTGWTabcontrol.Name = "OTGWTabcontrol";
             this.OTGWTabcontrol.SelectedIndex = 0;
@@ -570,7 +584,6 @@
             this.OTGWTabConnection.Controls.Add(this.OTGWCheckBoxEnableLoggingToFile);
             this.OTGWTabConnection.Controls.Add(this.OTGWCheckBoxAppend);
             this.OTGWTabConnection.Controls.Add(this.OTGWLabelAppend);
-            this.OTGWTabConnection.Controls.Add(this.label1);
             this.OTGWTabConnection.Controls.Add(this.OTGWTextBoxLogfileName);
             this.OTGWTabConnection.Controls.Add(this.OTGWLabelLogfileName);
             this.OTGWTabConnection.Controls.Add(this.OTGWListboxLog);
@@ -612,15 +625,6 @@
             this.OTGWLabelAppend.Size = new System.Drawing.Size(44, 13);
             this.OTGWLabelAppend.TabIndex = 9;
             this.OTGWLabelAppend.Text = "Append";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "label1";
             // 
             // OTGWTextBoxLogfileName
             // 
@@ -1316,59 +1320,59 @@
             this.OTGWLabelDiagCentralHeatingEnabled.TabIndex = 0;
             this.OTGWLabelDiagCentralHeatingEnabled.Text = "Central heating enabled";
             // 
-            // tabPage1
+            // OTGWTabOTGWDiagnostics
             // 
-            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagProductVersionSlave);
-            this.tabPage1.Controls.Add(this.OTGWLabelProductVersionSlave);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagProductVersionMaster);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagProductVersionMaster);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagProductTypeSlave);
-            this.tabPage1.Controls.Add(this.OTGWLabelProductTypeSlave);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagProductTypeMaster);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagProductTypeMaster);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagOpenThermVersionSlave);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagOpenThermVersionSlave);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagOpenThermVersionMaster);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagOpenThermVersionMaster);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagHotWater);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagHotWater);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagReferenceVoltage);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagReferenceVoltage);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagTweaks);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagTweaks);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagSetbackTemperature);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagSetbackTemperature);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagRemehaDetectionState);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagRemehaDetectionState);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagCauseOfLastReset);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagCauseOfLastReset);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagSmartPowerMode);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagSmartPowerMode);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagSetpointOverride);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagSetpointOverride);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagGatewayMode);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagGatewayMode);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagLedFunctions);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagLedFunctions);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagGPIOState);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagGPIOFunctions);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagGPIOState);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagGPIOFucntions);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagTemperatureSensorFunction);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagTemperatureSensorFunction);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagClockSpeed);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagClockSpeed);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagBuild);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagBuild);
-            this.tabPage1.Controls.Add(this.OTGWTextBoxDiagVersion);
-            this.tabPage1.Controls.Add(this.OTGWLabelDiagVersion);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(624, 504);
-            this.tabPage1.TabIndex = 3;
-            this.tabPage1.Text = "OTGW Diagnostics";
+            this.OTGWTabOTGWDiagnostics.BackColor = System.Drawing.SystemColors.Control;
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagProductVersionSlave);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelProductVersionSlave);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagProductVersionMaster);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagProductVersionMaster);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagProductTypeSlave);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelProductTypeSlave);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagProductTypeMaster);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagProductTypeMaster);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagOpenThermVersionSlave);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagOpenThermVersionSlave);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagOpenThermVersionMaster);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagOpenThermVersionMaster);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagHotWater);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagHotWater);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagReferenceVoltage);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagReferenceVoltage);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagTweaks);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagTweaks);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagSetbackTemperature);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagSetbackTemperature);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagRemehaDetectionState);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagRemehaDetectionState);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagCauseOfLastReset);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagCauseOfLastReset);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagSmartPowerMode);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagSmartPowerMode);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagSetpointOverride);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagSetpointOverride);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagGatewayMode);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagGatewayMode);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagLedFunctions);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagLedFunctions);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagGPIOState);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagGPIOFunctions);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagGPIOState);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagGPIOFucntions);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagTemperatureSensorFunction);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagTemperatureSensorFunction);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagClockSpeed);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagClockSpeed);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagBuild);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagBuild);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWTextBoxDiagVersion);
+            this.OTGWTabOTGWDiagnostics.Controls.Add(this.OTGWLabelDiagVersion);
+            this.OTGWTabOTGWDiagnostics.Location = new System.Drawing.Point(4, 22);
+            this.OTGWTabOTGWDiagnostics.Name = "OTGWTabOTGWDiagnostics";
+            this.OTGWTabOTGWDiagnostics.Padding = new System.Windows.Forms.Padding(3);
+            this.OTGWTabOTGWDiagnostics.Size = new System.Drawing.Size(624, 504);
+            this.OTGWTabOTGWDiagnostics.TabIndex = 3;
+            this.OTGWTabOTGWDiagnostics.Text = "OTGW Diagnostics";
             // 
             // OTGWTextBoxDiagProductVersionSlave
             // 
@@ -1724,11 +1728,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.MAXListboxLog);
-            this.groupBox2.Controls.Add(this.MaxTextBoxHostname);
-            this.groupBox2.Controls.Add(this.MaxLabelHostName);
-            this.groupBox2.Controls.Add(this.MaxButtonDisconnect);
-            this.groupBox2.Controls.Add(this.MaxButtonConnect);
+            this.groupBox2.Controls.Add(this.MaxTabControl);
             this.groupBox2.Location = new System.Drawing.Point(15, 23);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(457, 505);
@@ -1736,26 +1736,71 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "EQ-3 Max!";
             // 
-            // MaxTextBoxHostname
+            // MaxTabControl
             // 
-            this.MaxTextBoxHostname.Location = new System.Drawing.Point(173, 64);
-            this.MaxTextBoxHostname.Name = "MaxTextBoxHostname";
-            this.MaxTextBoxHostname.Size = new System.Drawing.Size(268, 20);
-            this.MaxTextBoxHostname.TabIndex = 3;
-            this.MaxTextBoxHostname.Text = "KEQ0567251";
+            this.MaxTabControl.Controls.Add(this.MaxTabPageStatusOverview);
+            this.MaxTabControl.Controls.Add(this.MaxTabConnection);
+            this.MaxTabControl.Controls.Add(this.MaxTabRooms);
+            this.MaxTabControl.Location = new System.Drawing.Point(6, 19);
+            this.MaxTabControl.Name = "MaxTabControl";
+            this.MaxTabControl.SelectedIndex = 0;
+            this.MaxTabControl.Size = new System.Drawing.Size(445, 526);
+            this.MaxTabControl.TabIndex = 5;
+            this.MaxTabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.MaxTabControl_Selected);
+            // 
+            // MaxTabPageStatusOverview
+            // 
+            this.MaxTabPageStatusOverview.BackColor = System.Drawing.SystemColors.Control;
+            this.MaxTabPageStatusOverview.Location = new System.Drawing.Point(4, 22);
+            this.MaxTabPageStatusOverview.Name = "MaxTabPageStatusOverview";
+            this.MaxTabPageStatusOverview.Padding = new System.Windows.Forms.Padding(3);
+            this.MaxTabPageStatusOverview.Size = new System.Drawing.Size(437, 500);
+            this.MaxTabPageStatusOverview.TabIndex = 0;
+            this.MaxTabPageStatusOverview.Text = "Status Overview";
+            // 
+            // MaxTabConnection
+            // 
+            this.MaxTabConnection.BackColor = System.Drawing.SystemColors.Control;
+            this.MaxTabConnection.Controls.Add(this.MaxLabelHostName);
+            this.MaxTabConnection.Controls.Add(this.MAXListboxLog);
+            this.MaxTabConnection.Controls.Add(this.MaxTextBoxHostname);
+            this.MaxTabConnection.Controls.Add(this.MaxButtonDisconnect);
+            this.MaxTabConnection.Controls.Add(this.MaxButtonConnect);
+            this.MaxTabConnection.Location = new System.Drawing.Point(4, 22);
+            this.MaxTabConnection.Name = "MaxTabConnection";
+            this.MaxTabConnection.Padding = new System.Windows.Forms.Padding(3);
+            this.MaxTabConnection.Size = new System.Drawing.Size(437, 500);
+            this.MaxTabConnection.TabIndex = 1;
+            this.MaxTabConnection.Text = "Connection";
             // 
             // MaxLabelHostName
             // 
             this.MaxLabelHostName.AutoSize = true;
-            this.MaxLabelHostName.Location = new System.Drawing.Point(20, 67);
+            this.MaxLabelHostName.Location = new System.Drawing.Point(6, 26);
             this.MaxLabelHostName.Name = "MaxLabelHostName";
             this.MaxLabelHostName.Size = new System.Drawing.Size(113, 13);
             this.MaxLabelHostName.TabIndex = 2;
             this.MaxLabelHostName.Text = "Hostname/ IP-address";
             // 
+            // MAXListboxLog
+            // 
+            this.MAXListboxLog.FormattingEnabled = true;
+            this.MAXListboxLog.Location = new System.Drawing.Point(6, 116);
+            this.MAXListboxLog.Name = "MAXListboxLog";
+            this.MAXListboxLog.Size = new System.Drawing.Size(418, 238);
+            this.MAXListboxLog.TabIndex = 4;
+            // 
+            // MaxTextBoxHostname
+            // 
+            this.MaxTextBoxHostname.Location = new System.Drawing.Point(156, 23);
+            this.MaxTextBoxHostname.Name = "MaxTextBoxHostname";
+            this.MaxTextBoxHostname.Size = new System.Drawing.Size(268, 20);
+            this.MaxTextBoxHostname.TabIndex = 3;
+            this.MaxTextBoxHostname.Text = "KEQ0567251";
+            // 
             // MaxButtonDisconnect
             // 
-            this.MaxButtonDisconnect.Location = new System.Drawing.Point(250, 107);
+            this.MaxButtonDisconnect.Location = new System.Drawing.Point(233, 67);
             this.MaxButtonDisconnect.Name = "MaxButtonDisconnect";
             this.MaxButtonDisconnect.Size = new System.Drawing.Size(191, 31);
             this.MaxButtonDisconnect.TabIndex = 1;
@@ -1765,7 +1810,7 @@
             // 
             // MaxButtonConnect
             // 
-            this.MaxButtonConnect.Location = new System.Drawing.Point(23, 104);
+            this.MaxButtonConnect.Location = new System.Drawing.Point(6, 64);
             this.MaxButtonConnect.Name = "MaxButtonConnect";
             this.MaxButtonConnect.Size = new System.Drawing.Size(191, 34);
             this.MaxButtonConnect.TabIndex = 0;
@@ -1773,13 +1818,76 @@
             this.MaxButtonConnect.UseVisualStyleBackColor = true;
             this.MaxButtonConnect.Click += new System.EventHandler(this.MAXButtonConnect_Click);
             // 
-            // MAXListboxLog
+            // MaxTabRooms
             // 
-            this.MAXListboxLog.FormattingEnabled = true;
-            this.MAXListboxLog.Location = new System.Drawing.Point(23, 157);
-            this.MAXListboxLog.Name = "MAXListboxLog";
-            this.MAXListboxLog.Size = new System.Drawing.Size(418, 238);
-            this.MAXListboxLog.TabIndex = 4;
+            this.MaxTabRooms.BackColor = System.Drawing.SystemColors.Control;
+            this.MaxTabRooms.Controls.Add(this.MaxListBoxRoomsDevice);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsDevice);
+            this.MaxTabRooms.Controls.Add(this.MaxListBoxRoomsRooms);
+            this.MaxTabRooms.Controls.Add(this.MaxListBoxRoomsMaxCube);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsRoom);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsMaxCube);
+            this.MaxTabRooms.Location = new System.Drawing.Point(4, 22);
+            this.MaxTabRooms.Name = "MaxTabRooms";
+            this.MaxTabRooms.Padding = new System.Windows.Forms.Padding(3);
+            this.MaxTabRooms.Size = new System.Drawing.Size(437, 500);
+            this.MaxTabRooms.TabIndex = 2;
+            this.MaxTabRooms.Text = "Rooms";
+            // 
+            // MaxListBoxRoomsDevice
+            // 
+            this.MaxListBoxRoomsDevice.FormattingEnabled = true;
+            this.MaxListBoxRoomsDevice.Location = new System.Drawing.Point(64, 325);
+            this.MaxListBoxRoomsDevice.Name = "MaxListBoxRoomsDevice";
+            this.MaxListBoxRoomsDevice.ScrollAlwaysVisible = true;
+            this.MaxListBoxRoomsDevice.Size = new System.Drawing.Size(191, 95);
+            this.MaxListBoxRoomsDevice.TabIndex = 6;
+            // 
+            // MaxLabelRoomsDevice
+            // 
+            this.MaxLabelRoomsDevice.AutoSize = true;
+            this.MaxLabelRoomsDevice.Location = new System.Drawing.Point(6, 325);
+            this.MaxLabelRoomsDevice.Name = "MaxLabelRoomsDevice";
+            this.MaxLabelRoomsDevice.Size = new System.Drawing.Size(41, 13);
+            this.MaxLabelRoomsDevice.TabIndex = 5;
+            this.MaxLabelRoomsDevice.Text = "Device";
+            // 
+            // MaxListBoxRoomsRooms
+            // 
+            this.MaxListBoxRoomsRooms.FormattingEnabled = true;
+            this.MaxListBoxRoomsRooms.Location = new System.Drawing.Point(64, 108);
+            this.MaxListBoxRoomsRooms.Name = "MaxListBoxRoomsRooms";
+            this.MaxListBoxRoomsRooms.ScrollAlwaysVisible = true;
+            this.MaxListBoxRoomsRooms.Size = new System.Drawing.Size(191, 95);
+            this.MaxListBoxRoomsRooms.TabIndex = 4;
+            // 
+            // MaxListBoxRoomsMaxCube
+            // 
+            this.MaxListBoxRoomsMaxCube.FormattingEnabled = true;
+            this.MaxListBoxRoomsMaxCube.Location = new System.Drawing.Point(64, 8);
+            this.MaxListBoxRoomsMaxCube.Name = "MaxListBoxRoomsMaxCube";
+            this.MaxListBoxRoomsMaxCube.ScrollAlwaysVisible = true;
+            this.MaxListBoxRoomsMaxCube.Size = new System.Drawing.Size(191, 30);
+            this.MaxListBoxRoomsMaxCube.TabIndex = 3;
+            this.MaxListBoxRoomsMaxCube.SelectedIndexChanged += new System.EventHandler(this.MaxListBoxRoomsMaxCube_SelectedIndexChanged);
+            // 
+            // MaxLabelRoomsRoom
+            // 
+            this.MaxLabelRoomsRoom.AutoSize = true;
+            this.MaxLabelRoomsRoom.Location = new System.Drawing.Point(6, 105);
+            this.MaxLabelRoomsRoom.Name = "MaxLabelRoomsRoom";
+            this.MaxLabelRoomsRoom.Size = new System.Drawing.Size(35, 13);
+            this.MaxLabelRoomsRoom.TabIndex = 2;
+            this.MaxLabelRoomsRoom.Text = "Room";
+            // 
+            // MaxLabelRoomsMaxCube
+            // 
+            this.MaxLabelRoomsMaxCube.AutoSize = true;
+            this.MaxLabelRoomsMaxCube.Location = new System.Drawing.Point(6, 17);
+            this.MaxLabelRoomsMaxCube.Name = "MaxLabelRoomsMaxCube";
+            this.MaxLabelRoomsMaxCube.Size = new System.Drawing.Size(52, 13);
+            this.MaxLabelRoomsMaxCube.TabIndex = 0;
+            this.MaxLabelRoomsMaxCube.Text = "MaxCube";
             // 
             // Form1
             // 
@@ -1799,10 +1907,14 @@
             this.OTGWTabConnection.PerformLayout();
             this.OTGWTabBoilerDiagnostics.ResumeLayout(false);
             this.OTGWTabBoilerDiagnostics.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.OTGWTabOTGWDiagnostics.ResumeLayout(false);
+            this.OTGWTabOTGWDiagnostics.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.MaxTabControl.ResumeLayout(false);
+            this.MaxTabConnection.ResumeLayout(false);
+            this.MaxTabConnection.PerformLayout();
+            this.MaxTabRooms.ResumeLayout(false);
+            this.MaxTabRooms.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1852,7 +1964,7 @@
         private System.Windows.Forms.Label OTGWLabelReturnTemperature;
         private System.Windows.Forms.TextBox OTGWTextBoxOutsideTemperature;
         private System.Windows.Forms.Label OTGWLabelOutsideTemperature;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage OTGWTabOTGWDiagnostics;
         private System.Windows.Forms.Label OTGWLabelDiagVersion;
         private System.Windows.Forms.TextBox OTGWTextBoxDiagVersion;
         private System.Windows.Forms.TextBox OTGWTextBoxDiagBuild;
@@ -1969,7 +2081,6 @@
         private System.Windows.Forms.Label OTGWLabelDiagProductTypeMaster;
         private System.Windows.Forms.TextBox OTGWTextBoxDiagProductVersionSlave;
         private ScottPlot.FormsPlot OTGWFormsPlotFloats;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox OTGWTextBoxLogfileName;
         private System.Windows.Forms.Label OTGWLabelLogfileName;
         private System.Windows.Forms.CheckBox OTGWCheckBoxAppend;
@@ -1980,6 +2091,17 @@
         private System.Windows.Forms.Button MaxButtonDisconnect;
         private System.Windows.Forms.TextBox MaxTextBoxHostname;
         private System.Windows.Forms.ListBox MAXListboxLog;
+        private System.Windows.Forms.TabControl MaxTabControl;
+        private System.Windows.Forms.TabPage MaxTabPageStatusOverview;
+        private System.Windows.Forms.TabPage MaxTabConnection;
+        private System.Windows.Forms.TabPage MaxTabRooms;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ListBox MaxListBoxRoomsDevice;
+        private System.Windows.Forms.Label MaxLabelRoomsDevice;
+        private System.Windows.Forms.ListBox MaxListBoxRoomsRooms;
+        private System.Windows.Forms.ListBox MaxListBoxRoomsMaxCube;
+        private System.Windows.Forms.Label MaxLabelRoomsRoom;
+        private System.Windows.Forms.Label MaxLabelRoomsMaxCube;
     }
 }
 

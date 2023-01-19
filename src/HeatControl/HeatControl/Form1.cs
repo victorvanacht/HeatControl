@@ -13,13 +13,14 @@ using System.Diagnostics;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 using System.IO;
+using static HeatControl.MaxCubeLogger.MaxCube;
 
 namespace HeatControl
 {
     public partial class Form1 : Form
     {
         private OTGW otgw;
-        private MaxCubeLogger maxCube;
+        private MaxCubeLogger maxCubeLogger;
         private FileStream logFileStream;
 
         public Form1()
@@ -27,7 +28,7 @@ namespace HeatControl
             InitializeComponent();
 
             this.otgw = new OTGW();
-            this.maxCube = new MaxCubeLogger();
+            this.maxCubeLogger = new MaxCubeLogger();
 
             this.listeners = new List<ListernerBase>()
             {
@@ -436,10 +437,10 @@ namespace HeatControl
 
         private void MAXButtonConnect_Click(object sender, EventArgs e)
         {
-            this.maxCube.hostName = this.MaxTextBoxHostname.Text;
-            this.maxCube.AddLogger(MAXLogger);
+            this.maxCubeLogger.hostName = this.MaxTextBoxHostname.Text;
+            this.maxCubeLogger.AddLogger(MAXLogger);
 
-            this.maxCube.Connect();
+            this.maxCubeLogger.Connect();
 
         }
 
@@ -462,7 +463,42 @@ namespace HeatControl
 
         private void MaxButtonDisconnect_Click(object sender, EventArgs e)
         {
-            this.maxCube.RemoveLogger(MAXLogger);
+            this.maxCubeLogger.RemoveLogger(MAXLogger);
+        }
+
+        private void MaxTabControl_Selected(object sender, TabControlEventArgs e)
+        {
+            TabPage selectedTab = this.MaxTabControl.SelectedTab;
+            if (selectedTab == this.MaxTabRooms) // see if we need to refresh the Rooms page
+            {
+                // Make all listboxes empty
+                this.MaxListBoxRoomsMaxCube.Items.Clear();
+                this.MaxListBoxRoomsRooms.Items.Clear();
+                this.MaxListBoxRoomsDevice.Items.Clear();
+
+                if (this.maxCubeLogger.IsConnected())
+                {
+                    foreach (MaxCubeLogger.MaxCube maxCube in this.maxCubeLogger.maxCubes)
+                    {
+                        this.MaxListBoxRoomsMaxCube.Items.Add(maxCube.iPAddress.ToString());
+                    }
+                }
+
+
+            }
+        }
+
+        private void MaxListBoxRoomsMaxCube_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.MaxListBoxRoomsRooms.Items.Clear();
+            this.MaxListBoxRoomsDevice.Items.Clear();
+
+            MaxCubeLogger.MaxCube maxCube = this.maxCubeLogger.maxCubes[this.MaxListBoxRoomsMaxCube.SelectedIndex];
+
+            foreach (KeyValuePair<int, Room> kvp  in maxCube.rooms)
+            {
+                this.MaxListBoxRoomsRooms.Items.Add("[" + kvp.Key.ToString() + "] " + kvp.Value.name);
+            }
         }
     }
 }

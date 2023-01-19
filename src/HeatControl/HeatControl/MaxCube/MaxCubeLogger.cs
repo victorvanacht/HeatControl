@@ -21,7 +21,7 @@ namespace HeatControl
 
         public string hostName;
 
-        List<MaxCube> maxCubes;
+        public List<MaxCube> maxCubes;
 
 
         public delegate void LogHandler(string text);
@@ -79,103 +79,24 @@ namespace HeatControl
             {
                 cube.Connect();
             }
-
-
-
-
-
-            /*
-            socketReader.Connect(this.hostName);
-
-            if (this.socketReader.IsConnected())
-            {
-                this.socketThreadShouldClose = false;
-                this.socketThread = new Thread(SocketThread);
-                this.socketThread.IsBackground = true;
-                this.socketThread.Start();
-            }
-
-            // first send three times PS=0 command to make sure that we receive log messages
-            socketReader.WriteLine("PS=0\n\r");
-            socketReader.WriteLine("PS=0\n\r");
-            socketReader.WriteLine("PS=0\n\r");
-
-            // send a list of commands to request configuration parameters
-            string[] initCommands = {"PR=A", "PR=B", "PR=C", "PR=G", "PR=I", "PR=L", "PR=M", "PR=O", "PR=P", // "PR=D" command does not return a proper response
-                                     "PR=Q", "PR=R", "PR=S", "PR=T", "PR=V", "PR=W" };
-            foreach (string line in initCommands)
-            {
-                commandQueue.EnqueueCommand(line);
-            }
         }
 
         public void Disconnect()
         {
-            this.socketThreadShouldClose = true;
-            this.socketThread.Join();
-            socketReader.Disconnect();
+            foreach (MaxCube cube in this.maxCubes)
+            {
+                cube.Disconnect();
+            }
         }
 
-        private SocketReader socketReader;
-        private Thread socketThread;
-        private volatile bool socketThreadShouldClose;
-        private volatile bool socketThreadHasClosed;
-        private void SocketThread()
+        public bool IsConnected()
         {
-            long lastStatusReportTick = 0;
-
-            socketThreadHasClosed = false;
-            while (socketThreadShouldClose == false)
+            bool r = true;
+            foreach (MaxCube cube in this.maxCubes)
             {
-                string[] lines = socketReader.ReadLines();
-                foreach (string line in lines)
-                {
-                    if (line.Length > 0)
-                    {
-                        Log(DateTime.Now.ToString() + " R:" + line);
-                        this.parser.Parse(line);
-                    }
-
-                    if (!commandQueue.IsEmpty())
-                    {
-                        CommandQueue.CommandQueueItem firstItem;
-                        if (commandQueue.TryPeek(out firstItem))
-                        {
-                            if ((firstItem.retryAttempts == 0) ||
-                                ((DateTime.Now.Ticks - firstItem.lastTransmitAttemptTick) > firstItem.retryDelayTicks))
-                            {
-                                if (firstItem.retryAttempts < firstItem.maxRetryAttempts)
-                                {
-                                    socketReader.WriteLine(firstItem.command);
-                                    firstItem.retryAttempts++;
-                                    firstItem.lastTransmitAttemptTick = DateTime.Now.Ticks;
-                                }
-                                else
-                                {
-                                    /// it failed!!
-                                    Console.WriteLine("Command failed!");
-
-                                    commandQueue.TryDequeueCommand(firstItem.command);
-                                    //throw new Exception("Command failed!");
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if ((DateTime.Now.Ticks - lastStatusReportTick) > (statusReportInterval * System.TimeSpan.TicksPerSecond))
-                {
-                    lastStatusReportTick = DateTime.Now.Ticks;
-
-                    StatusReport statusReport = new StatusReport(this.gatewayStatus);
-                    foreach (StatusReportHandler statusReportHandler in statusReportHandlers)
-                    {
-                        statusReportHandler(statusReport);
-                    }
-                }
+                if (!cube.IsConnected()) r = false;
             }
-            socketThreadHasClosed = true;
-            */
+            return r;
         }
 
         private static string GetLocalIPAddress()

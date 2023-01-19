@@ -203,9 +203,6 @@ namespace HeatControl
 
             public IPAddress iPAddress;
             public DeviceMaxCube deviceMaxCube;
-            //public string name;
-            //public string serial;
-            //public int RFAddress;
 
             public Dictionary<int, Room> rooms;
             public Dictionary<int, DeviceBase> deviceLookup;
@@ -244,22 +241,6 @@ namespace HeatControl
                     this.socketThread.Start();
                 }
 
-                /*
-                // first send three times PS=0 command to make sure that we receive log messages
-                socketReader.WriteLine("PS=0\n\r");
-                socketReader.WriteLine("PS=0\n\r");
-                socketReader.WriteLine("PS=0\n\r");
-
-                // send a list of commands to request configuration parameters
-                string[] initCommands = {"PR=A", "PR=B", "PR=C", "PR=G", "PR=I", "PR=L", "PR=M", "PR=O", "PR=P", // "PR=D" command does not return a proper response
-                                     "PR=Q", "PR=R", "PR=S", "PR=T", "PR=V", "PR=W" };
-                foreach (string line in initCommands)
-                {
-                    commandQueue.EnqueueCommand(line);
-                }
-                */
-
-
             }
 
             public void Disconnect()
@@ -267,6 +248,11 @@ namespace HeatControl
                 this.socketThreadShouldClose = true;
                 this.socketThread.Join();
                 this.socketReader.Disconnect();
+            }
+
+            public bool IsConnected()
+            {
+                return this.socketReader.IsConnected();
             }
 
 
