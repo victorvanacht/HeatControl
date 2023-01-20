@@ -14,6 +14,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 using System.IO;
 using static HeatControl.MaxCubeLogger.MaxCube;
+using static HeatControl.MaxCubeLogger;
 
 namespace HeatControl
 {
@@ -484,7 +485,13 @@ namespace HeatControl
                     }
                 }
 
-
+                this.MaxTextBoxRoomsCubeName.Text = "";
+                this.MaxTextBoxRoomsCubeSerialNumber.Text = "";
+                this.MaxTextBoxRoomsCubeRfAddress.Text = "";
+                this.MaxTextBoxRoomsCubeVersion.Text = "";
+                this.MaxTextBoxRoomsDutyCycle.Text = "";
+                this.MaxTextBoxRoomsEmptyMemorySlots.Text = "";
+                this.MaxTextBoxRoomsPortalURL.Text = "";
             }
         }
 
@@ -499,6 +506,32 @@ namespace HeatControl
             {
                 this.MaxListBoxRoomsRooms.Items.Add("[" + kvp.Key.ToString() + "] " + kvp.Value.name);
             }
+
+            this.MaxTextBoxRoomsCubeName.Text = maxCube.deviceMaxCube.name;
+            this.MaxTextBoxRoomsCubeSerialNumber.Text = maxCube.deviceMaxCube.serialNumber;
+            this.MaxTextBoxRoomsCubeRfAddress.Text = maxCube.deviceMaxCube.rfAddress.ToString("X6");
+            this.MaxTextBoxRoomsCubeVersion.Text = maxCube.deviceMaxCube.version;
+            this.MaxTextBoxRoomsDutyCycle.Text = maxCube.deviceMaxCube.dutyCycle.ToString();
+            this.MaxTextBoxRoomsEmptyMemorySlots.Text = maxCube.deviceMaxCube.freeMemorySlots.ToString();
+            this.MaxTextBoxRoomsPortalURL.Text = maxCube.deviceMaxCube.portalURL;
+
+
+
+
+        }
+
+        private void MaxListBoxRoomsRooms_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.MaxListBoxRoomsDevice.Items.Clear();
+
+            MaxCubeLogger.MaxCube maxCube = this.maxCubeLogger.maxCubes[this.MaxListBoxRoomsMaxCube.SelectedIndex];
+            MaxCubeLogger.MaxCube.Room room = maxCube.rooms[this.MaxListBoxRoomsRooms.SelectedIndex];
+
+            foreach (MaxCubeLogger.MaxCube.DeviceBase device in room.devices)
+            {
+                this.MaxListBoxRoomsDevice.Items.Add(device.name);
+            }
+
         }
     }
 }

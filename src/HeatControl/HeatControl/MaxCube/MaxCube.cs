@@ -204,7 +204,7 @@ namespace HeatControl
             public IPAddress iPAddress;
             public DeviceMaxCube deviceMaxCube;
 
-            public Dictionary<int, Room> rooms;
+            public SortedDictionary<int, Room> rooms;
             public Dictionary<int, DeviceBase> deviceLookup;
 
             private SocketReader socketReader;
@@ -214,7 +214,7 @@ namespace HeatControl
             public MaxCube(MaxCubeLogger maxCubeLogger, IPAddress iPAddress, string name, string serial, int RFAddress, string version)
             {
                 this.deviceLookup = new Dictionary<int, DeviceBase>();
-                this.rooms = new Dictionary<int, Room>();
+                this.rooms = new SortedDictionary<int, Room>();
                 this.rooms.Add(0, new Room("House", 0, 0));
 
                 this.deviceMaxCube = new DeviceMaxCube(name, serial, RFAddress, this.rooms[0]);

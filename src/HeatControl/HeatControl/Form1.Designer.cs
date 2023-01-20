@@ -210,6 +210,20 @@
             this.MaxLabelRoomsRoom = new System.Windows.Forms.Label();
             this.MaxLabelRoomsMaxCube = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.MaxLabelRoomsName = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsSerialNumber = new System.Windows.Forms.Label();
+            this.MaxLabelRFAddress = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsCubeName = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsCubeSerialNumber = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsCubeRfAddress = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsDutyCycle = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsEmptyMemorySlots = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsDutyCycle = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsEmptyMemorySlots = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsPortalURL = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsPortalURL = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsCubeVersion = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsCubeVersion = new System.Windows.Forms.TextBox();
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.OTGWTabStatus.SuspendLayout();
@@ -246,7 +260,7 @@
             // OTGWGroupbox
             // 
             this.OTGWGroupbox.Controls.Add(this.OTGWTabcontrol);
-            this.OTGWGroupbox.Location = new System.Drawing.Point(478, 23);
+            this.OTGWGroupbox.Location = new System.Drawing.Point(682, 23);
             this.OTGWGroupbox.Name = "OTGWGroupbox";
             this.OTGWGroupbox.Size = new System.Drawing.Size(670, 555);
             this.OTGWGroupbox.TabIndex = 2;
@@ -319,6 +333,7 @@
             // 
             this.OTGWTextBoxOutsideTemperature.Location = new System.Drawing.Point(551, 160);
             this.OTGWTextBoxOutsideTemperature.Name = "OTGWTextBoxOutsideTemperature";
+            this.OTGWTextBoxOutsideTemperature.ReadOnly = true;
             this.OTGWTextBoxOutsideTemperature.Size = new System.Drawing.Size(43, 20);
             this.OTGWTextBoxOutsideTemperature.TabIndex = 31;
             // 
@@ -335,6 +350,7 @@
             // 
             this.OTGWTextBoxReturnTemperature.Location = new System.Drawing.Point(318, 157);
             this.OTGWTextBoxReturnTemperature.Name = "OTGWTextBoxReturnTemperature";
+            this.OTGWTextBoxReturnTemperature.ReadOnly = true;
             this.OTGWTextBoxReturnTemperature.Size = new System.Drawing.Size(43, 20);
             this.OTGWTextBoxReturnTemperature.TabIndex = 29;
             // 
@@ -351,6 +367,7 @@
             // 
             this.OTGWTextBoxTapWaterTemperature.Location = new System.Drawing.Point(551, 131);
             this.OTGWTextBoxTapWaterTemperature.Name = "OTGWTextBoxTapWaterTemperature";
+            this.OTGWTextBoxTapWaterTemperature.ReadOnly = true;
             this.OTGWTextBoxTapWaterTemperature.Size = new System.Drawing.Size(43, 20);
             this.OTGWTextBoxTapWaterTemperature.TabIndex = 27;
             // 
@@ -367,6 +384,7 @@
             // 
             this.OTGWTextBoxTapWaterFlow.Location = new System.Drawing.Point(551, 105);
             this.OTGWTextBoxTapWaterFlow.Name = "OTGWTextBoxTapWaterFlow";
+            this.OTGWTextBoxTapWaterFlow.ReadOnly = true;
             this.OTGWTextBoxTapWaterFlow.Size = new System.Drawing.Size(43, 20);
             this.OTGWTextBoxTapWaterFlow.TabIndex = 25;
             // 
@@ -383,6 +401,7 @@
             // 
             this.OTGWTextBoxWaterPressure.Location = new System.Drawing.Point(551, 79);
             this.OTGWTextBoxWaterPressure.Name = "OTGWTextBoxWaterPressure";
+            this.OTGWTextBoxWaterPressure.ReadOnly = true;
             this.OTGWTextBoxWaterPressure.Size = new System.Drawing.Size(43, 20);
             this.OTGWTextBoxWaterPressure.TabIndex = 23;
             // 
@@ -399,6 +418,7 @@
             // 
             this.OTGWTextBoxModulationLevel.Location = new System.Drawing.Point(318, 131);
             this.OTGWTextBoxModulationLevel.Name = "OTGWTextBoxModulationLevel";
+            this.OTGWTextBoxModulationLevel.ReadOnly = true;
             this.OTGWTextBoxModulationLevel.Size = new System.Drawing.Size(43, 20);
             this.OTGWTextBoxModulationLevel.TabIndex = 21;
             // 
@@ -415,6 +435,7 @@
             // 
             this.OTGWTextBoxRoomSetpoint.Location = new System.Drawing.Point(318, 105);
             this.OTGWTextBoxRoomSetpoint.Name = "OTGWTextBoxRoomSetpoint";
+            this.OTGWTextBoxRoomSetpoint.ReadOnly = true;
             this.OTGWTextBoxRoomSetpoint.Size = new System.Drawing.Size(43, 20);
             this.OTGWTextBoxRoomSetpoint.TabIndex = 19;
             // 
@@ -431,6 +452,7 @@
             // 
             this.OTGWTextBoxControlSetpointModified.Location = new System.Drawing.Point(357, 79);
             this.OTGWTextBoxControlSetpointModified.Name = "OTGWTextBoxControlSetpointModified";
+            this.OTGWTextBoxControlSetpointModified.ReadOnly = true;
             this.OTGWTextBoxControlSetpointModified.Size = new System.Drawing.Size(27, 20);
             this.OTGWTextBoxControlSetpointModified.TabIndex = 17;
             // 
@@ -447,6 +469,7 @@
             // 
             this.OTGWTextBoxControlSetpoint.Location = new System.Drawing.Point(318, 79);
             this.OTGWTextBoxControlSetpoint.Name = "OTGWTextBoxControlSetpoint";
+            this.OTGWTextBoxControlSetpoint.ReadOnly = true;
             this.OTGWTextBoxControlSetpoint.Size = new System.Drawing.Size(27, 20);
             this.OTGWTextBoxControlSetpoint.TabIndex = 15;
             // 
@@ -463,6 +486,7 @@
             // 
             this.OTGWTextBoxFaultIndication.Location = new System.Drawing.Point(119, 157);
             this.OTGWTextBoxFaultIndication.Name = "OTGWTextBoxFaultIndication";
+            this.OTGWTextBoxFaultIndication.ReadOnly = true;
             this.OTGWTextBoxFaultIndication.Size = new System.Drawing.Size(43, 20);
             this.OTGWTextBoxFaultIndication.TabIndex = 13;
             // 
@@ -479,6 +503,7 @@
             // 
             this.OTGWTextBoxTapWaterMode.Location = new System.Drawing.Point(119, 131);
             this.OTGWTextBoxTapWaterMode.Name = "OTGWTextBoxTapWaterMode";
+            this.OTGWTextBoxTapWaterMode.ReadOnly = true;
             this.OTGWTextBoxTapWaterMode.Size = new System.Drawing.Size(43, 20);
             this.OTGWTextBoxTapWaterMode.TabIndex = 11;
             // 
@@ -495,6 +520,7 @@
             // 
             this.OTGWTextBoxCentralHeatingMode.Location = new System.Drawing.Point(119, 105);
             this.OTGWTextBoxCentralHeatingMode.Name = "OTGWTextBoxCentralHeatingMode";
+            this.OTGWTextBoxCentralHeatingMode.ReadOnly = true;
             this.OTGWTextBoxCentralHeatingMode.Size = new System.Drawing.Size(43, 20);
             this.OTGWTextBoxCentralHeatingMode.TabIndex = 9;
             // 
@@ -511,6 +537,7 @@
             // 
             this.OTGWTextBoxFlameStatus.Location = new System.Drawing.Point(119, 79);
             this.OTGWTextBoxFlameStatus.Name = "OTGWTextBoxFlameStatus";
+            this.OTGWTextBoxFlameStatus.ReadOnly = true;
             this.OTGWTextBoxFlameStatus.Size = new System.Drawing.Size(43, 20);
             this.OTGWTextBoxFlameStatus.TabIndex = 7;
             // 
@@ -547,6 +574,7 @@
             this.OTGWTextBoxBoilerTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OTGWTextBoxBoilerTemp.Location = new System.Drawing.Point(494, 44);
             this.OTGWTextBoxBoilerTemp.Name = "OTGWTextBoxBoilerTemp";
+            this.OTGWTextBoxBoilerTemp.ReadOnly = true;
             this.OTGWTextBoxBoilerTemp.Size = new System.Drawing.Size(100, 26);
             this.OTGWTextBoxBoilerTemp.TabIndex = 3;
             // 
@@ -566,6 +594,7 @@
             this.OTGWTextBoxRoomTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OTGWTextBoxRoomTemp.Location = new System.Drawing.Point(174, 45);
             this.OTGWTextBoxRoomTemp.Name = "OTGWTextBoxRoomTemp";
+            this.OTGWTextBoxRoomTemp.ReadOnly = true;
             this.OTGWTextBoxRoomTemp.Size = new System.Drawing.Size(100, 26);
             this.OTGWTextBoxRoomTemp.TabIndex = 1;
             // 
@@ -753,6 +782,7 @@
             // 
             this.OTGWTextBoxDiagTapWaterBurnerHours.Location = new System.Drawing.Point(526, 317);
             this.OTGWTextBoxDiagTapWaterBurnerHours.Name = "OTGWTextBoxDiagTapWaterBurnerHours";
+            this.OTGWTextBoxDiagTapWaterBurnerHours.ReadOnly = true;
             this.OTGWTextBoxDiagTapWaterBurnerHours.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagTapWaterBurnerHours.TabIndex = 66;
             // 
@@ -769,6 +799,7 @@
             // 
             this.OTGWTextBoxDiagTapWaterValveHours.Location = new System.Drawing.Point(526, 291);
             this.OTGWTextBoxDiagTapWaterValveHours.Name = "OTGWTextBoxDiagTapWaterValveHours";
+            this.OTGWTextBoxDiagTapWaterValveHours.ReadOnly = true;
             this.OTGWTextBoxDiagTapWaterValveHours.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagTapWaterValveHours.TabIndex = 64;
             // 
@@ -785,6 +816,7 @@
             // 
             this.OTGWTextBoxDiagPumpHours.Location = new System.Drawing.Point(526, 265);
             this.OTGWTextBoxDiagPumpHours.Name = "OTGWTextBoxDiagPumpHours";
+            this.OTGWTextBoxDiagPumpHours.ReadOnly = true;
             this.OTGWTextBoxDiagPumpHours.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagPumpHours.TabIndex = 62;
             // 
@@ -801,6 +833,7 @@
             // 
             this.OTGWTextBoxDiagBurnerHours.Location = new System.Drawing.Point(526, 239);
             this.OTGWTextBoxDiagBurnerHours.Name = "OTGWTextBoxDiagBurnerHours";
+            this.OTGWTextBoxDiagBurnerHours.ReadOnly = true;
             this.OTGWTextBoxDiagBurnerHours.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagBurnerHours.TabIndex = 60;
             // 
@@ -817,6 +850,7 @@
             // 
             this.OTGWTextBoxDiagTapWaterBurnerStarts.Location = new System.Drawing.Point(329, 317);
             this.OTGWTextBoxDiagTapWaterBurnerStarts.Name = "OTGWTextBoxDiagTapWaterBurnerStarts";
+            this.OTGWTextBoxDiagTapWaterBurnerStarts.ReadOnly = true;
             this.OTGWTextBoxDiagTapWaterBurnerStarts.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagTapWaterBurnerStarts.TabIndex = 58;
             // 
@@ -833,6 +867,7 @@
             // 
             this.OTGWTextBoxDiagTapWaterValveStarts.Location = new System.Drawing.Point(329, 291);
             this.OTGWTextBoxDiagTapWaterValveStarts.Name = "OTGWTextBoxDiagTapWaterValveStarts";
+            this.OTGWTextBoxDiagTapWaterValveStarts.ReadOnly = true;
             this.OTGWTextBoxDiagTapWaterValveStarts.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagTapWaterValveStarts.TabIndex = 56;
             // 
@@ -849,6 +884,7 @@
             // 
             this.OTGWTextBoxDiagPumpStarts.Location = new System.Drawing.Point(329, 265);
             this.OTGWTextBoxDiagPumpStarts.Name = "OTGWTextBoxDiagPumpStarts";
+            this.OTGWTextBoxDiagPumpStarts.ReadOnly = true;
             this.OTGWTextBoxDiagPumpStarts.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagPumpStarts.TabIndex = 54;
             // 
@@ -865,6 +901,7 @@
             // 
             this.OTGWTextBoxDiagBurnerStarts.Location = new System.Drawing.Point(329, 239);
             this.OTGWTextBoxDiagBurnerStarts.Name = "OTGWTextBoxDiagBurnerStarts";
+            this.OTGWTextBoxDiagBurnerStarts.ReadOnly = true;
             this.OTGWTextBoxDiagBurnerStarts.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagBurnerStarts.TabIndex = 52;
             // 
@@ -881,6 +918,7 @@
             // 
             this.OTGWTextBoxDiagExhaustTemperature.Location = new System.Drawing.Point(135, 343);
             this.OTGWTextBoxDiagExhaustTemperature.Name = "OTGWTextBoxDiagExhaustTemperature";
+            this.OTGWTextBoxDiagExhaustTemperature.ReadOnly = true;
             this.OTGWTextBoxDiagExhaustTemperature.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagExhaustTemperature.TabIndex = 50;
             // 
@@ -897,6 +935,7 @@
             // 
             this.OTGWTextBoxDiagTapWater2Temperature.Location = new System.Drawing.Point(135, 317);
             this.OTGWTextBoxDiagTapWater2Temperature.Name = "OTGWTextBoxDiagTapWater2Temperature";
+            this.OTGWTextBoxDiagTapWater2Temperature.ReadOnly = true;
             this.OTGWTextBoxDiagTapWater2Temperature.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagTapWater2Temperature.TabIndex = 48;
             // 
@@ -913,6 +952,7 @@
             // 
             this.OTGWTextBoxDiagFlowTemperatureCH2.Location = new System.Drawing.Point(135, 291);
             this.OTGWTextBoxDiagFlowTemperatureCH2.Name = "OTGWTextBoxDiagFlowTemperatureCH2";
+            this.OTGWTextBoxDiagFlowTemperatureCH2.ReadOnly = true;
             this.OTGWTextBoxDiagFlowTemperatureCH2.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagFlowTemperatureCH2.TabIndex = 46;
             // 
@@ -929,6 +969,7 @@
             // 
             this.OTGWTextBoxDiagSolarCollectorTemperature.Location = new System.Drawing.Point(135, 265);
             this.OTGWTextBoxDiagSolarCollectorTemperature.Name = "OTGWTextBoxDiagSolarCollectorTemperature";
+            this.OTGWTextBoxDiagSolarCollectorTemperature.ReadOnly = true;
             this.OTGWTextBoxDiagSolarCollectorTemperature.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagSolarCollectorTemperature.TabIndex = 44;
             // 
@@ -945,6 +986,7 @@
             // 
             this.OTGWTextBoxDiagSolarStorageTemperature.Location = new System.Drawing.Point(135, 239);
             this.OTGWTextBoxDiagSolarStorageTemperature.Name = "OTGWTextBoxDiagSolarStorageTemperature";
+            this.OTGWTextBoxDiagSolarStorageTemperature.ReadOnly = true;
             this.OTGWTextBoxDiagSolarStorageTemperature.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagSolarStorageTemperature.TabIndex = 42;
             // 
@@ -979,6 +1021,7 @@
             // 
             this.OTGWTextBoxDiagOEMDiagnosticCode.Location = new System.Drawing.Point(564, 191);
             this.OTGWTextBoxDiagOEMDiagnosticCode.Name = "OTGWTextBoxDiagOEMDiagnosticCode";
+            this.OTGWTextBoxDiagOEMDiagnosticCode.ReadOnly = true;
             this.OTGWTextBoxDiagOEMDiagnosticCode.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagOEMDiagnosticCode.TabIndex = 41;
             // 
@@ -1004,6 +1047,7 @@
             // 
             this.OTGWTextBoxDiagOEMFaultCode.Location = new System.Drawing.Point(564, 165);
             this.OTGWTextBoxDiagOEMFaultCode.Name = "OTGWTextBoxDiagOEMFaultCode";
+            this.OTGWTextBoxDiagOEMFaultCode.ReadOnly = true;
             this.OTGWTextBoxDiagOEMFaultCode.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagOEMFaultCode.TabIndex = 39;
             // 
@@ -1020,6 +1064,7 @@
             // 
             this.OTGWTextBoxDiagWaterOvertemp.Location = new System.Drawing.Point(564, 139);
             this.OTGWTextBoxDiagWaterOvertemp.Name = "OTGWTextBoxDiagWaterOvertemp";
+            this.OTGWTextBoxDiagWaterOvertemp.ReadOnly = true;
             this.OTGWTextBoxDiagWaterOvertemp.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagWaterOvertemp.TabIndex = 37;
             // 
@@ -1036,6 +1081,7 @@
             // 
             this.OTGWTextBoxDiagAirPressureFault.Location = new System.Drawing.Point(564, 113);
             this.OTGWTextBoxDiagAirPressureFault.Name = "OTGWTextBoxDiagAirPressureFault";
+            this.OTGWTextBoxDiagAirPressureFault.ReadOnly = true;
             this.OTGWTextBoxDiagAirPressureFault.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagAirPressureFault.TabIndex = 35;
             // 
@@ -1052,6 +1098,7 @@
             // 
             this.OTGWTextBoxDiagGasFlameFault.Location = new System.Drawing.Point(564, 87);
             this.OTGWTextBoxDiagGasFlameFault.Name = "OTGWTextBoxDiagGasFlameFault";
+            this.OTGWTextBoxDiagGasFlameFault.ReadOnly = true;
             this.OTGWTextBoxDiagGasFlameFault.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagGasFlameFault.TabIndex = 33;
             // 
@@ -1068,6 +1115,7 @@
             // 
             this.OTGWTextBoxDiagLowWaterPressure.Location = new System.Drawing.Point(564, 61);
             this.OTGWTextBoxDiagLowWaterPressure.Name = "OTGWTextBoxDiagLowWaterPressure";
+            this.OTGWTextBoxDiagLowWaterPressure.ReadOnly = true;
             this.OTGWTextBoxDiagLowWaterPressure.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagLowWaterPressure.TabIndex = 31;
             // 
@@ -1084,6 +1132,7 @@
             // 
             this.OTGWTextBoxDiagLockoutReset.Location = new System.Drawing.Point(564, 35);
             this.OTGWTextBoxDiagLockoutReset.Name = "OTGWTextBoxDiagLockoutReset";
+            this.OTGWTextBoxDiagLockoutReset.ReadOnly = true;
             this.OTGWTextBoxDiagLockoutReset.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagLockoutReset.TabIndex = 29;
             // 
@@ -1100,6 +1149,7 @@
             // 
             this.OTGWTextBoxDiagServiceRequest.Location = new System.Drawing.Point(564, 9);
             this.OTGWTextBoxDiagServiceRequest.Name = "OTGWTextBoxDiagServiceRequest";
+            this.OTGWTextBoxDiagServiceRequest.ReadOnly = true;
             this.OTGWTextBoxDiagServiceRequest.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagServiceRequest.TabIndex = 27;
             // 
@@ -1116,6 +1166,7 @@
             // 
             this.OTGWTextBoxDiagCH2Present.Location = new System.Drawing.Point(369, 113);
             this.OTGWTextBoxDiagCH2Present.Name = "OTGWTextBoxDiagCH2Present";
+            this.OTGWTextBoxDiagCH2Present.ReadOnly = true;
             this.OTGWTextBoxDiagCH2Present.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagCH2Present.TabIndex = 25;
             // 
@@ -1132,6 +1183,7 @@
             // 
             this.OTGWTextBoxDiagMasterLowOffPumpControl.Location = new System.Drawing.Point(369, 139);
             this.OTGWTextBoxDiagMasterLowOffPumpControl.Name = "OTGWTextBoxDiagMasterLowOffPumpControl";
+            this.OTGWTextBoxDiagMasterLowOffPumpControl.ReadOnly = true;
             this.OTGWTextBoxDiagMasterLowOffPumpControl.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagMasterLowOffPumpControl.TabIndex = 23;
             // 
@@ -1148,6 +1200,7 @@
             // 
             this.OTGWTextBoxDiagTapWaterConfiguration.Location = new System.Drawing.Point(369, 87);
             this.OTGWTextBoxDiagTapWaterConfiguration.Name = "OTGWTextBoxDiagTapWaterConfiguration";
+            this.OTGWTextBoxDiagTapWaterConfiguration.ReadOnly = true;
             this.OTGWTextBoxDiagTapWaterConfiguration.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagTapWaterConfiguration.TabIndex = 21;
             // 
@@ -1164,6 +1217,7 @@
             // 
             this.OTGWTextBoxDiagCoolingConfiguration.Location = new System.Drawing.Point(369, 61);
             this.OTGWTextBoxDiagCoolingConfiguration.Name = "OTGWTextBoxDiagCoolingConfiguration";
+            this.OTGWTextBoxDiagCoolingConfiguration.ReadOnly = true;
             this.OTGWTextBoxDiagCoolingConfiguration.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagCoolingConfiguration.TabIndex = 19;
             // 
@@ -1180,6 +1234,7 @@
             // 
             this.OTGWTextBoxDiagControlType.Location = new System.Drawing.Point(369, 9);
             this.OTGWTextBoxDiagControlType.Name = "OTGWTextBoxDiagControlType";
+            this.OTGWTextBoxDiagControlType.ReadOnly = true;
             this.OTGWTextBoxDiagControlType.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagControlType.TabIndex = 17;
             // 
@@ -1196,6 +1251,7 @@
             // 
             this.OTGWTextBoxDiagTapWaterPresent.Location = new System.Drawing.Point(369, 35);
             this.OTGWTextBoxDiagTapWaterPresent.Name = "OTGWTextBoxDiagTapWaterPresent";
+            this.OTGWTextBoxDiagTapWaterPresent.ReadOnly = true;
             this.OTGWTextBoxDiagTapWaterPresent.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagTapWaterPresent.TabIndex = 15;
             // 
@@ -1212,6 +1268,7 @@
             // 
             this.OTGWTextBoxDiagSlaveMemberID.Location = new System.Drawing.Point(369, 191);
             this.OTGWTextBoxDiagSlaveMemberID.Name = "OTGWTextBoxDiagSlaveMemberID";
+            this.OTGWTextBoxDiagSlaveMemberID.ReadOnly = true;
             this.OTGWTextBoxDiagSlaveMemberID.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagSlaveMemberID.TabIndex = 13;
             // 
@@ -1228,6 +1285,7 @@
             // 
             this.OTGWTextBoxDiagMasterMemberID.Location = new System.Drawing.Point(135, 191);
             this.OTGWTextBoxDiagMasterMemberID.Name = "OTGWTextBoxDiagMasterMemberID";
+            this.OTGWTextBoxDiagMasterMemberID.ReadOnly = true;
             this.OTGWTextBoxDiagMasterMemberID.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagMasterMemberID.TabIndex = 11;
             // 
@@ -1244,6 +1302,7 @@
             // 
             this.OTGWTextBoxDiagCH2Enabled.Location = new System.Drawing.Point(135, 113);
             this.OTGWTextBoxDiagCH2Enabled.Name = "OTGWTextBoxDiagCH2Enabled";
+            this.OTGWTextBoxDiagCH2Enabled.ReadOnly = true;
             this.OTGWTextBoxDiagCH2Enabled.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagCH2Enabled.TabIndex = 9;
             // 
@@ -1260,6 +1319,7 @@
             // 
             this.OTGWTextBoxDiagOTCActive.Location = new System.Drawing.Point(135, 87);
             this.OTGWTextBoxDiagOTCActive.Name = "OTGWTextBoxDiagOTCActive";
+            this.OTGWTextBoxDiagOTCActive.ReadOnly = true;
             this.OTGWTextBoxDiagOTCActive.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagOTCActive.TabIndex = 7;
             // 
@@ -1276,6 +1336,7 @@
             // 
             this.OTGWTextBoxDiagCoolingEnabled.Location = new System.Drawing.Point(135, 61);
             this.OTGWTextBoxDiagCoolingEnabled.Name = "OTGWTextBoxDiagCoolingEnabled";
+            this.OTGWTextBoxDiagCoolingEnabled.ReadOnly = true;
             this.OTGWTextBoxDiagCoolingEnabled.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagCoolingEnabled.TabIndex = 5;
             // 
@@ -1292,6 +1353,7 @@
             // 
             this.OTGWTextBoxDiagTapWaterEnabled.Location = new System.Drawing.Point(135, 35);
             this.OTGWTextBoxDiagTapWaterEnabled.Name = "OTGWTextBoxDiagTapWaterEnabled";
+            this.OTGWTextBoxDiagTapWaterEnabled.ReadOnly = true;
             this.OTGWTextBoxDiagTapWaterEnabled.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagTapWaterEnabled.TabIndex = 3;
             // 
@@ -1308,6 +1370,7 @@
             // 
             this.OTGWTextBoxDiagCentralHeatingEnabled.Location = new System.Drawing.Point(135, 9);
             this.OTGWTextBoxDiagCentralHeatingEnabled.Name = "OTGWTextBoxDiagCentralHeatingEnabled";
+            this.OTGWTextBoxDiagCentralHeatingEnabled.ReadOnly = true;
             this.OTGWTextBoxDiagCentralHeatingEnabled.Size = new System.Drawing.Size(54, 20);
             this.OTGWTextBoxDiagCentralHeatingEnabled.TabIndex = 1;
             // 
@@ -1378,6 +1441,7 @@
             // 
             this.OTGWTextBoxDiagProductVersionSlave.Location = new System.Drawing.Point(563, 323);
             this.OTGWTextBoxDiagProductVersionSlave.Name = "OTGWTextBoxDiagProductVersionSlave";
+            this.OTGWTextBoxDiagProductVersionSlave.ReadOnly = true;
             this.OTGWTextBoxDiagProductVersionSlave.Size = new System.Drawing.Size(55, 20);
             this.OTGWTextBoxDiagProductVersionSlave.TabIndex = 43;
             // 
@@ -1394,6 +1458,7 @@
             // 
             this.OTGWTextBoxDiagProductVersionMaster.Location = new System.Drawing.Point(563, 297);
             this.OTGWTextBoxDiagProductVersionMaster.Name = "OTGWTextBoxDiagProductVersionMaster";
+            this.OTGWTextBoxDiagProductVersionMaster.ReadOnly = true;
             this.OTGWTextBoxDiagProductVersionMaster.Size = new System.Drawing.Size(55, 20);
             this.OTGWTextBoxDiagProductVersionMaster.TabIndex = 41;
             // 
@@ -1410,6 +1475,7 @@
             // 
             this.OTGWTextBoxDiagProductTypeSlave.Location = new System.Drawing.Point(352, 323);
             this.OTGWTextBoxDiagProductTypeSlave.Name = "OTGWTextBoxDiagProductTypeSlave";
+            this.OTGWTextBoxDiagProductTypeSlave.ReadOnly = true;
             this.OTGWTextBoxDiagProductTypeSlave.Size = new System.Drawing.Size(56, 20);
             this.OTGWTextBoxDiagProductTypeSlave.TabIndex = 39;
             // 
@@ -1426,6 +1492,7 @@
             // 
             this.OTGWTextBoxDiagProductTypeMaster.Location = new System.Drawing.Point(352, 297);
             this.OTGWTextBoxDiagProductTypeMaster.Name = "OTGWTextBoxDiagProductTypeMaster";
+            this.OTGWTextBoxDiagProductTypeMaster.ReadOnly = true;
             this.OTGWTextBoxDiagProductTypeMaster.Size = new System.Drawing.Size(55, 20);
             this.OTGWTextBoxDiagProductTypeMaster.TabIndex = 37;
             // 
@@ -1442,6 +1509,7 @@
             // 
             this.OTGWTextBoxDiagOpenThermVersionSlave.Location = new System.Drawing.Point(159, 323);
             this.OTGWTextBoxDiagOpenThermVersionSlave.Name = "OTGWTextBoxDiagOpenThermVersionSlave";
+            this.OTGWTextBoxDiagOpenThermVersionSlave.ReadOnly = true;
             this.OTGWTextBoxDiagOpenThermVersionSlave.Size = new System.Drawing.Size(55, 20);
             this.OTGWTextBoxDiagOpenThermVersionSlave.TabIndex = 35;
             // 
@@ -1458,6 +1526,7 @@
             // 
             this.OTGWTextBoxDiagOpenThermVersionMaster.Location = new System.Drawing.Point(159, 297);
             this.OTGWTextBoxDiagOpenThermVersionMaster.Name = "OTGWTextBoxDiagOpenThermVersionMaster";
+            this.OTGWTextBoxDiagOpenThermVersionMaster.ReadOnly = true;
             this.OTGWTextBoxDiagOpenThermVersionMaster.Size = new System.Drawing.Size(55, 20);
             this.OTGWTextBoxDiagOpenThermVersionMaster.TabIndex = 33;
             // 
@@ -1474,6 +1543,7 @@
             // 
             this.OTGWTextBoxDiagHotWater.Location = new System.Drawing.Point(536, 235);
             this.OTGWTextBoxDiagHotWater.Name = "OTGWTextBoxDiagHotWater";
+            this.OTGWTextBoxDiagHotWater.ReadOnly = true;
             this.OTGWTextBoxDiagHotWater.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagHotWater.TabIndex = 31;
             // 
@@ -1499,6 +1569,7 @@
             // 
             this.OTGWTextBoxDiagReferenceVoltage.Location = new System.Drawing.Point(159, 102);
             this.OTGWTextBoxDiagReferenceVoltage.Name = "OTGWTextBoxDiagReferenceVoltage";
+            this.OTGWTextBoxDiagReferenceVoltage.ReadOnly = true;
             this.OTGWTextBoxDiagReferenceVoltage.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagReferenceVoltage.TabIndex = 28;
             // 
@@ -1515,6 +1586,7 @@
             // 
             this.OTGWTextBoxDiagTweaks.Location = new System.Drawing.Point(536, 206);
             this.OTGWTextBoxDiagTweaks.Name = "OTGWTextBoxDiagTweaks";
+            this.OTGWTextBoxDiagTweaks.ReadOnly = true;
             this.OTGWTextBoxDiagTweaks.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagTweaks.TabIndex = 26;
             // 
@@ -1522,6 +1594,7 @@
             // 
             this.OTGWTextBoxDiagSetbackTemperature.Location = new System.Drawing.Point(536, 180);
             this.OTGWTextBoxDiagSetbackTemperature.Name = "OTGWTextBoxDiagSetbackTemperature";
+            this.OTGWTextBoxDiagSetbackTemperature.ReadOnly = true;
             this.OTGWTextBoxDiagSetbackTemperature.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagSetbackTemperature.TabIndex = 25;
             // 
@@ -1538,6 +1611,7 @@
             // 
             this.OTGWTextBoxDiagRemehaDetectionState.Location = new System.Drawing.Point(536, 154);
             this.OTGWTextBoxDiagRemehaDetectionState.Name = "OTGWTextBoxDiagRemehaDetectionState";
+            this.OTGWTextBoxDiagRemehaDetectionState.ReadOnly = true;
             this.OTGWTextBoxDiagRemehaDetectionState.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagRemehaDetectionState.TabIndex = 23;
             // 
@@ -1554,6 +1628,7 @@
             // 
             this.OTGWTextBoxDiagCauseOfLastReset.Location = new System.Drawing.Point(159, 235);
             this.OTGWTextBoxDiagCauseOfLastReset.Name = "OTGWTextBoxDiagCauseOfLastReset";
+            this.OTGWTextBoxDiagCauseOfLastReset.ReadOnly = true;
             this.OTGWTextBoxDiagCauseOfLastReset.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagCauseOfLastReset.TabIndex = 21;
             // 
@@ -1570,6 +1645,7 @@
             // 
             this.OTGWTextBoxDiagSmartPowerMode.Location = new System.Drawing.Point(536, 128);
             this.OTGWTextBoxDiagSmartPowerMode.Name = "OTGWTextBoxDiagSmartPowerMode";
+            this.OTGWTextBoxDiagSmartPowerMode.ReadOnly = true;
             this.OTGWTextBoxDiagSmartPowerMode.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagSmartPowerMode.TabIndex = 19;
             // 
@@ -1586,6 +1662,7 @@
             // 
             this.OTGWTextBoxDiagSetpointOverride.Location = new System.Drawing.Point(536, 102);
             this.OTGWTextBoxDiagSetpointOverride.Name = "OTGWTextBoxDiagSetpointOverride";
+            this.OTGWTextBoxDiagSetpointOverride.ReadOnly = true;
             this.OTGWTextBoxDiagSetpointOverride.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagSetpointOverride.TabIndex = 17;
             // 
@@ -1602,6 +1679,7 @@
             // 
             this.OTGWTextBoxDiagGatewayMode.Location = new System.Drawing.Point(536, 76);
             this.OTGWTextBoxDiagGatewayMode.Name = "OTGWTextBoxDiagGatewayMode";
+            this.OTGWTextBoxDiagGatewayMode.ReadOnly = true;
             this.OTGWTextBoxDiagGatewayMode.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagGatewayMode.TabIndex = 15;
             // 
@@ -1618,6 +1696,7 @@
             // 
             this.OTGWTextBoxDiagLedFunctions.Location = new System.Drawing.Point(159, 206);
             this.OTGWTextBoxDiagLedFunctions.Name = "OTGWTextBoxDiagLedFunctions";
+            this.OTGWTextBoxDiagLedFunctions.ReadOnly = true;
             this.OTGWTextBoxDiagLedFunctions.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagLedFunctions.TabIndex = 13;
             // 
@@ -1634,6 +1713,7 @@
             // 
             this.OTGWTextBoxDiagGPIOState.Location = new System.Drawing.Point(159, 180);
             this.OTGWTextBoxDiagGPIOState.Name = "OTGWTextBoxDiagGPIOState";
+            this.OTGWTextBoxDiagGPIOState.ReadOnly = true;
             this.OTGWTextBoxDiagGPIOState.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagGPIOState.TabIndex = 11;
             // 
@@ -1641,6 +1721,7 @@
             // 
             this.OTGWTextBoxDiagGPIOFunctions.Location = new System.Drawing.Point(159, 154);
             this.OTGWTextBoxDiagGPIOFunctions.Name = "OTGWTextBoxDiagGPIOFunctions";
+            this.OTGWTextBoxDiagGPIOFunctions.ReadOnly = true;
             this.OTGWTextBoxDiagGPIOFunctions.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagGPIOFunctions.TabIndex = 10;
             // 
@@ -1666,6 +1747,7 @@
             // 
             this.OTGWTextBoxDiagTemperatureSensorFunction.Location = new System.Drawing.Point(159, 128);
             this.OTGWTextBoxDiagTemperatureSensorFunction.Name = "OTGWTextBoxDiagTemperatureSensorFunction";
+            this.OTGWTextBoxDiagTemperatureSensorFunction.ReadOnly = true;
             this.OTGWTextBoxDiagTemperatureSensorFunction.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagTemperatureSensorFunction.TabIndex = 7;
             // 
@@ -1682,6 +1764,7 @@
             // 
             this.OTGWTextBoxDiagClockSpeed.Location = new System.Drawing.Point(159, 76);
             this.OTGWTextBoxDiagClockSpeed.Name = "OTGWTextBoxDiagClockSpeed";
+            this.OTGWTextBoxDiagClockSpeed.ReadOnly = true;
             this.OTGWTextBoxDiagClockSpeed.Size = new System.Drawing.Size(82, 20);
             this.OTGWTextBoxDiagClockSpeed.TabIndex = 5;
             // 
@@ -1698,6 +1781,7 @@
             // 
             this.OTGWTextBoxDiagBuild.Location = new System.Drawing.Point(159, 50);
             this.OTGWTextBoxDiagBuild.Name = "OTGWTextBoxDiagBuild";
+            this.OTGWTextBoxDiagBuild.ReadOnly = true;
             this.OTGWTextBoxDiagBuild.Size = new System.Drawing.Size(459, 20);
             this.OTGWTextBoxDiagBuild.TabIndex = 3;
             // 
@@ -1714,6 +1798,7 @@
             // 
             this.OTGWTextBoxDiagVersion.Location = new System.Drawing.Point(159, 24);
             this.OTGWTextBoxDiagVersion.Name = "OTGWTextBoxDiagVersion";
+            this.OTGWTextBoxDiagVersion.ReadOnly = true;
             this.OTGWTextBoxDiagVersion.Size = new System.Drawing.Size(459, 20);
             this.OTGWTextBoxDiagVersion.TabIndex = 1;
             // 
@@ -1731,7 +1816,7 @@
             this.groupBox2.Controls.Add(this.MaxTabControl);
             this.groupBox2.Location = new System.Drawing.Point(15, 23);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(457, 505);
+            this.groupBox2.Size = new System.Drawing.Size(661, 505);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "EQ-3 Max!";
@@ -1744,7 +1829,7 @@
             this.MaxTabControl.Location = new System.Drawing.Point(6, 19);
             this.MaxTabControl.Name = "MaxTabControl";
             this.MaxTabControl.SelectedIndex = 0;
-            this.MaxTabControl.Size = new System.Drawing.Size(445, 526);
+            this.MaxTabControl.Size = new System.Drawing.Size(649, 526);
             this.MaxTabControl.TabIndex = 5;
             this.MaxTabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.MaxTabControl_Selected);
             // 
@@ -1754,7 +1839,7 @@
             this.MaxTabPageStatusOverview.Location = new System.Drawing.Point(4, 22);
             this.MaxTabPageStatusOverview.Name = "MaxTabPageStatusOverview";
             this.MaxTabPageStatusOverview.Padding = new System.Windows.Forms.Padding(3);
-            this.MaxTabPageStatusOverview.Size = new System.Drawing.Size(437, 500);
+            this.MaxTabPageStatusOverview.Size = new System.Drawing.Size(641, 500);
             this.MaxTabPageStatusOverview.TabIndex = 0;
             this.MaxTabPageStatusOverview.Text = "Status Overview";
             // 
@@ -1769,7 +1854,7 @@
             this.MaxTabConnection.Location = new System.Drawing.Point(4, 22);
             this.MaxTabConnection.Name = "MaxTabConnection";
             this.MaxTabConnection.Padding = new System.Windows.Forms.Padding(3);
-            this.MaxTabConnection.Size = new System.Drawing.Size(437, 500);
+            this.MaxTabConnection.Size = new System.Drawing.Size(641, 500);
             this.MaxTabConnection.TabIndex = 1;
             this.MaxTabConnection.Text = "Connection";
             // 
@@ -1821,6 +1906,20 @@
             // MaxTabRooms
             // 
             this.MaxTabRooms.BackColor = System.Drawing.SystemColors.Control;
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsCubeVersion);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsCubeVersion);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsPortalURL);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsPortalURL);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsEmptyMemorySlots);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsDutyCycle);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsEmptyMemorySlots);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsDutyCycle);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsCubeRfAddress);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsCubeSerialNumber);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsCubeName);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRFAddress);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsSerialNumber);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsName);
             this.MaxTabRooms.Controls.Add(this.MaxListBoxRoomsDevice);
             this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsDevice);
             this.MaxTabRooms.Controls.Add(this.MaxListBoxRoomsRooms);
@@ -1830,14 +1929,14 @@
             this.MaxTabRooms.Location = new System.Drawing.Point(4, 22);
             this.MaxTabRooms.Name = "MaxTabRooms";
             this.MaxTabRooms.Padding = new System.Windows.Forms.Padding(3);
-            this.MaxTabRooms.Size = new System.Drawing.Size(437, 500);
+            this.MaxTabRooms.Size = new System.Drawing.Size(641, 500);
             this.MaxTabRooms.TabIndex = 2;
             this.MaxTabRooms.Text = "Rooms";
             // 
             // MaxListBoxRoomsDevice
             // 
             this.MaxListBoxRoomsDevice.FormattingEnabled = true;
-            this.MaxListBoxRoomsDevice.Location = new System.Drawing.Point(64, 325);
+            this.MaxListBoxRoomsDevice.Location = new System.Drawing.Point(79, 325);
             this.MaxListBoxRoomsDevice.Name = "MaxListBoxRoomsDevice";
             this.MaxListBoxRoomsDevice.ScrollAlwaysVisible = true;
             this.MaxListBoxRoomsDevice.Size = new System.Drawing.Size(191, 95);
@@ -1855,16 +1954,17 @@
             // MaxListBoxRoomsRooms
             // 
             this.MaxListBoxRoomsRooms.FormattingEnabled = true;
-            this.MaxListBoxRoomsRooms.Location = new System.Drawing.Point(64, 108);
+            this.MaxListBoxRoomsRooms.Location = new System.Drawing.Point(79, 175);
             this.MaxListBoxRoomsRooms.Name = "MaxListBoxRoomsRooms";
             this.MaxListBoxRoomsRooms.ScrollAlwaysVisible = true;
             this.MaxListBoxRoomsRooms.Size = new System.Drawing.Size(191, 95);
             this.MaxListBoxRoomsRooms.TabIndex = 4;
+            this.MaxListBoxRoomsRooms.SelectedIndexChanged += new System.EventHandler(this.MaxListBoxRoomsRooms_SelectedIndexChanged);
             // 
             // MaxListBoxRoomsMaxCube
             // 
             this.MaxListBoxRoomsMaxCube.FormattingEnabled = true;
-            this.MaxListBoxRoomsMaxCube.Location = new System.Drawing.Point(64, 8);
+            this.MaxListBoxRoomsMaxCube.Location = new System.Drawing.Point(79, 6);
             this.MaxListBoxRoomsMaxCube.Name = "MaxListBoxRoomsMaxCube";
             this.MaxListBoxRoomsMaxCube.ScrollAlwaysVisible = true;
             this.MaxListBoxRoomsMaxCube.Size = new System.Drawing.Size(191, 30);
@@ -1874,7 +1974,7 @@
             // MaxLabelRoomsRoom
             // 
             this.MaxLabelRoomsRoom.AutoSize = true;
-            this.MaxLabelRoomsRoom.Location = new System.Drawing.Point(6, 105);
+            this.MaxLabelRoomsRoom.Location = new System.Drawing.Point(6, 175);
             this.MaxLabelRoomsRoom.Name = "MaxLabelRoomsRoom";
             this.MaxLabelRoomsRoom.Size = new System.Drawing.Size(35, 13);
             this.MaxLabelRoomsRoom.TabIndex = 2;
@@ -1889,11 +1989,130 @@
             this.MaxLabelRoomsMaxCube.TabIndex = 0;
             this.MaxLabelRoomsMaxCube.Text = "MaxCube";
             // 
+            // MaxLabelRoomsName
+            // 
+            this.MaxLabelRoomsName.AutoSize = true;
+            this.MaxLabelRoomsName.Location = new System.Drawing.Point(6, 44);
+            this.MaxLabelRoomsName.Name = "MaxLabelRoomsName";
+            this.MaxLabelRoomsName.Size = new System.Drawing.Size(35, 13);
+            this.MaxLabelRoomsName.TabIndex = 7;
+            this.MaxLabelRoomsName.Text = "Name";
+            // 
+            // MaxLabelRoomsSerialNumber
+            // 
+            this.MaxLabelRoomsSerialNumber.AutoSize = true;
+            this.MaxLabelRoomsSerialNumber.Location = new System.Drawing.Point(6, 70);
+            this.MaxLabelRoomsSerialNumber.Name = "MaxLabelRoomsSerialNumber";
+            this.MaxLabelRoomsSerialNumber.Size = new System.Drawing.Size(71, 13);
+            this.MaxLabelRoomsSerialNumber.TabIndex = 8;
+            this.MaxLabelRoomsSerialNumber.Text = "Serial number";
+            // 
+            // MaxLabelRFAddress
+            // 
+            this.MaxLabelRFAddress.AutoSize = true;
+            this.MaxLabelRFAddress.Location = new System.Drawing.Point(6, 96);
+            this.MaxLabelRFAddress.Name = "MaxLabelRFAddress";
+            this.MaxLabelRFAddress.Size = new System.Drawing.Size(61, 13);
+            this.MaxLabelRFAddress.TabIndex = 9;
+            this.MaxLabelRFAddress.Text = "RF address";
+            // 
+            // MaxTextBoxRoomsCubeName
+            // 
+            this.MaxTextBoxRoomsCubeName.Location = new System.Drawing.Point(79, 41);
+            this.MaxTextBoxRoomsCubeName.Name = "MaxTextBoxRoomsCubeName";
+            this.MaxTextBoxRoomsCubeName.ReadOnly = true;
+            this.MaxTextBoxRoomsCubeName.Size = new System.Drawing.Size(90, 20);
+            this.MaxTextBoxRoomsCubeName.TabIndex = 10;
+            // 
+            // MaxTextBoxRoomsCubeSerialNumber
+            // 
+            this.MaxTextBoxRoomsCubeSerialNumber.Location = new System.Drawing.Point(79, 67);
+            this.MaxTextBoxRoomsCubeSerialNumber.Name = "MaxTextBoxRoomsCubeSerialNumber";
+            this.MaxTextBoxRoomsCubeSerialNumber.ReadOnly = true;
+            this.MaxTextBoxRoomsCubeSerialNumber.Size = new System.Drawing.Size(90, 20);
+            this.MaxTextBoxRoomsCubeSerialNumber.TabIndex = 11;
+            // 
+            // MaxTextBoxRoomsCubeRfAddress
+            // 
+            this.MaxTextBoxRoomsCubeRfAddress.Location = new System.Drawing.Point(79, 93);
+            this.MaxTextBoxRoomsCubeRfAddress.Name = "MaxTextBoxRoomsCubeRfAddress";
+            this.MaxTextBoxRoomsCubeRfAddress.ReadOnly = true;
+            this.MaxTextBoxRoomsCubeRfAddress.Size = new System.Drawing.Size(90, 20);
+            this.MaxTextBoxRoomsCubeRfAddress.TabIndex = 12;
+            // 
+            // MaxLabelRoomsDutyCycle
+            // 
+            this.MaxLabelRoomsDutyCycle.AutoSize = true;
+            this.MaxLabelRoomsDutyCycle.Location = new System.Drawing.Point(242, 70);
+            this.MaxLabelRoomsDutyCycle.Name = "MaxLabelRoomsDutyCycle";
+            this.MaxLabelRoomsDutyCycle.Size = new System.Drawing.Size(57, 13);
+            this.MaxLabelRoomsDutyCycle.TabIndex = 13;
+            this.MaxLabelRoomsDutyCycle.Text = "Duty cycle";
+            // 
+            // MaxLabelRoomsEmptyMemorySlots
+            // 
+            this.MaxLabelRoomsEmptyMemorySlots.AutoSize = true;
+            this.MaxLabelRoomsEmptyMemorySlots.Location = new System.Drawing.Point(242, 96);
+            this.MaxLabelRoomsEmptyMemorySlots.Name = "MaxLabelRoomsEmptyMemorySlots";
+            this.MaxLabelRoomsEmptyMemorySlots.Size = new System.Drawing.Size(99, 13);
+            this.MaxLabelRoomsEmptyMemorySlots.TabIndex = 14;
+            this.MaxLabelRoomsEmptyMemorySlots.Text = "Empty memory slots";
+            // 
+            // MaxTextBoxRoomsDutyCycle
+            // 
+            this.MaxTextBoxRoomsDutyCycle.Location = new System.Drawing.Point(347, 67);
+            this.MaxTextBoxRoomsDutyCycle.Name = "MaxTextBoxRoomsDutyCycle";
+            this.MaxTextBoxRoomsDutyCycle.ReadOnly = true;
+            this.MaxTextBoxRoomsDutyCycle.Size = new System.Drawing.Size(42, 20);
+            this.MaxTextBoxRoomsDutyCycle.TabIndex = 15;
+            // 
+            // MaxTextBoxRoomsEmptyMemorySlots
+            // 
+            this.MaxTextBoxRoomsEmptyMemorySlots.Location = new System.Drawing.Point(347, 93);
+            this.MaxTextBoxRoomsEmptyMemorySlots.Name = "MaxTextBoxRoomsEmptyMemorySlots";
+            this.MaxTextBoxRoomsEmptyMemorySlots.ReadOnly = true;
+            this.MaxTextBoxRoomsEmptyMemorySlots.Size = new System.Drawing.Size(42, 20);
+            this.MaxTextBoxRoomsEmptyMemorySlots.TabIndex = 16;
+            // 
+            // MaxLabelRoomsPortalURL
+            // 
+            this.MaxLabelRoomsPortalURL.AutoSize = true;
+            this.MaxLabelRoomsPortalURL.Location = new System.Drawing.Point(6, 122);
+            this.MaxLabelRoomsPortalURL.Name = "MaxLabelRoomsPortalURL";
+            this.MaxLabelRoomsPortalURL.Size = new System.Drawing.Size(59, 13);
+            this.MaxLabelRoomsPortalURL.TabIndex = 17;
+            this.MaxLabelRoomsPortalURL.Text = "Portal URL";
+            // 
+            // MaxTextBoxRoomsPortalURL
+            // 
+            this.MaxTextBoxRoomsPortalURL.Location = new System.Drawing.Point(79, 119);
+            this.MaxTextBoxRoomsPortalURL.Name = "MaxTextBoxRoomsPortalURL";
+            this.MaxTextBoxRoomsPortalURL.ReadOnly = true;
+            this.MaxTextBoxRoomsPortalURL.Size = new System.Drawing.Size(311, 20);
+            this.MaxTextBoxRoomsPortalURL.TabIndex = 18;
+            // 
+            // MaxLabelRoomsCubeVersion
+            // 
+            this.MaxLabelRoomsCubeVersion.AutoSize = true;
+            this.MaxLabelRoomsCubeVersion.Location = new System.Drawing.Point(242, 44);
+            this.MaxLabelRoomsCubeVersion.Name = "MaxLabelRoomsCubeVersion";
+            this.MaxLabelRoomsCubeVersion.Size = new System.Drawing.Size(42, 13);
+            this.MaxLabelRoomsCubeVersion.TabIndex = 19;
+            this.MaxLabelRoomsCubeVersion.Text = "Version";
+            // 
+            // MaxTextBoxRoomsCubeVersion
+            // 
+            this.MaxTextBoxRoomsCubeVersion.Location = new System.Drawing.Point(347, 41);
+            this.MaxTextBoxRoomsCubeVersion.Name = "MaxTextBoxRoomsCubeVersion";
+            this.MaxTextBoxRoomsCubeVersion.ReadOnly = true;
+            this.MaxTextBoxRoomsCubeVersion.Size = new System.Drawing.Size(42, 20);
+            this.MaxTextBoxRoomsCubeVersion.TabIndex = 20;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 590);
+            this.ClientSize = new System.Drawing.Size(1364, 590);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.OTGWGroupbox);
             this.Name = "Form1";
@@ -2102,6 +2321,20 @@
         private System.Windows.Forms.ListBox MaxListBoxRoomsMaxCube;
         private System.Windows.Forms.Label MaxLabelRoomsRoom;
         private System.Windows.Forms.Label MaxLabelRoomsMaxCube;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsCubeRfAddress;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsCubeSerialNumber;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsCubeName;
+        private System.Windows.Forms.Label MaxLabelRFAddress;
+        private System.Windows.Forms.Label MaxLabelRoomsSerialNumber;
+        private System.Windows.Forms.Label MaxLabelRoomsName;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsEmptyMemorySlots;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsDutyCycle;
+        private System.Windows.Forms.Label MaxLabelRoomsEmptyMemorySlots;
+        private System.Windows.Forms.Label MaxLabelRoomsDutyCycle;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsPortalURL;
+        private System.Windows.Forms.Label MaxLabelRoomsPortalURL;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsCubeVersion;
+        private System.Windows.Forms.Label MaxLabelRoomsCubeVersion;
     }
 }
 
