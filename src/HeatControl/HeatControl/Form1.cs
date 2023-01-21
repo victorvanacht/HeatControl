@@ -15,6 +15,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 using System.IO;
 using static HeatControl.MaxCubeLogger.MaxCube;
 using static HeatControl.MaxCubeLogger;
+using System.Xml.Serialization;
 
 namespace HeatControl
 {
@@ -173,7 +174,7 @@ namespace HeatControl
                     FileMode mode = (this.OTGWCheckBoxAppend.Checked) ? FileMode.Append : FileMode.Create;
                     logFileStream = File.Open(this.OTGWTextBoxLogfileName.Text, mode);
 
-                    if (mode==FileMode.Create)
+                    if (mode == FileMode.Create)
                     {
                         Byte[] heading = new UTF8Encoding().GetBytes(OTGW.StatusReport.heading + "\n");
                         logFileStream.Write(heading, 0, heading.Length);
@@ -229,7 +230,7 @@ namespace HeatControl
                 {
                     OTGWListboxLog.Items.RemoveAt(0);
                 }
-                this.OTGWListboxLog.SelectedIndex = this.OTGWListboxLog.Items.Count-1;
+                this.OTGWListboxLog.SelectedIndex = this.OTGWListboxLog.Items.Count - 1;
             }
         }
 
@@ -285,14 +286,14 @@ namespace HeatControl
                 }
                 else
                 {
-                    this.control.Text = this.daysOfWeek[value >> 13] + " " + ((value >> 8)&0x1F).ToString() + ":" + (((value & 0xFF)<10)?"0":"") + (value & 0xFF).ToString();
+                    this.control.Text = this.daysOfWeek[value >> 13] + " " + ((value >> 8) & 0x1F).ToString() + ":" + (((value & 0xFF) < 10) ? "0" : "") + (value & 0xFF).ToString();
                 }
             }
         }
 
         private class ListenerDate : ListernerBase
         {
-            private string[] months = { "", "January", "February", "March", "April", "May","June", "July", "August", "September", "October", "November", "December" };
+            private string[] months = { "", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
 
             public ListenerDate(Control control, OTGW.IntValueName property) : base(control)
             {
@@ -313,7 +314,7 @@ namespace HeatControl
         }
 
 
-        private Dictionary<string,Line> lines;
+        private Dictionary<string, Line> lines;
         private ScottPlot.Renderable.Legend legend;
         private class Line
         {
@@ -383,14 +384,14 @@ namespace HeatControl
                     yData[xCount] = yValue * this.gain;
                     xCount++;
 
-                    if (xCount>xLim)
+                    if (xCount > xLim)
                     {
                         xLim *= 3;
-                        if (xLim>xSize)
+                        if (xLim > xSize)
                         {
                             xLim = xSize;
                         }
-                        this.plot.Plot.SetAxisLimits(xMin: xData[0], xMax: xData[xLim-1]);
+                        this.plot.Plot.SetAxisLimits(xMin: xData[0], xMax: xData[xLim - 1]);
                     }
 
                     if (xCount == xSize)
@@ -404,7 +405,7 @@ namespace HeatControl
                         // extend x-axis
                         for (int i = 1; i < skip; i++)
                         {
-                            xData[xSize-skip+i] = (xValueDateTime + TimeSpan.FromSeconds(OTGW.statusReportInterval * i)).ToOADate();
+                            xData[xSize - skip + i] = (xValueDateTime + TimeSpan.FromSeconds(OTGW.statusReportInterval * i)).ToOADate();
                         }
                         this.plot.Plot.SetAxisLimits(xMin: xData[0], xMax: xData[xSize - 1]);
                     }
@@ -485,21 +486,15 @@ namespace HeatControl
                     }
                 }
 
-                this.MaxTextBoxRoomsCubeName.Text = "";
-                this.MaxTextBoxRoomsCubeSerialNumber.Text = "";
-                this.MaxTextBoxRoomsCubeRfAddress.Text = "";
-                this.MaxTextBoxRoomsCubeVersion.Text = "";
-                this.MaxTextBoxRoomsDutyCycle.Text = "";
-                this.MaxTextBoxRoomsEmptyMemorySlots.Text = "";
-                this.MaxTextBoxRoomsPortalURL.Text = "";
-                this.MaxTextBoxRoomsPortalEnabled.Text = "";
-                this.MaxTextBoxRoomsPushButtonUp.Text = "";
-                this.MaxTextBoxRoomsPushButtonDown.Text = "";
-                this.MaxTextBoxRoomsDateTime.Text = "";
-                this.MaxTextBoxRoomsRoomRFAddress.Text = "";
-                this.MaxTextBoxRoomsRoomID.Text = "";
+                ClearMaxCube();
+                ClearRoom();
+                ClearDevice();
+
+
             }
         }
+
+
 
         private void MaxListBoxRoomsMaxCube_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -508,7 +503,7 @@ namespace HeatControl
 
             MaxCubeLogger.MaxCube maxCube = this.maxCubeLogger.maxCubes[this.MaxListBoxRoomsMaxCube.SelectedIndex];
 
-            foreach (KeyValuePair<int, Room> kvp  in maxCube.rooms)
+            foreach (KeyValuePair<int, Room> kvp in maxCube.rooms)
             {
                 this.MaxListBoxRoomsRooms.Items.Add(kvp.Value.name);
             }
@@ -524,9 +519,8 @@ namespace HeatControl
             this.MaxTextBoxRoomsPushButtonUp.Text = maxCube.deviceMaxCube.pushButtonUpConfig.ToString();
             this.MaxTextBoxRoomsPushButtonDown.Text = maxCube.deviceMaxCube.pushButtonDownConfig.ToString();
             this.MaxTextBoxRoomsDateTime.Text = maxCube.deviceMaxCube.dateTime.ToString("yyyy-MM-dd   HH:mm");
-            this.MaxTextBoxRoomsRoomRFAddress.Text = "";
-            this.MaxTextBoxRoomsRoomID.Text = "";
-
+            ClearRoom();
+            ClearDevice();
         }
 
         private void MaxListBoxRoomsRooms_SelectedIndexChanged(object sender, EventArgs e)
@@ -541,12 +535,127 @@ namespace HeatControl
                 this.MaxListBoxRoomsDevice.Items.Add(device.name);
             }
 
-            this.MaxTextBoxRoomsRoomRFAddress.Text=  room.rfAddress.ToString("X6");
+            this.MaxTextBoxRoomsRoomRFAddress.Text = room.rfAddress.ToString("X6");
             this.MaxTextBoxRoomsRoomID.Text = room.roomID.ToString();
             this.MaxTextBoxRoomsRoomActualTemperature.Text = room.actualTemperature.ToString();
             this.MaxTextBoxRoomsRoomConfiguredTemperature.Text = room.configuredTemperature.ToString();
 
+            ClearDevice();
         }
+
+        private void MaxListBoxRoomsDevice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MaxCubeLogger.MaxCube maxCube = this.maxCubeLogger.maxCubes[this.MaxListBoxRoomsMaxCube.SelectedIndex];
+            MaxCubeLogger.MaxCube.Room room = maxCube.rooms[this.MaxListBoxRoomsRooms.SelectedIndex];
+            MaxCubeLogger.MaxCube.DeviceBase device = room.devices[this.MaxListBoxRoomsDevice.SelectedIndex];
+
+            this.MaxTextBoxRoomsDeviceSerialNumber.Text = device.serialNumber;
+            this.MaxTextBoxRoomsDeviceRFAddress.Text = device.rfAddress.ToString("X6");
+
+            switch (device.type)
+            {
+                case DeviceType.HeatingThermostat:
+                case DeviceType.HeatingThermostatTODO:
+                    this.MaxTextBoxRoomsDeviceType.Text = "Heating thermostat";
+                    MaxCubeLogger.MaxCube.DeviceHeatingThermostat heatingThermostat = (MaxCubeLogger.MaxCube.DeviceHeatingThermostat)device;
+                    this.MaxTextBoxRoomsDeviceActualTemperature.Text = "";
+                    this.MaxTextBoxRoomsDeviceConfiguredTemperature.Text = heatingThermostat.configuredTemperature.ToString();
+                    this.MaxTextBoxRoomsDeviceComfortTemperature.Text =heatingThermostat.comfortTemperature.ToString();
+                    this.MaxTextBoxRoomsDeviceEcoTemperature.Text = heatingThermostat.ecoTemperature.ToString();
+                    this.MaxTextBoxRoomsMinSetpointTemperature.Text = heatingThermostat.minSetpointTemperature.ToString();
+                    this.MaxTextBoxRoomsMaxSetpointTemperature.Text = heatingThermostat.maxSetpointTemperature.ToString();
+                    this.MaxTextBoxRoomsBoostDuration.Text = heatingThermostat.boostDuration.ToString();
+                    this.MaxTextBoxRoomsBoostPercentage.Text = heatingThermostat.boostValvePercentage.ToString();
+                    this.MaxTextBoxRoomsDecalcificationDay.Text = heatingThermostat.decalcificationDay.ToString();
+                    this.MaxTextBoxRoomsDecalcificationHour.Text = heatingThermostat.decalcificationHours.ToString();
+                    this.MaxTextBoxRoomsWindowOpenDuration.Text = heatingThermostat.windowOpenDuration.ToString();
+                    this.MaxTextBoxRoomsWindowOpenTemperature.Text = heatingThermostat.windowOpenTemperature.ToString();
+                    this.MaxTextBoxRoomsValvePosition.Text = heatingThermostat.valvePosition.ToString();
+                    this.MaxTextBoxRoomsValveMaxPercent.Text = heatingThermostat.valveMaxPercent.ToString();
+                    this.MaxTextBoxRoomsValveOffsetPercent.Text = heatingThermostat.valveOffsetPercent.ToString();
+                    break;
+                case DeviceType.WallThermostat:
+                    this.MaxTextBoxRoomsDeviceType.Text = "Wall thermostat";
+                    MaxCubeLogger.MaxCube.DeviceWallThermostat wallThermostat = (MaxCubeLogger.MaxCube.DeviceWallThermostat)device;
+                    this.MaxTextBoxRoomsDeviceActualTemperature.Text = wallThermostat.actualTemperature.ToString();
+                    this.MaxTextBoxRoomsDeviceConfiguredTemperature.Text = wallThermostat.configuredTemperature.ToString();
+                    this.MaxTextBoxRoomsDeviceComfortTemperature.Text = wallThermostat.comfortTemperature.ToString();
+                    this.MaxTextBoxRoomsDeviceEcoTemperature.Text = wallThermostat.ecoTemperature.ToString();
+                    this.MaxTextBoxRoomsMinSetpointTemperature.Text = wallThermostat.minSetpointTemperature.ToString();
+                    this.MaxTextBoxRoomsMaxSetpointTemperature.Text = wallThermostat.maxSetpointTemperature.ToString();
+                    this.MaxTextBoxRoomsBoostDuration.Text = "";
+                    this.MaxTextBoxRoomsBoostPercentage.Text = "";
+                    this.MaxTextBoxRoomsDecalcificationDay.Text = "";
+                    this.MaxTextBoxRoomsDecalcificationHour.Text = "";
+                    this.MaxTextBoxRoomsWindowOpenDuration.Text = "";
+                    this.MaxTextBoxRoomsWindowOpenTemperature.Text = "";
+                    this.MaxTextBoxRoomsValvePosition.Text = "";
+                    this.MaxTextBoxRoomsValveMaxPercent.Text = "";
+                    this.MaxTextBoxRoomsValveOffsetPercent.Text = "";
+                    break;
+                case DeviceType.EcoSwitch:
+                    this.MaxTextBoxRoomsDeviceType.Text = "Eco switch";
+                    MaxCubeLogger.MaxCube.DeviceEcoSwitch ecoSwitch = (MaxCubeLogger.MaxCube.DeviceEcoSwitch)device;
+                    break;
+                default: 
+                    break;
+
+            }
+
+
+            
+
+        }
+
+
+
+
+        private void ClearMaxCube()
+        {
+            this.MaxTextBoxRoomsCubeName.Text = "";
+            this.MaxTextBoxRoomsCubeSerialNumber.Text = "";
+            this.MaxTextBoxRoomsCubeRfAddress.Text = "";
+            this.MaxTextBoxRoomsCubeVersion.Text = "";
+            this.MaxTextBoxRoomsDutyCycle.Text = "";
+            this.MaxTextBoxRoomsEmptyMemorySlots.Text = "";
+            this.MaxTextBoxRoomsPortalURL.Text = "";
+            this.MaxTextBoxRoomsPortalEnabled.Text = "";
+            this.MaxTextBoxRoomsPushButtonUp.Text = "";
+            this.MaxTextBoxRoomsPushButtonDown.Text = "";
+            this.MaxTextBoxRoomsDateTime.Text = "";
+        }
+
+        private void ClearRoom()
+        {
+            this.MaxTextBoxRoomsRoomRFAddress.Text = "";
+            this.MaxTextBoxRoomsRoomID.Text = "";
+            this.MaxTextBoxRoomsRoomActualTemperature.Text = "";
+            this.MaxTextBoxRoomsRoomConfiguredTemperature.Text = "";
+        }
+
+        private void ClearDevice()
+        {
+            this.MaxTextBoxRoomsDeviceType.Text = "";
+            this.MaxTextBoxRoomsDeviceSerialNumber.Text = "";
+            this.MaxTextBoxRoomsDeviceRFAddress.Text = "";
+            this.MaxTextBoxRoomsDeviceActualTemperature.Text = "";
+            this.MaxTextBoxRoomsDeviceConfiguredTemperature.Text = "";
+            this.MaxTextBoxRoomsDeviceComfortTemperature.Text = "";
+            this.MaxTextBoxRoomsDeviceEcoTemperature.Text = "";
+            this.MaxTextBoxRoomsMinSetpointTemperature.Text = "";
+            this.MaxTextBoxRoomsMaxSetpointTemperature.Text = "";
+            this.MaxTextBoxRoomsBoostDuration.Text = "";
+            this.MaxTextBoxRoomsBoostPercentage.Text = "";
+            this.MaxTextBoxRoomsDecalcificationDay.Text = "";
+            this.MaxTextBoxRoomsDecalcificationHour.Text = "";
+            this.MaxTextBoxRoomsWindowOpenDuration.Text = "";
+            this.MaxTextBoxRoomsWindowOpenTemperature.Text = "";
+            this.MaxTextBoxRoomsValvePosition.Text = "";
+            this.MaxTextBoxRoomsValveMaxPercent.Text = "";
+            this.MaxTextBoxRoomsValveOffsetPercent.Text = "";
+        }
+
+
     }
 }
 

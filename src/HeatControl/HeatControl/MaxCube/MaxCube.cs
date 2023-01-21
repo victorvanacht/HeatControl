@@ -140,7 +140,7 @@ namespace HeatControl
                 public int boostValvePercentage;
                 public int decalcificationDay;
                 public int decalcificationHours;
-                public float maxValveSettingPercent;
+                public float valveMaxPercent;
                 public float valveOffsetPercent;
                 public int valvePosition;
                 public float configuredTemperature;
@@ -160,7 +160,7 @@ namespace HeatControl
                     this.boostValvePercentage = -1;
                     this.decalcificationDay = -1;
                     this.decalcificationDay = -1;
-                    this.maxValveSettingPercent= -1;
+                    this.valveMaxPercent= -1;
                     this.valveOffsetPercent = -1;
                     this.program = new List<List<ProgramEntry>>(7 * 13);
                     for (int day = 0; day < 7; day++)

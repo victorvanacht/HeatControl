@@ -165,7 +165,7 @@ namespace HeatControl
                         device.boostValvePercentage = (data[index++] & 0x1F) * 5;
                         device.decalcificationDay = data[index] >> 5;
                         device.decalcificationHours = data[index++] & 0x1F;
-                        device.maxValveSettingPercent = (((float)data[index++]) * 100 / 255);
+                        device.valveMaxPercent = (((float)data[index++]) * 100 / 255);
                         device.valveOffsetPercent = (((float)data[index++]) * 100 / 255);
 
                         for (int day = 0; day < 7; day++)

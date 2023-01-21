@@ -203,6 +203,47 @@
             this.MaxButtonDisconnect = new System.Windows.Forms.Button();
             this.MaxButtonConnect = new System.Windows.Forms.Button();
             this.MaxTabRooms = new System.Windows.Forms.TabPage();
+            this.MaxTextBoxRoomsMinSetpointTemperature = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsMaxSetpointTemperature = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsMinSetPointTemperature = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsDecalcificationHour = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsDecalcificationDay = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsDecalcificationHour = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsDecalcificationDay = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsBoostPercentage = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsBoostDuration = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsBoostPercentage = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsBoostDuration = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsDeviceComfortTemperature = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsDeviceEcoTemperature = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsDeviceComfortTemperature = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsDeviceEcoTemperature = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsDeviceType = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsDeviceType = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsDeviceActualTemperature = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsDeviceConfiguredTemperature = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsDeviceActualTemperature = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsDeviceConfiguredTemperature = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsDeviceRFAddress = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsDeviceRFAddress = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsDeviceSerialNumber = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsDeviceSerialNumber = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsRoomConfiguredTemperature = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsRoomConfiguredTemperature = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsRoomActualTemperature = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsRoomActualTemperature = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsRoomRFAddress = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsRoomID = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsRoomID = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsRoomRFAddress = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsDateTime = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsDateTime = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsPushButtonDown = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsPushButtonUp = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsPushButtonDown = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsPushButtonUp = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsPortalEnabled = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsPortalEnabled = new System.Windows.Forms.Label();
             this.MaxTextBoxRoomsCubeVersion = new System.Windows.Forms.TextBox();
             this.MaxLabelRoomsCubeVersion = new System.Windows.Forms.Label();
             this.MaxTextBoxRoomsPortalURL = new System.Windows.Forms.TextBox();
@@ -224,22 +265,17 @@
             this.MaxLabelRoomsRoom = new System.Windows.Forms.Label();
             this.MaxLabelRoomsMaxCube = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.MaxLabelRoomsPortalEnabled = new System.Windows.Forms.Label();
-            this.MaxTextBoxRoomsPortalEnabled = new System.Windows.Forms.TextBox();
-            this.MaxLabelRoomsPushButtonUp = new System.Windows.Forms.Label();
-            this.MaxLabelRoomsPushButtonDown = new System.Windows.Forms.Label();
-            this.MaxTextBoxRoomsPushButtonUp = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxRoomsPushButtonDown = new System.Windows.Forms.TextBox();
-            this.MaxLabelRoomsDateTime = new System.Windows.Forms.Label();
-            this.MaxTextBoxRoomsDateTime = new System.Windows.Forms.TextBox();
-            this.MaxLabelRoomsRoomRFAddress = new System.Windows.Forms.Label();
-            this.MaxLabelRoomsRoomID = new System.Windows.Forms.Label();
-            this.MaxTextBoxRoomsRoomID = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxRoomsRoomRFAddress = new System.Windows.Forms.TextBox();
-            this.MaxLabelRoomsRoomActualTemperature = new System.Windows.Forms.Label();
-            this.MaxTextBoxRoomsRoomActualTemperature = new System.Windows.Forms.TextBox();
-            this.MaxLabelRoomsRoomConfiguredTemperature = new System.Windows.Forms.Label();
-            this.MaxTextBoxRoomsRoomConfiguredTemperature = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsMaxSetpointTemperature = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsWindowOpenDuration = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsWindowOpenTemperature = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsWindowOpenDuration = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsWindowOpenTemperature = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsValvePosition = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsValveMaxPercent = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsValveOffsetPercent = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsValvePosition = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsValveMaxPercent = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsValveOffsetPercent = new System.Windows.Forms.TextBox();
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.OTGWTabStatus.SuspendLayout();
@@ -1832,7 +1868,7 @@
             this.groupBox2.Controls.Add(this.MaxTabControl);
             this.groupBox2.Location = new System.Drawing.Point(15, 23);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(661, 505);
+            this.groupBox2.Size = new System.Drawing.Size(661, 753);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "EQ-3 Max!";
@@ -1845,7 +1881,7 @@
             this.MaxTabControl.Location = new System.Drawing.Point(6, 19);
             this.MaxTabControl.Name = "MaxTabControl";
             this.MaxTabControl.SelectedIndex = 0;
-            this.MaxTabControl.Size = new System.Drawing.Size(649, 526);
+            this.MaxTabControl.Size = new System.Drawing.Size(649, 728);
             this.MaxTabControl.TabIndex = 5;
             this.MaxTabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.MaxTabControl_Selected);
             // 
@@ -1855,7 +1891,7 @@
             this.MaxTabPageStatusOverview.Location = new System.Drawing.Point(4, 22);
             this.MaxTabPageStatusOverview.Name = "MaxTabPageStatusOverview";
             this.MaxTabPageStatusOverview.Padding = new System.Windows.Forms.Padding(3);
-            this.MaxTabPageStatusOverview.Size = new System.Drawing.Size(641, 500);
+            this.MaxTabPageStatusOverview.Size = new System.Drawing.Size(641, 702);
             this.MaxTabPageStatusOverview.TabIndex = 0;
             this.MaxTabPageStatusOverview.Text = "Status Overview";
             // 
@@ -1870,7 +1906,7 @@
             this.MaxTabConnection.Location = new System.Drawing.Point(4, 22);
             this.MaxTabConnection.Name = "MaxTabConnection";
             this.MaxTabConnection.Padding = new System.Windows.Forms.Padding(3);
-            this.MaxTabConnection.Size = new System.Drawing.Size(641, 500);
+            this.MaxTabConnection.Size = new System.Drawing.Size(641, 702);
             this.MaxTabConnection.TabIndex = 1;
             this.MaxTabConnection.Text = "Connection";
             // 
@@ -1922,6 +1958,42 @@
             // MaxTabRooms
             // 
             this.MaxTabRooms.BackColor = System.Drawing.SystemColors.Control;
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsValveOffsetPercent);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsValveMaxPercent);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsValvePosition);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsValveOffsetPercent);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsValveMaxPercent);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsValvePosition);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsWindowOpenTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsWindowOpenDuration);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsWindowOpenTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsWindowOpenDuration);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsMaxSetpointTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsMinSetpointTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsMaxSetpointTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsMinSetPointTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsDecalcificationHour);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsDecalcificationDay);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsDecalcificationHour);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsDecalcificationDay);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsBoostPercentage);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsBoostDuration);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsBoostPercentage);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsBoostDuration);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsDeviceComfortTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsDeviceEcoTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsDeviceComfortTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsDeviceEcoTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsDeviceType);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsDeviceType);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsDeviceActualTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsDeviceConfiguredTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsDeviceActualTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsDeviceConfiguredTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsDeviceRFAddress);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsDeviceRFAddress);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsDeviceSerialNumber);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsDeviceSerialNumber);
             this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsRoomConfiguredTemperature);
             this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsRoomConfiguredTemperature);
             this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsRoomActualTemperature);
@@ -1961,9 +2033,360 @@
             this.MaxTabRooms.Location = new System.Drawing.Point(4, 22);
             this.MaxTabRooms.Name = "MaxTabRooms";
             this.MaxTabRooms.Padding = new System.Windows.Forms.Padding(3);
-            this.MaxTabRooms.Size = new System.Drawing.Size(641, 500);
+            this.MaxTabRooms.Size = new System.Drawing.Size(641, 702);
             this.MaxTabRooms.TabIndex = 2;
             this.MaxTabRooms.Text = "Rooms";
+            // 
+            // MaxTextBoxRoomsMinSetpointTemperature
+            // 
+            this.MaxTextBoxRoomsMinSetpointTemperature.Location = new System.Drawing.Point(134, 611);
+            this.MaxTextBoxRoomsMinSetpointTemperature.Name = "MaxTextBoxRoomsMinSetpointTemperature";
+            this.MaxTextBoxRoomsMinSetpointTemperature.ReadOnly = true;
+            this.MaxTextBoxRoomsMinSetpointTemperature.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsMinSetpointTemperature.TabIndex = 61;
+            // 
+            // MaxLabelRoomsMaxSetpointTemperature
+            // 
+            this.MaxLabelRoomsMaxSetpointTemperature.AutoSize = true;
+            this.MaxLabelRoomsMaxSetpointTemperature.Location = new System.Drawing.Point(6, 640);
+            this.MaxLabelRoomsMaxSetpointTemperature.Name = "MaxLabelRoomsMaxSetpointTemperature";
+            this.MaxLabelRoomsMaxSetpointTemperature.Size = new System.Drawing.Size(126, 13);
+            this.MaxLabelRoomsMaxSetpointTemperature.TabIndex = 60;
+            this.MaxLabelRoomsMaxSetpointTemperature.Text = "Max setpoint temperature";
+            // 
+            // MaxLabelRoomsMinSetPointTemperature
+            // 
+            this.MaxLabelRoomsMinSetPointTemperature.AutoSize = true;
+            this.MaxLabelRoomsMinSetPointTemperature.Location = new System.Drawing.Point(6, 614);
+            this.MaxLabelRoomsMinSetPointTemperature.Name = "MaxLabelRoomsMinSetPointTemperature";
+            this.MaxLabelRoomsMinSetPointTemperature.Size = new System.Drawing.Size(123, 13);
+            this.MaxLabelRoomsMinSetPointTemperature.TabIndex = 59;
+            this.MaxLabelRoomsMinSetPointTemperature.Text = "Min setpoint temperature";
+            // 
+            // MaxTextBoxRoomsDecalcificationHour
+            // 
+            this.MaxTextBoxRoomsDecalcificationHour.Location = new System.Drawing.Point(357, 634);
+            this.MaxTextBoxRoomsDecalcificationHour.Name = "MaxTextBoxRoomsDecalcificationHour";
+            this.MaxTextBoxRoomsDecalcificationHour.ReadOnly = true;
+            this.MaxTextBoxRoomsDecalcificationHour.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsDecalcificationHour.TabIndex = 58;
+            // 
+            // MaxTextBoxRoomsDecalcificationDay
+            // 
+            this.MaxTextBoxRoomsDecalcificationDay.Location = new System.Drawing.Point(357, 608);
+            this.MaxTextBoxRoomsDecalcificationDay.Name = "MaxTextBoxRoomsDecalcificationDay";
+            this.MaxTextBoxRoomsDecalcificationDay.ReadOnly = true;
+            this.MaxTextBoxRoomsDecalcificationDay.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsDecalcificationDay.TabIndex = 57;
+            // 
+            // MaxLabelRoomsDecalcificationHour
+            // 
+            this.MaxLabelRoomsDecalcificationHour.AutoSize = true;
+            this.MaxLabelRoomsDecalcificationHour.Location = new System.Drawing.Point(224, 637);
+            this.MaxLabelRoomsDecalcificationHour.Name = "MaxLabelRoomsDecalcificationHour";
+            this.MaxLabelRoomsDecalcificationHour.Size = new System.Drawing.Size(101, 13);
+            this.MaxLabelRoomsDecalcificationHour.TabIndex = 56;
+            this.MaxLabelRoomsDecalcificationHour.Text = "Decalcification hour";
+            // 
+            // MaxLabelRoomsDecalcificationDay
+            // 
+            this.MaxLabelRoomsDecalcificationDay.AutoSize = true;
+            this.MaxLabelRoomsDecalcificationDay.Location = new System.Drawing.Point(224, 611);
+            this.MaxLabelRoomsDecalcificationDay.Name = "MaxLabelRoomsDecalcificationDay";
+            this.MaxLabelRoomsDecalcificationDay.Size = new System.Drawing.Size(97, 13);
+            this.MaxLabelRoomsDecalcificationDay.TabIndex = 55;
+            this.MaxLabelRoomsDecalcificationDay.Text = "Decalcification day";
+            // 
+            // MaxTextBoxRoomsBoostPercentage
+            // 
+            this.MaxTextBoxRoomsBoostPercentage.Location = new System.Drawing.Point(357, 530);
+            this.MaxTextBoxRoomsBoostPercentage.Name = "MaxTextBoxRoomsBoostPercentage";
+            this.MaxTextBoxRoomsBoostPercentage.ReadOnly = true;
+            this.MaxTextBoxRoomsBoostPercentage.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsBoostPercentage.TabIndex = 54;
+            // 
+            // MaxTextBoxRoomsBoostDuration
+            // 
+            this.MaxTextBoxRoomsBoostDuration.Location = new System.Drawing.Point(357, 504);
+            this.MaxTextBoxRoomsBoostDuration.Name = "MaxTextBoxRoomsBoostDuration";
+            this.MaxTextBoxRoomsBoostDuration.ReadOnly = true;
+            this.MaxTextBoxRoomsBoostDuration.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsBoostDuration.TabIndex = 53;
+            // 
+            // MaxLabelRoomsBoostPercentage
+            // 
+            this.MaxLabelRoomsBoostPercentage.AutoSize = true;
+            this.MaxLabelRoomsBoostPercentage.Location = new System.Drawing.Point(224, 533);
+            this.MaxLabelRoomsBoostPercentage.Name = "MaxLabelRoomsBoostPercentage";
+            this.MaxLabelRoomsBoostPercentage.Size = new System.Drawing.Size(91, 13);
+            this.MaxLabelRoomsBoostPercentage.TabIndex = 52;
+            this.MaxLabelRoomsBoostPercentage.Text = "Boost percentage";
+            // 
+            // MaxLabelRoomsBoostDuration
+            // 
+            this.MaxLabelRoomsBoostDuration.AutoSize = true;
+            this.MaxLabelRoomsBoostDuration.Location = new System.Drawing.Point(224, 507);
+            this.MaxLabelRoomsBoostDuration.Name = "MaxLabelRoomsBoostDuration";
+            this.MaxLabelRoomsBoostDuration.Size = new System.Drawing.Size(75, 13);
+            this.MaxLabelRoomsBoostDuration.TabIndex = 51;
+            this.MaxLabelRoomsBoostDuration.Text = "Boost duration";
+            // 
+            // MaxTextBoxRoomsDeviceComfortTemperature
+            // 
+            this.MaxTextBoxRoomsDeviceComfortTemperature.Location = new System.Drawing.Point(134, 585);
+            this.MaxTextBoxRoomsDeviceComfortTemperature.Name = "MaxTextBoxRoomsDeviceComfortTemperature";
+            this.MaxTextBoxRoomsDeviceComfortTemperature.ReadOnly = true;
+            this.MaxTextBoxRoomsDeviceComfortTemperature.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsDeviceComfortTemperature.TabIndex = 50;
+            // 
+            // MaxTextBoxRoomsDeviceEcoTemperature
+            // 
+            this.MaxTextBoxRoomsDeviceEcoTemperature.Location = new System.Drawing.Point(134, 559);
+            this.MaxTextBoxRoomsDeviceEcoTemperature.Name = "MaxTextBoxRoomsDeviceEcoTemperature";
+            this.MaxTextBoxRoomsDeviceEcoTemperature.ReadOnly = true;
+            this.MaxTextBoxRoomsDeviceEcoTemperature.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsDeviceEcoTemperature.TabIndex = 49;
+            // 
+            // MaxLabelRoomsDeviceComfortTemperature
+            // 
+            this.MaxLabelRoomsDeviceComfortTemperature.AutoSize = true;
+            this.MaxLabelRoomsDeviceComfortTemperature.Location = new System.Drawing.Point(6, 588);
+            this.MaxLabelRoomsDeviceComfortTemperature.Name = "MaxLabelRoomsDeviceComfortTemperature";
+            this.MaxLabelRoomsDeviceComfortTemperature.Size = new System.Drawing.Size(102, 13);
+            this.MaxLabelRoomsDeviceComfortTemperature.TabIndex = 48;
+            this.MaxLabelRoomsDeviceComfortTemperature.Text = "Comfort temperature";
+            // 
+            // MaxLabelRoomsDeviceEcoTemperature
+            // 
+            this.MaxLabelRoomsDeviceEcoTemperature.AutoSize = true;
+            this.MaxLabelRoomsDeviceEcoTemperature.Location = new System.Drawing.Point(6, 562);
+            this.MaxLabelRoomsDeviceEcoTemperature.Name = "MaxLabelRoomsDeviceEcoTemperature";
+            this.MaxLabelRoomsDeviceEcoTemperature.Size = new System.Drawing.Size(85, 13);
+            this.MaxLabelRoomsDeviceEcoTemperature.TabIndex = 47;
+            this.MaxLabelRoomsDeviceEcoTemperature.Text = "Eco temperature";
+            // 
+            // MaxTextBoxRoomsDeviceType
+            // 
+            this.MaxTextBoxRoomsDeviceType.Location = new System.Drawing.Point(392, 356);
+            this.MaxTextBoxRoomsDeviceType.Name = "MaxTextBoxRoomsDeviceType";
+            this.MaxTextBoxRoomsDeviceType.ReadOnly = true;
+            this.MaxTextBoxRoomsDeviceType.Size = new System.Drawing.Size(133, 20);
+            this.MaxTextBoxRoomsDeviceType.TabIndex = 46;
+            // 
+            // MaxLabelRoomsDeviceType
+            // 
+            this.MaxLabelRoomsDeviceType.AutoSize = true;
+            this.MaxLabelRoomsDeviceType.Location = new System.Drawing.Point(344, 359);
+            this.MaxLabelRoomsDeviceType.Name = "MaxLabelRoomsDeviceType";
+            this.MaxLabelRoomsDeviceType.Size = new System.Drawing.Size(31, 13);
+            this.MaxLabelRoomsDeviceType.TabIndex = 45;
+            this.MaxLabelRoomsDeviceType.Text = "Type";
+            // 
+            // MaxTextBoxRoomsDeviceActualTemperature
+            // 
+            this.MaxTextBoxRoomsDeviceActualTemperature.Location = new System.Drawing.Point(134, 533);
+            this.MaxTextBoxRoomsDeviceActualTemperature.Name = "MaxTextBoxRoomsDeviceActualTemperature";
+            this.MaxTextBoxRoomsDeviceActualTemperature.ReadOnly = true;
+            this.MaxTextBoxRoomsDeviceActualTemperature.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsDeviceActualTemperature.TabIndex = 44;
+            // 
+            // MaxTextBoxRoomsDeviceConfiguredTemperature
+            // 
+            this.MaxTextBoxRoomsDeviceConfiguredTemperature.Location = new System.Drawing.Point(134, 507);
+            this.MaxTextBoxRoomsDeviceConfiguredTemperature.Name = "MaxTextBoxRoomsDeviceConfiguredTemperature";
+            this.MaxTextBoxRoomsDeviceConfiguredTemperature.ReadOnly = true;
+            this.MaxTextBoxRoomsDeviceConfiguredTemperature.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsDeviceConfiguredTemperature.TabIndex = 43;
+            // 
+            // MaxLabelRoomsDeviceActualTemperature
+            // 
+            this.MaxLabelRoomsDeviceActualTemperature.AutoSize = true;
+            this.MaxLabelRoomsDeviceActualTemperature.Location = new System.Drawing.Point(6, 536);
+            this.MaxLabelRoomsDeviceActualTemperature.Name = "MaxLabelRoomsDeviceActualTemperature";
+            this.MaxLabelRoomsDeviceActualTemperature.Size = new System.Drawing.Size(96, 13);
+            this.MaxLabelRoomsDeviceActualTemperature.TabIndex = 42;
+            this.MaxLabelRoomsDeviceActualTemperature.Text = "Actual temperature";
+            // 
+            // MaxLabelRoomsDeviceConfiguredTemperature
+            // 
+            this.MaxLabelRoomsDeviceConfiguredTemperature.AutoSize = true;
+            this.MaxLabelRoomsDeviceConfiguredTemperature.Location = new System.Drawing.Point(6, 510);
+            this.MaxLabelRoomsDeviceConfiguredTemperature.Name = "MaxLabelRoomsDeviceConfiguredTemperature";
+            this.MaxLabelRoomsDeviceConfiguredTemperature.Size = new System.Drawing.Size(117, 13);
+            this.MaxLabelRoomsDeviceConfiguredTemperature.TabIndex = 41;
+            this.MaxLabelRoomsDeviceConfiguredTemperature.Text = "Configured temperature";
+            // 
+            // MaxTextBoxRoomsDeviceRFAddress
+            // 
+            this.MaxTextBoxRoomsDeviceRFAddress.Location = new System.Drawing.Point(79, 477);
+            this.MaxTextBoxRoomsDeviceRFAddress.Name = "MaxTextBoxRoomsDeviceRFAddress";
+            this.MaxTextBoxRoomsDeviceRFAddress.ReadOnly = true;
+            this.MaxTextBoxRoomsDeviceRFAddress.Size = new System.Drawing.Size(90, 20);
+            this.MaxTextBoxRoomsDeviceRFAddress.TabIndex = 40;
+            // 
+            // MaxLabelRoomsDeviceRFAddress
+            // 
+            this.MaxLabelRoomsDeviceRFAddress.AutoSize = true;
+            this.MaxLabelRoomsDeviceRFAddress.Location = new System.Drawing.Point(6, 480);
+            this.MaxLabelRoomsDeviceRFAddress.Name = "MaxLabelRoomsDeviceRFAddress";
+            this.MaxLabelRoomsDeviceRFAddress.Size = new System.Drawing.Size(61, 13);
+            this.MaxLabelRoomsDeviceRFAddress.TabIndex = 39;
+            this.MaxLabelRoomsDeviceRFAddress.Text = "RF address";
+            // 
+            // MaxTextBoxRoomsDeviceSerialNumber
+            // 
+            this.MaxTextBoxRoomsDeviceSerialNumber.Location = new System.Drawing.Point(79, 451);
+            this.MaxTextBoxRoomsDeviceSerialNumber.Name = "MaxTextBoxRoomsDeviceSerialNumber";
+            this.MaxTextBoxRoomsDeviceSerialNumber.ReadOnly = true;
+            this.MaxTextBoxRoomsDeviceSerialNumber.Size = new System.Drawing.Size(90, 20);
+            this.MaxTextBoxRoomsDeviceSerialNumber.TabIndex = 38;
+            // 
+            // MaxLabelRoomsDeviceSerialNumber
+            // 
+            this.MaxLabelRoomsDeviceSerialNumber.AutoSize = true;
+            this.MaxLabelRoomsDeviceSerialNumber.Location = new System.Drawing.Point(6, 451);
+            this.MaxLabelRoomsDeviceSerialNumber.Name = "MaxLabelRoomsDeviceSerialNumber";
+            this.MaxLabelRoomsDeviceSerialNumber.Size = new System.Drawing.Size(71, 13);
+            this.MaxLabelRoomsDeviceSerialNumber.TabIndex = 37;
+            this.MaxLabelRoomsDeviceSerialNumber.Text = "Serial number";
+            // 
+            // MaxTextBoxRoomsRoomConfiguredTemperature
+            // 
+            this.MaxTextBoxRoomsRoomConfiguredTemperature.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaxTextBoxRoomsRoomConfiguredTemperature.Location = new System.Drawing.Point(477, 193);
+            this.MaxTextBoxRoomsRoomConfiguredTemperature.Name = "MaxTextBoxRoomsRoomConfiguredTemperature";
+            this.MaxTextBoxRoomsRoomConfiguredTemperature.ReadOnly = true;
+            this.MaxTextBoxRoomsRoomConfiguredTemperature.Size = new System.Drawing.Size(48, 26);
+            this.MaxTextBoxRoomsRoomConfiguredTemperature.TabIndex = 36;
+            // 
+            // MaxLabelRoomsRoomConfiguredTemperature
+            // 
+            this.MaxLabelRoomsRoomConfiguredTemperature.AutoSize = true;
+            this.MaxLabelRoomsRoomConfiguredTemperature.Location = new System.Drawing.Point(344, 201);
+            this.MaxLabelRoomsRoomConfiguredTemperature.Name = "MaxLabelRoomsRoomConfiguredTemperature";
+            this.MaxLabelRoomsRoomConfiguredTemperature.Size = new System.Drawing.Size(117, 13);
+            this.MaxLabelRoomsRoomConfiguredTemperature.TabIndex = 35;
+            this.MaxLabelRoomsRoomConfiguredTemperature.Text = "Configured temperature";
+            // 
+            // MaxTextBoxRoomsRoomActualTemperature
+            // 
+            this.MaxTextBoxRoomsRoomActualTemperature.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaxTextBoxRoomsRoomActualTemperature.Location = new System.Drawing.Point(477, 228);
+            this.MaxTextBoxRoomsRoomActualTemperature.Name = "MaxTextBoxRoomsRoomActualTemperature";
+            this.MaxTextBoxRoomsRoomActualTemperature.ReadOnly = true;
+            this.MaxTextBoxRoomsRoomActualTemperature.Size = new System.Drawing.Size(48, 26);
+            this.MaxTextBoxRoomsRoomActualTemperature.TabIndex = 34;
+            // 
+            // MaxLabelRoomsRoomActualTemperature
+            // 
+            this.MaxLabelRoomsRoomActualTemperature.AutoSize = true;
+            this.MaxLabelRoomsRoomActualTemperature.Location = new System.Drawing.Point(344, 236);
+            this.MaxLabelRoomsRoomActualTemperature.Name = "MaxLabelRoomsRoomActualTemperature";
+            this.MaxLabelRoomsRoomActualTemperature.Size = new System.Drawing.Size(96, 13);
+            this.MaxLabelRoomsRoomActualTemperature.TabIndex = 33;
+            this.MaxLabelRoomsRoomActualTemperature.Text = "Actual temperature";
+            // 
+            // MaxTextBoxRoomsRoomRFAddress
+            // 
+            this.MaxTextBoxRoomsRoomRFAddress.Location = new System.Drawing.Point(79, 302);
+            this.MaxTextBoxRoomsRoomRFAddress.Name = "MaxTextBoxRoomsRoomRFAddress";
+            this.MaxTextBoxRoomsRoomRFAddress.ReadOnly = true;
+            this.MaxTextBoxRoomsRoomRFAddress.Size = new System.Drawing.Size(90, 20);
+            this.MaxTextBoxRoomsRoomRFAddress.TabIndex = 32;
+            // 
+            // MaxTextBoxRoomsRoomID
+            // 
+            this.MaxTextBoxRoomsRoomID.Location = new System.Drawing.Point(79, 276);
+            this.MaxTextBoxRoomsRoomID.Name = "MaxTextBoxRoomsRoomID";
+            this.MaxTextBoxRoomsRoomID.ReadOnly = true;
+            this.MaxTextBoxRoomsRoomID.Size = new System.Drawing.Size(90, 20);
+            this.MaxTextBoxRoomsRoomID.TabIndex = 31;
+            // 
+            // MaxLabelRoomsRoomID
+            // 
+            this.MaxLabelRoomsRoomID.AutoSize = true;
+            this.MaxLabelRoomsRoomID.Location = new System.Drawing.Point(6, 279);
+            this.MaxLabelRoomsRoomID.Name = "MaxLabelRoomsRoomID";
+            this.MaxLabelRoomsRoomID.Size = new System.Drawing.Size(49, 13);
+            this.MaxLabelRoomsRoomID.TabIndex = 30;
+            this.MaxLabelRoomsRoomID.Text = "Room ID";
+            // 
+            // MaxLabelRoomsRoomRFAddress
+            // 
+            this.MaxLabelRoomsRoomRFAddress.AutoSize = true;
+            this.MaxLabelRoomsRoomRFAddress.Location = new System.Drawing.Point(6, 305);
+            this.MaxLabelRoomsRoomRFAddress.Name = "MaxLabelRoomsRoomRFAddress";
+            this.MaxLabelRoomsRoomRFAddress.Size = new System.Drawing.Size(61, 13);
+            this.MaxLabelRoomsRoomRFAddress.TabIndex = 29;
+            this.MaxLabelRoomsRoomRFAddress.Text = "RF address";
+            // 
+            // MaxTextBoxRoomsDateTime
+            // 
+            this.MaxTextBoxRoomsDateTime.Location = new System.Drawing.Point(492, 14);
+            this.MaxTextBoxRoomsDateTime.Name = "MaxTextBoxRoomsDateTime";
+            this.MaxTextBoxRoomsDateTime.ReadOnly = true;
+            this.MaxTextBoxRoomsDateTime.Size = new System.Drawing.Size(100, 20);
+            this.MaxTextBoxRoomsDateTime.TabIndex = 28;
+            // 
+            // MaxLabelRoomsDateTime
+            // 
+            this.MaxLabelRoomsDateTime.AutoSize = true;
+            this.MaxLabelRoomsDateTime.Location = new System.Drawing.Point(412, 17);
+            this.MaxLabelRoomsDateTime.Name = "MaxLabelRoomsDateTime";
+            this.MaxLabelRoomsDateTime.Size = new System.Drawing.Size(57, 13);
+            this.MaxLabelRoomsDateTime.TabIndex = 27;
+            this.MaxLabelRoomsDateTime.Text = "Date/ time";
+            // 
+            // MaxTextBoxRoomsPushButtonDown
+            // 
+            this.MaxTextBoxRoomsPushButtonDown.Location = new System.Drawing.Point(550, 67);
+            this.MaxTextBoxRoomsPushButtonDown.Name = "MaxTextBoxRoomsPushButtonDown";
+            this.MaxTextBoxRoomsPushButtonDown.ReadOnly = true;
+            this.MaxTextBoxRoomsPushButtonDown.Size = new System.Drawing.Size(42, 20);
+            this.MaxTextBoxRoomsPushButtonDown.TabIndex = 26;
+            // 
+            // MaxTextBoxRoomsPushButtonUp
+            // 
+            this.MaxTextBoxRoomsPushButtonUp.Location = new System.Drawing.Point(550, 41);
+            this.MaxTextBoxRoomsPushButtonUp.Name = "MaxTextBoxRoomsPushButtonUp";
+            this.MaxTextBoxRoomsPushButtonUp.ReadOnly = true;
+            this.MaxTextBoxRoomsPushButtonUp.Size = new System.Drawing.Size(42, 20);
+            this.MaxTextBoxRoomsPushButtonUp.TabIndex = 25;
+            // 
+            // MaxLabelRoomsPushButtonDown
+            // 
+            this.MaxLabelRoomsPushButtonDown.AutoSize = true;
+            this.MaxLabelRoomsPushButtonDown.Location = new System.Drawing.Point(450, 70);
+            this.MaxLabelRoomsPushButtonDown.Name = "MaxLabelRoomsPushButtonDown";
+            this.MaxLabelRoomsPushButtonDown.Size = new System.Drawing.Size(93, 13);
+            this.MaxLabelRoomsPushButtonDown.TabIndex = 24;
+            this.MaxLabelRoomsPushButtonDown.Text = "Push button down";
+            // 
+            // MaxLabelRoomsPushButtonUp
+            // 
+            this.MaxLabelRoomsPushButtonUp.AutoSize = true;
+            this.MaxLabelRoomsPushButtonUp.Location = new System.Drawing.Point(450, 44);
+            this.MaxLabelRoomsPushButtonUp.Name = "MaxLabelRoomsPushButtonUp";
+            this.MaxLabelRoomsPushButtonUp.Size = new System.Drawing.Size(79, 13);
+            this.MaxLabelRoomsPushButtonUp.TabIndex = 23;
+            this.MaxLabelRoomsPushButtonUp.Text = "Push button up";
+            // 
+            // MaxTextBoxRoomsPortalEnabled
+            // 
+            this.MaxTextBoxRoomsPortalEnabled.Location = new System.Drawing.Point(550, 119);
+            this.MaxTextBoxRoomsPortalEnabled.Name = "MaxTextBoxRoomsPortalEnabled";
+            this.MaxTextBoxRoomsPortalEnabled.ReadOnly = true;
+            this.MaxTextBoxRoomsPortalEnabled.Size = new System.Drawing.Size(42, 20);
+            this.MaxTextBoxRoomsPortalEnabled.TabIndex = 22;
+            // 
+            // MaxLabelRoomsPortalEnabled
+            // 
+            this.MaxLabelRoomsPortalEnabled.AutoSize = true;
+            this.MaxLabelRoomsPortalEnabled.Location = new System.Drawing.Point(450, 122);
+            this.MaxLabelRoomsPortalEnabled.Name = "MaxLabelRoomsPortalEnabled";
+            this.MaxLabelRoomsPortalEnabled.Size = new System.Drawing.Size(75, 13);
+            this.MaxLabelRoomsPortalEnabled.TabIndex = 21;
+            this.MaxLabelRoomsPortalEnabled.Text = "Portal enabled";
             // 
             // MaxTextBoxRoomsCubeVersion
             // 
@@ -2092,11 +2515,12 @@
             this.MaxListBoxRoomsDevice.ScrollAlwaysVisible = true;
             this.MaxListBoxRoomsDevice.Size = new System.Drawing.Size(191, 95);
             this.MaxListBoxRoomsDevice.TabIndex = 6;
+            this.MaxListBoxRoomsDevice.SelectedIndexChanged += new System.EventHandler(this.MaxListBoxRoomsDevice_SelectedIndexChanged);
             // 
             // MaxLabelRoomsDevice
             // 
             this.MaxLabelRoomsDevice.AutoSize = true;
-            this.MaxLabelRoomsDevice.Location = new System.Drawing.Point(6, 361);
+            this.MaxLabelRoomsDevice.Location = new System.Drawing.Point(6, 359);
             this.MaxLabelRoomsDevice.Name = "MaxLabelRoomsDevice";
             this.MaxLabelRoomsDevice.Size = new System.Drawing.Size(41, 13);
             this.MaxLabelRoomsDevice.TabIndex = 5;
@@ -2140,149 +2564,104 @@
             this.MaxLabelRoomsMaxCube.TabIndex = 0;
             this.MaxLabelRoomsMaxCube.Text = "MaxCube";
             // 
-            // MaxLabelRoomsPortalEnabled
+            // MaxTextBoxRoomsMaxSetpointTemperature
             // 
-            this.MaxLabelRoomsPortalEnabled.AutoSize = true;
-            this.MaxLabelRoomsPortalEnabled.Location = new System.Drawing.Point(450, 122);
-            this.MaxLabelRoomsPortalEnabled.Name = "MaxLabelRoomsPortalEnabled";
-            this.MaxLabelRoomsPortalEnabled.Size = new System.Drawing.Size(75, 13);
-            this.MaxLabelRoomsPortalEnabled.TabIndex = 21;
-            this.MaxLabelRoomsPortalEnabled.Text = "Portal enabled";
+            this.MaxTextBoxRoomsMaxSetpointTemperature.Location = new System.Drawing.Point(134, 637);
+            this.MaxTextBoxRoomsMaxSetpointTemperature.Name = "MaxTextBoxRoomsMaxSetpointTemperature";
+            this.MaxTextBoxRoomsMaxSetpointTemperature.ReadOnly = true;
+            this.MaxTextBoxRoomsMaxSetpointTemperature.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsMaxSetpointTemperature.TabIndex = 62;
             // 
-            // MaxTextBoxRoomsPortalEnabled
+            // MaxLabelRoomsWindowOpenDuration
             // 
-            this.MaxTextBoxRoomsPortalEnabled.Location = new System.Drawing.Point(550, 119);
-            this.MaxTextBoxRoomsPortalEnabled.Name = "MaxTextBoxRoomsPortalEnabled";
-            this.MaxTextBoxRoomsPortalEnabled.ReadOnly = true;
-            this.MaxTextBoxRoomsPortalEnabled.Size = new System.Drawing.Size(42, 20);
-            this.MaxTextBoxRoomsPortalEnabled.TabIndex = 22;
+            this.MaxLabelRoomsWindowOpenDuration.AutoSize = true;
+            this.MaxLabelRoomsWindowOpenDuration.Location = new System.Drawing.Point(224, 559);
+            this.MaxLabelRoomsWindowOpenDuration.Name = "MaxLabelRoomsWindowOpenDuration";
+            this.MaxLabelRoomsWindowOpenDuration.Size = new System.Drawing.Size(114, 13);
+            this.MaxLabelRoomsWindowOpenDuration.TabIndex = 63;
+            this.MaxLabelRoomsWindowOpenDuration.Text = "Window open duration";
             // 
-            // MaxLabelRoomsPushButtonUp
+            // MaxLabelRoomsWindowOpenTemperature
             // 
-            this.MaxLabelRoomsPushButtonUp.AutoSize = true;
-            this.MaxLabelRoomsPushButtonUp.Location = new System.Drawing.Point(450, 44);
-            this.MaxLabelRoomsPushButtonUp.Name = "MaxLabelRoomsPushButtonUp";
-            this.MaxLabelRoomsPushButtonUp.Size = new System.Drawing.Size(79, 13);
-            this.MaxLabelRoomsPushButtonUp.TabIndex = 23;
-            this.MaxLabelRoomsPushButtonUp.Text = "Push button up";
+            this.MaxLabelRoomsWindowOpenTemperature.AutoSize = true;
+            this.MaxLabelRoomsWindowOpenTemperature.Location = new System.Drawing.Point(224, 585);
+            this.MaxLabelRoomsWindowOpenTemperature.Name = "MaxLabelRoomsWindowOpenTemperature";
+            this.MaxLabelRoomsWindowOpenTemperature.Size = new System.Drawing.Size(132, 13);
+            this.MaxLabelRoomsWindowOpenTemperature.TabIndex = 64;
+            this.MaxLabelRoomsWindowOpenTemperature.Text = "Window open temperature";
             // 
-            // MaxLabelRoomsPushButtonDown
+            // MaxTextBoxRoomsWindowOpenDuration
             // 
-            this.MaxLabelRoomsPushButtonDown.AutoSize = true;
-            this.MaxLabelRoomsPushButtonDown.Location = new System.Drawing.Point(450, 70);
-            this.MaxLabelRoomsPushButtonDown.Name = "MaxLabelRoomsPushButtonDown";
-            this.MaxLabelRoomsPushButtonDown.Size = new System.Drawing.Size(93, 13);
-            this.MaxLabelRoomsPushButtonDown.TabIndex = 24;
-            this.MaxLabelRoomsPushButtonDown.Text = "Push button down";
+            this.MaxTextBoxRoomsWindowOpenDuration.Location = new System.Drawing.Point(357, 556);
+            this.MaxTextBoxRoomsWindowOpenDuration.Name = "MaxTextBoxRoomsWindowOpenDuration";
+            this.MaxTextBoxRoomsWindowOpenDuration.ReadOnly = true;
+            this.MaxTextBoxRoomsWindowOpenDuration.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsWindowOpenDuration.TabIndex = 65;
             // 
-            // MaxTextBoxRoomsPushButtonUp
+            // MaxTextBoxRoomsWindowOpenTemperature
             // 
-            this.MaxTextBoxRoomsPushButtonUp.Location = new System.Drawing.Point(550, 41);
-            this.MaxTextBoxRoomsPushButtonUp.Name = "MaxTextBoxRoomsPushButtonUp";
-            this.MaxTextBoxRoomsPushButtonUp.ReadOnly = true;
-            this.MaxTextBoxRoomsPushButtonUp.Size = new System.Drawing.Size(42, 20);
-            this.MaxTextBoxRoomsPushButtonUp.TabIndex = 25;
+            this.MaxTextBoxRoomsWindowOpenTemperature.Location = new System.Drawing.Point(357, 582);
+            this.MaxTextBoxRoomsWindowOpenTemperature.Name = "MaxTextBoxRoomsWindowOpenTemperature";
+            this.MaxTextBoxRoomsWindowOpenTemperature.ReadOnly = true;
+            this.MaxTextBoxRoomsWindowOpenTemperature.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsWindowOpenTemperature.TabIndex = 66;
             // 
-            // MaxTextBoxRoomsPushButtonDown
+            // MaxLabelRoomsValvePosition
             // 
-            this.MaxTextBoxRoomsPushButtonDown.Location = new System.Drawing.Point(550, 67);
-            this.MaxTextBoxRoomsPushButtonDown.Name = "MaxTextBoxRoomsPushButtonDown";
-            this.MaxTextBoxRoomsPushButtonDown.ReadOnly = true;
-            this.MaxTextBoxRoomsPushButtonDown.Size = new System.Drawing.Size(42, 20);
-            this.MaxTextBoxRoomsPushButtonDown.TabIndex = 26;
+            this.MaxLabelRoomsValvePosition.AutoSize = true;
+            this.MaxLabelRoomsValvePosition.Location = new System.Drawing.Point(450, 510);
+            this.MaxLabelRoomsValvePosition.Name = "MaxLabelRoomsValvePosition";
+            this.MaxLabelRoomsValvePosition.Size = new System.Drawing.Size(73, 13);
+            this.MaxLabelRoomsValvePosition.TabIndex = 67;
+            this.MaxLabelRoomsValvePosition.Text = "Valve position";
             // 
-            // MaxLabelRoomsDateTime
+            // MaxLabelRoomsValveMaxPercent
             // 
-            this.MaxLabelRoomsDateTime.AutoSize = true;
-            this.MaxLabelRoomsDateTime.Location = new System.Drawing.Point(412, 17);
-            this.MaxLabelRoomsDateTime.Name = "MaxLabelRoomsDateTime";
-            this.MaxLabelRoomsDateTime.Size = new System.Drawing.Size(57, 13);
-            this.MaxLabelRoomsDateTime.TabIndex = 27;
-            this.MaxLabelRoomsDateTime.Text = "Date/ time";
+            this.MaxLabelRoomsValveMaxPercent.AutoSize = true;
+            this.MaxLabelRoomsValveMaxPercent.Location = new System.Drawing.Point(450, 536);
+            this.MaxLabelRoomsValveMaxPercent.Name = "MaxLabelRoomsValveMaxPercent";
+            this.MaxLabelRoomsValveMaxPercent.Size = new System.Drawing.Size(95, 13);
+            this.MaxLabelRoomsValveMaxPercent.TabIndex = 68;
+            this.MaxLabelRoomsValveMaxPercent.Text = "Valve max percent";
             // 
-            // MaxTextBoxRoomsDateTime
+            // MaxLabelRoomsValveOffsetPercent
             // 
-            this.MaxTextBoxRoomsDateTime.Location = new System.Drawing.Point(492, 14);
-            this.MaxTextBoxRoomsDateTime.Name = "MaxTextBoxRoomsDateTime";
-            this.MaxTextBoxRoomsDateTime.ReadOnly = true;
-            this.MaxTextBoxRoomsDateTime.Size = new System.Drawing.Size(100, 20);
-            this.MaxTextBoxRoomsDateTime.TabIndex = 28;
+            this.MaxLabelRoomsValveOffsetPercent.AutoSize = true;
+            this.MaxLabelRoomsValveOffsetPercent.Location = new System.Drawing.Point(450, 562);
+            this.MaxLabelRoomsValveOffsetPercent.Name = "MaxLabelRoomsValveOffsetPercent";
+            this.MaxLabelRoomsValveOffsetPercent.Size = new System.Drawing.Size(102, 13);
+            this.MaxLabelRoomsValveOffsetPercent.TabIndex = 69;
+            this.MaxLabelRoomsValveOffsetPercent.Text = "Valve offset percent";
             // 
-            // MaxLabelRoomsRoomRFAddress
+            // MaxTextBoxRoomsValvePosition
             // 
-            this.MaxLabelRoomsRoomRFAddress.AutoSize = true;
-            this.MaxLabelRoomsRoomRFAddress.Location = new System.Drawing.Point(9, 305);
-            this.MaxLabelRoomsRoomRFAddress.Name = "MaxLabelRoomsRoomRFAddress";
-            this.MaxLabelRoomsRoomRFAddress.Size = new System.Drawing.Size(61, 13);
-            this.MaxLabelRoomsRoomRFAddress.TabIndex = 29;
-            this.MaxLabelRoomsRoomRFAddress.Text = "RF address";
+            this.MaxTextBoxRoomsValvePosition.Location = new System.Drawing.Point(557, 507);
+            this.MaxTextBoxRoomsValvePosition.Name = "MaxTextBoxRoomsValvePosition";
+            this.MaxTextBoxRoomsValvePosition.ReadOnly = true;
+            this.MaxTextBoxRoomsValvePosition.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsValvePosition.TabIndex = 70;
             // 
-            // MaxLabelRoomsRoomID
+            // MaxTextBoxRoomsValveMaxPercent
             // 
-            this.MaxLabelRoomsRoomID.AutoSize = true;
-            this.MaxLabelRoomsRoomID.Location = new System.Drawing.Point(9, 279);
-            this.MaxLabelRoomsRoomID.Name = "MaxLabelRoomsRoomID";
-            this.MaxLabelRoomsRoomID.Size = new System.Drawing.Size(49, 13);
-            this.MaxLabelRoomsRoomID.TabIndex = 30;
-            this.MaxLabelRoomsRoomID.Text = "Room ID";
+            this.MaxTextBoxRoomsValveMaxPercent.Location = new System.Drawing.Point(557, 533);
+            this.MaxTextBoxRoomsValveMaxPercent.Name = "MaxTextBoxRoomsValveMaxPercent";
+            this.MaxTextBoxRoomsValveMaxPercent.ReadOnly = true;
+            this.MaxTextBoxRoomsValveMaxPercent.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsValveMaxPercent.TabIndex = 71;
             // 
-            // MaxTextBoxRoomsRoomID
+            // MaxTextBoxRoomsValveOffsetPercent
             // 
-            this.MaxTextBoxRoomsRoomID.Location = new System.Drawing.Point(79, 276);
-            this.MaxTextBoxRoomsRoomID.Name = "MaxTextBoxRoomsRoomID";
-            this.MaxTextBoxRoomsRoomID.ReadOnly = true;
-            this.MaxTextBoxRoomsRoomID.Size = new System.Drawing.Size(90, 20);
-            this.MaxTextBoxRoomsRoomID.TabIndex = 31;
-            // 
-            // MaxTextBoxRoomsRoomRFAddress
-            // 
-            this.MaxTextBoxRoomsRoomRFAddress.Location = new System.Drawing.Point(79, 302);
-            this.MaxTextBoxRoomsRoomRFAddress.Name = "MaxTextBoxRoomsRoomRFAddress";
-            this.MaxTextBoxRoomsRoomRFAddress.ReadOnly = true;
-            this.MaxTextBoxRoomsRoomRFAddress.Size = new System.Drawing.Size(90, 20);
-            this.MaxTextBoxRoomsRoomRFAddress.TabIndex = 32;
-            // 
-            // MaxLabelRoomsRoomActualTemperature
-            // 
-            this.MaxLabelRoomsRoomActualTemperature.AutoSize = true;
-            this.MaxLabelRoomsRoomActualTemperature.Location = new System.Drawing.Point(344, 236);
-            this.MaxLabelRoomsRoomActualTemperature.Name = "MaxLabelRoomsRoomActualTemperature";
-            this.MaxLabelRoomsRoomActualTemperature.Size = new System.Drawing.Size(96, 13);
-            this.MaxLabelRoomsRoomActualTemperature.TabIndex = 33;
-            this.MaxLabelRoomsRoomActualTemperature.Text = "Actual temperature";
-            // 
-            // MaxTextBoxRoomsRoomActualTemperature
-            // 
-            this.MaxTextBoxRoomsRoomActualTemperature.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MaxTextBoxRoomsRoomActualTemperature.Location = new System.Drawing.Point(477, 228);
-            this.MaxTextBoxRoomsRoomActualTemperature.Name = "MaxTextBoxRoomsRoomActualTemperature";
-            this.MaxTextBoxRoomsRoomActualTemperature.ReadOnly = true;
-            this.MaxTextBoxRoomsRoomActualTemperature.Size = new System.Drawing.Size(48, 26);
-            this.MaxTextBoxRoomsRoomActualTemperature.TabIndex = 34;
-            // 
-            // MaxLabelRoomsRoomConfiguredTemperature
-            // 
-            this.MaxLabelRoomsRoomConfiguredTemperature.AutoSize = true;
-            this.MaxLabelRoomsRoomConfiguredTemperature.Location = new System.Drawing.Point(344, 201);
-            this.MaxLabelRoomsRoomConfiguredTemperature.Name = "MaxLabelRoomsRoomConfiguredTemperature";
-            this.MaxLabelRoomsRoomConfiguredTemperature.Size = new System.Drawing.Size(117, 13);
-            this.MaxLabelRoomsRoomConfiguredTemperature.TabIndex = 35;
-            this.MaxLabelRoomsRoomConfiguredTemperature.Text = "Configured temperature";
-            // 
-            // MaxTextBoxRoomsRoomConfiguredTemperature
-            // 
-            this.MaxTextBoxRoomsRoomConfiguredTemperature.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MaxTextBoxRoomsRoomConfiguredTemperature.Location = new System.Drawing.Point(477, 193);
-            this.MaxTextBoxRoomsRoomConfiguredTemperature.Name = "MaxTextBoxRoomsRoomConfiguredTemperature";
-            this.MaxTextBoxRoomsRoomConfiguredTemperature.ReadOnly = true;
-            this.MaxTextBoxRoomsRoomConfiguredTemperature.Size = new System.Drawing.Size(48, 26);
-            this.MaxTextBoxRoomsRoomConfiguredTemperature.TabIndex = 36;
+            this.MaxTextBoxRoomsValveOffsetPercent.Location = new System.Drawing.Point(557, 559);
+            this.MaxTextBoxRoomsValveOffsetPercent.Name = "MaxTextBoxRoomsValveOffsetPercent";
+            this.MaxTextBoxRoomsValveOffsetPercent.ReadOnly = true;
+            this.MaxTextBoxRoomsValveOffsetPercent.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsValveOffsetPercent.TabIndex = 72;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1364, 590);
+            this.ClientSize = new System.Drawing.Size(1364, 788);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.OTGWGroupbox);
             this.Name = "Form1";
@@ -2521,6 +2900,42 @@
         private System.Windows.Forms.Label MaxLabelRoomsRoomActualTemperature;
         private System.Windows.Forms.TextBox MaxTextBoxRoomsRoomConfiguredTemperature;
         private System.Windows.Forms.Label MaxLabelRoomsRoomConfiguredTemperature;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsDeviceRFAddress;
+        private System.Windows.Forms.Label MaxLabelRoomsDeviceRFAddress;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsDeviceSerialNumber;
+        private System.Windows.Forms.Label MaxLabelRoomsDeviceSerialNumber;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsDeviceActualTemperature;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsDeviceConfiguredTemperature;
+        private System.Windows.Forms.Label MaxLabelRoomsDeviceActualTemperature;
+        private System.Windows.Forms.Label MaxLabelRoomsDeviceConfiguredTemperature;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsDeviceType;
+        private System.Windows.Forms.Label MaxLabelRoomsDeviceType;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsDeviceComfortTemperature;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsDeviceEcoTemperature;
+        private System.Windows.Forms.Label MaxLabelRoomsDeviceComfortTemperature;
+        private System.Windows.Forms.Label MaxLabelRoomsDeviceEcoTemperature;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsBoostPercentage;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsBoostDuration;
+        private System.Windows.Forms.Label MaxLabelRoomsBoostPercentage;
+        private System.Windows.Forms.Label MaxLabelRoomsBoostDuration;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsDecalcificationHour;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsDecalcificationDay;
+        private System.Windows.Forms.Label MaxLabelRoomsDecalcificationHour;
+        private System.Windows.Forms.Label MaxLabelRoomsDecalcificationDay;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsMinSetpointTemperature;
+        private System.Windows.Forms.Label MaxLabelRoomsMaxSetpointTemperature;
+        private System.Windows.Forms.Label MaxLabelRoomsMinSetPointTemperature;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsMaxSetpointTemperature;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsWindowOpenTemperature;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsWindowOpenDuration;
+        private System.Windows.Forms.Label MaxLabelRoomsWindowOpenTemperature;
+        private System.Windows.Forms.Label MaxLabelRoomsWindowOpenDuration;
+        private System.Windows.Forms.Label MaxLabelRoomsValvePosition;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsValveOffsetPercent;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsValveMaxPercent;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsValvePosition;
+        private System.Windows.Forms.Label MaxLabelRoomsValveOffsetPercent;
+        private System.Windows.Forms.Label MaxLabelRoomsValveMaxPercent;
     }
 }
 
