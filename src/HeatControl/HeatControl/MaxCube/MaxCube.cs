@@ -31,6 +31,8 @@ namespace HeatControl
                 public string name;
                 public int rfAddress;
                 public int roomID;
+                public float configuredTemperature;
+                public float actualTemperature;
 
                 public List<DeviceBase> devices;
                 public Room(string name, int rfAddress, int roomID)

@@ -492,6 +492,12 @@ namespace HeatControl
                 this.MaxTextBoxRoomsDutyCycle.Text = "";
                 this.MaxTextBoxRoomsEmptyMemorySlots.Text = "";
                 this.MaxTextBoxRoomsPortalURL.Text = "";
+                this.MaxTextBoxRoomsPortalEnabled.Text = "";
+                this.MaxTextBoxRoomsPushButtonUp.Text = "";
+                this.MaxTextBoxRoomsPushButtonDown.Text = "";
+                this.MaxTextBoxRoomsDateTime.Text = "";
+                this.MaxTextBoxRoomsRoomRFAddress.Text = "";
+                this.MaxTextBoxRoomsRoomID.Text = "";
             }
         }
 
@@ -504,7 +510,7 @@ namespace HeatControl
 
             foreach (KeyValuePair<int, Room> kvp  in maxCube.rooms)
             {
-                this.MaxListBoxRoomsRooms.Items.Add("[" + kvp.Key.ToString() + "] " + kvp.Value.name);
+                this.MaxListBoxRoomsRooms.Items.Add(kvp.Value.name);
             }
 
             this.MaxTextBoxRoomsCubeName.Text = maxCube.deviceMaxCube.name;
@@ -514,9 +520,12 @@ namespace HeatControl
             this.MaxTextBoxRoomsDutyCycle.Text = maxCube.deviceMaxCube.dutyCycle.ToString();
             this.MaxTextBoxRoomsEmptyMemorySlots.Text = maxCube.deviceMaxCube.freeMemorySlots.ToString();
             this.MaxTextBoxRoomsPortalURL.Text = maxCube.deviceMaxCube.portalURL;
-
-
-
+            this.MaxTextBoxRoomsPortalEnabled.Text = maxCube.deviceMaxCube.portalEnabled.ToString();
+            this.MaxTextBoxRoomsPushButtonUp.Text = maxCube.deviceMaxCube.pushButtonUpConfig.ToString();
+            this.MaxTextBoxRoomsPushButtonDown.Text = maxCube.deviceMaxCube.pushButtonDownConfig.ToString();
+            this.MaxTextBoxRoomsDateTime.Text = maxCube.deviceMaxCube.dateTime.ToString("yyyy-MM-dd   HH:mm");
+            this.MaxTextBoxRoomsRoomRFAddress.Text = "";
+            this.MaxTextBoxRoomsRoomID.Text = "";
 
         }
 
@@ -531,6 +540,11 @@ namespace HeatControl
             {
                 this.MaxListBoxRoomsDevice.Items.Add(device.name);
             }
+
+            this.MaxTextBoxRoomsRoomRFAddress.Text=  room.rfAddress.ToString("X6");
+            this.MaxTextBoxRoomsRoomID.Text = room.roomID.ToString();
+            this.MaxTextBoxRoomsRoomActualTemperature.Text = room.actualTemperature.ToString();
+            this.MaxTextBoxRoomsRoomConfiguredTemperature.Text = room.configuredTemperature.ToString();
 
         }
     }

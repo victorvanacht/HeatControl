@@ -203,6 +203,20 @@
             this.MaxButtonDisconnect = new System.Windows.Forms.Button();
             this.MaxButtonConnect = new System.Windows.Forms.Button();
             this.MaxTabRooms = new System.Windows.Forms.TabPage();
+            this.MaxTextBoxRoomsCubeVersion = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsCubeVersion = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsPortalURL = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsPortalURL = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsEmptyMemorySlots = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsDutyCycle = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsEmptyMemorySlots = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsDutyCycle = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsCubeRfAddress = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsCubeSerialNumber = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsCubeName = new System.Windows.Forms.TextBox();
+            this.MaxLabelRFAddress = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsSerialNumber = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsName = new System.Windows.Forms.Label();
             this.MaxListBoxRoomsDevice = new System.Windows.Forms.ListBox();
             this.MaxLabelRoomsDevice = new System.Windows.Forms.Label();
             this.MaxListBoxRoomsRooms = new System.Windows.Forms.ListBox();
@@ -210,20 +224,22 @@
             this.MaxLabelRoomsRoom = new System.Windows.Forms.Label();
             this.MaxLabelRoomsMaxCube = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.MaxLabelRoomsName = new System.Windows.Forms.Label();
-            this.MaxLabelRoomsSerialNumber = new System.Windows.Forms.Label();
-            this.MaxLabelRFAddress = new System.Windows.Forms.Label();
-            this.MaxTextBoxRoomsCubeName = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxRoomsCubeSerialNumber = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxRoomsCubeRfAddress = new System.Windows.Forms.TextBox();
-            this.MaxLabelRoomsDutyCycle = new System.Windows.Forms.Label();
-            this.MaxLabelRoomsEmptyMemorySlots = new System.Windows.Forms.Label();
-            this.MaxTextBoxRoomsDutyCycle = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxRoomsEmptyMemorySlots = new System.Windows.Forms.TextBox();
-            this.MaxLabelRoomsPortalURL = new System.Windows.Forms.Label();
-            this.MaxTextBoxRoomsPortalURL = new System.Windows.Forms.TextBox();
-            this.MaxLabelRoomsCubeVersion = new System.Windows.Forms.Label();
-            this.MaxTextBoxRoomsCubeVersion = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsPortalEnabled = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsPortalEnabled = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsPushButtonUp = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsPushButtonDown = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsPushButtonUp = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsPushButtonDown = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsDateTime = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsDateTime = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsRoomRFAddress = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsRoomID = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsRoomID = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsRoomRFAddress = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsRoomActualTemperature = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsRoomActualTemperature = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsRoomConfiguredTemperature = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsRoomConfiguredTemperature = new System.Windows.Forms.TextBox();
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.OTGWTabStatus.SuspendLayout();
@@ -1906,6 +1922,22 @@
             // MaxTabRooms
             // 
             this.MaxTabRooms.BackColor = System.Drawing.SystemColors.Control;
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsRoomConfiguredTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsRoomConfiguredTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsRoomActualTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsRoomActualTemperature);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsRoomRFAddress);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsRoomID);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsRoomID);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsRoomRFAddress);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsDateTime);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsDateTime);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsPushButtonDown);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsPushButtonUp);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsPushButtonDown);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsPushButtonUp);
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsPortalEnabled);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsPortalEnabled);
             this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsCubeVersion);
             this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsCubeVersion);
             this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsPortalURL);
@@ -1933,10 +1965,129 @@
             this.MaxTabRooms.TabIndex = 2;
             this.MaxTabRooms.Text = "Rooms";
             // 
+            // MaxTextBoxRoomsCubeVersion
+            // 
+            this.MaxTextBoxRoomsCubeVersion.Location = new System.Drawing.Point(347, 41);
+            this.MaxTextBoxRoomsCubeVersion.Name = "MaxTextBoxRoomsCubeVersion";
+            this.MaxTextBoxRoomsCubeVersion.ReadOnly = true;
+            this.MaxTextBoxRoomsCubeVersion.Size = new System.Drawing.Size(42, 20);
+            this.MaxTextBoxRoomsCubeVersion.TabIndex = 20;
+            // 
+            // MaxLabelRoomsCubeVersion
+            // 
+            this.MaxLabelRoomsCubeVersion.AutoSize = true;
+            this.MaxLabelRoomsCubeVersion.Location = new System.Drawing.Point(242, 44);
+            this.MaxLabelRoomsCubeVersion.Name = "MaxLabelRoomsCubeVersion";
+            this.MaxLabelRoomsCubeVersion.Size = new System.Drawing.Size(42, 13);
+            this.MaxLabelRoomsCubeVersion.TabIndex = 19;
+            this.MaxLabelRoomsCubeVersion.Text = "Version";
+            // 
+            // MaxTextBoxRoomsPortalURL
+            // 
+            this.MaxTextBoxRoomsPortalURL.Location = new System.Drawing.Point(79, 119);
+            this.MaxTextBoxRoomsPortalURL.Name = "MaxTextBoxRoomsPortalURL";
+            this.MaxTextBoxRoomsPortalURL.ReadOnly = true;
+            this.MaxTextBoxRoomsPortalURL.Size = new System.Drawing.Size(311, 20);
+            this.MaxTextBoxRoomsPortalURL.TabIndex = 18;
+            // 
+            // MaxLabelRoomsPortalURL
+            // 
+            this.MaxLabelRoomsPortalURL.AutoSize = true;
+            this.MaxLabelRoomsPortalURL.Location = new System.Drawing.Point(6, 122);
+            this.MaxLabelRoomsPortalURL.Name = "MaxLabelRoomsPortalURL";
+            this.MaxLabelRoomsPortalURL.Size = new System.Drawing.Size(59, 13);
+            this.MaxLabelRoomsPortalURL.TabIndex = 17;
+            this.MaxLabelRoomsPortalURL.Text = "Portal URL";
+            // 
+            // MaxTextBoxRoomsEmptyMemorySlots
+            // 
+            this.MaxTextBoxRoomsEmptyMemorySlots.Location = new System.Drawing.Point(347, 93);
+            this.MaxTextBoxRoomsEmptyMemorySlots.Name = "MaxTextBoxRoomsEmptyMemorySlots";
+            this.MaxTextBoxRoomsEmptyMemorySlots.ReadOnly = true;
+            this.MaxTextBoxRoomsEmptyMemorySlots.Size = new System.Drawing.Size(42, 20);
+            this.MaxTextBoxRoomsEmptyMemorySlots.TabIndex = 16;
+            // 
+            // MaxTextBoxRoomsDutyCycle
+            // 
+            this.MaxTextBoxRoomsDutyCycle.Location = new System.Drawing.Point(347, 67);
+            this.MaxTextBoxRoomsDutyCycle.Name = "MaxTextBoxRoomsDutyCycle";
+            this.MaxTextBoxRoomsDutyCycle.ReadOnly = true;
+            this.MaxTextBoxRoomsDutyCycle.Size = new System.Drawing.Size(42, 20);
+            this.MaxTextBoxRoomsDutyCycle.TabIndex = 15;
+            // 
+            // MaxLabelRoomsEmptyMemorySlots
+            // 
+            this.MaxLabelRoomsEmptyMemorySlots.AutoSize = true;
+            this.MaxLabelRoomsEmptyMemorySlots.Location = new System.Drawing.Point(242, 96);
+            this.MaxLabelRoomsEmptyMemorySlots.Name = "MaxLabelRoomsEmptyMemorySlots";
+            this.MaxLabelRoomsEmptyMemorySlots.Size = new System.Drawing.Size(99, 13);
+            this.MaxLabelRoomsEmptyMemorySlots.TabIndex = 14;
+            this.MaxLabelRoomsEmptyMemorySlots.Text = "Empty memory slots";
+            // 
+            // MaxLabelRoomsDutyCycle
+            // 
+            this.MaxLabelRoomsDutyCycle.AutoSize = true;
+            this.MaxLabelRoomsDutyCycle.Location = new System.Drawing.Point(242, 70);
+            this.MaxLabelRoomsDutyCycle.Name = "MaxLabelRoomsDutyCycle";
+            this.MaxLabelRoomsDutyCycle.Size = new System.Drawing.Size(57, 13);
+            this.MaxLabelRoomsDutyCycle.TabIndex = 13;
+            this.MaxLabelRoomsDutyCycle.Text = "Duty cycle";
+            // 
+            // MaxTextBoxRoomsCubeRfAddress
+            // 
+            this.MaxTextBoxRoomsCubeRfAddress.Location = new System.Drawing.Point(79, 93);
+            this.MaxTextBoxRoomsCubeRfAddress.Name = "MaxTextBoxRoomsCubeRfAddress";
+            this.MaxTextBoxRoomsCubeRfAddress.ReadOnly = true;
+            this.MaxTextBoxRoomsCubeRfAddress.Size = new System.Drawing.Size(90, 20);
+            this.MaxTextBoxRoomsCubeRfAddress.TabIndex = 12;
+            // 
+            // MaxTextBoxRoomsCubeSerialNumber
+            // 
+            this.MaxTextBoxRoomsCubeSerialNumber.Location = new System.Drawing.Point(79, 67);
+            this.MaxTextBoxRoomsCubeSerialNumber.Name = "MaxTextBoxRoomsCubeSerialNumber";
+            this.MaxTextBoxRoomsCubeSerialNumber.ReadOnly = true;
+            this.MaxTextBoxRoomsCubeSerialNumber.Size = new System.Drawing.Size(90, 20);
+            this.MaxTextBoxRoomsCubeSerialNumber.TabIndex = 11;
+            // 
+            // MaxTextBoxRoomsCubeName
+            // 
+            this.MaxTextBoxRoomsCubeName.Location = new System.Drawing.Point(79, 41);
+            this.MaxTextBoxRoomsCubeName.Name = "MaxTextBoxRoomsCubeName";
+            this.MaxTextBoxRoomsCubeName.ReadOnly = true;
+            this.MaxTextBoxRoomsCubeName.Size = new System.Drawing.Size(90, 20);
+            this.MaxTextBoxRoomsCubeName.TabIndex = 10;
+            // 
+            // MaxLabelRFAddress
+            // 
+            this.MaxLabelRFAddress.AutoSize = true;
+            this.MaxLabelRFAddress.Location = new System.Drawing.Point(6, 96);
+            this.MaxLabelRFAddress.Name = "MaxLabelRFAddress";
+            this.MaxLabelRFAddress.Size = new System.Drawing.Size(61, 13);
+            this.MaxLabelRFAddress.TabIndex = 9;
+            this.MaxLabelRFAddress.Text = "RF address";
+            // 
+            // MaxLabelRoomsSerialNumber
+            // 
+            this.MaxLabelRoomsSerialNumber.AutoSize = true;
+            this.MaxLabelRoomsSerialNumber.Location = new System.Drawing.Point(6, 70);
+            this.MaxLabelRoomsSerialNumber.Name = "MaxLabelRoomsSerialNumber";
+            this.MaxLabelRoomsSerialNumber.Size = new System.Drawing.Size(71, 13);
+            this.MaxLabelRoomsSerialNumber.TabIndex = 8;
+            this.MaxLabelRoomsSerialNumber.Text = "Serial number";
+            // 
+            // MaxLabelRoomsName
+            // 
+            this.MaxLabelRoomsName.AutoSize = true;
+            this.MaxLabelRoomsName.Location = new System.Drawing.Point(6, 44);
+            this.MaxLabelRoomsName.Name = "MaxLabelRoomsName";
+            this.MaxLabelRoomsName.Size = new System.Drawing.Size(35, 13);
+            this.MaxLabelRoomsName.TabIndex = 7;
+            this.MaxLabelRoomsName.Text = "Name";
+            // 
             // MaxListBoxRoomsDevice
             // 
             this.MaxListBoxRoomsDevice.FormattingEnabled = true;
-            this.MaxListBoxRoomsDevice.Location = new System.Drawing.Point(79, 325);
+            this.MaxListBoxRoomsDevice.Location = new System.Drawing.Point(79, 350);
             this.MaxListBoxRoomsDevice.Name = "MaxListBoxRoomsDevice";
             this.MaxListBoxRoomsDevice.ScrollAlwaysVisible = true;
             this.MaxListBoxRoomsDevice.Size = new System.Drawing.Size(191, 95);
@@ -1945,7 +2096,7 @@
             // MaxLabelRoomsDevice
             // 
             this.MaxLabelRoomsDevice.AutoSize = true;
-            this.MaxLabelRoomsDevice.Location = new System.Drawing.Point(6, 325);
+            this.MaxLabelRoomsDevice.Location = new System.Drawing.Point(6, 361);
             this.MaxLabelRoomsDevice.Name = "MaxLabelRoomsDevice";
             this.MaxLabelRoomsDevice.Size = new System.Drawing.Size(41, 13);
             this.MaxLabelRoomsDevice.TabIndex = 5;
@@ -1989,124 +2140,143 @@
             this.MaxLabelRoomsMaxCube.TabIndex = 0;
             this.MaxLabelRoomsMaxCube.Text = "MaxCube";
             // 
-            // MaxLabelRoomsName
+            // MaxLabelRoomsPortalEnabled
             // 
-            this.MaxLabelRoomsName.AutoSize = true;
-            this.MaxLabelRoomsName.Location = new System.Drawing.Point(6, 44);
-            this.MaxLabelRoomsName.Name = "MaxLabelRoomsName";
-            this.MaxLabelRoomsName.Size = new System.Drawing.Size(35, 13);
-            this.MaxLabelRoomsName.TabIndex = 7;
-            this.MaxLabelRoomsName.Text = "Name";
+            this.MaxLabelRoomsPortalEnabled.AutoSize = true;
+            this.MaxLabelRoomsPortalEnabled.Location = new System.Drawing.Point(450, 122);
+            this.MaxLabelRoomsPortalEnabled.Name = "MaxLabelRoomsPortalEnabled";
+            this.MaxLabelRoomsPortalEnabled.Size = new System.Drawing.Size(75, 13);
+            this.MaxLabelRoomsPortalEnabled.TabIndex = 21;
+            this.MaxLabelRoomsPortalEnabled.Text = "Portal enabled";
             // 
-            // MaxLabelRoomsSerialNumber
+            // MaxTextBoxRoomsPortalEnabled
             // 
-            this.MaxLabelRoomsSerialNumber.AutoSize = true;
-            this.MaxLabelRoomsSerialNumber.Location = new System.Drawing.Point(6, 70);
-            this.MaxLabelRoomsSerialNumber.Name = "MaxLabelRoomsSerialNumber";
-            this.MaxLabelRoomsSerialNumber.Size = new System.Drawing.Size(71, 13);
-            this.MaxLabelRoomsSerialNumber.TabIndex = 8;
-            this.MaxLabelRoomsSerialNumber.Text = "Serial number";
+            this.MaxTextBoxRoomsPortalEnabled.Location = new System.Drawing.Point(550, 119);
+            this.MaxTextBoxRoomsPortalEnabled.Name = "MaxTextBoxRoomsPortalEnabled";
+            this.MaxTextBoxRoomsPortalEnabled.ReadOnly = true;
+            this.MaxTextBoxRoomsPortalEnabled.Size = new System.Drawing.Size(42, 20);
+            this.MaxTextBoxRoomsPortalEnabled.TabIndex = 22;
             // 
-            // MaxLabelRFAddress
+            // MaxLabelRoomsPushButtonUp
             // 
-            this.MaxLabelRFAddress.AutoSize = true;
-            this.MaxLabelRFAddress.Location = new System.Drawing.Point(6, 96);
-            this.MaxLabelRFAddress.Name = "MaxLabelRFAddress";
-            this.MaxLabelRFAddress.Size = new System.Drawing.Size(61, 13);
-            this.MaxLabelRFAddress.TabIndex = 9;
-            this.MaxLabelRFAddress.Text = "RF address";
+            this.MaxLabelRoomsPushButtonUp.AutoSize = true;
+            this.MaxLabelRoomsPushButtonUp.Location = new System.Drawing.Point(450, 44);
+            this.MaxLabelRoomsPushButtonUp.Name = "MaxLabelRoomsPushButtonUp";
+            this.MaxLabelRoomsPushButtonUp.Size = new System.Drawing.Size(79, 13);
+            this.MaxLabelRoomsPushButtonUp.TabIndex = 23;
+            this.MaxLabelRoomsPushButtonUp.Text = "Push button up";
             // 
-            // MaxTextBoxRoomsCubeName
+            // MaxLabelRoomsPushButtonDown
             // 
-            this.MaxTextBoxRoomsCubeName.Location = new System.Drawing.Point(79, 41);
-            this.MaxTextBoxRoomsCubeName.Name = "MaxTextBoxRoomsCubeName";
-            this.MaxTextBoxRoomsCubeName.ReadOnly = true;
-            this.MaxTextBoxRoomsCubeName.Size = new System.Drawing.Size(90, 20);
-            this.MaxTextBoxRoomsCubeName.TabIndex = 10;
+            this.MaxLabelRoomsPushButtonDown.AutoSize = true;
+            this.MaxLabelRoomsPushButtonDown.Location = new System.Drawing.Point(450, 70);
+            this.MaxLabelRoomsPushButtonDown.Name = "MaxLabelRoomsPushButtonDown";
+            this.MaxLabelRoomsPushButtonDown.Size = new System.Drawing.Size(93, 13);
+            this.MaxLabelRoomsPushButtonDown.TabIndex = 24;
+            this.MaxLabelRoomsPushButtonDown.Text = "Push button down";
             // 
-            // MaxTextBoxRoomsCubeSerialNumber
+            // MaxTextBoxRoomsPushButtonUp
             // 
-            this.MaxTextBoxRoomsCubeSerialNumber.Location = new System.Drawing.Point(79, 67);
-            this.MaxTextBoxRoomsCubeSerialNumber.Name = "MaxTextBoxRoomsCubeSerialNumber";
-            this.MaxTextBoxRoomsCubeSerialNumber.ReadOnly = true;
-            this.MaxTextBoxRoomsCubeSerialNumber.Size = new System.Drawing.Size(90, 20);
-            this.MaxTextBoxRoomsCubeSerialNumber.TabIndex = 11;
+            this.MaxTextBoxRoomsPushButtonUp.Location = new System.Drawing.Point(550, 41);
+            this.MaxTextBoxRoomsPushButtonUp.Name = "MaxTextBoxRoomsPushButtonUp";
+            this.MaxTextBoxRoomsPushButtonUp.ReadOnly = true;
+            this.MaxTextBoxRoomsPushButtonUp.Size = new System.Drawing.Size(42, 20);
+            this.MaxTextBoxRoomsPushButtonUp.TabIndex = 25;
             // 
-            // MaxTextBoxRoomsCubeRfAddress
+            // MaxTextBoxRoomsPushButtonDown
             // 
-            this.MaxTextBoxRoomsCubeRfAddress.Location = new System.Drawing.Point(79, 93);
-            this.MaxTextBoxRoomsCubeRfAddress.Name = "MaxTextBoxRoomsCubeRfAddress";
-            this.MaxTextBoxRoomsCubeRfAddress.ReadOnly = true;
-            this.MaxTextBoxRoomsCubeRfAddress.Size = new System.Drawing.Size(90, 20);
-            this.MaxTextBoxRoomsCubeRfAddress.TabIndex = 12;
+            this.MaxTextBoxRoomsPushButtonDown.Location = new System.Drawing.Point(550, 67);
+            this.MaxTextBoxRoomsPushButtonDown.Name = "MaxTextBoxRoomsPushButtonDown";
+            this.MaxTextBoxRoomsPushButtonDown.ReadOnly = true;
+            this.MaxTextBoxRoomsPushButtonDown.Size = new System.Drawing.Size(42, 20);
+            this.MaxTextBoxRoomsPushButtonDown.TabIndex = 26;
             // 
-            // MaxLabelRoomsDutyCycle
+            // MaxLabelRoomsDateTime
             // 
-            this.MaxLabelRoomsDutyCycle.AutoSize = true;
-            this.MaxLabelRoomsDutyCycle.Location = new System.Drawing.Point(242, 70);
-            this.MaxLabelRoomsDutyCycle.Name = "MaxLabelRoomsDutyCycle";
-            this.MaxLabelRoomsDutyCycle.Size = new System.Drawing.Size(57, 13);
-            this.MaxLabelRoomsDutyCycle.TabIndex = 13;
-            this.MaxLabelRoomsDutyCycle.Text = "Duty cycle";
+            this.MaxLabelRoomsDateTime.AutoSize = true;
+            this.MaxLabelRoomsDateTime.Location = new System.Drawing.Point(412, 17);
+            this.MaxLabelRoomsDateTime.Name = "MaxLabelRoomsDateTime";
+            this.MaxLabelRoomsDateTime.Size = new System.Drawing.Size(57, 13);
+            this.MaxLabelRoomsDateTime.TabIndex = 27;
+            this.MaxLabelRoomsDateTime.Text = "Date/ time";
             // 
-            // MaxLabelRoomsEmptyMemorySlots
+            // MaxTextBoxRoomsDateTime
             // 
-            this.MaxLabelRoomsEmptyMemorySlots.AutoSize = true;
-            this.MaxLabelRoomsEmptyMemorySlots.Location = new System.Drawing.Point(242, 96);
-            this.MaxLabelRoomsEmptyMemorySlots.Name = "MaxLabelRoomsEmptyMemorySlots";
-            this.MaxLabelRoomsEmptyMemorySlots.Size = new System.Drawing.Size(99, 13);
-            this.MaxLabelRoomsEmptyMemorySlots.TabIndex = 14;
-            this.MaxLabelRoomsEmptyMemorySlots.Text = "Empty memory slots";
+            this.MaxTextBoxRoomsDateTime.Location = new System.Drawing.Point(492, 14);
+            this.MaxTextBoxRoomsDateTime.Name = "MaxTextBoxRoomsDateTime";
+            this.MaxTextBoxRoomsDateTime.ReadOnly = true;
+            this.MaxTextBoxRoomsDateTime.Size = new System.Drawing.Size(100, 20);
+            this.MaxTextBoxRoomsDateTime.TabIndex = 28;
             // 
-            // MaxTextBoxRoomsDutyCycle
+            // MaxLabelRoomsRoomRFAddress
             // 
-            this.MaxTextBoxRoomsDutyCycle.Location = new System.Drawing.Point(347, 67);
-            this.MaxTextBoxRoomsDutyCycle.Name = "MaxTextBoxRoomsDutyCycle";
-            this.MaxTextBoxRoomsDutyCycle.ReadOnly = true;
-            this.MaxTextBoxRoomsDutyCycle.Size = new System.Drawing.Size(42, 20);
-            this.MaxTextBoxRoomsDutyCycle.TabIndex = 15;
+            this.MaxLabelRoomsRoomRFAddress.AutoSize = true;
+            this.MaxLabelRoomsRoomRFAddress.Location = new System.Drawing.Point(9, 305);
+            this.MaxLabelRoomsRoomRFAddress.Name = "MaxLabelRoomsRoomRFAddress";
+            this.MaxLabelRoomsRoomRFAddress.Size = new System.Drawing.Size(61, 13);
+            this.MaxLabelRoomsRoomRFAddress.TabIndex = 29;
+            this.MaxLabelRoomsRoomRFAddress.Text = "RF address";
             // 
-            // MaxTextBoxRoomsEmptyMemorySlots
+            // MaxLabelRoomsRoomID
             // 
-            this.MaxTextBoxRoomsEmptyMemorySlots.Location = new System.Drawing.Point(347, 93);
-            this.MaxTextBoxRoomsEmptyMemorySlots.Name = "MaxTextBoxRoomsEmptyMemorySlots";
-            this.MaxTextBoxRoomsEmptyMemorySlots.ReadOnly = true;
-            this.MaxTextBoxRoomsEmptyMemorySlots.Size = new System.Drawing.Size(42, 20);
-            this.MaxTextBoxRoomsEmptyMemorySlots.TabIndex = 16;
+            this.MaxLabelRoomsRoomID.AutoSize = true;
+            this.MaxLabelRoomsRoomID.Location = new System.Drawing.Point(9, 279);
+            this.MaxLabelRoomsRoomID.Name = "MaxLabelRoomsRoomID";
+            this.MaxLabelRoomsRoomID.Size = new System.Drawing.Size(49, 13);
+            this.MaxLabelRoomsRoomID.TabIndex = 30;
+            this.MaxLabelRoomsRoomID.Text = "Room ID";
             // 
-            // MaxLabelRoomsPortalURL
+            // MaxTextBoxRoomsRoomID
             // 
-            this.MaxLabelRoomsPortalURL.AutoSize = true;
-            this.MaxLabelRoomsPortalURL.Location = new System.Drawing.Point(6, 122);
-            this.MaxLabelRoomsPortalURL.Name = "MaxLabelRoomsPortalURL";
-            this.MaxLabelRoomsPortalURL.Size = new System.Drawing.Size(59, 13);
-            this.MaxLabelRoomsPortalURL.TabIndex = 17;
-            this.MaxLabelRoomsPortalURL.Text = "Portal URL";
+            this.MaxTextBoxRoomsRoomID.Location = new System.Drawing.Point(79, 276);
+            this.MaxTextBoxRoomsRoomID.Name = "MaxTextBoxRoomsRoomID";
+            this.MaxTextBoxRoomsRoomID.ReadOnly = true;
+            this.MaxTextBoxRoomsRoomID.Size = new System.Drawing.Size(90, 20);
+            this.MaxTextBoxRoomsRoomID.TabIndex = 31;
             // 
-            // MaxTextBoxRoomsPortalURL
+            // MaxTextBoxRoomsRoomRFAddress
             // 
-            this.MaxTextBoxRoomsPortalURL.Location = new System.Drawing.Point(79, 119);
-            this.MaxTextBoxRoomsPortalURL.Name = "MaxTextBoxRoomsPortalURL";
-            this.MaxTextBoxRoomsPortalURL.ReadOnly = true;
-            this.MaxTextBoxRoomsPortalURL.Size = new System.Drawing.Size(311, 20);
-            this.MaxTextBoxRoomsPortalURL.TabIndex = 18;
+            this.MaxTextBoxRoomsRoomRFAddress.Location = new System.Drawing.Point(79, 302);
+            this.MaxTextBoxRoomsRoomRFAddress.Name = "MaxTextBoxRoomsRoomRFAddress";
+            this.MaxTextBoxRoomsRoomRFAddress.ReadOnly = true;
+            this.MaxTextBoxRoomsRoomRFAddress.Size = new System.Drawing.Size(90, 20);
+            this.MaxTextBoxRoomsRoomRFAddress.TabIndex = 32;
             // 
-            // MaxLabelRoomsCubeVersion
+            // MaxLabelRoomsRoomActualTemperature
             // 
-            this.MaxLabelRoomsCubeVersion.AutoSize = true;
-            this.MaxLabelRoomsCubeVersion.Location = new System.Drawing.Point(242, 44);
-            this.MaxLabelRoomsCubeVersion.Name = "MaxLabelRoomsCubeVersion";
-            this.MaxLabelRoomsCubeVersion.Size = new System.Drawing.Size(42, 13);
-            this.MaxLabelRoomsCubeVersion.TabIndex = 19;
-            this.MaxLabelRoomsCubeVersion.Text = "Version";
+            this.MaxLabelRoomsRoomActualTemperature.AutoSize = true;
+            this.MaxLabelRoomsRoomActualTemperature.Location = new System.Drawing.Point(344, 236);
+            this.MaxLabelRoomsRoomActualTemperature.Name = "MaxLabelRoomsRoomActualTemperature";
+            this.MaxLabelRoomsRoomActualTemperature.Size = new System.Drawing.Size(96, 13);
+            this.MaxLabelRoomsRoomActualTemperature.TabIndex = 33;
+            this.MaxLabelRoomsRoomActualTemperature.Text = "Actual temperature";
             // 
-            // MaxTextBoxRoomsCubeVersion
+            // MaxTextBoxRoomsRoomActualTemperature
             // 
-            this.MaxTextBoxRoomsCubeVersion.Location = new System.Drawing.Point(347, 41);
-            this.MaxTextBoxRoomsCubeVersion.Name = "MaxTextBoxRoomsCubeVersion";
-            this.MaxTextBoxRoomsCubeVersion.ReadOnly = true;
-            this.MaxTextBoxRoomsCubeVersion.Size = new System.Drawing.Size(42, 20);
-            this.MaxTextBoxRoomsCubeVersion.TabIndex = 20;
+            this.MaxTextBoxRoomsRoomActualTemperature.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaxTextBoxRoomsRoomActualTemperature.Location = new System.Drawing.Point(477, 228);
+            this.MaxTextBoxRoomsRoomActualTemperature.Name = "MaxTextBoxRoomsRoomActualTemperature";
+            this.MaxTextBoxRoomsRoomActualTemperature.ReadOnly = true;
+            this.MaxTextBoxRoomsRoomActualTemperature.Size = new System.Drawing.Size(48, 26);
+            this.MaxTextBoxRoomsRoomActualTemperature.TabIndex = 34;
+            // 
+            // MaxLabelRoomsRoomConfiguredTemperature
+            // 
+            this.MaxLabelRoomsRoomConfiguredTemperature.AutoSize = true;
+            this.MaxLabelRoomsRoomConfiguredTemperature.Location = new System.Drawing.Point(344, 201);
+            this.MaxLabelRoomsRoomConfiguredTemperature.Name = "MaxLabelRoomsRoomConfiguredTemperature";
+            this.MaxLabelRoomsRoomConfiguredTemperature.Size = new System.Drawing.Size(117, 13);
+            this.MaxLabelRoomsRoomConfiguredTemperature.TabIndex = 35;
+            this.MaxLabelRoomsRoomConfiguredTemperature.Text = "Configured temperature";
+            // 
+            // MaxTextBoxRoomsRoomConfiguredTemperature
+            // 
+            this.MaxTextBoxRoomsRoomConfiguredTemperature.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaxTextBoxRoomsRoomConfiguredTemperature.Location = new System.Drawing.Point(477, 193);
+            this.MaxTextBoxRoomsRoomConfiguredTemperature.Name = "MaxTextBoxRoomsRoomConfiguredTemperature";
+            this.MaxTextBoxRoomsRoomConfiguredTemperature.ReadOnly = true;
+            this.MaxTextBoxRoomsRoomConfiguredTemperature.Size = new System.Drawing.Size(48, 26);
+            this.MaxTextBoxRoomsRoomConfiguredTemperature.TabIndex = 36;
             // 
             // Form1
             // 
@@ -2335,6 +2505,22 @@
         private System.Windows.Forms.Label MaxLabelRoomsPortalURL;
         private System.Windows.Forms.TextBox MaxTextBoxRoomsCubeVersion;
         private System.Windows.Forms.Label MaxLabelRoomsCubeVersion;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsPortalEnabled;
+        private System.Windows.Forms.Label MaxLabelRoomsPortalEnabled;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsPushButtonDown;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsPushButtonUp;
+        private System.Windows.Forms.Label MaxLabelRoomsPushButtonDown;
+        private System.Windows.Forms.Label MaxLabelRoomsPushButtonUp;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsDateTime;
+        private System.Windows.Forms.Label MaxLabelRoomsDateTime;
+        private System.Windows.Forms.Label MaxLabelRoomsRoomID;
+        private System.Windows.Forms.Label MaxLabelRoomsRoomRFAddress;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsRoomRFAddress;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsRoomID;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsRoomActualTemperature;
+        private System.Windows.Forms.Label MaxLabelRoomsRoomActualTemperature;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsRoomConfiguredTemperature;
+        private System.Windows.Forms.Label MaxLabelRoomsRoomConfiguredTemperature;
     }
 }
 
