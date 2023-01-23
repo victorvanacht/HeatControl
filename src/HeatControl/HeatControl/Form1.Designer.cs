@@ -203,6 +203,17 @@
             this.MaxButtonDisconnect = new System.Windows.Forms.Button();
             this.MaxButtonConnect = new System.Windows.Forms.Button();
             this.MaxTabRooms = new System.Windows.Forms.TabPage();
+            this.MaxTextBoxRoomsValveOffsetPercent = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsValveMaxPercent = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsValvePosition = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsValveOffsetPercent = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsValveMaxPercent = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsValvePosition = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsWindowOpenTemperature = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxRoomsWindowOpenDuration = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsWindowOpenTemperature = new System.Windows.Forms.Label();
+            this.MaxLabelRoomsWindowOpenDuration = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsMaxSetpointTemperature = new System.Windows.Forms.TextBox();
             this.MaxTextBoxRoomsMinSetpointTemperature = new System.Windows.Forms.TextBox();
             this.MaxLabelRoomsMaxSetpointTemperature = new System.Windows.Forms.Label();
             this.MaxLabelRoomsMinSetPointTemperature = new System.Windows.Forms.Label();
@@ -265,17 +276,8 @@
             this.MaxLabelRoomsRoom = new System.Windows.Forms.Label();
             this.MaxLabelRoomsMaxCube = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.MaxTextBoxRoomsMaxSetpointTemperature = new System.Windows.Forms.TextBox();
-            this.MaxLabelRoomsWindowOpenDuration = new System.Windows.Forms.Label();
-            this.MaxLabelRoomsWindowOpenTemperature = new System.Windows.Forms.Label();
-            this.MaxTextBoxRoomsWindowOpenDuration = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxRoomsWindowOpenTemperature = new System.Windows.Forms.TextBox();
-            this.MaxLabelRoomsValvePosition = new System.Windows.Forms.Label();
-            this.MaxLabelRoomsValveMaxPercent = new System.Windows.Forms.Label();
-            this.MaxLabelRoomsValveOffsetPercent = new System.Windows.Forms.Label();
-            this.MaxTextBoxRoomsValvePosition = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxRoomsValveMaxPercent = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxRoomsValveOffsetPercent = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsNTPServer = new System.Windows.Forms.Label();
+            this.MaxTextBoxRoomsNTPServer = new System.Windows.Forms.TextBox();
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.OTGWTabStatus.SuspendLayout();
@@ -1958,6 +1960,8 @@
             // MaxTabRooms
             // 
             this.MaxTabRooms.BackColor = System.Drawing.SystemColors.Control;
+            this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsNTPServer);
+            this.MaxTabRooms.Controls.Add(this.MaxLabelRoomsNTPServer);
             this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsValveOffsetPercent);
             this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsValveMaxPercent);
             this.MaxTabRooms.Controls.Add(this.MaxTextBoxRoomsValvePosition);
@@ -2036,6 +2040,99 @@
             this.MaxTabRooms.Size = new System.Drawing.Size(641, 702);
             this.MaxTabRooms.TabIndex = 2;
             this.MaxTabRooms.Text = "Rooms";
+            // 
+            // MaxTextBoxRoomsValveOffsetPercent
+            // 
+            this.MaxTextBoxRoomsValveOffsetPercent.Location = new System.Drawing.Point(557, 559);
+            this.MaxTextBoxRoomsValveOffsetPercent.Name = "MaxTextBoxRoomsValveOffsetPercent";
+            this.MaxTextBoxRoomsValveOffsetPercent.ReadOnly = true;
+            this.MaxTextBoxRoomsValveOffsetPercent.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsValveOffsetPercent.TabIndex = 72;
+            // 
+            // MaxTextBoxRoomsValveMaxPercent
+            // 
+            this.MaxTextBoxRoomsValveMaxPercent.Location = new System.Drawing.Point(557, 533);
+            this.MaxTextBoxRoomsValveMaxPercent.Name = "MaxTextBoxRoomsValveMaxPercent";
+            this.MaxTextBoxRoomsValveMaxPercent.ReadOnly = true;
+            this.MaxTextBoxRoomsValveMaxPercent.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsValveMaxPercent.TabIndex = 71;
+            // 
+            // MaxTextBoxRoomsValvePosition
+            // 
+            this.MaxTextBoxRoomsValvePosition.Location = new System.Drawing.Point(557, 507);
+            this.MaxTextBoxRoomsValvePosition.Name = "MaxTextBoxRoomsValvePosition";
+            this.MaxTextBoxRoomsValvePosition.ReadOnly = true;
+            this.MaxTextBoxRoomsValvePosition.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsValvePosition.TabIndex = 70;
+            // 
+            // MaxLabelRoomsValveOffsetPercent
+            // 
+            this.MaxLabelRoomsValveOffsetPercent.AutoSize = true;
+            this.MaxLabelRoomsValveOffsetPercent.Location = new System.Drawing.Point(450, 562);
+            this.MaxLabelRoomsValveOffsetPercent.Name = "MaxLabelRoomsValveOffsetPercent";
+            this.MaxLabelRoomsValveOffsetPercent.Size = new System.Drawing.Size(102, 13);
+            this.MaxLabelRoomsValveOffsetPercent.TabIndex = 69;
+            this.MaxLabelRoomsValveOffsetPercent.Text = "Valve offset percent";
+            // 
+            // MaxLabelRoomsValveMaxPercent
+            // 
+            this.MaxLabelRoomsValveMaxPercent.AutoSize = true;
+            this.MaxLabelRoomsValveMaxPercent.Location = new System.Drawing.Point(450, 536);
+            this.MaxLabelRoomsValveMaxPercent.Name = "MaxLabelRoomsValveMaxPercent";
+            this.MaxLabelRoomsValveMaxPercent.Size = new System.Drawing.Size(95, 13);
+            this.MaxLabelRoomsValveMaxPercent.TabIndex = 68;
+            this.MaxLabelRoomsValveMaxPercent.Text = "Valve max percent";
+            // 
+            // MaxLabelRoomsValvePosition
+            // 
+            this.MaxLabelRoomsValvePosition.AutoSize = true;
+            this.MaxLabelRoomsValvePosition.Location = new System.Drawing.Point(450, 510);
+            this.MaxLabelRoomsValvePosition.Name = "MaxLabelRoomsValvePosition";
+            this.MaxLabelRoomsValvePosition.Size = new System.Drawing.Size(73, 13);
+            this.MaxLabelRoomsValvePosition.TabIndex = 67;
+            this.MaxLabelRoomsValvePosition.Text = "Valve position";
+            // 
+            // MaxTextBoxRoomsWindowOpenTemperature
+            // 
+            this.MaxTextBoxRoomsWindowOpenTemperature.Location = new System.Drawing.Point(357, 582);
+            this.MaxTextBoxRoomsWindowOpenTemperature.Name = "MaxTextBoxRoomsWindowOpenTemperature";
+            this.MaxTextBoxRoomsWindowOpenTemperature.ReadOnly = true;
+            this.MaxTextBoxRoomsWindowOpenTemperature.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsWindowOpenTemperature.TabIndex = 66;
+            // 
+            // MaxTextBoxRoomsWindowOpenDuration
+            // 
+            this.MaxTextBoxRoomsWindowOpenDuration.Location = new System.Drawing.Point(357, 556);
+            this.MaxTextBoxRoomsWindowOpenDuration.Name = "MaxTextBoxRoomsWindowOpenDuration";
+            this.MaxTextBoxRoomsWindowOpenDuration.ReadOnly = true;
+            this.MaxTextBoxRoomsWindowOpenDuration.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsWindowOpenDuration.TabIndex = 65;
+            // 
+            // MaxLabelRoomsWindowOpenTemperature
+            // 
+            this.MaxLabelRoomsWindowOpenTemperature.AutoSize = true;
+            this.MaxLabelRoomsWindowOpenTemperature.Location = new System.Drawing.Point(224, 585);
+            this.MaxLabelRoomsWindowOpenTemperature.Name = "MaxLabelRoomsWindowOpenTemperature";
+            this.MaxLabelRoomsWindowOpenTemperature.Size = new System.Drawing.Size(132, 13);
+            this.MaxLabelRoomsWindowOpenTemperature.TabIndex = 64;
+            this.MaxLabelRoomsWindowOpenTemperature.Text = "Window open temperature";
+            // 
+            // MaxLabelRoomsWindowOpenDuration
+            // 
+            this.MaxLabelRoomsWindowOpenDuration.AutoSize = true;
+            this.MaxLabelRoomsWindowOpenDuration.Location = new System.Drawing.Point(224, 559);
+            this.MaxLabelRoomsWindowOpenDuration.Name = "MaxLabelRoomsWindowOpenDuration";
+            this.MaxLabelRoomsWindowOpenDuration.Size = new System.Drawing.Size(114, 13);
+            this.MaxLabelRoomsWindowOpenDuration.TabIndex = 63;
+            this.MaxLabelRoomsWindowOpenDuration.Text = "Window open duration";
+            // 
+            // MaxTextBoxRoomsMaxSetpointTemperature
+            // 
+            this.MaxTextBoxRoomsMaxSetpointTemperature.Location = new System.Drawing.Point(134, 637);
+            this.MaxTextBoxRoomsMaxSetpointTemperature.Name = "MaxTextBoxRoomsMaxSetpointTemperature";
+            this.MaxTextBoxRoomsMaxSetpointTemperature.ReadOnly = true;
+            this.MaxTextBoxRoomsMaxSetpointTemperature.Size = new System.Drawing.Size(35, 20);
+            this.MaxTextBoxRoomsMaxSetpointTemperature.TabIndex = 62;
             // 
             // MaxTextBoxRoomsMinSetpointTemperature
             // 
@@ -2564,98 +2661,22 @@
             this.MaxLabelRoomsMaxCube.TabIndex = 0;
             this.MaxLabelRoomsMaxCube.Text = "MaxCube";
             // 
-            // MaxTextBoxRoomsMaxSetpointTemperature
+            // MaxLabelRoomsNTPServer
             // 
-            this.MaxTextBoxRoomsMaxSetpointTemperature.Location = new System.Drawing.Point(134, 637);
-            this.MaxTextBoxRoomsMaxSetpointTemperature.Name = "MaxTextBoxRoomsMaxSetpointTemperature";
-            this.MaxTextBoxRoomsMaxSetpointTemperature.ReadOnly = true;
-            this.MaxTextBoxRoomsMaxSetpointTemperature.Size = new System.Drawing.Size(35, 20);
-            this.MaxTextBoxRoomsMaxSetpointTemperature.TabIndex = 62;
+            this.MaxLabelRoomsNTPServer.AutoSize = true;
+            this.MaxLabelRoomsNTPServer.Location = new System.Drawing.Point(6, 148);
+            this.MaxLabelRoomsNTPServer.Name = "MaxLabelRoomsNTPServer";
+            this.MaxLabelRoomsNTPServer.Size = new System.Drawing.Size(61, 13);
+            this.MaxLabelRoomsNTPServer.TabIndex = 73;
+            this.MaxLabelRoomsNTPServer.Text = "NTP server";
             // 
-            // MaxLabelRoomsWindowOpenDuration
+            // MaxTextBoxRoomsNTPServer
             // 
-            this.MaxLabelRoomsWindowOpenDuration.AutoSize = true;
-            this.MaxLabelRoomsWindowOpenDuration.Location = new System.Drawing.Point(224, 559);
-            this.MaxLabelRoomsWindowOpenDuration.Name = "MaxLabelRoomsWindowOpenDuration";
-            this.MaxLabelRoomsWindowOpenDuration.Size = new System.Drawing.Size(114, 13);
-            this.MaxLabelRoomsWindowOpenDuration.TabIndex = 63;
-            this.MaxLabelRoomsWindowOpenDuration.Text = "Window open duration";
-            // 
-            // MaxLabelRoomsWindowOpenTemperature
-            // 
-            this.MaxLabelRoomsWindowOpenTemperature.AutoSize = true;
-            this.MaxLabelRoomsWindowOpenTemperature.Location = new System.Drawing.Point(224, 585);
-            this.MaxLabelRoomsWindowOpenTemperature.Name = "MaxLabelRoomsWindowOpenTemperature";
-            this.MaxLabelRoomsWindowOpenTemperature.Size = new System.Drawing.Size(132, 13);
-            this.MaxLabelRoomsWindowOpenTemperature.TabIndex = 64;
-            this.MaxLabelRoomsWindowOpenTemperature.Text = "Window open temperature";
-            // 
-            // MaxTextBoxRoomsWindowOpenDuration
-            // 
-            this.MaxTextBoxRoomsWindowOpenDuration.Location = new System.Drawing.Point(357, 556);
-            this.MaxTextBoxRoomsWindowOpenDuration.Name = "MaxTextBoxRoomsWindowOpenDuration";
-            this.MaxTextBoxRoomsWindowOpenDuration.ReadOnly = true;
-            this.MaxTextBoxRoomsWindowOpenDuration.Size = new System.Drawing.Size(35, 20);
-            this.MaxTextBoxRoomsWindowOpenDuration.TabIndex = 65;
-            // 
-            // MaxTextBoxRoomsWindowOpenTemperature
-            // 
-            this.MaxTextBoxRoomsWindowOpenTemperature.Location = new System.Drawing.Point(357, 582);
-            this.MaxTextBoxRoomsWindowOpenTemperature.Name = "MaxTextBoxRoomsWindowOpenTemperature";
-            this.MaxTextBoxRoomsWindowOpenTemperature.ReadOnly = true;
-            this.MaxTextBoxRoomsWindowOpenTemperature.Size = new System.Drawing.Size(35, 20);
-            this.MaxTextBoxRoomsWindowOpenTemperature.TabIndex = 66;
-            // 
-            // MaxLabelRoomsValvePosition
-            // 
-            this.MaxLabelRoomsValvePosition.AutoSize = true;
-            this.MaxLabelRoomsValvePosition.Location = new System.Drawing.Point(450, 510);
-            this.MaxLabelRoomsValvePosition.Name = "MaxLabelRoomsValvePosition";
-            this.MaxLabelRoomsValvePosition.Size = new System.Drawing.Size(73, 13);
-            this.MaxLabelRoomsValvePosition.TabIndex = 67;
-            this.MaxLabelRoomsValvePosition.Text = "Valve position";
-            // 
-            // MaxLabelRoomsValveMaxPercent
-            // 
-            this.MaxLabelRoomsValveMaxPercent.AutoSize = true;
-            this.MaxLabelRoomsValveMaxPercent.Location = new System.Drawing.Point(450, 536);
-            this.MaxLabelRoomsValveMaxPercent.Name = "MaxLabelRoomsValveMaxPercent";
-            this.MaxLabelRoomsValveMaxPercent.Size = new System.Drawing.Size(95, 13);
-            this.MaxLabelRoomsValveMaxPercent.TabIndex = 68;
-            this.MaxLabelRoomsValveMaxPercent.Text = "Valve max percent";
-            // 
-            // MaxLabelRoomsValveOffsetPercent
-            // 
-            this.MaxLabelRoomsValveOffsetPercent.AutoSize = true;
-            this.MaxLabelRoomsValveOffsetPercent.Location = new System.Drawing.Point(450, 562);
-            this.MaxLabelRoomsValveOffsetPercent.Name = "MaxLabelRoomsValveOffsetPercent";
-            this.MaxLabelRoomsValveOffsetPercent.Size = new System.Drawing.Size(102, 13);
-            this.MaxLabelRoomsValveOffsetPercent.TabIndex = 69;
-            this.MaxLabelRoomsValveOffsetPercent.Text = "Valve offset percent";
-            // 
-            // MaxTextBoxRoomsValvePosition
-            // 
-            this.MaxTextBoxRoomsValvePosition.Location = new System.Drawing.Point(557, 507);
-            this.MaxTextBoxRoomsValvePosition.Name = "MaxTextBoxRoomsValvePosition";
-            this.MaxTextBoxRoomsValvePosition.ReadOnly = true;
-            this.MaxTextBoxRoomsValvePosition.Size = new System.Drawing.Size(35, 20);
-            this.MaxTextBoxRoomsValvePosition.TabIndex = 70;
-            // 
-            // MaxTextBoxRoomsValveMaxPercent
-            // 
-            this.MaxTextBoxRoomsValveMaxPercent.Location = new System.Drawing.Point(557, 533);
-            this.MaxTextBoxRoomsValveMaxPercent.Name = "MaxTextBoxRoomsValveMaxPercent";
-            this.MaxTextBoxRoomsValveMaxPercent.ReadOnly = true;
-            this.MaxTextBoxRoomsValveMaxPercent.Size = new System.Drawing.Size(35, 20);
-            this.MaxTextBoxRoomsValveMaxPercent.TabIndex = 71;
-            // 
-            // MaxTextBoxRoomsValveOffsetPercent
-            // 
-            this.MaxTextBoxRoomsValveOffsetPercent.Location = new System.Drawing.Point(557, 559);
-            this.MaxTextBoxRoomsValveOffsetPercent.Name = "MaxTextBoxRoomsValveOffsetPercent";
-            this.MaxTextBoxRoomsValveOffsetPercent.ReadOnly = true;
-            this.MaxTextBoxRoomsValveOffsetPercent.Size = new System.Drawing.Size(35, 20);
-            this.MaxTextBoxRoomsValveOffsetPercent.TabIndex = 72;
+            this.MaxTextBoxRoomsNTPServer.Location = new System.Drawing.Point(79, 145);
+            this.MaxTextBoxRoomsNTPServer.Name = "MaxTextBoxRoomsNTPServer";
+            this.MaxTextBoxRoomsNTPServer.ReadOnly = true;
+            this.MaxTextBoxRoomsNTPServer.Size = new System.Drawing.Size(310, 20);
+            this.MaxTextBoxRoomsNTPServer.TabIndex = 74;
             // 
             // Form1
             // 
@@ -2936,6 +2957,8 @@
         private System.Windows.Forms.TextBox MaxTextBoxRoomsValvePosition;
         private System.Windows.Forms.Label MaxLabelRoomsValveOffsetPercent;
         private System.Windows.Forms.Label MaxLabelRoomsValveMaxPercent;
+        private System.Windows.Forms.TextBox MaxTextBoxRoomsNTPServer;
+        private System.Windows.Forms.Label MaxLabelRoomsNTPServer;
     }
 }
 

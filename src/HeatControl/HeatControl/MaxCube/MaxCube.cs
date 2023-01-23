@@ -190,6 +190,7 @@ namespace HeatControl
                 public DateTime dateTime;
                 public bool portalEnabled;
                 public string portalURL;
+                public string NTPserver;
                 public int pushButtonUpConfig;
                 public int pushButtonDownConfig;
 
@@ -212,6 +213,8 @@ namespace HeatControl
             private SocketReader socketReader;
             private Parser parser;
             private MaxCubeLogger maxCubeLogger;
+            private CommandQueue commandQueue;
+
 
             public MaxCube(MaxCubeLogger maxCubeLogger, IPAddress iPAddress, string name, string serial, int RFAddress, string version)
             {
@@ -228,7 +231,19 @@ namespace HeatControl
 
                 this.socketReader = new SocketReader(maxCubeLogger, this);
                 this.parser= new Parser(this);
-                
+                this.commandQueue = new CommandQueue();
+
+
+
+
+                string[] initCommands = {"f:"};
+                foreach (string line in initCommands)
+                {
+                    commandQueue.EnqueueCommand(line);
+                }
+
+
+
             }
 
             public void Connect()
@@ -276,48 +291,48 @@ namespace HeatControl
                             maxCubeLogger.Log(DateTime.Now.ToString() + " R:" + line);
                             this.parser.Parse(line);
                         }
+                    }
 
-                        /*
-                        if (!commandQueue.IsEmpty())
+                    if (!commandQueue.IsEmpty())
+                    {
+                        CommandQueue.CommandQueueItem firstItem;
+                        if (commandQueue.TryPeek(out firstItem))
                         {
-                            CommandQueue.CommandQueueItem firstItem;
-                            if (commandQueue.TryPeek(out firstItem))
+                            if ((firstItem.retryAttempts == 0) ||
+                                ((DateTime.Now.Ticks - firstItem.lastTransmitAttemptTick) > firstItem.retryDelayTicks))
                             {
-                                if ((firstItem.retryAttempts == 0) ||
-                                    ((DateTime.Now.Ticks - firstItem.lastTransmitAttemptTick) > firstItem.retryDelayTicks))
+                                if (firstItem.retryAttempts < firstItem.maxRetryAttempts)
                                 {
-                                    if (firstItem.retryAttempts < firstItem.maxRetryAttempts)
-                                    {
-                                        socketReader.WriteLine(firstItem.command);
-                                        firstItem.retryAttempts++;
-                                        firstItem.lastTransmitAttemptTick = DateTime.Now.Ticks;
-                                    }
-                                    else
-                                    {
-                                        /// it failed!!
-                                        Console.WriteLine("Command failed!");
+                                    socketReader.WriteLine(firstItem.command);
+                                    firstItem.retryAttempts++;
+                                    firstItem.lastTransmitAttemptTick = DateTime.Now.Ticks;
+                                }
+                                else
+                                {
+                                    /// it failed!!
+                                    Console.WriteLine("Command failed!");
 
-                                        commandQueue.TryDequeueCommand(firstItem.command);
-                                        //throw new Exception("Command failed!");
-                                    }
+                                    commandQueue.TryDequeueCommand(firstItem.command);
+                                    //throw new Exception("Command failed!");
                                 }
                             }
                         }
-                        */
                     }
 
-                /*
-                    if ((DateTime.Now.Ticks - lastStatusReportTick) > (statusReportInterval * System.TimeSpan.TicksPerSecond))
-                    {
-                        lastStatusReportTick = DateTime.Now.Ticks;
-
-                        StatusReport statusReport = new StatusReport(this.gatewayStatus);
-                        foreach (StatusReportHandler statusReportHandler in statusReportHandlers)
+                    /*
+                        if ((DateTime.Now.Ticks - lastStatusReportTick) > (statusReportInterval * System.TimeSpan.TicksPerSecond))
                         {
-                            statusReportHandler(statusReport);
+                            lastStatusReportTick = DateTime.Now.Ticks;
+
+                            StatusReport statusReport = new StatusReport(this.gatewayStatus);
+                            foreach (StatusReportHandler statusReportHandler in statusReportHandlers)
+                            {
+                                statusReportHandler(statusReport);
+                            }
                         }
-                    }
-                */
+                    */
+                    Thread.Sleep(100);
+
                 }
                 socketThreadHasClosed = true;
             }

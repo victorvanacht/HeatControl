@@ -489,38 +489,38 @@ namespace HeatControl
                 ClearMaxCube();
                 ClearRoom();
                 ClearDevice();
-
-
             }
         }
 
-
-
         private void MaxListBoxRoomsMaxCube_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.MaxListBoxRoomsRooms.Items.Clear();
-            this.MaxListBoxRoomsDevice.Items.Clear();
-
-            MaxCubeLogger.MaxCube maxCube = this.maxCubeLogger.maxCubes[this.MaxListBoxRoomsMaxCube.SelectedIndex];
-
-            foreach (KeyValuePair<int, Room> kvp in maxCube.rooms)
+            if (this.MaxListBoxRoomsMaxCube.Items.Count > 0)
             {
-                this.MaxListBoxRoomsRooms.Items.Add(kvp.Value.name);
-            }
+                this.MaxListBoxRoomsRooms.Items.Clear();
+                this.MaxListBoxRoomsDevice.Items.Clear();
 
-            this.MaxTextBoxRoomsCubeName.Text = maxCube.deviceMaxCube.name;
-            this.MaxTextBoxRoomsCubeSerialNumber.Text = maxCube.deviceMaxCube.serialNumber;
-            this.MaxTextBoxRoomsCubeRfAddress.Text = maxCube.deviceMaxCube.rfAddress.ToString("X6");
-            this.MaxTextBoxRoomsCubeVersion.Text = maxCube.deviceMaxCube.version;
-            this.MaxTextBoxRoomsDutyCycle.Text = maxCube.deviceMaxCube.dutyCycle.ToString();
-            this.MaxTextBoxRoomsEmptyMemorySlots.Text = maxCube.deviceMaxCube.freeMemorySlots.ToString();
-            this.MaxTextBoxRoomsPortalURL.Text = maxCube.deviceMaxCube.portalURL;
-            this.MaxTextBoxRoomsPortalEnabled.Text = maxCube.deviceMaxCube.portalEnabled.ToString();
-            this.MaxTextBoxRoomsPushButtonUp.Text = maxCube.deviceMaxCube.pushButtonUpConfig.ToString();
-            this.MaxTextBoxRoomsPushButtonDown.Text = maxCube.deviceMaxCube.pushButtonDownConfig.ToString();
-            this.MaxTextBoxRoomsDateTime.Text = maxCube.deviceMaxCube.dateTime.ToString("yyyy-MM-dd   HH:mm");
-            ClearRoom();
-            ClearDevice();
+                MaxCubeLogger.MaxCube maxCube = this.maxCubeLogger.maxCubes[this.MaxListBoxRoomsMaxCube.SelectedIndex];
+
+                foreach (KeyValuePair<int, Room> kvp in maxCube.rooms)
+                {
+                    this.MaxListBoxRoomsRooms.Items.Add(kvp.Value.name);
+                }
+
+                this.MaxTextBoxRoomsCubeName.Text = maxCube.deviceMaxCube.name;
+                this.MaxTextBoxRoomsCubeSerialNumber.Text = maxCube.deviceMaxCube.serialNumber;
+                this.MaxTextBoxRoomsCubeRfAddress.Text = maxCube.deviceMaxCube.rfAddress.ToString("X6");
+                this.MaxTextBoxRoomsCubeVersion.Text = maxCube.deviceMaxCube.version;
+                this.MaxTextBoxRoomsDutyCycle.Text = maxCube.deviceMaxCube.dutyCycle.ToString();
+                this.MaxTextBoxRoomsEmptyMemorySlots.Text = maxCube.deviceMaxCube.freeMemorySlots.ToString();
+                this.MaxTextBoxRoomsPortalURL.Text = maxCube.deviceMaxCube.portalURL;
+                this.MaxTextBoxRoomsNTPServer.Text = maxCube.deviceMaxCube.NTPserver;
+                this.MaxTextBoxRoomsPortalEnabled.Text = maxCube.deviceMaxCube.portalEnabled.ToString();
+                this.MaxTextBoxRoomsPushButtonUp.Text = maxCube.deviceMaxCube.pushButtonUpConfig.ToString();
+                this.MaxTextBoxRoomsPushButtonDown.Text = maxCube.deviceMaxCube.pushButtonDownConfig.ToString();
+                this.MaxTextBoxRoomsDateTime.Text = maxCube.deviceMaxCube.dateTime.ToString("yyyy-MM-dd   HH:mm");
+                ClearRoom();
+                ClearDevice();
+            }
         }
 
         private void MaxListBoxRoomsRooms_SelectedIndexChanged(object sender, EventArgs e)
@@ -599,16 +599,8 @@ namespace HeatControl
                     break;
                 default: 
                     break;
-
             }
-
-
-            
-
         }
-
-
-
 
         private void ClearMaxCube()
         {
@@ -619,6 +611,7 @@ namespace HeatControl
             this.MaxTextBoxRoomsDutyCycle.Text = "";
             this.MaxTextBoxRoomsEmptyMemorySlots.Text = "";
             this.MaxTextBoxRoomsPortalURL.Text = "";
+            this.MaxTextBoxRoomsNTPServer.Text = "";
             this.MaxTextBoxRoomsPortalEnabled.Text = "";
             this.MaxTextBoxRoomsPushButtonUp.Text = "";
             this.MaxTextBoxRoomsPushButtonDown.Text = "";
@@ -654,8 +647,6 @@ namespace HeatControl
             this.MaxTextBoxRoomsValveMaxPercent.Text = "";
             this.MaxTextBoxRoomsValveOffsetPercent.Text = "";
         }
-
-
     }
 }
 

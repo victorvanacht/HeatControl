@@ -44,6 +44,7 @@ namespace HeatControl
                     this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                     this.socket.Connect(new IPAddress[] { this.ipAddress }, port);
                     this.socket.NoDelay = true;
+                    this.socket.Blocking = false;
                 }
 
 
@@ -75,53 +76,58 @@ namespace HeatControl
                     string[] lines = { };
 
                     Byte[] bytes = new byte[this.socket.ReceiveBufferSize];
-                    int bytesRecv = this.socket.Receive(bytes);
-                    if (bytesRecv > 0)
+                    try
                     {
-                        msg = readLinesLeftover + Encoding.ASCII.GetString(bytes, 0, bytesRecv);
+                        int bytesRecv = this.socket.Receive(bytes);
 
-                        //remove any \r in the string, by splitting and rejoining it [This is the fastest way to do it, according to internet]
-                        string[] temp = msg.Split('\r');
-                        msg = string.Join("", temp);
-
-                        // see if the message ends with CR. If not, chop it andf put the remaining part in leftover.
-                        int lastIndex = msg.LastIndexOf('\n');
-                        if (lastIndex == -1)
+                        if (bytesRecv > 0)
                         {
-                            readLinesLeftover = msg;
-                            msg = "";
-                        }
-                        else if (lastIndex != msg.Length - 1)
-                        {
-                            readLinesLeftover = msg.Substring(lastIndex + 1);
-                            msg = msg.Substring(0, lastIndex + 1);
-                        }
-                        else
-                        {
-                            readLinesLeftover = "";
-                        }
+                            msg = readLinesLeftover + Encoding.ASCII.GetString(bytes, 0, bytesRecv);
+
+                            //remove any \r in the string, by splitting and rejoining it [This is the fastest way to do it, according to internet]
+                            string[] temp = msg.Split('\r');
+                            msg = string.Join("", temp);
+
+                            // see if the message ends with CR. If not, chop it andf put the remaining part in leftover.
+                            int lastIndex = msg.LastIndexOf('\n');
+                            if (lastIndex == -1)
+                            {
+                                readLinesLeftover = msg;
+                                msg = "";
+                            }
+                            else if (lastIndex != msg.Length - 1)
+                            {
+                                readLinesLeftover = msg.Substring(lastIndex + 1);
+                                msg = msg.Substring(0, lastIndex + 1);
+                            }
+                            else
+                            {
+                                readLinesLeftover = "";
+                            }
 
 
-                        // split the message in separate lines by CR
-                        lines = msg.Split('\n');
+                            // split the message in separate lines by CR
+                            lines = msg.Split('\n');
+                        }
                     }
+                    catch (Exception e) { };
                     return lines;
                 }
 
-                /*
                 public void WriteLine(string line)
                 {
-                    Thread.Sleep(500); // for some reason we need to insert a wait here. Don't know why. But if we don't the OTGW doesnt respond.
-                    otgw.Log(DateTime.Now.ToString() + " T:" + line);
+                    Console.WriteLine(line);
 
-                    byte[] msg = Encoding.ASCII.GetBytes(line + "\n\r");
+                    Thread.Sleep(500); // for some reason we need to insert a wait here. Don't know why. But if we don't the OTGW doesnt respond.
+                    maxCubeLogger.Log(DateTime.Now.ToString() + " T:" + line);
+
+                    byte[] msg = Encoding.ASCII.GetBytes(line + "\r\n");
                     int byteSent = this.socket.Send(msg);
                     if (byteSent != msg.Length)
                     {
                         throw new Exception("Message not sent.");
                     }
                 }
-                */
             }
         }
     }

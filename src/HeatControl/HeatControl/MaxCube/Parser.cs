@@ -28,6 +28,7 @@ namespace HeatControl
                     this.decodeMessage = new Dictionary<string, ParserBase>()
                     {
                         ["C"] = new ParserConfiguration(),
+                        ["F"] = new ParserNTPServer(),
                         ["H"] = new ParserHello(),
                         ["M"] = new ParserMetadata(),
                         ["L"] = new ParserList()
@@ -42,6 +43,8 @@ namespace HeatControl
                     {
                         if (line[1] == ':')
                         {
+                            this.maxCube.commandQueue.TryDequeueCommand(line.Substring(0, 2));
+
                             string messageType = line.Substring(0, 1);
                             if (this.decodeMessage.ContainsKey(messageType))
                             {
@@ -182,6 +185,14 @@ namespace HeatControl
                         }
                     }
 
+                }
+
+                private class ParserNTPServer : ParserBase
+                {
+                    public override void Parse(MaxCube maxCube, string message)
+                    {
+                        maxCube.deviceMaxCube.NTPserver = message;
+                    }
                 }
 
 
