@@ -203,7 +203,7 @@ namespace HeatControl
 
 
 
-
+            public const int statusReportInterval = 10;
             public IPAddress iPAddress;
             public DeviceMaxCube deviceMaxCube;
 
@@ -220,9 +220,10 @@ namespace HeatControl
             {
                 this.deviceLookup = new Dictionary<int, DeviceBase>();
                 this.rooms = new SortedDictionary<int, Room>();
-                this.rooms.Add(0, new Room("House", 0, 0));
+                 
+                this.rooms.Add(0, new Room("House", 0, 0)); 
+                this.deviceMaxCube = new DeviceMaxCube(name, serial, RFAddress, this.rooms[0]); 
 
-                this.deviceMaxCube = new DeviceMaxCube(name, serial, RFAddress, this.rooms[0]);
                 //this.deviceLookup.Add(RFAddress, this.deviceMaxCube); because we dont know the RFaddress at this point in time, we delay this operation, and do it in the implementation of the "H" parser, where we have all information that we need.
 
                 this.maxCubeLogger = maxCubeLogger;
@@ -248,6 +249,13 @@ namespace HeatControl
 
             public void Connect()
             {
+                // delete all rooms exacept room 0 (=House)
+                Room temp = this.rooms[0];
+                this.rooms.Clear();
+                this.rooms.Add(0, temp);
+
+                this.deviceLookup.Clear();
+
                 this.socketReader.Connect();
 
                 if (this.socketReader.IsConnected())
@@ -278,7 +286,7 @@ namespace HeatControl
             private volatile bool socketThreadHasClosed;
             private void SocketThread()
             {
-                //long lastStatusReportTick = 0;
+                long lastStatusReportTick = 0;
 
                 socketThreadHasClosed = false;
                 while (socketThreadShouldClose == false)
@@ -320,17 +328,18 @@ namespace HeatControl
                     }
 
                     /*
-                        if ((DateTime.Now.Ticks - lastStatusReportTick) > (statusReportInterval * System.TimeSpan.TicksPerSecond))
-                        {
-                            lastStatusReportTick = DateTime.Now.Ticks;
+                    if ((DateTime.Now.Ticks - lastStatusReportTick) > (statusReportInterval * System.TimeSpan.TicksPerSecond))
+                    {
+                        lastStatusReportTick = DateTime.Now.Ticks;
 
-                            StatusReport statusReport = new StatusReport(this.gatewayStatus);
-                            foreach (StatusReportHandler statusReportHandler in statusReportHandlers)
-                            {
-                                statusReportHandler(statusReport);
-                            }
+                        StatusReport statusReport = new StatusReport(this.gatewayStatus);
+                        foreach (StatusReportHandler statusReportHandler in statusReportHandlers)
+                        {
+                            statusReportHandler(statusReport);
                         }
+                    }
                     */
+
                     Thread.Sleep(100);
 
                 }

@@ -17,6 +17,10 @@ namespace HeatControl
             this.maxCubes = new List<MaxCube>();
             this.logHandlers = new List<LogHandler>();
 
+            this.stateMachineShouldClose = false;
+            this.stateMachine = new Thread(StateMachine);
+            this.stateMachine.IsBackground = true;
+            this.stateMachine.Start();
         }
 
         public string hostName;
@@ -45,8 +49,53 @@ namespace HeatControl
             this.logHandlers.Remove(handler);
         }
 
+        public enum StateRequest
+        {
+            Disconnected = 0,
+            Connect = 1,
+            Running = 2,
+            Disconnect = 3,
+        };
+
+        private Thread stateMachine;
+        private volatile bool stateMachineShouldClose;
+        private volatile bool stateMachineHasClosed;
+        public volatile StateRequest stateRequest;
+
+        private void StateMachine()
+        {
+            stateMachineHasClosed = false;
+            stateRequest = StateRequest.Disconnected;
+            while (this.stateMachineShouldClose == false)
+            {
+                switch (stateRequest)
+                {
+                    case StateRequest.Disconnected:
+                        break;
+                    case StateRequest.Connect:
+                        Connect();
+                        stateRequest = StateRequest.Running;
+                        break;
+                    case StateRequest.Running:
+                        break;
+                    case StateRequest.Disconnect:
+                        Disconnect();
+                        stateRequest = StateRequest.Disconnected;
+                        break;
+                }
+                Thread.Sleep(100); // we could make this event driven somehow....
+            }
+            stateMachineHasClosed = true;
+        }
+
+
+
+
         public void Connect()
         {
+            // remove any previously found MaxCubes
+            this.maxCubes.Clear();
+
             if ((this.hostName == null) || (this.hostName.Equals("")))
             {
                 // hostname is empty string, let's find the IP-adress(es) automagically

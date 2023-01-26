@@ -203,6 +203,8 @@
             this.MaxButtonDisconnect = new System.Windows.Forms.Button();
             this.MaxButtonConnect = new System.Windows.Forms.Button();
             this.MaxTabRooms = new System.Windows.Forms.TabPage();
+            this.MaxTextBoxRoomsNTPServer = new System.Windows.Forms.TextBox();
+            this.MaxLabelRoomsNTPServer = new System.Windows.Forms.Label();
             this.MaxTextBoxRoomsValveOffsetPercent = new System.Windows.Forms.TextBox();
             this.MaxTextBoxRoomsValveMaxPercent = new System.Windows.Forms.TextBox();
             this.MaxTextBoxRoomsValvePosition = new System.Windows.Forms.TextBox();
@@ -276,8 +278,6 @@
             this.MaxLabelRoomsRoom = new System.Windows.Forms.Label();
             this.MaxLabelRoomsMaxCube = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.MaxLabelRoomsNTPServer = new System.Windows.Forms.Label();
-            this.MaxTextBoxRoomsNTPServer = new System.Windows.Forms.TextBox();
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.OTGWTabStatus.SuspendLayout();
@@ -1939,6 +1939,7 @@
             // 
             // MaxButtonDisconnect
             // 
+            this.MaxButtonDisconnect.Enabled = false;
             this.MaxButtonDisconnect.Location = new System.Drawing.Point(233, 67);
             this.MaxButtonDisconnect.Name = "MaxButtonDisconnect";
             this.MaxButtonDisconnect.Size = new System.Drawing.Size(191, 31);
@@ -2040,6 +2041,23 @@
             this.MaxTabRooms.Size = new System.Drawing.Size(641, 702);
             this.MaxTabRooms.TabIndex = 2;
             this.MaxTabRooms.Text = "Rooms";
+            // 
+            // MaxTextBoxRoomsNTPServer
+            // 
+            this.MaxTextBoxRoomsNTPServer.Location = new System.Drawing.Point(79, 145);
+            this.MaxTextBoxRoomsNTPServer.Name = "MaxTextBoxRoomsNTPServer";
+            this.MaxTextBoxRoomsNTPServer.ReadOnly = true;
+            this.MaxTextBoxRoomsNTPServer.Size = new System.Drawing.Size(310, 20);
+            this.MaxTextBoxRoomsNTPServer.TabIndex = 74;
+            // 
+            // MaxLabelRoomsNTPServer
+            // 
+            this.MaxLabelRoomsNTPServer.AutoSize = true;
+            this.MaxLabelRoomsNTPServer.Location = new System.Drawing.Point(6, 148);
+            this.MaxLabelRoomsNTPServer.Name = "MaxLabelRoomsNTPServer";
+            this.MaxLabelRoomsNTPServer.Size = new System.Drawing.Size(61, 13);
+            this.MaxLabelRoomsNTPServer.TabIndex = 73;
+            this.MaxLabelRoomsNTPServer.Text = "NTP server";
             // 
             // MaxTextBoxRoomsValveOffsetPercent
             // 
@@ -2660,23 +2678,6 @@
             this.MaxLabelRoomsMaxCube.Size = new System.Drawing.Size(52, 13);
             this.MaxLabelRoomsMaxCube.TabIndex = 0;
             this.MaxLabelRoomsMaxCube.Text = "MaxCube";
-            // 
-            // MaxLabelRoomsNTPServer
-            // 
-            this.MaxLabelRoomsNTPServer.AutoSize = true;
-            this.MaxLabelRoomsNTPServer.Location = new System.Drawing.Point(6, 148);
-            this.MaxLabelRoomsNTPServer.Name = "MaxLabelRoomsNTPServer";
-            this.MaxLabelRoomsNTPServer.Size = new System.Drawing.Size(61, 13);
-            this.MaxLabelRoomsNTPServer.TabIndex = 73;
-            this.MaxLabelRoomsNTPServer.Text = "NTP server";
-            // 
-            // MaxTextBoxRoomsNTPServer
-            // 
-            this.MaxTextBoxRoomsNTPServer.Location = new System.Drawing.Point(79, 145);
-            this.MaxTextBoxRoomsNTPServer.Name = "MaxTextBoxRoomsNTPServer";
-            this.MaxTextBoxRoomsNTPServer.ReadOnly = true;
-            this.MaxTextBoxRoomsNTPServer.Size = new System.Drawing.Size(310, 20);
-            this.MaxTextBoxRoomsNTPServer.TabIndex = 74;
             // 
             // Form1
             // 

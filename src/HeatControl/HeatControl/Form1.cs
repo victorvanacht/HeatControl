@@ -147,6 +147,7 @@ namespace HeatControl
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             OTGWButtonDisconnect_Click(sender, e);
+            MaxButtonDisconnect_Click(sender, e);
         }
 
 
@@ -439,12 +440,85 @@ namespace HeatControl
 
         private void MAXButtonConnect_Click(object sender, EventArgs e)
         {
-            this.maxCubeLogger.hostName = this.MaxTextBoxHostname.Text;
-            this.maxCubeLogger.AddLogger(MAXLogger);
+            if (maxCubeLogger.stateRequest == MaxCubeLogger.StateRequest.Disconnected)
+            {
+                this.MaxButtonConnect.Enabled = false;
+                this.MaxButtonDisconnect.Enabled = true;
+                //this.OTGWTextBoxLogfileName.Enabled = false;
+                //this.OTGWCheckBoxAppend.Enabled = false;
+                //this.OTGWCheckBoxEnableLoggingToFile.Enabled = false;
 
-            this.maxCubeLogger.Connect();
+                this.maxCubeLogger.hostName = this.MaxTextBoxHostname.Text;
+
+                /*
+                // Reset the x-axis of the plot to now.
+                foreach (KeyValuePair<string, Line> entry in lines)
+                {
+                    entry.Value.FillXAxisNow();
+                }
+
+                // open log file, if needed
+                if (this.OTGWCheckBoxEnableLoggingToFile.Checked)
+                {
+                    FileMode mode = (this.OTGWCheckBoxAppend.Checked) ? FileMode.Append : FileMode.Create;
+                    logFileStream = File.Open(this.OTGWTextBoxLogfileName.Text, mode);
+
+                    if (mode == FileMode.Create)
+                    {
+                        Byte[] heading = new UTF8Encoding().GetBytes(OTGW.StatusReport.heading + "\n");
+                        logFileStream.Write(heading, 0, heading.Length);
+                    }
+                    this.otgw.AddStatusReporter(OTGWLogToFile);
+                }
+
+                this.otgw.AddLogger(OTGWLogger);
+                this.otgw.AddStatusReporter(OTGWPlotter);
+                */
+
+                this.maxCubeLogger.AddLogger(MAXLogger);
+                this.maxCubeLogger.stateRequest = MaxCubeLogger.StateRequest.Connect;
+            }
+        }
+
+
+        private void MaxButtonDisconnect_Click(object sender, EventArgs e)
+        {
+            //this.maxCubeLogger.RemoveLogger(MAXLogger);
+
+            if (maxCubeLogger.stateRequest == MaxCubeLogger.StateRequest.Running)
+            {
+
+                this.maxCubeLogger.stateRequest = MaxCubeLogger.StateRequest.Disconnect;
+
+
+                this.maxCubeLogger.RemoveLogger(MAXLogger);
+
+                /*
+                this.otgw.RemoveStatusReporter(OTGWPlotter);
+
+                
+                // close the log file
+                if (this.OTGWCheckBoxEnableLoggingToFile.Checked)
+                {
+                    this.otgw.AddStatusReporter(OTGWLogToFile);
+                    logFileStream.Close();
+                }
+                */
+
+                this.MaxButtonConnect.Enabled = true;
+                this.MaxButtonDisconnect.Enabled = false;
+
+                /*
+                this.OTGWTextBoxLogfileName.Enabled = true;
+                this.OTGWCheckBoxAppend.Enabled = true;
+                this.OTGWCheckBoxEnableLoggingToFile.Enabled = true;
+                */
+            }
 
         }
+
+
+
 
         private void MAXLogger(string text)
         {
@@ -461,11 +535,6 @@ namespace HeatControl
                 }
                 this.MAXListboxLog.SelectedIndex = this.MAXListboxLog.Items.Count - 1;
             }
-        }
-
-        private void MaxButtonDisconnect_Click(object sender, EventArgs e)
-        {
-            this.maxCubeLogger.RemoveLogger(MAXLogger);
         }
 
         private void MaxTabControl_Selected(object sender, TabControlEventArgs e)
