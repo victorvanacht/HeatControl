@@ -23,7 +23,8 @@ namespace HeatControl
     {
         private OTGW otgw;
         private MaxCubeLogger maxCubeLogger;
-        private FileStream logFileStream;
+        private FileStream logFileStreamOTGW;
+        private FileStream logFileStreamMax;
 
         public Form1()
         {
@@ -173,12 +174,12 @@ namespace HeatControl
                 if (this.OTGWCheckBoxEnableLoggingToFile.Checked)
                 {
                     FileMode mode = (this.OTGWCheckBoxAppend.Checked) ? FileMode.Append : FileMode.Create;
-                    logFileStream = File.Open(this.OTGWTextBoxLogfileName.Text, mode);
+                    logFileStreamOTGW = File.Open(this.OTGWTextBoxLogfileName.Text, mode);
 
                     if (mode == FileMode.Create)
                     {
                         Byte[] heading = new UTF8Encoding().GetBytes(OTGW.StatusReport.heading + "\n");
-                        logFileStream.Write(heading, 0, heading.Length);
+                        logFileStreamOTGW.Write(heading, 0, heading.Length);
                     }
                     this.otgw.AddStatusReporter(OTGWLogToFile);
                 }
@@ -204,8 +205,8 @@ namespace HeatControl
                 // close the log file
                 if (this.OTGWCheckBoxEnableLoggingToFile.Checked)
                 {
-                    this.otgw.AddStatusReporter(OTGWLogToFile);
-                    logFileStream.Close();
+                    this.otgw.RemoveStatusReporter(OTGWLogToFile);
+                    logFileStreamOTGW.Close();
                 }
 
                 this.OTGWButtonConnect.Enabled = true;
@@ -435,7 +436,7 @@ namespace HeatControl
         private void OTGWLogToFile(OTGW.StatusReport status)
         {
             Byte[] line = new UTF8Encoding().GetBytes(status.ToString() + "\n");
-            logFileStream.Write(line, 0, line.Length);
+            logFileStreamOTGW.Write(line, 0, line.Length);
         }
 
         private void MAXButtonConnect_Click(object sender, EventArgs e)
@@ -444,9 +445,9 @@ namespace HeatControl
             {
                 this.MaxButtonConnect.Enabled = false;
                 this.MaxButtonDisconnect.Enabled = true;
-                //this.OTGWTextBoxLogfileName.Enabled = false;
-                //this.OTGWCheckBoxAppend.Enabled = false;
-                //this.OTGWCheckBoxEnableLoggingToFile.Enabled = false;
+                this.MaxTextBoxLogFilename.Enabled = false;
+                this.OTGWCheckBoxAppend.Enabled = false;
+                this.OTGWCheckBoxEnableLoggingToFile.Enabled = false;
 
                 this.maxCubeLogger.hostName = this.MaxTextBoxHostname.Text;
 
@@ -456,24 +457,19 @@ namespace HeatControl
                 {
                     entry.Value.FillXAxisNow();
                 }
+                */
 
                 // open log file, if needed
-                if (this.OTGWCheckBoxEnableLoggingToFile.Checked)
+                if (this.MaxCheckBoxEnableLoggingToFile.Checked)
                 {
-                    FileMode mode = (this.OTGWCheckBoxAppend.Checked) ? FileMode.Append : FileMode.Create;
-                    logFileStream = File.Open(this.OTGWTextBoxLogfileName.Text, mode);
+                    // indicate that the stream is not open yet
+                    logFileStreamMax = null;
 
-                    if (mode == FileMode.Create)
-                    {
-                        Byte[] heading = new UTF8Encoding().GetBytes(OTGW.StatusReport.heading + "\n");
-                        logFileStream.Write(heading, 0, heading.Length);
-                    }
-                    this.otgw.AddStatusReporter(OTGWLogToFile);
+                    this.maxCubeLogger.AddStatusReporter(MaxLogToFile);
                 }
 
                 this.otgw.AddLogger(OTGWLogger);
                 this.otgw.AddStatusReporter(OTGWPlotter);
-                */
 
                 this.maxCubeLogger.AddLogger(MAXLogger);
                 this.maxCubeLogger.stateRequest = MaxCubeLogger.StateRequest.Connect;
@@ -495,24 +491,21 @@ namespace HeatControl
 
                 /*
                 this.otgw.RemoveStatusReporter(OTGWPlotter);
+                */
 
                 
                 // close the log file
-                if (this.OTGWCheckBoxEnableLoggingToFile.Checked)
+                if (this.MaxCheckBoxEnableLoggingToFile.Checked)
                 {
-                    this.otgw.AddStatusReporter(OTGWLogToFile);
-                    logFileStream.Close();
+                    this.maxCubeLogger.RemoveStatusReporter(MaxLogToFile);
+                    logFileStreamMax.Close();
                 }
-                */
 
                 this.MaxButtonConnect.Enabled = true;
                 this.MaxButtonDisconnect.Enabled = false;
-
-                /*
-                this.OTGWTextBoxLogfileName.Enabled = true;
-                this.OTGWCheckBoxAppend.Enabled = true;
-                this.OTGWCheckBoxEnableLoggingToFile.Enabled = true;
-                */
+                this.MaxTextBoxLogFilename.Enabled = true;
+                this.MaxCheckBoxAppend.Enabled = true;
+                this.MaxCheckBoxEnableLoggingToFile.Enabled = true;
             }
 
         }
@@ -715,6 +708,25 @@ namespace HeatControl
             this.MaxTextBoxRoomsValvePosition.Text = "";
             this.MaxTextBoxRoomsValveMaxPercent.Text = "";
             this.MaxTextBoxRoomsValveOffsetPercent.Text = "";
+        }
+
+        private void MaxLogToFile(MaxCubeLogger.StatusReport status)
+        {
+            if (this.logFileStreamMax == null) 
+            {
+                //we still have to open the file
+                FileMode mode = (this.MaxCheckBoxAppend.Checked) ? FileMode.Append : FileMode.Create;
+                logFileStreamMax = File.Open(this.MaxTextBoxLogFilename.Text, mode);
+
+                if (mode == FileMode.Create)
+                {
+                    Byte[] heading = new UTF8Encoding().GetBytes(status.Heading() + "\n");
+                    logFileStreamMax.Write(heading, 0, heading.Length);
+                }
+            }
+
+            Byte[] line = new UTF8Encoding().GetBytes(status.ToString() + "\n");
+            logFileStreamMax.Write(line, 0, line.Length);
         }
     }
 }

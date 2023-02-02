@@ -278,6 +278,11 @@
             this.MaxLabelRoomsRoom = new System.Windows.Forms.Label();
             this.MaxLabelRoomsMaxCube = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.MaxCheckBoxEnableLoggingToFile = new System.Windows.Forms.CheckBox();
+            this.MaxLabelLogFilename = new System.Windows.Forms.Label();
+            this.MaxTextBoxLogFilename = new System.Windows.Forms.TextBox();
+            this.MaxLabelAppend = new System.Windows.Forms.Label();
+            this.MaxCheckBoxAppend = new System.Windows.Forms.CheckBox();
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.OTGWTabStatus.SuspendLayout();
@@ -715,7 +720,7 @@
             this.OTGWTextBoxLogfileName.Name = "OTGWTextBoxLogfileName";
             this.OTGWTextBoxLogfileName.Size = new System.Drawing.Size(221, 20);
             this.OTGWTextBoxLogfileName.TabIndex = 7;
-            this.OTGWTextBoxLogfileName.Text = "E:\\HeatControlLog.txt";
+            this.OTGWTextBoxLogfileName.Text = "E:\\HeatControlLogOTGW.txt";
             // 
             // OTGWLabelLogfileName
             // 
@@ -1900,6 +1905,11 @@
             // MaxTabConnection
             // 
             this.MaxTabConnection.BackColor = System.Drawing.SystemColors.Control;
+            this.MaxTabConnection.Controls.Add(this.MaxCheckBoxAppend);
+            this.MaxTabConnection.Controls.Add(this.MaxLabelAppend);
+            this.MaxTabConnection.Controls.Add(this.MaxTextBoxLogFilename);
+            this.MaxTabConnection.Controls.Add(this.MaxLabelLogFilename);
+            this.MaxTabConnection.Controls.Add(this.MaxCheckBoxEnableLoggingToFile);
             this.MaxTabConnection.Controls.Add(this.MaxLabelHostName);
             this.MaxTabConnection.Controls.Add(this.MAXListboxLog);
             this.MaxTabConnection.Controls.Add(this.MaxTextBoxHostname);
@@ -2679,6 +2689,51 @@
             this.MaxLabelRoomsMaxCube.TabIndex = 0;
             this.MaxLabelRoomsMaxCube.Text = "MaxCube";
             // 
+            // MaxCheckBoxEnableLoggingToFile
+            // 
+            this.MaxCheckBoxEnableLoggingToFile.AutoSize = true;
+            this.MaxCheckBoxEnableLoggingToFile.Location = new System.Drawing.Point(6, 387);
+            this.MaxCheckBoxEnableLoggingToFile.Name = "MaxCheckBoxEnableLoggingToFile";
+            this.MaxCheckBoxEnableLoggingToFile.Size = new System.Drawing.Size(124, 17);
+            this.MaxCheckBoxEnableLoggingToFile.TabIndex = 5;
+            this.MaxCheckBoxEnableLoggingToFile.Text = "Enable logging to file";
+            this.MaxCheckBoxEnableLoggingToFile.UseVisualStyleBackColor = true;
+            // 
+            // MaxLabelLogFilename
+            // 
+            this.MaxLabelLogFilename.AutoSize = true;
+            this.MaxLabelLogFilename.Location = new System.Drawing.Point(3, 407);
+            this.MaxLabelLogFilename.Name = "MaxLabelLogFilename";
+            this.MaxLabelLogFilename.Size = new System.Drawing.Size(67, 13);
+            this.MaxLabelLogFilename.TabIndex = 6;
+            this.MaxLabelLogFilename.Text = "Log filename";
+            // 
+            // MaxTextBoxLogFilename
+            // 
+            this.MaxTextBoxLogFilename.Location = new System.Drawing.Point(94, 404);
+            this.MaxTextBoxLogFilename.Name = "MaxTextBoxLogFilename";
+            this.MaxTextBoxLogFilename.Size = new System.Drawing.Size(245, 20);
+            this.MaxTextBoxLogFilename.TabIndex = 7;
+            this.MaxTextBoxLogFilename.Text = "E:\\HeatControlLogMaxcube.txt";
+            // 
+            // MaxLabelAppend
+            // 
+            this.MaxLabelAppend.AutoSize = true;
+            this.MaxLabelAppend.Location = new System.Drawing.Point(359, 406);
+            this.MaxLabelAppend.Name = "MaxLabelAppend";
+            this.MaxLabelAppend.Size = new System.Drawing.Size(44, 13);
+            this.MaxLabelAppend.TabIndex = 8;
+            this.MaxLabelAppend.Text = "Append";
+            // 
+            // MaxCheckBoxAppend
+            // 
+            this.MaxCheckBoxAppend.AutoSize = true;
+            this.MaxCheckBoxAppend.Location = new System.Drawing.Point(409, 406);
+            this.MaxCheckBoxAppend.Name = "MaxCheckBoxAppend";
+            this.MaxCheckBoxAppend.Size = new System.Drawing.Size(15, 14);
+            this.MaxCheckBoxAppend.TabIndex = 9;
+            this.MaxCheckBoxAppend.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2960,6 +3015,11 @@
         private System.Windows.Forms.Label MaxLabelRoomsValveMaxPercent;
         private System.Windows.Forms.TextBox MaxTextBoxRoomsNTPServer;
         private System.Windows.Forms.Label MaxLabelRoomsNTPServer;
+        private System.Windows.Forms.CheckBox MaxCheckBoxAppend;
+        private System.Windows.Forms.Label MaxLabelAppend;
+        private System.Windows.Forms.TextBox MaxTextBoxLogFilename;
+        private System.Windows.Forms.Label MaxLabelLogFilename;
+        private System.Windows.Forms.CheckBox MaxCheckBoxEnableLoggingToFile;
     }
 }
 

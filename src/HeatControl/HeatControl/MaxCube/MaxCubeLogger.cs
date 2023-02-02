@@ -7,13 +7,127 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using static HeatControl.OTGW;
+using System.IO;
 
 namespace HeatControl
 {
     partial class MaxCubeLogger
     {
+        public class StatusReport
+        {
+            public class Radiator
+            {
+                public string name;
+                public float valve;
+
+                public Radiator(string name, float valve)
+                {
+                    this.name = name;
+                    this.valve = valve;
+                }
+            }
+
+            public class RoomReport
+            {
+                public string name;
+                public float configuredTemperature;
+                public float actualTemperature;
+                public List<Radiator> radiators;
+
+                public RoomReport(string name, float configuredTemperature, float actualTemperature) 
+                { 
+                    this.radiators = new List<Radiator>();
+                    this.name = name;
+                    this.configuredTemperature = configuredTemperature;
+                    this.actualTemperature = actualTemperature;
+                }
+            }
+
+            public DateTime dateTime;
+            public List<RoomReport> report;
+
+            public StatusReport(MaxCubeLogger maxCubeLogger) 
+            {
+                this.dateTime= DateTime.Now;
+                this.report= new List<RoomReport>();
+
+                foreach(MaxCube maxCube in maxCubeLogger.maxCubes)
+                {
+                    foreach(KeyValuePair<int,MaxCube.Room> kvp in maxCube.rooms)
+                    {
+                        MaxCube.Room room = kvp.Value;
+                        if (room.roomID != 0)
+                        {
+                            RoomReport roomReport = new RoomReport(room.name, room.configuredTemperature, room.actualTemperature);
+
+                            foreach (MaxCube.DeviceBase device in room.devices)
+                            {
+                                if ((device.type == MaxCube.DeviceType.HeatingThermostat) || (device.type == MaxCube.DeviceType.HeatingThermostatTODO))
+                                {
+                                    MaxCube.DeviceHeatingThermostat heatingThermostat = (MaxCube.DeviceHeatingThermostat)device;
+                                    roomReport.radiators.Add(new Radiator(heatingThermostat.name, heatingThermostat.valvePosition));
+                                }
+                            }
+                            this.report.Add(roomReport);
+                        }
+                    }
+
+                    // request new real-time status report from the devices.
+                    maxCube.EnqueueCommand("l:");
+                }
+            }
+
+            public string Heading()
+            {
+                string s = "Date Time; ";
+
+                foreach(RoomReport roomReport in this.report)
+                {
+                    s += roomReport.name + " configured temperature; ";
+                    s += roomReport.name + " actual temperature; ";
+                    foreach (Radiator radiator in roomReport.radiators)
+                    {
+                        s += roomReport.name + radiator.name + " percentage; ";
+                    }
+                }
+                return s;
+            }
+
+            override public string ToString()
+            {
+                string s = this.dateTime.ToString() + "; ";
+
+                foreach (RoomReport roomReport in this.report)
+                {
+                    s += roomReport.configuredTemperature.ToString() + "; ";
+                    s += roomReport.actualTemperature.ToString() + "; ";
+                    foreach (Radiator radiator in roomReport.radiators) 
+                    {
+                        s += radiator.valve.ToString() + "; ";
+                    }
+                }
+                return s;
+            }
+        }
+
+        public delegate void StatusReportHandler(StatusReport status);
+        private List<StatusReportHandler> statusReportHandlers;
+
+
+        public void AddStatusReporter(StatusReportHandler handler)
+        {
+            this.statusReportHandlers.Add(handler);
+        }
+
+        public void RemoveStatusReporter(StatusReportHandler handler)
+        {
+            this.statusReportHandlers.Remove(handler);
+        }
+
+
         public MaxCubeLogger()
         {
+            this.statusReportHandlers = new List<StatusReportHandler>();
             this.maxCubes = new List<MaxCube>();
             this.logHandlers = new List<LogHandler>();
 
@@ -62,8 +176,12 @@ namespace HeatControl
         private volatile bool stateMachineHasClosed;
         public volatile StateRequest stateRequest;
 
+        public const int statusReportInterval = 10;
+
         private void StateMachine()
         {
+            long lastStatusReportTick = 0;
+
             stateMachineHasClosed = false;
             stateRequest = StateRequest.Disconnected;
             while (this.stateMachineShouldClose == false)
@@ -83,13 +201,43 @@ namespace HeatControl
                         stateRequest = StateRequest.Disconnected;
                         break;
                 }
+
+                if (stateRequest == StateRequest.Running)
+                {
+                    if ((DateTime.Now.Ticks - lastStatusReportTick) > (statusReportInterval * System.TimeSpan.TicksPerSecond))
+                    {
+                        // check if we can generate a valid StatusReport
+                        bool allValid = true;
+                        foreach (MaxCube maxCube in maxCubes)
+                        {
+                            if (maxCube.configurationReceived == false)
+                            {
+                                allValid = false;
+                            }
+                        }
+
+                        if (allValid)
+                        {
+                            StatusReport statusReport = new StatusReport(this);
+
+                            foreach (StatusReportHandler statusReportHandler in statusReportHandlers)
+                            {
+                                statusReportHandler(statusReport);
+                            }
+                        }
+                        lastStatusReportTick = DateTime.Now.Ticks;
+                    }
+                }
+
+
+
+
+
+
                 Thread.Sleep(100); // we could make this event driven somehow....
             }
             stateMachineHasClosed = true;
         }
-
-
-
 
         public void Connect()
         {

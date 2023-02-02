@@ -203,12 +203,12 @@ namespace HeatControl
 
 
 
-            public const int statusReportInterval = 10;
             public IPAddress iPAddress;
             public DeviceMaxCube deviceMaxCube;
 
             public SortedDictionary<int, Room> rooms;
             public Dictionary<int, DeviceBase> deviceLookup;
+            public bool configurationReceived;
 
             private SocketReader socketReader;
             private Parser parser;
@@ -218,6 +218,7 @@ namespace HeatControl
 
             public MaxCube(MaxCubeLogger maxCubeLogger, IPAddress iPAddress, string name, string serial, int RFAddress, string version)
             {
+                this.configurationReceived = false;
                 this.deviceLookup = new Dictionary<int, DeviceBase>();
                 this.rooms = new SortedDictionary<int, Room>();
                  
@@ -238,13 +239,10 @@ namespace HeatControl
 
 
                 string[] initCommands = {"f:"};
-                foreach (string line in initCommands)
+                foreach (string command in initCommands)
                 {
-                    commandQueue.EnqueueCommand(line);
+                    this.EnqueueCommand(command);
                 }
-
-
-
             }
 
             public void Connect()
@@ -265,7 +263,6 @@ namespace HeatControl
                     this.socketThread.IsBackground = true;
                     this.socketThread.Start();
                 }
-
             }
 
             public void Disconnect()
@@ -280,14 +277,17 @@ namespace HeatControl
                 return this.socketReader.IsConnected();
             }
 
+            public void EnqueueCommand(string command)
+            {
+                this.commandQueue.EnqueueCommand(command);
+            }
+
 
             private Thread socketThread;
             private volatile bool socketThreadShouldClose;
             private volatile bool socketThreadHasClosed;
             private void SocketThread()
             {
-                long lastStatusReportTick = 0;
-
                 socketThreadHasClosed = false;
                 while (socketThreadShouldClose == false)
                 {
@@ -326,20 +326,6 @@ namespace HeatControl
                             }
                         }
                     }
-
-                    /*
-                    if ((DateTime.Now.Ticks - lastStatusReportTick) > (statusReportInterval * System.TimeSpan.TicksPerSecond))
-                    {
-                        lastStatusReportTick = DateTime.Now.Ticks;
-
-                        StatusReport statusReport = new StatusReport(this.gatewayStatus);
-                        foreach (StatusReportHandler statusReportHandler in statusReportHandlers)
-                        {
-                            statusReportHandler(statusReport);
-                        }
-                    }
-                    */
-
                     Thread.Sleep(100);
 
                 }

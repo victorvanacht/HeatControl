@@ -224,6 +224,7 @@ namespace HeatControl
                 {
                     public override void Parse(MaxCube maxCube, string message)
                     {
+                        maxCube.configurationReceived = true;
                         byte[] data = System.Convert.FromBase64String(message);
                         int index = 0;
 
