@@ -34,7 +34,7 @@
             this.OTGWGroupbox = new System.Windows.Forms.GroupBox();
             this.OTGWTabcontrol = new System.Windows.Forms.TabControl();
             this.OTGWTabStatus = new System.Windows.Forms.TabPage();
-            this.OTGWFormsPlotFloats = new ScottPlot.FormsPlot();
+            this.OTGWFormsPlot = new ScottPlot.FormsPlot();
             this.OTGWTextBoxOutsideTemperature = new System.Windows.Forms.TextBox();
             this.OTGWLabelOutsideTemperature = new System.Windows.Forms.Label();
             this.OTGWTextBoxReturnTemperature = new System.Windows.Forms.TextBox();
@@ -196,7 +196,15 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.MaxTabControl = new System.Windows.Forms.TabControl();
             this.MaxTabPageStatusOverview = new System.Windows.Forms.TabPage();
+            this.MaxLabelOverviewPlotSelection = new System.Windows.Forms.Label();
+            this.MaxFormsPlot = new ScottPlot.FormsPlot();
+            this.MaxCheckedListBoxOverviewPlotSelection = new System.Windows.Forms.CheckedListBox();
             this.MaxTabConnection = new System.Windows.Forms.TabPage();
+            this.MaxCheckBoxAppend = new System.Windows.Forms.CheckBox();
+            this.MaxLabelAppend = new System.Windows.Forms.Label();
+            this.MaxTextBoxLogFilename = new System.Windows.Forms.TextBox();
+            this.MaxLabelLogFilename = new System.Windows.Forms.Label();
+            this.MaxCheckBoxEnableLoggingToFile = new System.Windows.Forms.CheckBox();
             this.MaxLabelHostName = new System.Windows.Forms.Label();
             this.MAXListboxLog = new System.Windows.Forms.ListBox();
             this.MaxTextBoxHostname = new System.Windows.Forms.TextBox();
@@ -278,11 +286,6 @@
             this.MaxLabelRoomsRoom = new System.Windows.Forms.Label();
             this.MaxLabelRoomsMaxCube = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.MaxCheckBoxEnableLoggingToFile = new System.Windows.Forms.CheckBox();
-            this.MaxLabelLogFilename = new System.Windows.Forms.Label();
-            this.MaxTextBoxLogFilename = new System.Windows.Forms.TextBox();
-            this.MaxLabelAppend = new System.Windows.Forms.Label();
-            this.MaxCheckBoxAppend = new System.Windows.Forms.CheckBox();
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.OTGWTabStatus.SuspendLayout();
@@ -291,6 +294,7 @@
             this.OTGWTabOTGWDiagnostics.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.MaxTabControl.SuspendLayout();
+            this.MaxTabPageStatusOverview.SuspendLayout();
             this.MaxTabConnection.SuspendLayout();
             this.MaxTabRooms.SuspendLayout();
             this.SuspendLayout();
@@ -340,7 +344,7 @@
             // 
             // OTGWTabStatus
             // 
-            this.OTGWTabStatus.Controls.Add(this.OTGWFormsPlotFloats);
+            this.OTGWTabStatus.Controls.Add(this.OTGWFormsPlot);
             this.OTGWTabStatus.Controls.Add(this.OTGWTextBoxOutsideTemperature);
             this.OTGWTabStatus.Controls.Add(this.OTGWLabelOutsideTemperature);
             this.OTGWTabStatus.Controls.Add(this.OTGWTextBoxReturnTemperature);
@@ -380,13 +384,13 @@
             this.OTGWTabStatus.TabIndex = 0;
             this.OTGWTabStatus.Text = "Status Overview";
             // 
-            // OTGWFormsPlotFloats
+            // OTGWFormsPlot
             // 
-            this.OTGWFormsPlotFloats.Location = new System.Drawing.Point(0, 186);
-            this.OTGWFormsPlotFloats.Margin = new System.Windows.Forms.Padding(0);
-            this.OTGWFormsPlotFloats.Name = "OTGWFormsPlotFloats";
-            this.OTGWFormsPlotFloats.Size = new System.Drawing.Size(624, 322);
-            this.OTGWFormsPlotFloats.TabIndex = 32;
+            this.OTGWFormsPlot.Location = new System.Drawing.Point(0, 186);
+            this.OTGWFormsPlot.Margin = new System.Windows.Forms.Padding(0);
+            this.OTGWFormsPlot.Name = "OTGWFormsPlot";
+            this.OTGWFormsPlot.Size = new System.Drawing.Size(624, 322);
+            this.OTGWFormsPlot.TabIndex = 32;
             // 
             // OTGWTextBoxOutsideTemperature
             // 
@@ -1895,12 +1899,41 @@
             // MaxTabPageStatusOverview
             // 
             this.MaxTabPageStatusOverview.BackColor = System.Drawing.SystemColors.Control;
+            this.MaxTabPageStatusOverview.Controls.Add(this.MaxLabelOverviewPlotSelection);
+            this.MaxTabPageStatusOverview.Controls.Add(this.MaxFormsPlot);
+            this.MaxTabPageStatusOverview.Controls.Add(this.MaxCheckedListBoxOverviewPlotSelection);
             this.MaxTabPageStatusOverview.Location = new System.Drawing.Point(4, 22);
             this.MaxTabPageStatusOverview.Name = "MaxTabPageStatusOverview";
             this.MaxTabPageStatusOverview.Padding = new System.Windows.Forms.Padding(3);
             this.MaxTabPageStatusOverview.Size = new System.Drawing.Size(641, 702);
             this.MaxTabPageStatusOverview.TabIndex = 0;
             this.MaxTabPageStatusOverview.Text = "Status Overview";
+            // 
+            // MaxLabelOverviewPlotSelection
+            // 
+            this.MaxLabelOverviewPlotSelection.AutoSize = true;
+            this.MaxLabelOverviewPlotSelection.Location = new System.Drawing.Point(6, 31);
+            this.MaxLabelOverviewPlotSelection.Name = "MaxLabelOverviewPlotSelection";
+            this.MaxLabelOverviewPlotSelection.Size = new System.Drawing.Size(70, 13);
+            this.MaxLabelOverviewPlotSelection.TabIndex = 34;
+            this.MaxLabelOverviewPlotSelection.Text = "Plot selection";
+            // 
+            // MaxFormsPlot
+            // 
+            this.MaxFormsPlot.Location = new System.Drawing.Point(6, 186);
+            this.MaxFormsPlot.Margin = new System.Windows.Forms.Padding(0);
+            this.MaxFormsPlot.Name = "MaxFormsPlot";
+            this.MaxFormsPlot.Size = new System.Drawing.Size(624, 322);
+            this.MaxFormsPlot.TabIndex = 33;
+            // 
+            // MaxCheckedListBoxOverviewPlotSelection
+            // 
+            this.MaxCheckedListBoxOverviewPlotSelection.FormattingEnabled = true;
+            this.MaxCheckedListBoxOverviewPlotSelection.Location = new System.Drawing.Point(97, 31);
+            this.MaxCheckedListBoxOverviewPlotSelection.Name = "MaxCheckedListBoxOverviewPlotSelection";
+            this.MaxCheckedListBoxOverviewPlotSelection.Size = new System.Drawing.Size(153, 154);
+            this.MaxCheckedListBoxOverviewPlotSelection.TabIndex = 0;
+            this.MaxCheckedListBoxOverviewPlotSelection.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.MaxCheckedListBoxOverviewPlotSelection_ItemCheck);
             // 
             // MaxTabConnection
             // 
@@ -1921,6 +1954,51 @@
             this.MaxTabConnection.Size = new System.Drawing.Size(641, 702);
             this.MaxTabConnection.TabIndex = 1;
             this.MaxTabConnection.Text = "Connection";
+            // 
+            // MaxCheckBoxAppend
+            // 
+            this.MaxCheckBoxAppend.AutoSize = true;
+            this.MaxCheckBoxAppend.Location = new System.Drawing.Point(409, 406);
+            this.MaxCheckBoxAppend.Name = "MaxCheckBoxAppend";
+            this.MaxCheckBoxAppend.Size = new System.Drawing.Size(15, 14);
+            this.MaxCheckBoxAppend.TabIndex = 9;
+            this.MaxCheckBoxAppend.UseVisualStyleBackColor = true;
+            // 
+            // MaxLabelAppend
+            // 
+            this.MaxLabelAppend.AutoSize = true;
+            this.MaxLabelAppend.Location = new System.Drawing.Point(359, 406);
+            this.MaxLabelAppend.Name = "MaxLabelAppend";
+            this.MaxLabelAppend.Size = new System.Drawing.Size(44, 13);
+            this.MaxLabelAppend.TabIndex = 8;
+            this.MaxLabelAppend.Text = "Append";
+            // 
+            // MaxTextBoxLogFilename
+            // 
+            this.MaxTextBoxLogFilename.Location = new System.Drawing.Point(94, 404);
+            this.MaxTextBoxLogFilename.Name = "MaxTextBoxLogFilename";
+            this.MaxTextBoxLogFilename.Size = new System.Drawing.Size(245, 20);
+            this.MaxTextBoxLogFilename.TabIndex = 7;
+            this.MaxTextBoxLogFilename.Text = "E:\\HeatControlLogMaxcube.txt";
+            // 
+            // MaxLabelLogFilename
+            // 
+            this.MaxLabelLogFilename.AutoSize = true;
+            this.MaxLabelLogFilename.Location = new System.Drawing.Point(3, 407);
+            this.MaxLabelLogFilename.Name = "MaxLabelLogFilename";
+            this.MaxLabelLogFilename.Size = new System.Drawing.Size(67, 13);
+            this.MaxLabelLogFilename.TabIndex = 6;
+            this.MaxLabelLogFilename.Text = "Log filename";
+            // 
+            // MaxCheckBoxEnableLoggingToFile
+            // 
+            this.MaxCheckBoxEnableLoggingToFile.AutoSize = true;
+            this.MaxCheckBoxEnableLoggingToFile.Location = new System.Drawing.Point(6, 387);
+            this.MaxCheckBoxEnableLoggingToFile.Name = "MaxCheckBoxEnableLoggingToFile";
+            this.MaxCheckBoxEnableLoggingToFile.Size = new System.Drawing.Size(124, 17);
+            this.MaxCheckBoxEnableLoggingToFile.TabIndex = 5;
+            this.MaxCheckBoxEnableLoggingToFile.Text = "Enable logging to file";
+            this.MaxCheckBoxEnableLoggingToFile.UseVisualStyleBackColor = true;
             // 
             // MaxLabelHostName
             // 
@@ -2689,51 +2767,6 @@
             this.MaxLabelRoomsMaxCube.TabIndex = 0;
             this.MaxLabelRoomsMaxCube.Text = "MaxCube";
             // 
-            // MaxCheckBoxEnableLoggingToFile
-            // 
-            this.MaxCheckBoxEnableLoggingToFile.AutoSize = true;
-            this.MaxCheckBoxEnableLoggingToFile.Location = new System.Drawing.Point(6, 387);
-            this.MaxCheckBoxEnableLoggingToFile.Name = "MaxCheckBoxEnableLoggingToFile";
-            this.MaxCheckBoxEnableLoggingToFile.Size = new System.Drawing.Size(124, 17);
-            this.MaxCheckBoxEnableLoggingToFile.TabIndex = 5;
-            this.MaxCheckBoxEnableLoggingToFile.Text = "Enable logging to file";
-            this.MaxCheckBoxEnableLoggingToFile.UseVisualStyleBackColor = true;
-            // 
-            // MaxLabelLogFilename
-            // 
-            this.MaxLabelLogFilename.AutoSize = true;
-            this.MaxLabelLogFilename.Location = new System.Drawing.Point(3, 407);
-            this.MaxLabelLogFilename.Name = "MaxLabelLogFilename";
-            this.MaxLabelLogFilename.Size = new System.Drawing.Size(67, 13);
-            this.MaxLabelLogFilename.TabIndex = 6;
-            this.MaxLabelLogFilename.Text = "Log filename";
-            // 
-            // MaxTextBoxLogFilename
-            // 
-            this.MaxTextBoxLogFilename.Location = new System.Drawing.Point(94, 404);
-            this.MaxTextBoxLogFilename.Name = "MaxTextBoxLogFilename";
-            this.MaxTextBoxLogFilename.Size = new System.Drawing.Size(245, 20);
-            this.MaxTextBoxLogFilename.TabIndex = 7;
-            this.MaxTextBoxLogFilename.Text = "E:\\HeatControlLogMaxcube.txt";
-            // 
-            // MaxLabelAppend
-            // 
-            this.MaxLabelAppend.AutoSize = true;
-            this.MaxLabelAppend.Location = new System.Drawing.Point(359, 406);
-            this.MaxLabelAppend.Name = "MaxLabelAppend";
-            this.MaxLabelAppend.Size = new System.Drawing.Size(44, 13);
-            this.MaxLabelAppend.TabIndex = 8;
-            this.MaxLabelAppend.Text = "Append";
-            // 
-            // MaxCheckBoxAppend
-            // 
-            this.MaxCheckBoxAppend.AutoSize = true;
-            this.MaxCheckBoxAppend.Location = new System.Drawing.Point(409, 406);
-            this.MaxCheckBoxAppend.Name = "MaxCheckBoxAppend";
-            this.MaxCheckBoxAppend.Size = new System.Drawing.Size(15, 14);
-            this.MaxCheckBoxAppend.TabIndex = 9;
-            this.MaxCheckBoxAppend.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2756,6 +2789,8 @@
             this.OTGWTabOTGWDiagnostics.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.MaxTabControl.ResumeLayout(false);
+            this.MaxTabPageStatusOverview.ResumeLayout(false);
+            this.MaxTabPageStatusOverview.PerformLayout();
             this.MaxTabConnection.ResumeLayout(false);
             this.MaxTabConnection.PerformLayout();
             this.MaxTabRooms.ResumeLayout(false);
@@ -2925,7 +2960,7 @@
         private System.Windows.Forms.TextBox OTGWTextBoxDiagProductTypeMaster;
         private System.Windows.Forms.Label OTGWLabelDiagProductTypeMaster;
         private System.Windows.Forms.TextBox OTGWTextBoxDiagProductVersionSlave;
-        private ScottPlot.FormsPlot OTGWFormsPlotFloats;
+        private ScottPlot.FormsPlot OTGWFormsPlot;
         private System.Windows.Forms.TextBox OTGWTextBoxLogfileName;
         private System.Windows.Forms.Label OTGWLabelLogfileName;
         private System.Windows.Forms.CheckBox OTGWCheckBoxAppend;
@@ -3020,6 +3055,9 @@
         private System.Windows.Forms.TextBox MaxTextBoxLogFilename;
         private System.Windows.Forms.Label MaxLabelLogFilename;
         private System.Windows.Forms.CheckBox MaxCheckBoxEnableLoggingToFile;
+        private ScottPlot.FormsPlot MaxFormsPlot;
+        private System.Windows.Forms.CheckedListBox MaxCheckedListBoxOverviewPlotSelection;
+        private System.Windows.Forms.Label MaxLabelOverviewPlotSelection;
     }
 }
 

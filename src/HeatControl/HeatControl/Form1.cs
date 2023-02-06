@@ -118,29 +118,40 @@ namespace HeatControl
                 new ListenerGeneral<int>(this.OTGWTextBoxDiagProductVersionSlave, this.otgw.gatewayStatus.productVersionSlave),
             };
 
-            this.lines = new Dictionary<string, Line>()
+            this.OTGWLines = new Dictionary<string, Line>()
             {
-                ["BoilerTemp"] = new Line(this.OTGWFormsPlotFloats, "BoilerTemp", Color.Blue),
-                ["RoomSetpoint"] = new Line(this.OTGWFormsPlotFloats, "RoomSetpoint", Color.Gray),
-                ["Setpoint"] = new Line(this.OTGWFormsPlotFloats, "Setpoint", Color.LightBlue),
-                ["SetpointMod"] = new Line(this.OTGWFormsPlotFloats, "SetpointMod", Color.AliceBlue),
-                ["Modulation"] = new Line(this.OTGWFormsPlotFloats, "Modulation", Color.Pink),
-                ["OutsideTemp"] = new Line(this.OTGWFormsPlotFloats, "OutsideTemp", Color.DeepPink),
-                ["ReturnTemp"] = new Line(this.OTGWFormsPlotFloats, "ReturnTemp", Color.DarkRed),
-                ["Burner"] = new Line(this.OTGWFormsPlotFloats, "Burner", 10, Color.OrangeRed, Color.Yellow),
-                ["TapWater"] = new Line(this.OTGWFormsPlotFloats, "TapWater", 40, Color.DarkGreen, Color.LightGreen),
-                ["Heating"] = new Line(this.OTGWFormsPlotFloats, "Heating", 70, Color.DarkMagenta, Color.LightPink),
+                ["BoilerTemp"] = new Line(this.OTGWFormsPlot, "BoilerTemp", Color.Blue),
+                ["RoomSetpoint"] = new Line(this.OTGWFormsPlot, "RoomSetpoint", Color.Gray),
+                ["Setpoint"] = new Line(this.OTGWFormsPlot, "Setpoint", Color.LightBlue),
+                ["SetpointMod"] = new Line(this.OTGWFormsPlot, "SetpointMod", Color.AliceBlue),
+                ["Modulation"] = new Line(this.OTGWFormsPlot, "Modulation", Color.Pink),
+                ["OutsideTemp"] = new Line(this.OTGWFormsPlot, "OutsideTemp", Color.DeepPink),
+                ["ReturnTemp"] = new Line(this.OTGWFormsPlot, "ReturnTemp", Color.DarkRed),
+                ["Burner"] = new Line(this.OTGWFormsPlot, "Burner", 10, Color.OrangeRed, Color.Yellow),
+                ["TapWater"] = new Line(this.OTGWFormsPlot, "TapWater", 40, Color.DarkGreen, Color.LightGreen),
+                ["Heating"] = new Line(this.OTGWFormsPlot, "Heating", 70, Color.DarkMagenta, Color.LightPink),
             };
 
-            this.OTGWFormsPlotFloats.Plot.SetAxisLimits(yMin: 0, yMax: 100);
-            this.OTGWFormsPlotFloats.Configuration.LockVerticalAxis = true;
-            this.OTGWFormsPlotFloats.Configuration.DoubleClickBenchmark = false;
-            this.OTGWFormsPlotFloats.Plot.XAxis.DateTimeFormat(true);
-            this.legend = this.OTGWFormsPlotFloats.Plot.Legend();
-            this.legend.Orientation = ScottPlot.Orientation.Vertical;
-            this.legend.Location = ScottPlot.Alignment.UpperLeft;
-            this.legend.FontSize = 9;
-            this.OTGWFormsPlotFloats.Refresh();
+            this.OTGWFormsPlot.Plot.SetAxisLimits(yMin: 0, yMax: 100);
+            this.OTGWFormsPlot.Configuration.LockVerticalAxis = true;
+            this.OTGWFormsPlot.Configuration.DoubleClickBenchmark = false;
+            this.OTGWFormsPlot.Plot.XAxis.DateTimeFormat(true);
+            this.OTGWlegend = this.OTGWFormsPlot.Plot.Legend();
+            this.OTGWlegend.Orientation = ScottPlot.Orientation.Vertical;
+            this.OTGWlegend.Location = ScottPlot.Alignment.UpperLeft;
+            this.OTGWlegend.FontSize = 9;
+            this.OTGWFormsPlot.Refresh();
+
+
+            this.MaxFormsPlot.Plot.SetAxisLimits(yMin: 5, yMax: 35);
+            this.MaxFormsPlot.Configuration.LockVerticalAxis = true;
+            this.MaxFormsPlot.Configuration.DoubleClickBenchmark = false;
+            this.MaxFormsPlot.Plot.XAxis.DateTimeFormat(true);
+            this.Maxlegend = this.MaxFormsPlot.Plot.Legend();
+            this.Maxlegend.Orientation = ScottPlot.Orientation.Vertical;
+            this.Maxlegend.Location = ScottPlot.Alignment.UpperLeft;
+            this.Maxlegend.FontSize = 9;
+            this.MaxFormsPlot.Refresh();
 
 
         }
@@ -165,7 +176,7 @@ namespace HeatControl
                 this.otgw.hostName = this.OTGWTextboxHostname.Text;
 
                 // Reset the x-axis of the plot to now.
-                foreach (KeyValuePair<string, Line> entry in lines)
+                foreach (KeyValuePair<string, Line> entry in OTGWLines)
                 {
                     entry.Value.FillXAxisNow();
                 }
@@ -316,8 +327,8 @@ namespace HeatControl
         }
 
 
-        private Dictionary<string, Line> lines;
-        private ScottPlot.Renderable.Legend legend;
+        private Dictionary<string, Line> OTGWLines;
+        private ScottPlot.Renderable.Legend OTGWlegend;
         private class Line
         {
             private FormsPlot plot;
@@ -414,23 +425,28 @@ namespace HeatControl
                     this.line.MaxRenderIndex = xCount - 1;
                 }
             }
+
+            public void SetVisibilty(bool enabled)
+            {
+                this.line.IsVisible = enabled;
+            }
         }
         private void OTGWPlotter(OTGW.StatusReport status)
         {
             double dateTime = status.dateTime.ToOADate();
 
-            lines["BoilerTemp"].AddPoint(dateTime, status.boilerWaterTemperature.value);
-            lines["RoomSetpoint"].AddPoint(dateTime, status.roomSetPoint.value);
-            lines["Setpoint"].AddPoint(dateTime, status.controlSetPoint.value);
-            lines["SetpointMod"].AddPoint(dateTime, status.controlSetPointModified.value);
-            lines["Modulation"].AddPoint(dateTime, status.relativeModulationLevel.value);
-            lines["OutsideTemp"].AddPoint(dateTime, status.outsideTemperature.value);
-            lines["ReturnTemp"].AddPoint(dateTime, status.returnWaterTemperature.value);
-            lines["Burner"].AddPoint(dateTime, Convert.ToDouble(status.flameStatus.value));
-            lines["TapWater"].AddPoint(dateTime, Convert.ToDouble(status.tapWaterMode.value));
-            lines["Heating"].AddPoint(dateTime, Convert.ToDouble(status.centralHeatingMode.value));
+            OTGWLines["BoilerTemp"].AddPoint(dateTime, status.boilerWaterTemperature.value);
+            OTGWLines["RoomSetpoint"].AddPoint(dateTime, status.roomSetPoint.value);
+            OTGWLines["Setpoint"].AddPoint(dateTime, status.controlSetPoint.value);
+            OTGWLines["SetpointMod"].AddPoint(dateTime, status.controlSetPointModified.value);
+            OTGWLines["Modulation"].AddPoint(dateTime, status.relativeModulationLevel.value);
+            OTGWLines["OutsideTemp"].AddPoint(dateTime, status.outsideTemperature.value);
+            OTGWLines["ReturnTemp"].AddPoint(dateTime, status.returnWaterTemperature.value);
+            OTGWLines["Burner"].AddPoint(dateTime, Convert.ToDouble(status.flameStatus.value));
+            OTGWLines["TapWater"].AddPoint(dateTime, Convert.ToDouble(status.tapWaterMode.value));
+            OTGWLines["Heating"].AddPoint(dateTime, Convert.ToDouble(status.centralHeatingMode.value));
 
-            this.OTGWFormsPlotFloats.Invoke((Action)delegate { this.OTGWFormsPlotFloats.Refresh(); });
+            this.OTGWFormsPlot.Invoke((Action)delegate { this.OTGWFormsPlot.Refresh(); });
         }
 
         private void OTGWLogToFile(OTGW.StatusReport status)
@@ -471,7 +487,8 @@ namespace HeatControl
                 this.otgw.AddLogger(OTGWLogger);
                 this.otgw.AddStatusReporter(OTGWPlotter);
 
-                this.maxCubeLogger.AddLogger(MAXLogger);
+                this.maxCubeLogger.AddLogger(MaxLogger);
+                this.maxCubeLogger.AddStatusReporter(MaxPlotter);
                 this.maxCubeLogger.stateRequest = MaxCubeLogger.StateRequest.Connect;
             }
         }
@@ -487,7 +504,7 @@ namespace HeatControl
                 this.maxCubeLogger.stateRequest = MaxCubeLogger.StateRequest.Disconnect;
 
 
-                this.maxCubeLogger.RemoveLogger(MAXLogger);
+                this.maxCubeLogger.RemoveLogger(MaxLogger);
 
                 /*
                 this.otgw.RemoveStatusReporter(OTGWPlotter);
@@ -513,11 +530,11 @@ namespace HeatControl
 
 
 
-        private void MAXLogger(string text)
+        private void MaxLogger(string text)
         {
             if (this.MAXListboxLog.InvokeRequired)
             {
-                this.MAXListboxLog.Invoke((Action)delegate { MAXLogger(text); });
+                this.MAXListboxLog.Invoke((Action)delegate { MaxLogger(text); });
             }
             else
             {
@@ -727,6 +744,99 @@ namespace HeatControl
 
             Byte[] line = new UTF8Encoding().GetBytes(status.ToString() + "\n");
             logFileStreamMax.Write(line, 0, line.Length);
+        }
+
+
+        Dictionary<string, Line> maxLines;
+        private ScottPlot.Renderable.Legend Maxlegend;
+        private Color[] rainbowColors = { // odd color numbers for setpoint, odd numbers for actual temperature
+            Color.Blue, Color.DarkBlue,
+            Color.Red, Color.DarkRed,
+            Color.Yellow, Color.Beige,
+            Color.Green, Color.DarkGreen,
+            Color.Gray, Color.DarkGray,
+            Color.LightBlue, Color.MediumBlue,
+            Color.Pink, Color.IndianRed,
+            Color.LightPink, Color.MediumTurquoise,
+            Color.LightCyan, Color.Cyan,
+            Color.LightGray, Color.LightGray
+        };
+
+        private static string setpoint = ":Setpoint";
+        private static string actual = ":Actual";
+        private bool maxPlotStarted = false;
+
+
+        private void MaxPlotter(MaxCubeLogger.StatusReport status)
+        {
+            if (this.MaxCheckedListBoxOverviewPlotSelection.InvokeRequired)
+            {
+                this.MaxCheckedListBoxOverviewPlotSelection.Invoke((Action)delegate { MaxPlotter(status); });
+            }
+            else
+            {
+                // fill CheckedListbox if needed
+                if (this.MaxCheckedListBoxOverviewPlotSelection.Items.Count == 0)
+                {
+                    foreach (MaxCubeLogger.StatusReport.RoomReport roomReport in status.report)
+                    {
+                        this.MaxCheckedListBoxOverviewPlotSelection.Items.Add(roomReport.name);
+                    }
+
+                    for (int i = 0; i< this.MaxCheckedListBoxOverviewPlotSelection.Items.Count; i++)
+                    {
+                        this.MaxCheckedListBoxOverviewPlotSelection.SetItemChecked(i, true);
+                    }
+                }
+
+                // fill graph if needed
+                if ((this.maxLines == null) || (this.maxLines.Count == 0)) {
+
+
+                    this.maxLines = new Dictionary<string, Line>();
+                    for (int i=0; i< status.report.Count; i++) {
+                        MaxCubeLogger.StatusReport.RoomReport roomReport = status.report[i];
+                        maxLines.Add(roomReport.name + setpoint, new Line(this.MaxFormsPlot, roomReport.name + setpoint, rainbowColors[(i*2)%rainbowColors.Length]));
+                        maxLines.Add(roomReport.name + actual, new Line(this.MaxFormsPlot, roomReport.name + actual, rainbowColors[((i*2)+1) % rainbowColors.Length]));
+                    }
+                }
+
+                double dateTime = status.dateTime.ToOADate();
+                foreach (MaxCubeLogger.StatusReport.RoomReport roomReport in status.report)
+                {
+                    maxLines[roomReport.name + setpoint].AddPoint(dateTime, roomReport.configuredTemperature);
+                    maxLines[roomReport.name + actual].AddPoint(dateTime, roomReport.actualTemperature);
+                }
+                this.MaxFormsPlot.Refresh();
+
+                maxPlotStarted = true;
+            }
+        }
+
+        private void MaxCheckedListBoxOverviewPlotSelection_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (maxPlotStarted)
+            {
+                for (int i = 0; i < this.MaxCheckedListBoxOverviewPlotSelection.Items.Count; i++)
+                {
+                    bool selectionState = this.MaxCheckedListBoxOverviewPlotSelection.GetItemChecked(i);
+                    string name = this.MaxCheckedListBoxOverviewPlotSelection.Items[i].ToString();
+
+                    if (i == e.Index)
+                    {
+                        bool value = (e.NewValue == CheckState.Checked);
+                        maxLines[name + setpoint].SetVisibilty(value);
+                        maxLines[name + actual].SetVisibilty(value);
+                    }
+                    else
+                    { 
+                        maxLines[name + setpoint].SetVisibilty(selectionState);
+                        maxLines[name + actual].SetVisibilty(selectionState);
+                    }
+                }   
+                
+                this.MaxFormsPlot.Refresh();
+            }
         }
     }
 }
