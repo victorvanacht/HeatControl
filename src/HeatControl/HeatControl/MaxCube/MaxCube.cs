@@ -33,6 +33,7 @@ namespace HeatControl
                 public int roomID;
                 public float configuredTemperature;
                 public float actualTemperature;
+                public bool boostActive;
 
                 public List<DeviceBase> devices;
                 public Room(string name, int rfAddress, int roomID)
@@ -105,6 +106,7 @@ namespace HeatControl
                 public float minSetpointTemperature;
                 public float configuredTemperature;
                 public float actualTemperature;
+                public bool boostActive;
 
                 public List<List<ProgramEntry>> program;
 
@@ -115,6 +117,7 @@ namespace HeatControl
                     this.ecoTemperature = -1;
                     this.maxSetpointTemperature = -1;
                     this.minSetpointTemperature = -1;
+                    this.boostActive = false;
                     this.program = new List<List<ProgramEntry>>(7*13);
                     for (int day = 0; day < 7; day++)
                     {

@@ -276,8 +276,10 @@ namespace HeatControl
                                         DeviceWallThermostat wallThermostat = (DeviceWallThermostat)device;
                                         wallThermostat.configuredTemperature = configuredTemperature;
                                         wallThermostat.actualTemperature = actualTemperature;
+                                        wallThermostat.boostActive = ((flags & 0x03) == 3);
                                         wallThermostat.room.configuredTemperature = configuredTemperature;
                                         wallThermostat.room.actualTemperature = actualTemperature;
+                                        wallThermostat.room.boostActive = wallThermostat.boostActive;
                                         break;
                                     case DeviceType.EcoSwitch:
                                         // TODO: throw new Exception("to do");

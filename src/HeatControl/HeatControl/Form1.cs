@@ -153,6 +153,8 @@ namespace HeatControl
             this.Maxlegend.FontSize = 9;
             this.MaxFormsPlot.Refresh();
 
+            this.MaxLabelOverviewBoostActive.Visible = false;
+
 
         }
 
@@ -489,6 +491,7 @@ namespace HeatControl
 
                 this.maxCubeLogger.AddLogger(MaxLogger);
                 this.maxCubeLogger.AddStatusReporter(MaxPlotter);
+                this.maxCubeLogger.AddStatusReporter(MaxController);
                 this.maxCubeLogger.stateRequest = MaxCubeLogger.StateRequest.Connect;
             }
         }
@@ -838,6 +841,27 @@ namespace HeatControl
                 this.MaxFormsPlot.Refresh();
             }
         }
+
+        private void MaxController(MaxCubeLogger.StatusReport status)
+        {
+            // fill CheckedListbox if needed
+            if (this.MaxCheckedListBoxOverviewControlSelection.Items.Count == 0)
+            {
+                foreach (MaxCubeLogger.StatusReport.RoomReport roomReport in status.report)
+                {
+                    this.MaxCheckedListBoxOverviewControlSelection.Invoke((Action)delegate { this.MaxCheckedListBoxOverviewControlSelection.Items.Add(roomReport.name); });
+                }
+            }
+
+            // check if boost is active anywhere
+            bool boostActive = false;
+            foreach (MaxCubeLogger.StatusReport.RoomReport roomReport in status.report)
+            {
+                if (roomReport.boostActive) boostActive = true;
+            }
+            this.MaxLabelOverviewBoostActive.Invoke((Action)delegate { this.MaxLabelOverviewBoostActive.Visible = boostActive; });
+        }
+
     }
 }
 

@@ -33,13 +33,15 @@ namespace HeatControl
                 public float configuredTemperature;
                 public float actualTemperature;
                 public List<Radiator> radiators;
+                public bool boostActive;
 
-                public RoomReport(string name, float configuredTemperature, float actualTemperature) 
+                public RoomReport(string name, float configuredTemperature, float actualTemperature, bool boostActive) 
                 { 
                     this.radiators = new List<Radiator>();
                     this.name = name;
                     this.configuredTemperature = configuredTemperature;
                     this.actualTemperature = actualTemperature;
+                    this.boostActive = boostActive;
                 }
             }
 
@@ -58,7 +60,7 @@ namespace HeatControl
                         MaxCube.Room room = kvp.Value;
                         if (room.roomID != 0)
                         {
-                            RoomReport roomReport = new RoomReport(room.name, room.configuredTemperature, room.actualTemperature);
+                            RoomReport roomReport = new RoomReport(room.name, room.configuredTemperature, room.actualTemperature, room.boostActive);
 
                             foreach (MaxCube.DeviceBase device in room.devices)
                             {

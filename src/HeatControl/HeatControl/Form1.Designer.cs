@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.OTGWButtonConnect = new System.Windows.Forms.Button();
             this.OTGWButtonDisconnect = new System.Windows.Forms.Button();
             this.OTGWGroupbox = new System.Windows.Forms.GroupBox();
@@ -196,6 +197,10 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.MaxTabControl = new System.Windows.Forms.TabControl();
             this.MaxTabPageStatusOverview = new System.Windows.Forms.TabPage();
+            this.MaxCheckedListBoxOverviewControlSelection = new System.Windows.Forms.CheckedListBox();
+            this.MaxLabelOverviewBoostActive = new System.Windows.Forms.Label();
+            this.MaxButtonOverviewEnableControl = new System.Windows.Forms.Button();
+            this.MaxPictureBoxOverviewArrow = new System.Windows.Forms.PictureBox();
             this.MaxLabelOverviewPlotSelection = new System.Windows.Forms.Label();
             this.MaxFormsPlot = new ScottPlot.FormsPlot();
             this.MaxCheckedListBoxOverviewPlotSelection = new System.Windows.Forms.CheckedListBox();
@@ -295,6 +300,7 @@
             this.groupBox2.SuspendLayout();
             this.MaxTabControl.SuspendLayout();
             this.MaxTabPageStatusOverview.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MaxPictureBoxOverviewArrow)).BeginInit();
             this.MaxTabConnection.SuspendLayout();
             this.MaxTabRooms.SuspendLayout();
             this.SuspendLayout();
@@ -1899,6 +1905,10 @@
             // MaxTabPageStatusOverview
             // 
             this.MaxTabPageStatusOverview.BackColor = System.Drawing.SystemColors.Control;
+            this.MaxTabPageStatusOverview.Controls.Add(this.MaxCheckedListBoxOverviewControlSelection);
+            this.MaxTabPageStatusOverview.Controls.Add(this.MaxLabelOverviewBoostActive);
+            this.MaxTabPageStatusOverview.Controls.Add(this.MaxButtonOverviewEnableControl);
+            this.MaxTabPageStatusOverview.Controls.Add(this.MaxPictureBoxOverviewArrow);
             this.MaxTabPageStatusOverview.Controls.Add(this.MaxLabelOverviewPlotSelection);
             this.MaxTabPageStatusOverview.Controls.Add(this.MaxFormsPlot);
             this.MaxTabPageStatusOverview.Controls.Add(this.MaxCheckedListBoxOverviewPlotSelection);
@@ -1908,6 +1918,45 @@
             this.MaxTabPageStatusOverview.Size = new System.Drawing.Size(641, 702);
             this.MaxTabPageStatusOverview.TabIndex = 0;
             this.MaxTabPageStatusOverview.Text = "Status Overview";
+            // 
+            // MaxCheckedListBoxOverviewControlSelection
+            // 
+            this.MaxCheckedListBoxOverviewControlSelection.FormattingEnabled = true;
+            this.MaxCheckedListBoxOverviewControlSelection.Location = new System.Drawing.Point(424, 31);
+            this.MaxCheckedListBoxOverviewControlSelection.Name = "MaxCheckedListBoxOverviewControlSelection";
+            this.MaxCheckedListBoxOverviewControlSelection.Size = new System.Drawing.Size(133, 154);
+            this.MaxCheckedListBoxOverviewControlSelection.TabIndex = 38;
+            // 
+            // MaxLabelOverviewBoostActive
+            // 
+            this.MaxLabelOverviewBoostActive.AutoSize = true;
+            this.MaxLabelOverviewBoostActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaxLabelOverviewBoostActive.ForeColor = System.Drawing.Color.Red;
+            this.MaxLabelOverviewBoostActive.Location = new System.Drawing.Point(572, 18);
+            this.MaxLabelOverviewBoostActive.Name = "MaxLabelOverviewBoostActive";
+            this.MaxLabelOverviewBoostActive.Size = new System.Drawing.Size(58, 40);
+            this.MaxLabelOverviewBoostActive.TabIndex = 37;
+            this.MaxLabelOverviewBoostActive.Text = "Boost\r\nActive\r\n";
+            // 
+            // MaxButtonOverviewEnableControl
+            // 
+            this.MaxButtonOverviewEnableControl.Location = new System.Drawing.Point(563, 131);
+            this.MaxButtonOverviewEnableControl.Name = "MaxButtonOverviewEnableControl";
+            this.MaxButtonOverviewEnableControl.Size = new System.Drawing.Size(75, 40);
+            this.MaxButtonOverviewEnableControl.TabIndex = 36;
+            this.MaxButtonOverviewEnableControl.Text = "Enable control";
+            this.MaxButtonOverviewEnableControl.UseVisualStyleBackColor = true;
+            // 
+            // MaxPictureBoxOverviewArrow
+            // 
+            this.MaxPictureBoxOverviewArrow.ErrorImage = ((System.Drawing.Image)(resources.GetObject("MaxPictureBoxOverviewArrow.ErrorImage")));
+            this.MaxPictureBoxOverviewArrow.Image = ((System.Drawing.Image)(resources.GetObject("MaxPictureBoxOverviewArrow.Image")));
+            this.MaxPictureBoxOverviewArrow.Location = new System.Drawing.Point(565, 61);
+            this.MaxPictureBoxOverviewArrow.Name = "MaxPictureBoxOverviewArrow";
+            this.MaxPictureBoxOverviewArrow.Size = new System.Drawing.Size(70, 64);
+            this.MaxPictureBoxOverviewArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.MaxPictureBoxOverviewArrow.TabIndex = 35;
+            this.MaxPictureBoxOverviewArrow.TabStop = false;
             // 
             // MaxLabelOverviewPlotSelection
             // 
@@ -1929,9 +1978,9 @@
             // MaxCheckedListBoxOverviewPlotSelection
             // 
             this.MaxCheckedListBoxOverviewPlotSelection.FormattingEnabled = true;
-            this.MaxCheckedListBoxOverviewPlotSelection.Location = new System.Drawing.Point(97, 31);
+            this.MaxCheckedListBoxOverviewPlotSelection.Location = new System.Drawing.Point(82, 31);
             this.MaxCheckedListBoxOverviewPlotSelection.Name = "MaxCheckedListBoxOverviewPlotSelection";
-            this.MaxCheckedListBoxOverviewPlotSelection.Size = new System.Drawing.Size(153, 154);
+            this.MaxCheckedListBoxOverviewPlotSelection.Size = new System.Drawing.Size(133, 154);
             this.MaxCheckedListBoxOverviewPlotSelection.TabIndex = 0;
             this.MaxCheckedListBoxOverviewPlotSelection.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.MaxCheckedListBoxOverviewPlotSelection_ItemCheck);
             // 
@@ -2791,6 +2840,7 @@
             this.MaxTabControl.ResumeLayout(false);
             this.MaxTabPageStatusOverview.ResumeLayout(false);
             this.MaxTabPageStatusOverview.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MaxPictureBoxOverviewArrow)).EndInit();
             this.MaxTabConnection.ResumeLayout(false);
             this.MaxTabConnection.PerformLayout();
             this.MaxTabRooms.ResumeLayout(false);
@@ -3058,6 +3108,10 @@
         private ScottPlot.FormsPlot MaxFormsPlot;
         private System.Windows.Forms.CheckedListBox MaxCheckedListBoxOverviewPlotSelection;
         private System.Windows.Forms.Label MaxLabelOverviewPlotSelection;
+        private System.Windows.Forms.PictureBox MaxPictureBoxOverviewArrow;
+        private System.Windows.Forms.CheckedListBox MaxCheckedListBoxOverviewControlSelection;
+        private System.Windows.Forms.Label MaxLabelOverviewBoostActive;
+        private System.Windows.Forms.Button MaxButtonOverviewEnableControl;
     }
 }
 
