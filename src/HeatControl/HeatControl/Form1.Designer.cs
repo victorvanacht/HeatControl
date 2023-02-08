@@ -291,6 +291,24 @@
             this.MaxLabelRoomsRoom = new System.Windows.Forms.Label();
             this.MaxLabelRoomsMaxCube = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.MaxTabPageControl = new System.Windows.Forms.TabPage();
+            this.MaxFormsPlotControlCurve = new ScottPlot.FormsPlot();
+            this.MaxLabelControlDifference = new System.Windows.Forms.Label();
+            this.MaxLabelControlBoilerTemp = new System.Windows.Forms.Label();
+            this.MaxTextBoxControl00 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControl05 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControl10 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControl15 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControl20 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControl25 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControl30 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControlTemp00 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControlTemp05 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControlTemp10 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControlTemp15 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControlTemp20 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControlTemp25 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControlTemp30 = new System.Windows.Forms.TextBox();
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.OTGWTabStatus.SuspendLayout();
@@ -303,6 +321,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.MaxPictureBoxOverviewArrow)).BeginInit();
             this.MaxTabConnection.SuspendLayout();
             this.MaxTabRooms.SuspendLayout();
+            this.MaxTabPageControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // OTGWButtonConnect
@@ -1895,6 +1914,7 @@
             this.MaxTabControl.Controls.Add(this.MaxTabPageStatusOverview);
             this.MaxTabControl.Controls.Add(this.MaxTabConnection);
             this.MaxTabControl.Controls.Add(this.MaxTabRooms);
+            this.MaxTabControl.Controls.Add(this.MaxTabPageControl);
             this.MaxTabControl.Location = new System.Drawing.Point(6, 19);
             this.MaxTabControl.Name = "MaxTabControl";
             this.MaxTabControl.SelectedIndex = 0;
@@ -2816,6 +2836,178 @@
             this.MaxLabelRoomsMaxCube.TabIndex = 0;
             this.MaxLabelRoomsMaxCube.Text = "MaxCube";
             // 
+            // MaxTabPageControl
+            // 
+            this.MaxTabPageControl.BackColor = System.Drawing.SystemColors.Control;
+            this.MaxTabPageControl.Controls.Add(this.MaxTextBoxControlTemp30);
+            this.MaxTabPageControl.Controls.Add(this.MaxTextBoxControlTemp25);
+            this.MaxTabPageControl.Controls.Add(this.MaxTextBoxControlTemp20);
+            this.MaxTabPageControl.Controls.Add(this.MaxTextBoxControlTemp15);
+            this.MaxTabPageControl.Controls.Add(this.MaxTextBoxControlTemp10);
+            this.MaxTabPageControl.Controls.Add(this.MaxTextBoxControlTemp05);
+            this.MaxTabPageControl.Controls.Add(this.MaxTextBoxControlTemp00);
+            this.MaxTabPageControl.Controls.Add(this.MaxTextBoxControl30);
+            this.MaxTabPageControl.Controls.Add(this.MaxTextBoxControl25);
+            this.MaxTabPageControl.Controls.Add(this.MaxTextBoxControl20);
+            this.MaxTabPageControl.Controls.Add(this.MaxTextBoxControl15);
+            this.MaxTabPageControl.Controls.Add(this.MaxTextBoxControl10);
+            this.MaxTabPageControl.Controls.Add(this.MaxTextBoxControl05);
+            this.MaxTabPageControl.Controls.Add(this.MaxTextBoxControl00);
+            this.MaxTabPageControl.Controls.Add(this.MaxLabelControlBoilerTemp);
+            this.MaxTabPageControl.Controls.Add(this.MaxLabelControlDifference);
+            this.MaxTabPageControl.Controls.Add(this.MaxFormsPlotControlCurve);
+            this.MaxTabPageControl.Location = new System.Drawing.Point(4, 22);
+            this.MaxTabPageControl.Name = "MaxTabPageControl";
+            this.MaxTabPageControl.Padding = new System.Windows.Forms.Padding(3);
+            this.MaxTabPageControl.Size = new System.Drawing.Size(641, 702);
+            this.MaxTabPageControl.TabIndex = 3;
+            this.MaxTabPageControl.Text = "Control curve";
+            // 
+            // MaxFormsPlotControlCurve
+            // 
+            this.MaxFormsPlotControlCurve.Location = new System.Drawing.Point(220, 3);
+            this.MaxFormsPlotControlCurve.Margin = new System.Windows.Forms.Padding(0);
+            this.MaxFormsPlotControlCurve.Name = "MaxFormsPlotControlCurve";
+            this.MaxFormsPlotControlCurve.Size = new System.Drawing.Size(418, 505);
+            this.MaxFormsPlotControlCurve.TabIndex = 33;
+            // 
+            // MaxLabelControlDifference
+            // 
+            this.MaxLabelControlDifference.AutoSize = true;
+            this.MaxLabelControlDifference.Location = new System.Drawing.Point(6, 28);
+            this.MaxLabelControlDifference.Name = "MaxLabelControlDifference";
+            this.MaxLabelControlDifference.Size = new System.Drawing.Size(86, 13);
+            this.MaxLabelControlDifference.TabIndex = 34;
+            this.MaxLabelControlDifference.Text = "Temp Difference";
+            // 
+            // MaxLabelControlBoilerTemp
+            // 
+            this.MaxLabelControlBoilerTemp.AutoSize = true;
+            this.MaxLabelControlBoilerTemp.Location = new System.Drawing.Point(107, 28);
+            this.MaxLabelControlBoilerTemp.Name = "MaxLabelControlBoilerTemp";
+            this.MaxLabelControlBoilerTemp.Size = new System.Drawing.Size(96, 13);
+            this.MaxLabelControlBoilerTemp.TabIndex = 35;
+            this.MaxLabelControlBoilerTemp.Text = "Boiler Temperature";
+            // 
+            // MaxTextBoxControl00
+            // 
+            this.MaxTextBoxControl00.Location = new System.Drawing.Point(48, 49);
+            this.MaxTextBoxControl00.Name = "MaxTextBoxControl00";
+            this.MaxTextBoxControl00.ReadOnly = true;
+            this.MaxTextBoxControl00.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControl00.TabIndex = 36;
+            this.MaxTextBoxControl00.Text = "0.0";
+            // 
+            // MaxTextBoxControl05
+            // 
+            this.MaxTextBoxControl05.Location = new System.Drawing.Point(48, 75);
+            this.MaxTextBoxControl05.Name = "MaxTextBoxControl05";
+            this.MaxTextBoxControl05.ReadOnly = true;
+            this.MaxTextBoxControl05.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControl05.TabIndex = 37;
+            this.MaxTextBoxControl05.Text = "0.5";
+            // 
+            // MaxTextBoxControl10
+            // 
+            this.MaxTextBoxControl10.Location = new System.Drawing.Point(48, 101);
+            this.MaxTextBoxControl10.Name = "MaxTextBoxControl10";
+            this.MaxTextBoxControl10.ReadOnly = true;
+            this.MaxTextBoxControl10.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControl10.TabIndex = 38;
+            this.MaxTextBoxControl10.Text = "1.0";
+            // 
+            // MaxTextBoxControl15
+            // 
+            this.MaxTextBoxControl15.Location = new System.Drawing.Point(48, 127);
+            this.MaxTextBoxControl15.Name = "MaxTextBoxControl15";
+            this.MaxTextBoxControl15.ReadOnly = true;
+            this.MaxTextBoxControl15.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControl15.TabIndex = 39;
+            this.MaxTextBoxControl15.Text = "1.5";
+            // 
+            // MaxTextBoxControl20
+            // 
+            this.MaxTextBoxControl20.Location = new System.Drawing.Point(48, 153);
+            this.MaxTextBoxControl20.Name = "MaxTextBoxControl20";
+            this.MaxTextBoxControl20.ReadOnly = true;
+            this.MaxTextBoxControl20.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControl20.TabIndex = 40;
+            this.MaxTextBoxControl20.Text = "2.0";
+            // 
+            // MaxTextBoxControl25
+            // 
+            this.MaxTextBoxControl25.Location = new System.Drawing.Point(48, 179);
+            this.MaxTextBoxControl25.Name = "MaxTextBoxControl25";
+            this.MaxTextBoxControl25.ReadOnly = true;
+            this.MaxTextBoxControl25.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControl25.TabIndex = 41;
+            this.MaxTextBoxControl25.Text = "2.5";
+            // 
+            // MaxTextBoxControl30
+            // 
+            this.MaxTextBoxControl30.Location = new System.Drawing.Point(48, 205);
+            this.MaxTextBoxControl30.Name = "MaxTextBoxControl30";
+            this.MaxTextBoxControl30.ReadOnly = true;
+            this.MaxTextBoxControl30.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControl30.TabIndex = 42;
+            this.MaxTextBoxControl30.Text = "3.0";
+            // 
+            // MaxTextBoxControlTemp00
+            // 
+            this.MaxTextBoxControlTemp00.Location = new System.Drawing.Point(110, 49);
+            this.MaxTextBoxControlTemp00.Name = "MaxTextBoxControlTemp00";
+            this.MaxTextBoxControlTemp00.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControlTemp00.TabIndex = 43;
+            this.MaxTextBoxControlTemp00.Text = "0.0";
+            // 
+            // MaxTextBoxControlTemp05
+            // 
+            this.MaxTextBoxControlTemp05.Location = new System.Drawing.Point(110, 75);
+            this.MaxTextBoxControlTemp05.Name = "MaxTextBoxControlTemp05";
+            this.MaxTextBoxControlTemp05.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControlTemp05.TabIndex = 44;
+            this.MaxTextBoxControlTemp05.Text = "0.0";
+            // 
+            // MaxTextBoxControlTemp10
+            // 
+            this.MaxTextBoxControlTemp10.Location = new System.Drawing.Point(110, 101);
+            this.MaxTextBoxControlTemp10.Name = "MaxTextBoxControlTemp10";
+            this.MaxTextBoxControlTemp10.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControlTemp10.TabIndex = 45;
+            this.MaxTextBoxControlTemp10.Text = "40";
+            // 
+            // MaxTextBoxControlTemp15
+            // 
+            this.MaxTextBoxControlTemp15.Location = new System.Drawing.Point(110, 127);
+            this.MaxTextBoxControlTemp15.Name = "MaxTextBoxControlTemp15";
+            this.MaxTextBoxControlTemp15.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControlTemp15.TabIndex = 46;
+            this.MaxTextBoxControlTemp15.Text = "40";
+            // 
+            // MaxTextBoxControlTemp20
+            // 
+            this.MaxTextBoxControlTemp20.Location = new System.Drawing.Point(110, 153);
+            this.MaxTextBoxControlTemp20.Name = "MaxTextBoxControlTemp20";
+            this.MaxTextBoxControlTemp20.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControlTemp20.TabIndex = 47;
+            this.MaxTextBoxControlTemp20.Text = "40";
+            // 
+            // MaxTextBoxControlTemp25
+            // 
+            this.MaxTextBoxControlTemp25.Location = new System.Drawing.Point(110, 179);
+            this.MaxTextBoxControlTemp25.Name = "MaxTextBoxControlTemp25";
+            this.MaxTextBoxControlTemp25.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControlTemp25.TabIndex = 48;
+            this.MaxTextBoxControlTemp25.Text = "50";
+            // 
+            // MaxTextBoxControlTemp30
+            // 
+            this.MaxTextBoxControlTemp30.Location = new System.Drawing.Point(110, 205);
+            this.MaxTextBoxControlTemp30.Name = "MaxTextBoxControlTemp30";
+            this.MaxTextBoxControlTemp30.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControlTemp30.TabIndex = 49;
+            this.MaxTextBoxControlTemp30.Text = "60";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2845,6 +3037,8 @@
             this.MaxTabConnection.PerformLayout();
             this.MaxTabRooms.ResumeLayout(false);
             this.MaxTabRooms.PerformLayout();
+            this.MaxTabPageControl.ResumeLayout(false);
+            this.MaxTabPageControl.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3112,6 +3306,24 @@
         private System.Windows.Forms.CheckedListBox MaxCheckedListBoxOverviewControlSelection;
         private System.Windows.Forms.Label MaxLabelOverviewBoostActive;
         private System.Windows.Forms.Button MaxButtonOverviewEnableControl;
+        private System.Windows.Forms.TabPage MaxTabPageControl;
+        private System.Windows.Forms.TextBox MaxTextBoxControlTemp30;
+        private System.Windows.Forms.TextBox MaxTextBoxControlTemp25;
+        private System.Windows.Forms.TextBox MaxTextBoxControlTemp20;
+        private System.Windows.Forms.TextBox MaxTextBoxControlTemp15;
+        private System.Windows.Forms.TextBox MaxTextBoxControlTemp10;
+        private System.Windows.Forms.TextBox MaxTextBoxControlTemp05;
+        private System.Windows.Forms.TextBox MaxTextBoxControlTemp00;
+        private System.Windows.Forms.TextBox MaxTextBoxControl30;
+        private System.Windows.Forms.TextBox MaxTextBoxControl25;
+        private System.Windows.Forms.TextBox MaxTextBoxControl20;
+        private System.Windows.Forms.TextBox MaxTextBoxControl15;
+        private System.Windows.Forms.TextBox MaxTextBoxControl10;
+        private System.Windows.Forms.TextBox MaxTextBoxControl05;
+        private System.Windows.Forms.TextBox MaxTextBoxControl00;
+        private System.Windows.Forms.Label MaxLabelControlBoilerTemp;
+        private System.Windows.Forms.Label MaxLabelControlDifference;
+        private ScottPlot.FormsPlot MaxFormsPlotControlCurve;
     }
 }
 

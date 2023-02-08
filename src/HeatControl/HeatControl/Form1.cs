@@ -581,6 +581,13 @@ namespace HeatControl
                 this.MaxListBoxRoomsRooms.Items.Clear();
                 this.MaxListBoxRoomsDevice.Items.Clear();
 
+                // check if we did not click a line beyond the last line (hence an empty line)
+                if (this.MaxListBoxRoomsMaxCube.SelectedIndex < 0)
+                {
+                    this.MaxListBoxRoomsMaxCube.SelectedIndex = 0;
+                }
+
+
                 MaxCubeLogger.MaxCube maxCube = this.maxCubeLogger.maxCubes[this.MaxListBoxRoomsMaxCube.SelectedIndex];
 
                 foreach (KeyValuePair<int, Room> kvp in maxCube.rooms)
@@ -860,6 +867,26 @@ namespace HeatControl
                 if (roomReport.boostActive) boostActive = true;
             }
             this.MaxLabelOverviewBoostActive.Invoke((Action)delegate { this.MaxLabelOverviewBoostActive.Visible = boostActive; });
+
+            float maxTempDifference = float.MinValue;
+            foreach (MaxCubeLogger.StatusReport.RoomReport roomReport in status.report)
+            {
+                int index = this.MaxCheckedListBoxOverviewControlSelection.Items.IndexOf(roomReport.name);
+                if (this.MaxCheckedListBoxOverviewControlSelection.GetItemChecked(index))
+                {
+                    if ((roomReport.configuredTemperature != -1) && (roomReport.actualTemperature != -1))
+                    {
+                        float difference = roomReport.configuredTemperature - roomReport.actualTemperature;
+                        if (difference > maxTempDifference)
+                        {
+                            maxTempDifference = difference;
+                        }
+                    }
+                }
+            }
+            Console.WriteLine(maxTempDifference.ToString());
+
+
         }
 
     }

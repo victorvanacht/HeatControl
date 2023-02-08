@@ -59,8 +59,11 @@ namespace HeatControl
                     this.name = name;
                     this.rfAddress = rfAddress;
                     this.roomID = roomID;
-
                     this.devices = new List<DeviceBase>();
+                    this._configuredTemperature = -1;
+                    this._actualTemperature = -1;
+                    this._boostActive = false;
+
                     this.lastUpdate = DateTime.Now;
                 }
             }
