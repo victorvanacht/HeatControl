@@ -61,13 +61,24 @@ namespace HeatControl
                         if (room.roomID != 0)
                         {
                             RoomReport roomReport = new RoomReport(room.name, room.configuredTemperature, room.actualTemperature, room.boostActive);
+                            if ((DateTime.Now - room.lastUpdate).TotalSeconds > 300) // @@@@ still to be modified!!!!!
+                            {
+                                roomReport.actualTemperature = -1;
+                                roomReport.configuredTemperature = -1;
+                                roomReport.boostActive = false;
+                            }
 
                             foreach (MaxCube.DeviceBase device in room.devices)
                             {
                                 if ((device.type == MaxCube.DeviceType.HeatingThermostat) || (device.type == MaxCube.DeviceType.HeatingThermostatTODO))
                                 {
                                     MaxCube.DeviceHeatingThermostat heatingThermostat = (MaxCube.DeviceHeatingThermostat)device;
-                                    roomReport.radiators.Add(new Radiator(heatingThermostat.name, heatingThermostat.valvePosition));
+                                    Radiator radiator = new Radiator(heatingThermostat.name, heatingThermostat.valvePosition);
+                                    if ((DateTime.Now - heatingThermostat.lastUpdate).TotalSeconds > 300) // @@@ Still to be changed 
+                                    {
+                                        radiator.valve = -1;
+                                    }
+                                    roomReport.radiators.Add(radiator);
                                 }
                             }
                             this.report.Add(roomReport);

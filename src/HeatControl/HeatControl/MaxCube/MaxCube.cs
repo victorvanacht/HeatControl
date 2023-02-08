@@ -31,9 +31,27 @@ namespace HeatControl
                 public string name;
                 public int rfAddress;
                 public int roomID;
-                public float configuredTemperature;
-                public float actualTemperature;
-                public bool boostActive;
+
+                private float _configuredTemperature;
+                private float _actualTemperature;
+                private bool _boostActive;
+                public float configuredTemperature
+                {
+                    get { return this._configuredTemperature;}
+                    set { this._configuredTemperature = value; this.lastUpdate = DateTime.Now; }
+                }
+                public float actualTemperature
+                {
+                    get { return this._actualTemperature;}
+                    set { this._actualTemperature = value; this.lastUpdate = DateTime.Now; }
+                }
+                public bool boostActive
+                {
+                    get { return this._boostActive;}
+                    set { this._boostActive = value; this.lastUpdate = DateTime.Now; }
+                }
+                public DateTime lastUpdate;
+
 
                 public List<DeviceBase> devices;
                 public Room(string name, int rfAddress, int roomID)
@@ -43,6 +61,7 @@ namespace HeatControl
                     this.roomID = roomID;
 
                     this.devices = new List<DeviceBase>();
+                    this.lastUpdate = DateTime.Now;
                 }
             }
 
@@ -53,6 +72,7 @@ namespace HeatControl
                 public string serialNumber;
                 public int rfAddress;
                 public Room room;
+                public DateTime lastUpdate;
 
                 public class ProgramEntry
                 {
@@ -75,6 +95,7 @@ namespace HeatControl
                     this.serialNumber = serialNumber;
                     this.rfAddress = rfAddress;
                     this.room = room;
+                    this.lastUpdate = DateTime.Now;
                 }
 
                 static public DeviceBase CreateFromTypeID(DeviceType type, string name, string serialNumber, int rfAddress, Room room)

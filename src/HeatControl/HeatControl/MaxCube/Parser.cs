@@ -70,6 +70,7 @@ namespace HeatControl
                         if (maxCube.deviceLookup.ContainsKey(rfAddress))
                         {
                             DeviceBase device = maxCube.deviceLookup[rfAddress];
+                            device.lastUpdate = DateTime.Now;
                             
                             switch (device.type)
                             {
@@ -260,6 +261,7 @@ namespace HeatControl
                             if (maxCube.deviceLookup.ContainsKey(rfAddress))
                             {
                                 DeviceBase device = maxCube.deviceLookup[rfAddress];
+                                device.lastUpdate = DateTime.Now;
 
                                 switch (device.type)
                                 {
