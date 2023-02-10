@@ -290,25 +290,25 @@
             this.MaxListBoxRoomsMaxCube = new System.Windows.Forms.ListBox();
             this.MaxLabelRoomsRoom = new System.Windows.Forms.Label();
             this.MaxLabelRoomsMaxCube = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.MaxTabPageControl = new System.Windows.Forms.TabPage();
-            this.MaxFormsPlotControlCurve = new ScottPlot.FormsPlot();
-            this.MaxLabelControlDifference = new System.Windows.Forms.Label();
-            this.MaxLabelControlBoilerTemp = new System.Windows.Forms.Label();
-            this.MaxTextBoxControl00 = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxControl05 = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxControl10 = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxControl15 = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxControl20 = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxControl25 = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxControl30 = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxControlTemp00 = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxControlTemp05 = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxControlTemp10 = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxControlTemp15 = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxControlTemp20 = new System.Windows.Forms.TextBox();
-            this.MaxTextBoxControlTemp25 = new System.Windows.Forms.TextBox();
             this.MaxTextBoxControlTemp30 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControlTemp25 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControlTemp20 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControlTemp15 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControlTemp10 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControlTemp05 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControlTemp00 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControl30 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControl25 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControl20 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControl15 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControl10 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControl05 = new System.Windows.Forms.TextBox();
+            this.MaxTextBoxControl00 = new System.Windows.Forms.TextBox();
+            this.MaxLabelControlBoilerTemp = new System.Windows.Forms.Label();
+            this.MaxLabelControlDifference = new System.Windows.Forms.Label();
+            this.MaxFormsPlotControlCurve = new ScottPlot.FormsPlot();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.OTGWTabStatus.SuspendLayout();
@@ -2863,85 +2863,68 @@
             this.MaxTabPageControl.TabIndex = 3;
             this.MaxTabPageControl.Text = "Control curve";
             // 
-            // MaxFormsPlotControlCurve
+            // MaxTextBoxControlTemp30
             // 
-            this.MaxFormsPlotControlCurve.Location = new System.Drawing.Point(220, 3);
-            this.MaxFormsPlotControlCurve.Margin = new System.Windows.Forms.Padding(0);
-            this.MaxFormsPlotControlCurve.Name = "MaxFormsPlotControlCurve";
-            this.MaxFormsPlotControlCurve.Size = new System.Drawing.Size(418, 505);
-            this.MaxFormsPlotControlCurve.TabIndex = 33;
+            this.MaxTextBoxControlTemp30.Location = new System.Drawing.Point(110, 205);
+            this.MaxTextBoxControlTemp30.Name = "MaxTextBoxControlTemp30";
+            this.MaxTextBoxControlTemp30.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControlTemp30.TabIndex = 49;
+            this.MaxTextBoxControlTemp30.Text = "60";
+            this.MaxTextBoxControlTemp30.TextChanged += new System.EventHandler(this.MaxTextBoxControlTempXX_TextChanged);
             // 
-            // MaxLabelControlDifference
+            // MaxTextBoxControlTemp25
             // 
-            this.MaxLabelControlDifference.AutoSize = true;
-            this.MaxLabelControlDifference.Location = new System.Drawing.Point(6, 28);
-            this.MaxLabelControlDifference.Name = "MaxLabelControlDifference";
-            this.MaxLabelControlDifference.Size = new System.Drawing.Size(86, 13);
-            this.MaxLabelControlDifference.TabIndex = 34;
-            this.MaxLabelControlDifference.Text = "Temp Difference";
+            this.MaxTextBoxControlTemp25.Location = new System.Drawing.Point(110, 179);
+            this.MaxTextBoxControlTemp25.Name = "MaxTextBoxControlTemp25";
+            this.MaxTextBoxControlTemp25.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControlTemp25.TabIndex = 48;
+            this.MaxTextBoxControlTemp25.Text = "50";
+            this.MaxTextBoxControlTemp25.TextChanged += new System.EventHandler(this.MaxTextBoxControlTempXX_TextChanged);
             // 
-            // MaxLabelControlBoilerTemp
+            // MaxTextBoxControlTemp20
             // 
-            this.MaxLabelControlBoilerTemp.AutoSize = true;
-            this.MaxLabelControlBoilerTemp.Location = new System.Drawing.Point(107, 28);
-            this.MaxLabelControlBoilerTemp.Name = "MaxLabelControlBoilerTemp";
-            this.MaxLabelControlBoilerTemp.Size = new System.Drawing.Size(96, 13);
-            this.MaxLabelControlBoilerTemp.TabIndex = 35;
-            this.MaxLabelControlBoilerTemp.Text = "Boiler Temperature";
+            this.MaxTextBoxControlTemp20.Location = new System.Drawing.Point(110, 153);
+            this.MaxTextBoxControlTemp20.Name = "MaxTextBoxControlTemp20";
+            this.MaxTextBoxControlTemp20.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControlTemp20.TabIndex = 47;
+            this.MaxTextBoxControlTemp20.Text = "40";
+            this.MaxTextBoxControlTemp20.TextChanged += new System.EventHandler(this.MaxTextBoxControlTempXX_TextChanged);
             // 
-            // MaxTextBoxControl00
+            // MaxTextBoxControlTemp15
             // 
-            this.MaxTextBoxControl00.Location = new System.Drawing.Point(48, 49);
-            this.MaxTextBoxControl00.Name = "MaxTextBoxControl00";
-            this.MaxTextBoxControl00.ReadOnly = true;
-            this.MaxTextBoxControl00.Size = new System.Drawing.Size(44, 20);
-            this.MaxTextBoxControl00.TabIndex = 36;
-            this.MaxTextBoxControl00.Text = "0.0";
+            this.MaxTextBoxControlTemp15.Location = new System.Drawing.Point(110, 127);
+            this.MaxTextBoxControlTemp15.Name = "MaxTextBoxControlTemp15";
+            this.MaxTextBoxControlTemp15.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControlTemp15.TabIndex = 46;
+            this.MaxTextBoxControlTemp15.Text = "40";
+            this.MaxTextBoxControlTemp15.TextChanged += new System.EventHandler(this.MaxTextBoxControlTempXX_TextChanged);
             // 
-            // MaxTextBoxControl05
+            // MaxTextBoxControlTemp10
             // 
-            this.MaxTextBoxControl05.Location = new System.Drawing.Point(48, 75);
-            this.MaxTextBoxControl05.Name = "MaxTextBoxControl05";
-            this.MaxTextBoxControl05.ReadOnly = true;
-            this.MaxTextBoxControl05.Size = new System.Drawing.Size(44, 20);
-            this.MaxTextBoxControl05.TabIndex = 37;
-            this.MaxTextBoxControl05.Text = "0.5";
+            this.MaxTextBoxControlTemp10.Location = new System.Drawing.Point(110, 101);
+            this.MaxTextBoxControlTemp10.Name = "MaxTextBoxControlTemp10";
+            this.MaxTextBoxControlTemp10.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControlTemp10.TabIndex = 45;
+            this.MaxTextBoxControlTemp10.Text = "40";
+            this.MaxTextBoxControlTemp10.TextChanged += new System.EventHandler(this.MaxTextBoxControlTempXX_TextChanged);
             // 
-            // MaxTextBoxControl10
+            // MaxTextBoxControlTemp05
             // 
-            this.MaxTextBoxControl10.Location = new System.Drawing.Point(48, 101);
-            this.MaxTextBoxControl10.Name = "MaxTextBoxControl10";
-            this.MaxTextBoxControl10.ReadOnly = true;
-            this.MaxTextBoxControl10.Size = new System.Drawing.Size(44, 20);
-            this.MaxTextBoxControl10.TabIndex = 38;
-            this.MaxTextBoxControl10.Text = "1.0";
+            this.MaxTextBoxControlTemp05.Location = new System.Drawing.Point(110, 75);
+            this.MaxTextBoxControlTemp05.Name = "MaxTextBoxControlTemp05";
+            this.MaxTextBoxControlTemp05.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControlTemp05.TabIndex = 44;
+            this.MaxTextBoxControlTemp05.Text = "0.0";
+            this.MaxTextBoxControlTemp05.TextChanged += new System.EventHandler(this.MaxTextBoxControlTempXX_TextChanged);
             // 
-            // MaxTextBoxControl15
+            // MaxTextBoxControlTemp00
             // 
-            this.MaxTextBoxControl15.Location = new System.Drawing.Point(48, 127);
-            this.MaxTextBoxControl15.Name = "MaxTextBoxControl15";
-            this.MaxTextBoxControl15.ReadOnly = true;
-            this.MaxTextBoxControl15.Size = new System.Drawing.Size(44, 20);
-            this.MaxTextBoxControl15.TabIndex = 39;
-            this.MaxTextBoxControl15.Text = "1.5";
-            // 
-            // MaxTextBoxControl20
-            // 
-            this.MaxTextBoxControl20.Location = new System.Drawing.Point(48, 153);
-            this.MaxTextBoxControl20.Name = "MaxTextBoxControl20";
-            this.MaxTextBoxControl20.ReadOnly = true;
-            this.MaxTextBoxControl20.Size = new System.Drawing.Size(44, 20);
-            this.MaxTextBoxControl20.TabIndex = 40;
-            this.MaxTextBoxControl20.Text = "2.0";
-            // 
-            // MaxTextBoxControl25
-            // 
-            this.MaxTextBoxControl25.Location = new System.Drawing.Point(48, 179);
-            this.MaxTextBoxControl25.Name = "MaxTextBoxControl25";
-            this.MaxTextBoxControl25.ReadOnly = true;
-            this.MaxTextBoxControl25.Size = new System.Drawing.Size(44, 20);
-            this.MaxTextBoxControl25.TabIndex = 41;
-            this.MaxTextBoxControl25.Text = "2.5";
+            this.MaxTextBoxControlTemp00.Location = new System.Drawing.Point(110, 49);
+            this.MaxTextBoxControlTemp00.Name = "MaxTextBoxControlTemp00";
+            this.MaxTextBoxControlTemp00.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControlTemp00.TabIndex = 43;
+            this.MaxTextBoxControlTemp00.Text = "0.0";
+            this.MaxTextBoxControlTemp00.TextChanged += new System.EventHandler(this.MaxTextBoxControlTempXX_TextChanged);
             // 
             // MaxTextBoxControl30
             // 
@@ -2952,61 +2935,85 @@
             this.MaxTextBoxControl30.TabIndex = 42;
             this.MaxTextBoxControl30.Text = "3.0";
             // 
-            // MaxTextBoxControlTemp00
+            // MaxTextBoxControl25
             // 
-            this.MaxTextBoxControlTemp00.Location = new System.Drawing.Point(110, 49);
-            this.MaxTextBoxControlTemp00.Name = "MaxTextBoxControlTemp00";
-            this.MaxTextBoxControlTemp00.Size = new System.Drawing.Size(44, 20);
-            this.MaxTextBoxControlTemp00.TabIndex = 43;
-            this.MaxTextBoxControlTemp00.Text = "0.0";
+            this.MaxTextBoxControl25.Location = new System.Drawing.Point(48, 179);
+            this.MaxTextBoxControl25.Name = "MaxTextBoxControl25";
+            this.MaxTextBoxControl25.ReadOnly = true;
+            this.MaxTextBoxControl25.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControl25.TabIndex = 41;
+            this.MaxTextBoxControl25.Text = "2.5";
             // 
-            // MaxTextBoxControlTemp05
+            // MaxTextBoxControl20
             // 
-            this.MaxTextBoxControlTemp05.Location = new System.Drawing.Point(110, 75);
-            this.MaxTextBoxControlTemp05.Name = "MaxTextBoxControlTemp05";
-            this.MaxTextBoxControlTemp05.Size = new System.Drawing.Size(44, 20);
-            this.MaxTextBoxControlTemp05.TabIndex = 44;
-            this.MaxTextBoxControlTemp05.Text = "0.0";
+            this.MaxTextBoxControl20.Location = new System.Drawing.Point(48, 153);
+            this.MaxTextBoxControl20.Name = "MaxTextBoxControl20";
+            this.MaxTextBoxControl20.ReadOnly = true;
+            this.MaxTextBoxControl20.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControl20.TabIndex = 40;
+            this.MaxTextBoxControl20.Text = "2.0";
             // 
-            // MaxTextBoxControlTemp10
+            // MaxTextBoxControl15
             // 
-            this.MaxTextBoxControlTemp10.Location = new System.Drawing.Point(110, 101);
-            this.MaxTextBoxControlTemp10.Name = "MaxTextBoxControlTemp10";
-            this.MaxTextBoxControlTemp10.Size = new System.Drawing.Size(44, 20);
-            this.MaxTextBoxControlTemp10.TabIndex = 45;
-            this.MaxTextBoxControlTemp10.Text = "40";
+            this.MaxTextBoxControl15.Location = new System.Drawing.Point(48, 127);
+            this.MaxTextBoxControl15.Name = "MaxTextBoxControl15";
+            this.MaxTextBoxControl15.ReadOnly = true;
+            this.MaxTextBoxControl15.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControl15.TabIndex = 39;
+            this.MaxTextBoxControl15.Text = "1.5";
             // 
-            // MaxTextBoxControlTemp15
+            // MaxTextBoxControl10
             // 
-            this.MaxTextBoxControlTemp15.Location = new System.Drawing.Point(110, 127);
-            this.MaxTextBoxControlTemp15.Name = "MaxTextBoxControlTemp15";
-            this.MaxTextBoxControlTemp15.Size = new System.Drawing.Size(44, 20);
-            this.MaxTextBoxControlTemp15.TabIndex = 46;
-            this.MaxTextBoxControlTemp15.Text = "40";
+            this.MaxTextBoxControl10.Location = new System.Drawing.Point(48, 101);
+            this.MaxTextBoxControl10.Name = "MaxTextBoxControl10";
+            this.MaxTextBoxControl10.ReadOnly = true;
+            this.MaxTextBoxControl10.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControl10.TabIndex = 38;
+            this.MaxTextBoxControl10.Text = "1.0";
             // 
-            // MaxTextBoxControlTemp20
+            // MaxTextBoxControl05
             // 
-            this.MaxTextBoxControlTemp20.Location = new System.Drawing.Point(110, 153);
-            this.MaxTextBoxControlTemp20.Name = "MaxTextBoxControlTemp20";
-            this.MaxTextBoxControlTemp20.Size = new System.Drawing.Size(44, 20);
-            this.MaxTextBoxControlTemp20.TabIndex = 47;
-            this.MaxTextBoxControlTemp20.Text = "40";
+            this.MaxTextBoxControl05.Location = new System.Drawing.Point(48, 75);
+            this.MaxTextBoxControl05.Name = "MaxTextBoxControl05";
+            this.MaxTextBoxControl05.ReadOnly = true;
+            this.MaxTextBoxControl05.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControl05.TabIndex = 37;
+            this.MaxTextBoxControl05.Text = "0.5";
             // 
-            // MaxTextBoxControlTemp25
+            // MaxTextBoxControl00
             // 
-            this.MaxTextBoxControlTemp25.Location = new System.Drawing.Point(110, 179);
-            this.MaxTextBoxControlTemp25.Name = "MaxTextBoxControlTemp25";
-            this.MaxTextBoxControlTemp25.Size = new System.Drawing.Size(44, 20);
-            this.MaxTextBoxControlTemp25.TabIndex = 48;
-            this.MaxTextBoxControlTemp25.Text = "50";
+            this.MaxTextBoxControl00.Location = new System.Drawing.Point(48, 49);
+            this.MaxTextBoxControl00.Name = "MaxTextBoxControl00";
+            this.MaxTextBoxControl00.ReadOnly = true;
+            this.MaxTextBoxControl00.Size = new System.Drawing.Size(44, 20);
+            this.MaxTextBoxControl00.TabIndex = 36;
+            this.MaxTextBoxControl00.Text = "0.0";
             // 
-            // MaxTextBoxControlTemp30
+            // MaxLabelControlBoilerTemp
             // 
-            this.MaxTextBoxControlTemp30.Location = new System.Drawing.Point(110, 205);
-            this.MaxTextBoxControlTemp30.Name = "MaxTextBoxControlTemp30";
-            this.MaxTextBoxControlTemp30.Size = new System.Drawing.Size(44, 20);
-            this.MaxTextBoxControlTemp30.TabIndex = 49;
-            this.MaxTextBoxControlTemp30.Text = "60";
+            this.MaxLabelControlBoilerTemp.AutoSize = true;
+            this.MaxLabelControlBoilerTemp.Location = new System.Drawing.Point(107, 28);
+            this.MaxLabelControlBoilerTemp.Name = "MaxLabelControlBoilerTemp";
+            this.MaxLabelControlBoilerTemp.Size = new System.Drawing.Size(96, 13);
+            this.MaxLabelControlBoilerTemp.TabIndex = 35;
+            this.MaxLabelControlBoilerTemp.Text = "Boiler Temperature";
+            // 
+            // MaxLabelControlDifference
+            // 
+            this.MaxLabelControlDifference.AutoSize = true;
+            this.MaxLabelControlDifference.Location = new System.Drawing.Point(6, 28);
+            this.MaxLabelControlDifference.Name = "MaxLabelControlDifference";
+            this.MaxLabelControlDifference.Size = new System.Drawing.Size(86, 13);
+            this.MaxLabelControlDifference.TabIndex = 34;
+            this.MaxLabelControlDifference.Text = "Temp Difference";
+            // 
+            // MaxFormsPlotControlCurve
+            // 
+            this.MaxFormsPlotControlCurve.Location = new System.Drawing.Point(220, 3);
+            this.MaxFormsPlotControlCurve.Margin = new System.Windows.Forms.Padding(0);
+            this.MaxFormsPlotControlCurve.Name = "MaxFormsPlotControlCurve";
+            this.MaxFormsPlotControlCurve.Size = new System.Drawing.Size(418, 505);
+            this.MaxFormsPlotControlCurve.TabIndex = 33;
             // 
             // Form1
             // 

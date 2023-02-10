@@ -16,6 +16,8 @@ using System.IO;
 using static HeatControl.MaxCubeLogger.MaxCube;
 using static HeatControl.MaxCubeLogger;
 using System.Xml.Serialization;
+using System.Xml.Linq;
+using System.Globalization;
 
 namespace HeatControl
 {
@@ -155,7 +157,15 @@ namespace HeatControl
 
             this.MaxLabelOverviewBoostActive.Visible = false;
 
-
+            this.controlGraphx = new double[7];
+            this.controlGraphy = new double[7];
+            this.ParseControlGraphInputs();
+            this.MaxFormsPlotControlCurve.Plot.SetAxisLimits(xMin: 0, xMax: 3, yMin: 0, yMax: 100);
+            this.MaxFormsPlotControlCurve.Plot.AddSignalXY(this.controlGraphx, this.controlGraphy);
+            this.MaxFormsPlotControlCurve.Plot.XLabel("Room temperature error");
+            this.MaxFormsPlotControlCurve.Plot.YLabel("Boiler temperature");
+            this.MaxFormsPlotControlCurve.Plot.Title("Control graph");
+            this.MaxFormsPlotControlCurve.Refresh();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -889,6 +899,31 @@ namespace HeatControl
 
         }
 
+        private double[] controlGraphx;
+        private double[] controlGraphy;
+        private void MaxTextBoxControlTempXX_TextChanged(object sender, EventArgs e)
+        {
+            this.ParseControlGraphInputs();
+            this.MaxFormsPlotControlCurve.Refresh();
+        }
+
+        private void ParseControlGraphInputs()
+        {
+            Double.TryParse(this.MaxTextBoxControl00.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out controlGraphx[0]);
+            Double.TryParse(this.MaxTextBoxControl05.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out controlGraphx[1]);
+            Double.TryParse(this.MaxTextBoxControl10.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out controlGraphx[2]);
+            Double.TryParse(this.MaxTextBoxControl15.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out controlGraphx[3]);
+            Double.TryParse(this.MaxTextBoxControl20.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out controlGraphx[4]);
+            Double.TryParse(this.MaxTextBoxControl25.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out controlGraphx[5]);
+            Double.TryParse(this.MaxTextBoxControl30.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out controlGraphx[6]);
+            Double.TryParse(this.MaxTextBoxControlTemp00.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out controlGraphy[0]);
+            Double.TryParse(this.MaxTextBoxControlTemp05.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out controlGraphy[1]);
+            Double.TryParse(this.MaxTextBoxControlTemp10.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out controlGraphy[2]);
+            Double.TryParse(this.MaxTextBoxControlTemp15.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out controlGraphy[3]);
+            Double.TryParse(this.MaxTextBoxControlTemp20.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out controlGraphy[4]);
+            Double.TryParse(this.MaxTextBoxControlTemp25.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out controlGraphy[5]);
+            Double.TryParse(this.MaxTextBoxControlTemp30.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out controlGraphy[6]);
+        }
     }
 }
 
