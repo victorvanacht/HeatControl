@@ -449,8 +449,8 @@ namespace HeatControl
 
             OTGWLines["BoilerTemp"].AddPoint(dateTime, status.boilerWaterTemperature.value);
             OTGWLines["RoomSetpoint"].AddPoint(dateTime, status.roomSetPoint.value);
-            OTGWLines["Setpoint"].AddPoint(dateTime, status.controlSetPoint.value);
-            OTGWLines["SetpointMod"].AddPoint(dateTime, status.controlSetPointModified.value);
+            OTGWLines["Setpoint"].AddPoint(dateTime, status.controlSetPoint.value); // @@@@when  i disable these two lines it works
+            OTGWLines["SetpointMod"].AddPoint(dateTime, status.controlSetPointModified.value); // @@@@when  i disable these two lines it works
             OTGWLines["Modulation"].AddPoint(dateTime, status.relativeModulationLevel.value);
             OTGWLines["OutsideTemp"].AddPoint(dateTime, status.outsideTemperature.value);
             OTGWLines["ReturnTemp"].AddPoint(dateTime, status.returnWaterTemperature.value);
@@ -495,10 +495,6 @@ namespace HeatControl
 
                     this.maxCubeLogger.AddStatusReporter(MaxLogToFile);
                 }
-
-                this.otgw.AddLogger(OTGWLogger);
-                this.otgw.AddStatusReporter(OTGWPlotter);
-
                 this.maxCubeLogger.AddLogger(MaxLogger);
                 this.maxCubeLogger.AddStatusReporter(MaxPlotter);
                 this.maxCubeLogger.AddStatusReporter(MaxController);

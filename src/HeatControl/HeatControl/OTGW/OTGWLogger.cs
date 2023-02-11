@@ -399,7 +399,7 @@ namespace HeatControl
         }
 
 
-        public const int statusReportInterval = 1;
+        public const int statusReportInterval = 10;
         public delegate void StatusReportHandler(StatusReport status);
         private List<StatusReportHandler> statusReportHandlers;
 
@@ -496,7 +496,8 @@ namespace HeatControl
 
         public void SetBoilerTemp(double boilerTemperature)
         {
-            commandQueue.EnqueueCommand("CS=" + ((int)boilerTemperature).ToString());
+            string t = ((int)boilerTemperature).ToString();
+            commandQueue.EnqueueCommand("CS=" + t);
         }
 
         private SocketReader socketReader;

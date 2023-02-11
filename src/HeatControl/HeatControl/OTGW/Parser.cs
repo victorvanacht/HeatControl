@@ -233,6 +233,8 @@ namespace HeatControl
                     ["PR: T"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.tweaks) },
                     ["PR: V"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.referenceVoltage) },
                     ["PR: W"] = new List<ParsersBase>() { new StringParser(6, ref this.gatewayConfiguration.hotWater) },
+
+                    ["CS:"] = new List<ParsersBase> () {  new DummyParser()},
                 };
             }
 
@@ -241,6 +243,13 @@ namespace HeatControl
                 abstract public void Parse(Message message);
             }
 
+            private class DummyParser : ParsersBase
+            {
+                public DummyParser() { }
+
+                override public void Parse(Message message)
+                { }
+            }
 
             private class Flags16Parser : ParsersBase
             {
@@ -395,17 +404,26 @@ namespace HeatControl
                         decodeMessages[line][0].Parse(message);
                     }
                 }
-                else if (line.Length >= 5)
+                else if (line.Length >=3)
                 {
-                    // parse "PR:" request response
-                    string res = line.Substring(0, 5);
-
-                    if (decodeMessages.ContainsKey(res))
+                    if (line.Substring(2, 1).Equals(":"))
                     {
-                        commandQueue.TryDequeueCommand(res.Substring(0,2));
-                        decodeMessages[res][0].Parse(new Message(line));
-                    }
+                        // Response to a 2-character command (e.g. CS)
+                        string res = line.Substring(0, 3);
+                        if (decodeMessages.ContainsKey(res))
+                        {
+                            commandQueue.TryDequeueCommand(res.Substring(0, 2));
+                            decodeMessages[res][0].Parse(new Message(line));
+                        }
 
+                        // parsing of PR responses
+                        res = line.Substring(0, 5);
+                        if (decodeMessages.ContainsKey(res))
+                        {
+                            commandQueue.TryDequeueCommand(res.Substring(0, 2));
+                            decodeMessages[res][0].Parse(new Message(line));
+                        }
+                    }
                     else if (line.Length == 9)
                     {
                         message = new Message(line);
