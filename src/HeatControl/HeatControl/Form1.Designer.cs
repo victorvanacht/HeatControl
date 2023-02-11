@@ -199,7 +199,6 @@
             this.MaxTabPageStatusOverview = new System.Windows.Forms.TabPage();
             this.MaxCheckedListBoxOverviewControlSelection = new System.Windows.Forms.CheckedListBox();
             this.MaxLabelOverviewBoostActive = new System.Windows.Forms.Label();
-            this.MaxButtonOverviewEnableControl = new System.Windows.Forms.Button();
             this.MaxPictureBoxOverviewArrow = new System.Windows.Forms.PictureBox();
             this.MaxLabelOverviewPlotSelection = new System.Windows.Forms.Label();
             this.MaxFormsPlot = new ScottPlot.FormsPlot();
@@ -309,6 +308,7 @@
             this.MaxLabelControlDifference = new System.Windows.Forms.Label();
             this.MaxFormsPlotControlCurve = new ScottPlot.FormsPlot();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.MaxCheckBoxOverviewEnableControl = new System.Windows.Forms.CheckBox();
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.OTGWTabStatus.SuspendLayout();
@@ -1925,9 +1925,9 @@
             // MaxTabPageStatusOverview
             // 
             this.MaxTabPageStatusOverview.BackColor = System.Drawing.SystemColors.Control;
+            this.MaxTabPageStatusOverview.Controls.Add(this.MaxCheckBoxOverviewEnableControl);
             this.MaxTabPageStatusOverview.Controls.Add(this.MaxCheckedListBoxOverviewControlSelection);
             this.MaxTabPageStatusOverview.Controls.Add(this.MaxLabelOverviewBoostActive);
-            this.MaxTabPageStatusOverview.Controls.Add(this.MaxButtonOverviewEnableControl);
             this.MaxTabPageStatusOverview.Controls.Add(this.MaxPictureBoxOverviewArrow);
             this.MaxTabPageStatusOverview.Controls.Add(this.MaxLabelOverviewPlotSelection);
             this.MaxTabPageStatusOverview.Controls.Add(this.MaxFormsPlot);
@@ -1957,15 +1957,6 @@
             this.MaxLabelOverviewBoostActive.Size = new System.Drawing.Size(58, 40);
             this.MaxLabelOverviewBoostActive.TabIndex = 37;
             this.MaxLabelOverviewBoostActive.Text = "Boost\r\nActive\r\n";
-            // 
-            // MaxButtonOverviewEnableControl
-            // 
-            this.MaxButtonOverviewEnableControl.Location = new System.Drawing.Point(563, 131);
-            this.MaxButtonOverviewEnableControl.Name = "MaxButtonOverviewEnableControl";
-            this.MaxButtonOverviewEnableControl.Size = new System.Drawing.Size(75, 40);
-            this.MaxButtonOverviewEnableControl.TabIndex = 36;
-            this.MaxButtonOverviewEnableControl.Text = "Enable control";
-            this.MaxButtonOverviewEnableControl.UseVisualStyleBackColor = true;
             // 
             // MaxPictureBoxOverviewArrow
             // 
@@ -3015,6 +3006,18 @@
             this.MaxFormsPlotControlCurve.Size = new System.Drawing.Size(418, 505);
             this.MaxFormsPlotControlCurve.TabIndex = 33;
             // 
+            // MaxCheckBoxOverviewEnableControl
+            // 
+            this.MaxCheckBoxOverviewEnableControl.Appearance = System.Windows.Forms.Appearance.Button;
+            this.MaxCheckBoxOverviewEnableControl.Location = new System.Drawing.Point(565, 131);
+            this.MaxCheckBoxOverviewEnableControl.Name = "MaxCheckBoxOverviewEnableControl";
+            this.MaxCheckBoxOverviewEnableControl.Size = new System.Drawing.Size(70, 52);
+            this.MaxCheckBoxOverviewEnableControl.TabIndex = 39;
+            this.MaxCheckBoxOverviewEnableControl.Text = "Enable control";
+            this.MaxCheckBoxOverviewEnableControl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.MaxCheckBoxOverviewEnableControl.UseVisualStyleBackColor = true;
+            this.MaxCheckBoxOverviewEnableControl.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3312,7 +3315,6 @@
         private System.Windows.Forms.PictureBox MaxPictureBoxOverviewArrow;
         private System.Windows.Forms.CheckedListBox MaxCheckedListBoxOverviewControlSelection;
         private System.Windows.Forms.Label MaxLabelOverviewBoostActive;
-        private System.Windows.Forms.Button MaxButtonOverviewEnableControl;
         private System.Windows.Forms.TabPage MaxTabPageControl;
         private System.Windows.Forms.TextBox MaxTextBoxControlTemp30;
         private System.Windows.Forms.TextBox MaxTextBoxControlTemp25;
@@ -3331,6 +3333,7 @@
         private System.Windows.Forms.Label MaxLabelControlBoilerTemp;
         private System.Windows.Forms.Label MaxLabelControlDifference;
         private ScottPlot.FormsPlot MaxFormsPlotControlCurve;
+        private System.Windows.Forms.CheckBox MaxCheckBoxOverviewEnableControl;
     }
 }
 

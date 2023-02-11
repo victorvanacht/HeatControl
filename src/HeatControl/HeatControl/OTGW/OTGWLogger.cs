@@ -489,6 +489,16 @@ namespace HeatControl
             socketReader.Disconnect();
         }
 
+        public bool IsConnected()
+        {
+            return socketReader.IsConnected();
+        }
+
+        public void SetBoilerTemp(double boilerTemperature)
+        {
+            commandQueue.EnqueueCommand("CS=" + ((int)boilerTemperature).ToString());
+        }
+
         private SocketReader socketReader;
         private Thread socketThread;
         private volatile bool socketThreadShouldClose;

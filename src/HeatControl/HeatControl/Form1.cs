@@ -859,6 +859,16 @@ namespace HeatControl
             }
         }
 
+        private float controllerActualBoilerTemp;
+        private float controllerControlSetPoint;
+        private float controllerModifiedControlSetPoint;
+        private void OTGWController(OTGW.StatusReport status)
+        {
+            this.controllerActualBoilerTemp = status.boilerWaterTemperature.value;
+            this.controllerControlSetPoint = status.controlSetPoint.value;
+            this.controllerModifiedControlSetPoint = status.controlSetPointModified.value;
+        }
+
         private void MaxController(MaxCubeLogger.StatusReport status)
         {
             // fill CheckedListbox if needed
@@ -870,32 +880,61 @@ namespace HeatControl
                 }
             }
 
-            // check if boost is active anywhere
-            bool boostActive = false;
-            foreach (MaxCubeLogger.StatusReport.RoomReport roomReport in status.report)
+            if (otgw.IsConnected())
             {
-                if (roomReport.boostActive) boostActive = true;
-            }
-            this.MaxLabelOverviewBoostActive.Invoke((Action)delegate { this.MaxLabelOverviewBoostActive.Visible = boostActive; });
-
-            float maxTempDifference = float.MinValue;
-            foreach (MaxCubeLogger.StatusReport.RoomReport roomReport in status.report)
-            {
-                int index = this.MaxCheckedListBoxOverviewControlSelection.Items.IndexOf(roomReport.name);
-                if (this.MaxCheckedListBoxOverviewControlSelection.GetItemChecked(index))
+                // check if boost is active anywhere
+                bool boostActive = false;
+                foreach (MaxCubeLogger.StatusReport.RoomReport roomReport in status.report)
                 {
-                    if ((roomReport.configuredTemperature != -1) && (roomReport.actualTemperature != -1))
+                    if (roomReport.boostActive) boostActive = true;
+                }
+                this.MaxLabelOverviewBoostActive.Invoke((Action)delegate { this.MaxLabelOverviewBoostActive.Visible = boostActive; });
+
+                // find the maximum room difference in the controlled rooms...
+                float maxTempDifference = float.MinValue;
+                foreach (MaxCubeLogger.StatusReport.RoomReport roomReport in status.report)
+                {
+                    int index = this.MaxCheckedListBoxOverviewControlSelection.Items.IndexOf(roomReport.name);
+                    if (this.MaxCheckedListBoxOverviewControlSelection.GetItemChecked(index))
                     {
-                        float difference = roomReport.configuredTemperature - roomReport.actualTemperature;
-                        if (difference > maxTempDifference)
+                        if ((roomReport.configuredTemperature != -1) && (roomReport.actualTemperature != -1))
                         {
-                            maxTempDifference = difference;
+                            float difference = roomReport.configuredTemperature - roomReport.actualTemperature;
+                            if (difference > maxTempDifference)
+                            {
+                                maxTempDifference = difference;
+                            }
                         }
                     }
                 }
-            }
-            Console.WriteLine(maxTempDifference.ToString());
+                //... and calculate the desired boiler temp accodingly
+                double boilerTemp = this.CalculateBoilerTemp(maxTempDifference);
 
+                // if boost is active in any of the rooms, we use the highest boilertemp
+                if (boostActive)
+                {
+                    boilerTemp = this.controlGraphy[controlGraphy.Length- 1];
+                }
+
+                // but if we are not supposed to control the boiler temp, we set it to 0
+                if (!this.MaxCheckBoxOverviewEnableControl.Checked)
+                {
+                    boilerTemp = 0;
+                }
+
+                // now see if the current desired boiler temp is higher than what we would like
+                if (boilerTemp > this.controllerControlSetPoint)
+                {
+                    otgw.SetBoilerTemp(boilerTemp);
+                }
+                else
+                {
+                    otgw.SetBoilerTemp(0);
+                }
+
+
+
+            }
 
         }
 
@@ -923,6 +962,28 @@ namespace HeatControl
             Double.TryParse(this.MaxTextBoxControlTemp20.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out controlGraphy[4]);
             Double.TryParse(this.MaxTextBoxControlTemp25.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out controlGraphy[5]);
             Double.TryParse(this.MaxTextBoxControlTemp30.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out controlGraphy[6]);
+        }
+
+        private double CalculateBoilerTemp(double inputTemp)
+        {
+            if (inputTemp <= this.controlGraphx[0]) return this.controlGraphy[0];
+            if (inputTemp >= this.controlGraphx[controlGraphx.Length - 1]) return this.controlGraphy[controlGraphy.Length - 1];
+
+            int minIndex = 0;
+            int maxIndex = controlGraphx.Length - 1;
+            while (minIndex != (maxIndex-1))
+            {
+                int midIndex = (maxIndex + minIndex) / 2;
+                if (inputTemp <= this.controlGraphx[midIndex]) maxIndex = midIndex; else minIndex= midIndex;
+            }
+
+            double d = (inputTemp - this.controlGraphx[minIndex]) / (this.controlGraphx[maxIndex] - this.controlGraphx[minIndex]);
+            return (this.controlGraphy[maxIndex] - this.controlGraphy[minIndex]) * d + this.controlGraphy[minIndex];
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
