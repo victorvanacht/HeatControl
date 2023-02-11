@@ -498,6 +498,11 @@ namespace HeatControl
         {
             string t = ((int)boilerTemperature).ToString();
             commandQueue.EnqueueCommand("CS=" + t);
+
+            if (boilerTemperature < 1) // should be equal to 0, but it's a float.... so....
+            {
+                this.gatewayStatus.controlSetPointModified.value = 0; // this is to remove the modified control setpoint from the UI again.
+            }
         }
 
         private SocketReader socketReader;
