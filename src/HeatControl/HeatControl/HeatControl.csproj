@@ -97,6 +97,7 @@
     <Compile Include="MaxCube\Parser.cs" />
     <Compile Include="MaxCube\SocketReader.cs" />
     <Compile Include="CommandQueue.cs" />
+    <Compile Include="MaxCube\StatusReport.cs" />
     <Compile Include="OTGW\OTGWLogger.cs" />
     <Compile Include="OTGW\Parser.cs" />
     <Compile Include="OTGW\SocketReader.cs" />
