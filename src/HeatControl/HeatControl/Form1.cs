@@ -166,12 +166,22 @@ namespace HeatControl
             this.MaxFormsPlotControlCurve.Plot.YLabel("Boiler temperature");
             this.MaxFormsPlotControlCurve.Plot.Title("Control graph");
             this.MaxFormsPlotControlCurve.Refresh();
+
+            this.NotifyIcon.ShowBalloonTip(1000);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            OTGWButtonDisconnect_Click(sender, e);
-            MaxButtonDisconnect_Click(sender, e);
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                this.WindowState = FormWindowState.Minimized;
+            }
+            else
+            {
+                OTGWButtonDisconnect_Click(sender, e);
+                MaxButtonDisconnect_Click(sender, e);
+            }
         }
 
 
@@ -980,6 +990,35 @@ namespace HeatControl
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            //if the form is minimized  
+            //hide it from the task bar  
+            //and show the system tray icon (represented by the NotifyIcon control)  
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                Hide();
+                NotifyIcon.Visible = true;
+            }
+        }
+
+        private void NotifyIcon_DoubleClick(object sender, EventArgs e)
+        {
+            Show();
+            this.WindowState = FormWindowState.Normal;
+            NotifyIcon.Visible = false;
+        }
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Heat Control\nProgrammed by Victor van Acht\n\nhttps://github.com/victorvanacht/HeatControl");
         }
     }
 }

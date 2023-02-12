@@ -197,6 +197,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.MaxTabControl = new System.Windows.Forms.TabControl();
             this.MaxTabPageStatusOverview = new System.Windows.Forms.TabPage();
+            this.MaxCheckBoxOverviewEnableControl = new System.Windows.Forms.CheckBox();
             this.MaxCheckedListBoxOverviewControlSelection = new System.Windows.Forms.CheckedListBox();
             this.MaxLabelOverviewBoostActive = new System.Windows.Forms.Label();
             this.MaxPictureBoxOverviewArrow = new System.Windows.Forms.PictureBox();
@@ -308,7 +309,12 @@
             this.MaxLabelControlDifference = new System.Windows.Forms.Label();
             this.MaxFormsPlotControlCurve = new ScottPlot.FormsPlot();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.MaxCheckBoxOverviewEnableControl = new System.Windows.Forms.CheckBox();
+            this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OTGWGroupbox.SuspendLayout();
             this.OTGWTabcontrol.SuspendLayout();
             this.OTGWTabStatus.SuspendLayout();
@@ -322,6 +328,7 @@
             this.MaxTabConnection.SuspendLayout();
             this.MaxTabRooms.SuspendLayout();
             this.MaxTabPageControl.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // OTGWButtonConnect
@@ -348,9 +355,9 @@
             // OTGWGroupbox
             // 
             this.OTGWGroupbox.Controls.Add(this.OTGWTabcontrol);
-            this.OTGWGroupbox.Location = new System.Drawing.Point(682, 23);
+            this.OTGWGroupbox.Location = new System.Drawing.Point(682, 27);
             this.OTGWGroupbox.Name = "OTGWGroupbox";
-            this.OTGWGroupbox.Size = new System.Drawing.Size(670, 555);
+            this.OTGWGroupbox.Size = new System.Drawing.Size(670, 551);
             this.OTGWGroupbox.TabIndex = 2;
             this.OTGWGroupbox.TabStop = false;
             this.OTGWGroupbox.Text = "OpenTherm Gateway (OTGW)";
@@ -1902,9 +1909,9 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.MaxTabControl);
-            this.groupBox2.Location = new System.Drawing.Point(15, 23);
+            this.groupBox2.Location = new System.Drawing.Point(15, 27);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(661, 753);
+            this.groupBox2.Size = new System.Drawing.Size(661, 749);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "EQ-3 Max!";
@@ -1938,6 +1945,18 @@
             this.MaxTabPageStatusOverview.Size = new System.Drawing.Size(641, 702);
             this.MaxTabPageStatusOverview.TabIndex = 0;
             this.MaxTabPageStatusOverview.Text = "Status Overview";
+            // 
+            // MaxCheckBoxOverviewEnableControl
+            // 
+            this.MaxCheckBoxOverviewEnableControl.Appearance = System.Windows.Forms.Appearance.Button;
+            this.MaxCheckBoxOverviewEnableControl.Location = new System.Drawing.Point(565, 131);
+            this.MaxCheckBoxOverviewEnableControl.Name = "MaxCheckBoxOverviewEnableControl";
+            this.MaxCheckBoxOverviewEnableControl.Size = new System.Drawing.Size(70, 52);
+            this.MaxCheckBoxOverviewEnableControl.TabIndex = 39;
+            this.MaxCheckBoxOverviewEnableControl.Text = "Enable control";
+            this.MaxCheckBoxOverviewEnableControl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.MaxCheckBoxOverviewEnableControl.UseVisualStyleBackColor = true;
+            this.MaxCheckBoxOverviewEnableControl.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // MaxCheckedListBoxOverviewControlSelection
             // 
@@ -3006,17 +3025,55 @@
             this.MaxFormsPlotControlCurve.Size = new System.Drawing.Size(418, 505);
             this.MaxFormsPlotControlCurve.TabIndex = 33;
             // 
-            // MaxCheckBoxOverviewEnableControl
+            // NotifyIcon
             // 
-            this.MaxCheckBoxOverviewEnableControl.Appearance = System.Windows.Forms.Appearance.Button;
-            this.MaxCheckBoxOverviewEnableControl.Location = new System.Drawing.Point(565, 131);
-            this.MaxCheckBoxOverviewEnableControl.Name = "MaxCheckBoxOverviewEnableControl";
-            this.MaxCheckBoxOverviewEnableControl.Size = new System.Drawing.Size(70, 52);
-            this.MaxCheckBoxOverviewEnableControl.TabIndex = 39;
-            this.MaxCheckBoxOverviewEnableControl.Text = "Enable control";
-            this.MaxCheckBoxOverviewEnableControl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.MaxCheckBoxOverviewEnableControl.UseVisualStyleBackColor = true;
-            this.MaxCheckBoxOverviewEnableControl.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.NotifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.NotifyIcon.BalloonTipText = "Double click to open";
+            this.NotifyIcon.BalloonTipTitle = "Heat Cotrol";
+            this.NotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon.Icon")));
+            this.NotifyIcon.Text = "Heat Control";
+            this.NotifyIcon.DoubleClick += new System.EventHandler(this.NotifyIcon_DoubleClick);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1364, 24);
+            this.menuStrip1.TabIndex = 4;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
+            this.toolStripMenuItem1.Text = "File";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fileToolStripMenuItem.Text = "Exit";
+            this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -3025,9 +3082,11 @@
             this.ClientSize = new System.Drawing.Size(1364, 788);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.OTGWGroupbox);
+            this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
             this.Text = "HeatControl";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.OTGWGroupbox.ResumeLayout(false);
             this.OTGWTabcontrol.ResumeLayout(false);
             this.OTGWTabStatus.ResumeLayout(false);
@@ -3049,7 +3108,10 @@
             this.MaxTabRooms.PerformLayout();
             this.MaxTabPageControl.ResumeLayout(false);
             this.MaxTabPageControl.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -3334,6 +3396,12 @@
         private System.Windows.Forms.Label MaxLabelControlDifference;
         private ScottPlot.FormsPlot MaxFormsPlotControlCurve;
         private System.Windows.Forms.CheckBox MaxCheckBoxOverviewEnableControl;
+        private System.Windows.Forms.NotifyIcon NotifyIcon;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 
