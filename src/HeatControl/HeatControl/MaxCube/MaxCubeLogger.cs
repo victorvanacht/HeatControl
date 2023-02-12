@@ -159,12 +159,10 @@ namespace HeatControl
         private List<LogHandler> logHandlers;
         private void Log(string text)
         {
-            Console.WriteLine(text);
             foreach (LogHandler logHandler in logHandlers)
             {
                 logHandler(text);
             }
-
         }
         public void AddLogger(LogHandler handler)
         {

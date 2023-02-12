@@ -116,8 +116,6 @@ namespace HeatControl
 
                 public void WriteLine(string line)
                 {
-                    Console.WriteLine(line);
-
                     Thread.Sleep(500); // for some reason we need to insert a wait here. Don't know why. But if we don't the OTGW doesnt respond.
                     maxCubeLogger.Log(DateTime.Now.ToString() + " T:" + line);
 

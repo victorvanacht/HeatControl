@@ -505,18 +505,10 @@ namespace HeatControl
                 this.MaxButtonConnect.Enabled = false;
                 this.MaxButtonDisconnect.Enabled = true;
                 this.MaxTextBoxLogFilename.Enabled = false;
-                this.OTGWCheckBoxAppend.Enabled = false;
-                this.OTGWCheckBoxEnableLoggingToFile.Enabled = false;
+                this.MaxCheckBoxAppend.Enabled = false;
+                this.MaxCheckBoxEnableLoggingToFile.Enabled = false;
 
                 this.maxCubeLogger.hostName = this.MaxTextBoxHostname.Text;
-
-                /*
-                // Reset the x-axis of the plot to now.
-                foreach (KeyValuePair<string, Line> entry in lines)
-                {
-                    entry.Value.FillXAxisNow();
-                }
-                */
 
                 // open log file, if needed
                 if (this.MaxCheckBoxEnableLoggingToFile.Checked)
@@ -545,12 +537,9 @@ namespace HeatControl
 
 
                 this.maxCubeLogger.RemoveLogger(MaxLogger);
+                this.maxCubeLogger.RemoveStatusReporter(MaxPlotter);
+                this.maxCubeLogger.RemoveStatusReporter(MaxController);
 
-                /*
-                this.otgw.RemoveStatusReporter(OTGWPlotter);
-                */
-
-                
                 // close the log file
                 if (this.MaxCheckBoxEnableLoggingToFile.Checked)
                 {
@@ -564,11 +553,7 @@ namespace HeatControl
                 this.MaxCheckBoxAppend.Enabled = true;
                 this.MaxCheckBoxEnableLoggingToFile.Enabled = true;
             }
-
         }
-
-
-
 
         private void MaxLogger(string text)
         {
