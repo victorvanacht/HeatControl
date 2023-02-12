@@ -3083,6 +3083,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.OTGWGroupbox);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "HeatControl";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
