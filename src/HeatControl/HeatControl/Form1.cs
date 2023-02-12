@@ -18,6 +18,7 @@ using static HeatControl.MaxCubeLogger;
 using System.Xml.Serialization;
 using System.Xml.Linq;
 using System.Globalization;
+using System.Windows.Forms.VisualStyles;
 
 namespace HeatControl
 {
@@ -168,6 +169,26 @@ namespace HeatControl
             this.MaxFormsPlotControlCurve.Refresh();
 
             this.NotifyIcon.ShowBalloonTip(1000);
+
+            this.OTGWTextboxHostname.Text = Properties.Settings.Default.OTGWLabelHostname;
+            this.OTGWCheckBoxEnableLoggingToFile.Checked = Properties.Settings.Default.OTGWCheckBoxEnableLoggingToFile;
+            this.OTGWTextBoxLogfileName.Text = Properties.Settings.Default.OTGWTextBoxLogfileName;
+            this.OTGWCheckBoxAppend.Checked = Properties.Settings.Default.OTGWCheckBoxAppend;
+            this.MaxTextBoxHostname.Text = Properties.Settings.Default.MaxTextBoxHostname;
+            this.MaxCheckBoxEnableLoggingToFile.Checked = Properties.Settings.Default.MaxCheckBoxEnableLoggingToFile;
+            this.MaxTextBoxLogFilename.Text = Properties.Settings.Default.MaxTextBoxLogFilename;
+            this.MaxCheckBoxAppend.Checked = Properties.Settings.Default.MaxCheckBoxAppend;
+            this.MaxCheckBoxOverviewEnableControl.Checked = Properties.Settings.Default.MaxCheckBoxOverviewEnableControl;
+            this.MaxTextBoxControlTemp00.Text = Properties.Settings.Default.MaxTextBoxControlTemp00;
+            this.MaxTextBoxControlTemp05.Text = Properties.Settings.Default.MaxTextBoxControlTemp05;
+            this.MaxTextBoxControlTemp10.Text = Properties.Settings.Default.MaxTextBoxControlTemp10;
+            this.MaxTextBoxControlTemp15.Text = Properties.Settings.Default.MaxTextBoxControlTemp15;
+            this.MaxTextBoxControlTemp20.Text = Properties.Settings.Default.MaxTextBoxControlTemp20;
+            this.MaxTextBoxControlTemp25.Text = Properties.Settings.Default.MaxTextBoxControlTemp25;
+            this.MaxTextBoxControlTemp30.Text = Properties.Settings.Default.MaxTextBoxControlTemp30;
+
+            if (Properties.Settings.Default.OTGWButtonConnect) OTGWButtonConnect_Click(null, null);
+            if (Properties.Settings.Default.MaxButtonConnect) MAXButtonConnect_Click(null, null);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -809,10 +830,13 @@ namespace HeatControl
                         this.MaxCheckedListBoxOverviewPlotSelection.Items.Add(roomReport.name);
                     }
 
+                    String2CheckedListbox(Properties.Settings.Default.MaxCheckedListBoxOverviewPlotSelection, MaxCheckedListBoxOverviewPlotSelection);
+                    /*
                     for (int i = 0; i< this.MaxCheckedListBoxOverviewPlotSelection.Items.Count; i++)
                     {
                         this.MaxCheckedListBoxOverviewPlotSelection.SetItemChecked(i, true);
                     }
+                    */
                 }
 
                 // fill graph if needed
@@ -884,6 +908,7 @@ namespace HeatControl
                 {
                     this.MaxCheckedListBoxOverviewControlSelection.Invoke((Action)delegate { this.MaxCheckedListBoxOverviewControlSelection.Items.Add(roomReport.name); });
                 }
+                this.MaxCheckedListBoxOverviewControlSelection.Invoke((Action)delegate { String2CheckedListbox(Properties.Settings.Default.MaxCheckedListBoxOverviewControlSelection, MaxCheckedListBoxOverviewControlSelection); });
             }
 
             if (otgw.IsConnected())
@@ -1013,12 +1038,80 @@ namespace HeatControl
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Properties.Settings.Default.OTGWLabelHostname = this.OTGWTextboxHostname.Text;
+            Properties.Settings.Default.OTGWCheckBoxEnableLoggingToFile = this.OTGWCheckBoxEnableLoggingToFile.Checked;
+            Properties.Settings.Default.OTGWTextBoxLogfileName = this.OTGWTextBoxLogfileName.Text;
+            Properties.Settings.Default.OTGWCheckBoxAppend = this.OTGWCheckBoxAppend.Checked;
+            Properties.Settings.Default.MaxTextBoxHostname = this.MaxTextBoxHostname.Text;
+            Properties.Settings.Default.MaxCheckBoxEnableLoggingToFile = this.MaxCheckBoxEnableLoggingToFile.Checked;
+            Properties.Settings.Default.MaxTextBoxLogFilename = this.MaxTextBoxLogFilename.Text;
+            Properties.Settings.Default.MaxCheckBoxAppend = this.MaxCheckBoxAppend.Checked;
+            Properties.Settings.Default.OTGWButtonConnect = this.otgw.IsConnected();
+            Properties.Settings.Default.MaxButtonConnect = this.maxCubeLogger.IsConnected();
+            Properties.Settings.Default.MaxCheckBoxOverviewEnableControl = this.MaxCheckBoxOverviewEnableControl.Checked;
+            Properties.Settings.Default.MaxTextBoxControlTemp00 = this.MaxTextBoxControlTemp00.Text;
+            Properties.Settings.Default.MaxTextBoxControlTemp05 = this.MaxTextBoxControlTemp05.Text;
+            Properties.Settings.Default.MaxTextBoxControlTemp10 = this.MaxTextBoxControlTemp10.Text;
+            Properties.Settings.Default.MaxTextBoxControlTemp15 = this.MaxTextBoxControlTemp15.Text;
+            Properties.Settings.Default.MaxTextBoxControlTemp20 = this.MaxTextBoxControlTemp20.Text;
+            Properties.Settings.Default.MaxTextBoxControlTemp25 = this.MaxTextBoxControlTemp25.Text;
+            Properties.Settings.Default.MaxTextBoxControlTemp30 = this.MaxTextBoxControlTemp30.Text;
+
+            Properties.Settings.Default.MaxCheckedListBoxOverviewPlotSelection = CheckedListBox2String(MaxCheckedListBoxOverviewPlotSelection);
+            Properties.Settings.Default.MaxCheckedListBoxOverviewControlSelection = CheckedListBox2String(MaxCheckedListBoxOverviewControlSelection);
+
+
+            Properties.Settings.Default.Save();
+
             Application.Exit();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Heat Control\nProgrammed by Victor van Acht\n\nhttps://github.com/victorvanacht/HeatControl");
+        }
+
+        private string CheckedListBox2String(CheckedListBox checkedlistBox)
+        {
+            string r = "";
+            for (int i=0;i<checkedlistBox.Items.Count;i++)
+            {
+                r += checkedlistBox.Items[i].ToString() + ":" + checkedlistBox.GetItemChecked(i) + "; ";
+            }
+            return r;
+        }
+
+        private void String2CheckedListbox(string s, CheckedListBox checkedListBox)
+        {
+            if (s.Length > 0)
+            {
+                string[] items = s.Split(';');
+                foreach (string item in items)
+                {
+                    if (item.Length > 0)
+                    {
+                        string[] elements = item.Split(':');
+                        if (elements.Length == 2)
+                        {
+                            string name = elements[0].Trim();
+                            string value = elements[1].Trim();
+                            if (name.Length > 0)
+                            {
+                                if (value.Length > 0)
+                                {
+                                    for (int i = 0; i < checkedListBox.Items.Count; i++)
+                                    {
+                                        if (name.Equals(checkedListBox.Items[i]))
+                                        {
+                                            checkedListBox.SetItemChecked(i, bool.Parse(value));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }              
+                }
+            }
         }
     }
 }

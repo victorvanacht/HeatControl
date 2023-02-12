@@ -22,5 +22,245 @@ namespace HeatControl.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("OTGW_wifi")]
+        public string OTGWLabelHostname {
+            get {
+                return ((string)(this["OTGWLabelHostname"]));
+            }
+            set {
+                this["OTGWLabelHostname"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OTGWCheckBoxEnableLoggingToFile {
+            get {
+                return ((bool)(this["OTGWCheckBoxEnableLoggingToFile"]));
+            }
+            set {
+                this["OTGWCheckBoxEnableLoggingToFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("E:\\HeatControlLogOTGW.txt")]
+        public string OTGWTextBoxLogfileName {
+            get {
+                return ((string)(this["OTGWTextBoxLogfileName"]));
+            }
+            set {
+                this["OTGWTextBoxLogfileName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OTGWCheckBoxAppend {
+            get {
+                return ((bool)(this["OTGWCheckBoxAppend"]));
+            }
+            set {
+                this["OTGWCheckBoxAppend"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("KEQ0567251")]
+        public string MaxTextBoxHostname {
+            get {
+                return ((string)(this["MaxTextBoxHostname"]));
+            }
+            set {
+                this["MaxTextBoxHostname"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MaxCheckBoxEnableLoggingToFile {
+            get {
+                return ((bool)(this["MaxCheckBoxEnableLoggingToFile"]));
+            }
+            set {
+                this["MaxCheckBoxEnableLoggingToFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("E:\\HeatControlLogMaxcube.txt")]
+        public string MaxTextBoxLogFilename {
+            get {
+                return ((string)(this["MaxTextBoxLogFilename"]));
+            }
+            set {
+                this["MaxTextBoxLogFilename"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MaxCheckBoxAppend {
+            get {
+                return ((bool)(this["MaxCheckBoxAppend"]));
+            }
+            set {
+                this["MaxCheckBoxAppend"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OTGWButtonConnect {
+            get {
+                return ((bool)(this["OTGWButtonConnect"]));
+            }
+            set {
+                this["OTGWButtonConnect"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MaxButtonConnect {
+            get {
+                return ((bool)(this["MaxButtonConnect"]));
+            }
+            set {
+                this["MaxButtonConnect"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MaxCheckedListBoxOverviewPlotSelection {
+            get {
+                return ((string)(this["MaxCheckedListBoxOverviewPlotSelection"]));
+            }
+            set {
+                this["MaxCheckedListBoxOverviewPlotSelection"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MaxCheckedListBoxOverviewControlSelection {
+            get {
+                return ((string)(this["MaxCheckedListBoxOverviewControlSelection"]));
+            }
+            set {
+                this["MaxCheckedListBoxOverviewControlSelection"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MaxCheckBoxOverviewEnableControl {
+            get {
+                return ((bool)(this["MaxCheckBoxOverviewEnableControl"]));
+            }
+            set {
+                this["MaxCheckBoxOverviewEnableControl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string MaxTextBoxControlTemp00 {
+            get {
+                return ((string)(this["MaxTextBoxControlTemp00"]));
+            }
+            set {
+                this["MaxTextBoxControlTemp00"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string MaxTextBoxControlTemp05 {
+            get {
+                return ((string)(this["MaxTextBoxControlTemp05"]));
+            }
+            set {
+                this["MaxTextBoxControlTemp05"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string MaxTextBoxControlTemp10 {
+            get {
+                return ((string)(this["MaxTextBoxControlTemp10"]));
+            }
+            set {
+                this["MaxTextBoxControlTemp10"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("40")]
+        public string MaxTextBoxControlTemp15 {
+            get {
+                return ((string)(this["MaxTextBoxControlTemp15"]));
+            }
+            set {
+                this["MaxTextBoxControlTemp15"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("40")]
+        public string MaxTextBoxControlTemp20 {
+            get {
+                return ((string)(this["MaxTextBoxControlTemp20"]));
+            }
+            set {
+                this["MaxTextBoxControlTemp20"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public string MaxTextBoxControlTemp25 {
+            get {
+                return ((string)(this["MaxTextBoxControlTemp25"]));
+            }
+            set {
+                this["MaxTextBoxControlTemp25"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public string MaxTextBoxControlTemp30 {
+            get {
+                return ((string)(this["MaxTextBoxControlTemp30"]));
+            }
+            set {
+                this["MaxTextBoxControlTemp30"] = value;
+            }
+        }
     }
 }
