@@ -1,6 +1,6 @@
 ﻿namespace HeatControl
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.OTGWButtonConnect = new System.Windows.Forms.Button();
             this.OTGWButtonDisconnect = new System.Windows.Forms.Button();
             this.OTGWGroupbox = new System.Windows.Forms.GroupBox();
